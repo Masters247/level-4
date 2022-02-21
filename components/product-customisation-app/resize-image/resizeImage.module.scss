@@ -1,0 +1,26 @@
+@use "../../../styles/base.scss" as *;
+
+.imageReSizerWrap {
+  background-color: rgb(255, 126, 126);
+  position: relative;
+  .size {
+    background-color: $white;
+    border: 1px solid $black;
+    border-radius: 50%;
+    cursor: move;
+    width: 20px;
+    height: 20px;
+    position: absolute;
+    z-index: 1;
+    &:nth-child(2) {
+      right: 0;
+    }
+    &:nth-child(3) {
+      bottom: 0;
+    }
+    &:nth-child(4) {
+      bottom: 0;
+      right: 0;
+    }
+  }
+}

@@ -1,0 +1,9 @@
+// colours
+$white: #fff;
+$black: #000;
+
+@mixin flexCenter {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
