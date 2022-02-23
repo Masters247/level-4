@@ -1,0 +1,36 @@
+@use "../../../../styles/base.scss" as *;
+
+.navButton {
+  position: absolute;
+  background-color: $white;
+  right: 1em;
+}
+
+.nav {
+  top: 60px;
+  right: 0;
+  position: absolute;
+  transition: 500ms;
+  background-color: $white;
+
+  ul {
+    padding: 1em;
+    @include boxShadow;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    li {
+      a {
+        padding: 0.5em;
+      }
+    }
+  }
+}
+
+.navActive {
+  right: 0;
+}
+
+.navClosed {
+  transform: translate(110px);
+}

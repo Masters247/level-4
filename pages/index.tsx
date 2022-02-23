@@ -1,12 +1,7 @@
 import type { NextPage } from "next";
-import ProductUi from "../components/product-customisation-app/product-ui/ProductUi";
 
 const Home: NextPage = () => {
-  return (
-    <div>
-      <ProductUi />
-    </div>
-  );
+  return <div>Home Page</div>;
 };
 
 export default Home;

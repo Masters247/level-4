@@ -1,0 +1,22 @@
+@use "../../../styles/base.scss" as *;
+
+.header {
+  @include boxShadow;
+  .topBanner {
+    padding: 0.5em;
+    font-family: sofia-pro, sans-serif;
+    border-bottom: 1px solid $black-opacity-40;
+    p {
+      text-transform: uppercase;
+      text-align: center;
+    }
+  }
+  .mainHeader {
+    position: relative;
+    @include flexCenter;
+    .imageWrap {
+      width: 120px;
+      margin: 0.2em auto 0;
+    }
+  }
+}
