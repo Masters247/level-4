@@ -1,7 +1,7 @@
 @use "../../../styles/base.scss" as *;
 .productUi {
-  width: 400px;
-  height: 400px;
+  width: 100vw;
+  height: 100vh;
   @include flexCenter;
-  background-color: rgb(253, 196, 196);
+  background: #222035;
 }

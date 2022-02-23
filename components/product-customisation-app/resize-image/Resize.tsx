@@ -3,7 +3,7 @@ import Rotate from "../../ui/icons/Rotate";
 import Image from "next/image";
 import s from "./resizeImage.module.scss";
 
-const ResizeImage = () => {
+const Resize = () => {
   const ref = useRef(null);
   const refLeft = useRef(null);
   const refTop = useRef(null);
@@ -12,47 +12,40 @@ const ResizeImage = () => {
   const refRotate = useRef(null);
 
   useEffect(() => {
-    const resizeableEle: any = ref.current;
-    const styles = window.getComputedStyle(resizeableEle);
+    const rotatableEle: any = ref.current;
+    const styles = window.getComputedStyle(rotatableEle);
+    const rotatable = rotatableEle;
+    console.log(rotatable);
     let width = parseInt(styles.width, 10);
-    let rotate = 0;
-
-    // let height = parseInt(styles.height, 10);
+    let height = parseInt(styles.height, 10);
     let x = 0;
-    // let y = 0;
+    let y = 0;
 
-    resizeableEle.style.top = "50px";
-    resizeableEle.style.left = "50px";
+    rotatableEle.style.top = "50px";
+    rotatableEle.style.left = "50px";
 
-    // Right resize
-    const onMouseMoveRightResize = (event: any) => {
-      console.log("rotate");
-      const dx = event.clientX - x;
-      x = event.clientX;
-      width = width + dx;
-      resizeableEle.style.width = `${width}px`;
-      resizeableEle.style.height = `${width}px`;
+    const onMouseDownMoveRotate = (e: any) => {
+      var deg = 0;
+      console.log("move");
+      const x = e.clientX;
+      rotatableEle.style.transform = `rotate(${deg}deg)`;
     };
 
-    const onMouseDownRightResize = (event: any) => {
-      console.log("event right");
-      x = event.clientX;
-      resizeableEle.style.left = styles.left;
-      resizeableEle.style.right = null;
-      document.addEventListener("mousemove", onMouseMoveRightResize);
-      document.addEventListener("mouseup", onMouseUpRightResize);
+    const onMouseDownRotate = (e: any) => {
+      console.log("click", e);
+      document.addEventListener("mousemove", onMouseDownMoveRotate);
+      document.addEventListener("mouseup", onMouseUpRotate);
     };
 
-    const onMouseUpRightResize = (event: any) => {
-      document.removeEventListener("mousemove", onMouseMoveRightResize);
+    const onMouseUpRotate = (e: any) => {
+      document.removeEventListener("mousemove", onMouseDownMoveRotate);
     };
 
-    // Add mouse down event listener
-    const resizerRight: any = refRight.current;
-    resizerRight.addEventListener("mousedown", onMouseDownRightResize);
+    const resizerRight: any = refRotate.current;
+    resizerRight.addEventListener("mousedown", onMouseDownRotate);
 
     return () => {
-      resizerRight.removeEventListener("mousedown", onMouseDownRightResize);
+      resizerRight.removeEventListener("mousedown", onMouseDownRotate);
     };
   }, []);
 
@@ -84,4 +77,4 @@ const ResizeImage = () => {
   );
 };
 
-export default ResizeImage;
+export default Resize;
