@@ -1,4 +1,4 @@
-import { FC } from "react";
+import { FC, useEffect } from "react";
 import Image from "next/image";
 import MobileNav from "../Nav/Mobile-Nav/MobileNav";
 import s from "./header.module.scss";

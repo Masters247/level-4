@@ -9,7 +9,7 @@ interface Props {
 
 const Layout: FC<Props> = ({ children }) => {
   return (
-    <div className={s.pageWrap}>
+    <div>
       <Header />
       <main>{children}</main>
       <Footer />

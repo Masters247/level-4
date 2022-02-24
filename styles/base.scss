@@ -9,6 +9,10 @@ $black: #000;
 $white-opacity-50: #ffffff60;
 $black-opacity-40: #00000041;
 
+$media-tablet: 768px;
+$media-desktop-small: 850px;
+$media-desktop: 1020px;
+
 @mixin flexCenter {
   display: flex;
   justify-content: center;
