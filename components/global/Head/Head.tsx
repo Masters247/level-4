@@ -4,7 +4,9 @@ import NextHead from "next/head";
 const Head: FC = () => {
   return (
     <>
-      <NextHead></NextHead>
+      <NextHead>
+        <p></p>
+      </NextHead>
     </>
   );
 };
