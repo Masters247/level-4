@@ -1,7 +1,7 @@
 const pages = [
   {
     pages: [
-      { name: "Home", link: "/index" },
+      { name: "Home", link: "/" },
       { name: "About Us", link: "/about-us" },
       { name: "Contact Us", link: "/contact-us" },
     ],
@@ -12,6 +12,7 @@ const pages = [
       { name: "Bespoke", link: "/bespoke" },
       { name: "Collections", link: "/collections" },
       { name: "Headware", link: "/headwear" },
+      { name: "Custom", link: "/product-customiser" },
     ],
   },
 ];

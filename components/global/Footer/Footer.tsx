@@ -12,9 +12,11 @@ const Footer: FC = () => {
     <footer className={s.footer}>
       <div className={s.mainFooter}>
         <div className={`${s.footerElements} ${s.footer1}`}>
-          <div className={s.imageWrap}>
-            <Image src="/Level-4-Lge.png" width={375} height={166} />
-          </div>
+          <Link href="/" passHref>
+            <a className={s.imageWrap}>
+              <Image src="/Level-4-Lge.png" width={375} height={166} />
+            </a>
+          </Link>
           <div className={s.addressWrap}>
             <p>Serbert Road</p>
             <p>Gordano Gate</p>

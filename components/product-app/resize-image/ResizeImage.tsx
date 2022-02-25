@@ -2,6 +2,7 @@ import { useState, useEffect, useRef } from "react";
 import Rotate from "../../ui/icons/Rotate";
 import Image from "next/image";
 import s from "./resizeImage.module.scss";
+import Draggable from "react-draggable";
 
 const ResizeImage = () => {
   const ref = useRef(null);
@@ -57,29 +58,24 @@ const ResizeImage = () => {
   }, []);
 
   return (
-    <div className={s.container}>
-      <div ref={ref} className={s.resizeable}>
-        <div className={s.imageWrap}>
-          <Image
-            src="/TheLogoMan.png"
-            width={70}
-            height={70}
-            layout="responsive"
-            priority={true}
-          />
-        </div>
-        <div className={s.rotateWrap}>
-          <Rotate styles={s.rotateIcon} />
-          <div ref={refRotate} className={`${s.resizer} ${s.rotate}`}></div>
-        </div>
-        <div ref={refLeft} className={`${s.resizer} ${s.resizerLeft}`}></div>
-        <div ref={refTop} className={`${s.resizer} ${s.resizerTop}`}></div>
-        <div ref={refRight} className={`${s.resizer} ${s.resizerRight}`}></div>
-        <div
-          ref={refBottom}
-          className={`${s.resizer} ${s.resizerBottom}`}
-        ></div>
+    <div ref={ref} className={s.resizeable}>
+      <div className={s.imageWrap}>
+        <Image
+          src="/TheLogoMan.png"
+          width={70}
+          height={70}
+          layout="responsive"
+          priority={true}
+        />
       </div>
+      <div className={s.rotateWrap}>
+        <Rotate styles={s.rotateIcon} />
+        <div ref={refRotate} className={`${s.resizer} ${s.rotate}`}></div>
+      </div>
+      <div ref={refLeft} className={`${s.resizer} ${s.resizerLeft}`}></div>
+      <div ref={refTop} className={`${s.resizer} ${s.resizerTop}`}></div>
+      <div ref={refRight} className={`${s.resizer} ${s.resizerRight}`}></div>
+      <div ref={refBottom} className={`${s.resizer} ${s.resizerBottom}`}></div>
     </div>
   );
 };

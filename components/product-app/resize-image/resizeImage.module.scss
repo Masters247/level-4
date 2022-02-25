@@ -1,15 +1,5 @@
 @use "../../../styles/base.scss" as *;
 
-.container {
-  border: 2px dotted $white-opacity-50;
-  overflow: hidden;
-  border-radius: 5px;
-  width: 400px;
-  height: 400px;
-  background: #222035;
-  position: relative;
-}
-
 .resizeable {
   position: absolute;
   border: 2px dotted $white-opacity-50;

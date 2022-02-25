@@ -1,13 +1,36 @@
-import ResizeImage from "../resize-image/ResizeImage";
-import Resize from "../resize-image/Resize";
+import React, { useState } from "react";
+// import logo from "./logo.svg";
 import s from "./productUi.module.scss";
+import DragMove from "../drag-move/DragMove";
 
-const ProductUi = () => {
+function App() {
+  const [translate, setTranslate] = useState({
+    x: 0,
+    y: 0,
+  });
+
+  const handleDragMove = (e: any) => {
+    setTranslate({
+      x: translate.x + e.movementX,
+      y: translate.y + e.movementY,
+    });
+  };
+
   return (
-    <div className={s.productUi}>
-      <Resize />
-      {/* <ResizeImage /> */}
+    <div className={s.App}>
+      <header className={s.AppHeader}>
+        <DragMove onDragMove={handleDragMove}>
+          <div
+            style={{
+              transform: `translateX(${translate.x}px) translateY(${translate.y}px)`,
+            }}
+          >
+            <span className={s.span}></span>
+          </div>
+        </DragMove>
+      </header>
     </div>
   );
-};
-export default ProductUi;
+}
+
+export default App;

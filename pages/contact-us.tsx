@@ -1,11 +1,11 @@
 import { FC } from "react";
 
-const Headwear: FC = () => {
+const ContactUs: FC = () => {
   return (
     <div className="div">
-      <p>headwear</p>
+      <p>Contact us</p>
     </div>
   );
 };
 
-export default Headwear;
+export default ContactUs;

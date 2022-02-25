@@ -3,7 +3,7 @@ import { FC } from "react";
 const Bespoke: FC = () => {
   return (
     <div className="div">
-      <p>the</p>
+      <p>bespoke</p>
     </div>
   );
 };
