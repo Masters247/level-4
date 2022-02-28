@@ -42,7 +42,7 @@ const DragMove = (props: any) => {
       onPointerDown={handlePointerDown}
       onPointerUp={handlePointerUp}
       onPointerMove={handlePointerMove}
-      // onPointerLeave={handlePointerLeave}
+      onPointerLeave={handlePointerLeave}
       style={style}
       className={className}
     >

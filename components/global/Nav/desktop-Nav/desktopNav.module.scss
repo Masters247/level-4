@@ -1,0 +1,35 @@
+@use "../../../../styles/base.scss" as *;
+
+.navOne,
+.navTwo {
+  display: none;
+  padding: 0 2em;
+  @media (min-width: $media-desktop-small) {
+    display: flex;
+    ul {
+      display: flex;
+      li {
+        margin: 0 0.3em;
+        a {
+          transition: color 200ms;
+          &:hover {
+            color: $grey-1;
+          }
+        }
+      }
+    }
+  }
+}
+
+.navTwo {
+  .iconWrap {
+    position: relative;
+    top: 3px;
+    .account,
+    .search {
+      width: 18px;
+      height: 18px;
+      margin: 0 0.3em;
+    }
+  }
+}

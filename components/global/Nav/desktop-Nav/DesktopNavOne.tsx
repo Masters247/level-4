@@ -1,12 +1,13 @@
 import { FC } from "react";
+import s from "./desktopNav.module.scss";
 import pages from "../../../../lib/pages";
 import Link from "next/link";
 
-const DesktopNav: FC = () => {
+const DesktopNavOne: FC = () => {
   return (
-    <nav>
+    <nav className={s.navTwo}>
       <ul>
-        {pages[0].pages?.map((page: any) => (
+        {pages[1].products?.map((page: any) => (
           <li key={page.name} className={page?.class}>
             <Link href={page.link} passHref>
               <a>{page.name}</a>
@@ -18,4 +19,4 @@ const DesktopNav: FC = () => {
   );
 };
 
-export default DesktopNav;
+export default DesktopNavOne;
