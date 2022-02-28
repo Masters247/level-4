@@ -1,4 +1,10 @@
-import { ButtonHTMLAttributes, FC } from "react";
+import {
+  ButtonHTMLAttributes,
+  FC,
+  JSXElementConstructor,
+  forwardRef,
+  useRef,
+} from "react";
 import cn from "classnames";
 import s from "./button.module.scss";
 
@@ -7,27 +13,42 @@ interface Props extends ButtonHTMLAttributes<HTMLButtonElement> {
   loading?: boolean;
   disabled?: boolean;
   classname?: string;
+  Component?: string | JSXElementConstructor<any>;
+  href?: string;
 }
 
-const Button: FC<Props> = ({
-  children,
-  variant = "primary",
-  loading = false,
-  className,
-  disabled = false,
-}) => {
-  const rootClassName = cn(
-    s.button,
+const Button: FC<Props> = forwardRef(
+  (
     {
-      [s.primary]: variant === "primary",
-      [s.secondary]: variant === "secondary",
-      [s.tertiary]: variant === "tertiary",
-      [s.loading]: loading,
-      [s.disabled]: disabled,
+      children,
+      variant = "primary",
+      loading = false,
+      className,
+      disabled = false,
+      Component = "a",
+      href,
+      ...rest
     },
-    className
-  );
-  return <button className={rootClassName}>{children}</button>;
-};
+    buttonRef
+  ): JSX.Element => {
+    const ref = useRef<typeof Component>(null);
+    const rootClassName = cn(
+      s.button,
+      {
+        [s.primary]: variant === "primary",
+        [s.secondary]: variant === "secondary",
+        [s.tertiary]: variant === "tertiary",
+        [s.loading]: loading,
+        [s.disabled]: disabled,
+      },
+      className
+    );
+    return (
+      <Component className={rootClassName} ref={ref} href={href} {...rest}>
+        {children}
+      </Component>
+    );
+  }
+);
 
 export default Button;

@@ -24,7 +24,7 @@ const CollectionCard: FC<Props> = ({ collection }) => {
       <div className={s.cardText}>
         <h2>{collection.title}</h2>
         <h3>{collection.shortDesctiption}</h3>
-        <Link href="/" passHref>
+        <Link href={`/collections/${collection.slug}`} passHref>
           <Button variant="secondary">Explore Range</Button>
         </Link>
       </div>
