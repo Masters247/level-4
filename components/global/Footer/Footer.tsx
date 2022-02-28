@@ -14,7 +14,12 @@ const Footer: FC = () => {
         <div className={`${s.footerElements} ${s.footer1}`}>
           <Link href="/" passHref>
             <a className={s.imageWrap}>
-              <Image src="/Level-4-Lge.png" width={375} height={166} />
+              <Image
+                src="/Level-4-Lge.png"
+                width={375}
+                height={166}
+                alt="Level Four Logo"
+              />
             </a>
           </Link>
           <div className={s.addressWrap}>
