@@ -1,9 +1,9 @@
-import { FC, useEffect } from "react";
+import { FC } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import MobileNav from "../nav/mobile-Nav/MobileNav";
-import DesktopNavOne from "../nav/desktop-Nav/DesktopNavOne";
-import DesktopNavTwo from "../nav/desktop-Nav/DesktopNavTwo";
+import MobileNav from "../Nav/Mobile-Nav/MobileNav";
+import DesktopNavOne from "../Nav/Desktop-Nav/DesktopNavOne";
+import DesktopNavTwo from "../Nav/Desktop-Nav/DesktopNavTwo";
 import s from "./header.module.scss";
 
 const Header: FC = () => {
@@ -16,7 +16,12 @@ const Header: FC = () => {
         <DesktopNavOne />
         <Link href="/" passHref>
           <a className={s.imageWrap}>
-            <Image src="/Level-4-Lge.png" width={375} height={166} />
+            <Image
+              src="/Level-4-Lge.png"
+              width={375}
+              height={166}
+              alt="Level Four Logo"
+            />
           </a>
         </Link>
         <DesktopNavTwo />

@@ -8,11 +8,10 @@ const pages = [
   },
   {
     products: [
-      { name: "Accessories", link: "/accessories" },
-      { name: "Bespoke", link: "/bespoke" },
       { name: "Collections", link: "/collections" },
       { name: "Headware", link: "/headwear" },
-      { name: "Custom", link: "/product-customiser" },
+      { name: "Accessories", link: "/accessories" },
+      { name: "Bespoke", link: "/bespoke" },
     ],
   },
 ];

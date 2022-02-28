@@ -1,6 +1,6 @@
 import { FC } from "react";
-import Header from "../header/Header";
-import Footer from "../footer/Footer";
+import Header from "../Header/Header";
+import Footer from "../Footer/Footer";
 import s from "./layout.module.scss";
 
 interface Props {
@@ -9,7 +9,7 @@ interface Props {
 
 const Layout: FC<Props> = ({ children }) => {
   return (
-    <div>
+    <div className={s.wrap}>
       <Header />
       <main>{children}</main>
       <Footer />
