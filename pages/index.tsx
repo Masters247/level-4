@@ -1,10 +1,28 @@
-import type { NextPage } from "next";
+import type { GetStaticProps, NextPage } from "next";
+import CollectionsGrid from "../components/global/CollectionsGrid";
+import VideoHero from "../components/global/Video";
+import collectionsQuery, {
+  Collection,
+} from "../lib/graphcms-querys/collectionsQuery";
 import s from "../styles/pages/index.module.scss";
 
-const Home: NextPage = () => {
+export const getStaticProps: GetStaticProps = async () => {
+  const collections = await collectionsQuery();
+  return {
+    props: { collections },
+    revalidate: 60,
+  };
+};
+
+interface Props {
+  collections: Collection[];
+}
+
+const Home: NextPage<Props> = ({ collections }) => {
   return (
-    <div className={s.pageWrap}>
-      <p>Home Page</p>
+    <div>
+      <VideoHero />
+      <CollectionsGrid collections={collections} />
     </div>
   );
 };

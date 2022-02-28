@@ -1,0 +1,32 @@
+@use "../../../styles/base.scss" as *;
+
+.collectionCard {
+  width: 100%;
+  min-height: 15em;
+  padding: 2em;
+  background-color: $grey-3;
+
+  &:nth-of-type(even) {
+    background-color: $grey-0;
+  }
+
+  h2 {
+    font-weight: 600;
+    margin-bottom: 0.5em;
+  }
+
+  h3 {
+    margin-bottom: 1.5em;
+  }
+
+  .cardText {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: space-between;
+
+    padding: 0.5em 0em 1em 1em;
+
+    border-left: $black solid 0.5px;
+  }
+}

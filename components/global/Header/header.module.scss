@@ -1,7 +1,9 @@
 @use "../../../styles/base.scss" as *;
 
 .header {
+  z-index: 10;
   @include boxShadow;
+
   .topBanner {
     padding: 0.5em;
     font-family: sofia-pro, sans-serif;

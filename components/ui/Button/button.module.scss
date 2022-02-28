@@ -1,0 +1,36 @@
+@use "../../../styles/base.scss" as *;
+
+.button {
+  padding: 0.75em 1em;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  @include flexCenter;
+}
+
+.secondary {
+  background-color: transparent;
+  border: $black solid 0.5px;
+}
+
+.primary {
+  background-color: $button-primary;
+  color: $white;
+}
+
+.tertiary {
+  background-color: $grey-3;
+  color: $white;
+}
+
+.loading {
+  background-color: $grey-3;
+  color: $white;
+  cursor: not-allowed;
+}
+
+.disabled {
+  background-color: $grey-3;
+  color: $black;
+  cursor: not-allowed;
+}
