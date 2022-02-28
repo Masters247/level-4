@@ -12,9 +12,7 @@
     width: 70%;
     border-bottom: 1px solid $black;
     form {
-      width: 70%;
       display: flex;
-      flex-direction: column;
       padding-bottom: 0.5em;
       position: relative;
       .input {
@@ -36,16 +34,20 @@
       }
 
       .formButton {
-        // cursor: pointer;
-        width: 50px;
         display: flex;
         align-items: flex-end;
         background-color: $grey-2;
-        text-transform: uppercase;
-        font-size: 10px;
         position: relative;
         padding-right: 30px;
         transition: 200ms;
+        p {
+          display: none;
+          text-transform: uppercase;
+          font-size: 10px;
+          @media (min-width: $media-desktop-small) {
+            display: block;
+          }
+        }
 
         &:hover {
           color: $red-1;
@@ -57,8 +59,8 @@
         }
 
         .mailIcon {
-          right: -30px;
-          top: -2px;
+          right: 0px;
+          top: 1px;
           position: absolute;
           width: 20px;
           height: 20px;

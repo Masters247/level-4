@@ -32,7 +32,7 @@ const MailList = () => {
                 <div className={s.error}>{errors.email}</div>
               ) : null}
               <button className={s.formButton} type="submit">
-                Subscribe
+                <p>Subscribe</p>
                 <Mail styles={s.mailIcon} />
               </button>
             </Form>
