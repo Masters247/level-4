@@ -1,7 +1,6 @@
 @use "../../../styles/base.scss" as *;
 
 .header {
-  z-index: 10;
   @include boxShadow;
 
   .topBanner {
