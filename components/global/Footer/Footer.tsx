@@ -26,7 +26,7 @@ const Footer: FC = () => {
           </div>
         </div>
         <div className={`${s.footerElements} ${s.footer2}`}>
-          <h2>Products</h2>
+          <h4>Products</h4>
           <ul>
             {pages[0].pages?.map((page: any) => (
               <li key={page.name} className={page?.class}>
@@ -38,7 +38,7 @@ const Footer: FC = () => {
           </ul>
         </div>
         <div className={`${s.footerElements} ${s.footer3}`}>
-          <h2>Information</h2>
+          <h4>Information</h4>
           <ul>
             {pages[1].products?.map((page: any) => (
               <li key={page.name} className={page?.class}>
@@ -50,7 +50,7 @@ const Footer: FC = () => {
           </ul>
         </div>
         <div className={`${s.footerElements} ${s.footer4}`}>
-          <h2>Connect</h2>
+          <h4>Connect</h4>
           <div className={s.socialWrap}>
             <ul>
               <li>

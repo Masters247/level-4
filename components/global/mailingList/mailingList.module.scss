@@ -1,0 +1,72 @@
+@use "../../../styles/base.scss" as *;
+
+.mailWrap {
+  @include flexCenter;
+  flex-direction: column;
+  background-color: $grey-2;
+  min-height: 500px;
+
+  .formWrap {
+    @include flexCenter;
+    margin-top: 2em;
+    width: 70%;
+    border-bottom: 1px solid $black;
+    form {
+      width: 70%;
+      display: flex;
+      flex-direction: column;
+      padding-bottom: 0.5em;
+      position: relative;
+      .input {
+        margin-bottom: 0.5em;
+        background-color: $grey-2;
+        &::placeholder {
+          color: $black;
+          text-transform: uppercase;
+          font-size: 10px;
+        }
+      }
+
+      .error {
+        display: flex;
+        align-items: flex-end;
+        text-transform: uppercase;
+        font-size: 10px;
+        color: $red-1;
+      }
+
+      .formButton {
+        // cursor: pointer;
+        width: 50px;
+        display: flex;
+        align-items: flex-end;
+        background-color: $grey-2;
+        text-transform: uppercase;
+        font-size: 10px;
+        position: relative;
+        padding-right: 30px;
+        transition: 200ms;
+
+        &:hover {
+          color: $red-1;
+          .mailIcon {
+            path {
+              stroke: $red-1;
+            }
+          }
+        }
+
+        .mailIcon {
+          right: -30px;
+          top: -2px;
+          position: absolute;
+          width: 20px;
+          height: 20px;
+          path {
+            transition: 200ms;
+          }
+        }
+      }
+    }
+  }
+}

@@ -17,31 +17,34 @@ const DragMove = (props: any) => {
   //   // console.log(window);
   // }, []);
 
+  // console.log("no event", isDragging);
+
   const handlePointerDown = (e: any) => {
-    console.log("Pointer Down");
+    // console.log("Pointer Down");
     setIsDragging(true);
     onPointerDown(e);
   };
 
   const handlePointerUp = (e: any) => {
-    console.log("Pointer Up");
+    // console.log("Pointer Up");
     setIsDragging(false);
     onPointerUp(e);
   };
 
   const handlePointerMove = (e: any) => {
-    console.log("Pointer Move");
+    // console.log("Pointer Move");
     if (isDragging) onDragMove(e);
     onPointerMove(e);
   };
 
   const handlePointerLeave = (e: any) => {
-    console.log("Pointer leave");
+    // console.log("Pointer leave");
     setIsDragging(false);
   };
 
   return (
     <div
+      id="drag"
       onPointerDown={handlePointerDown}
       onPointerUp={handlePointerUp}
       onPointerMove={handlePointerMove}

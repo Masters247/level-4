@@ -1,39 +1,58 @@
-import React, { useState } from "react";
-// import logo from "./logo.svg";
+import React, { useRef, useEffect, useState } from "react";
 import s from "./productUi.module.scss";
+import Resize from "../resize-image/Resize";
+import ResizeImage from "../resize-image/ResizeImage";
 import DragMove from "../drag-move/DragMove";
-import { text } from "stream/consumers";
 
 function App() {
+  const ref = useRef(null);
+  const [isDragging, setIsDragging] = useState(false);
   const [translate, setTranslate] = useState({
     x: 0,
     y: 0,
   });
 
-  const handleDragMove = (e: any) => {
-    setTranslate({
-      x: translate.x + e.movementX,
-      y: translate.y + e.movementY,
-    });
-  };
+  useEffect(() => {
+    const draggableEle: any = ref.current;
+    const styles = window.getComputedStyle(draggableEle);
+    const drag = document.getElementById("drag");
+    drag?.addEventListener("pointerdown", (e) => pointDown(e));
+    drag?.addEventListener("pointerup", (e) => pointUp(e));
 
-  // console.log(translate.x);
+    const pointDown = (e: any) => {
+      drag?.addEventListener("pointermove", (e) => pointMovement(e));
+      console.log("pointdown", e);
+    };
+
+    const pointMovement = (e: any) => {
+      console.log("pointmove", e);
+    };
+
+    const pointUp = (e: any) => {
+      console.log("pointup", e);
+    };
+
+    // return () => {
+    //   drag?.removeEventListener("pointermove", (e) => pointMovement(e));
+    // };
+  }, []);
 
   return (
     <div className={s.App}>
-      <header className={s.AppHeader}>
-        <DragMove onDragMove={handleDragMove}>
-          <div
-            style={{
-              // position: "absolute",
-              // left: `${translate.x}`,
-              // top: `${translate.y}`,
-              transform: `translateX(${translate.x}px) translateY(${translate.y}px)`,
-            }}
-          >
-            <span className={s.span}></span>
-          </div>
-        </DragMove>
+      <header className={s.AppHeader} id="drag">
+        {/* <DragMove onDragMove={handleDragMove}> */}
+        <div
+          id="drag"
+          draggable={false}
+          style={{
+            transform: `translateX(${translate.x}px) translateY(${translate.y}px)`,
+          }}
+        >
+          <span className={s.span}></span>
+        </div>
+        {/* <Resize /> */}
+        {/* <ResizeImage /> */}
+        {/* </DragMove> */}
       </header>
     </div>
   );

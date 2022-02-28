@@ -4,9 +4,11 @@ import Menu from "../../../ui/icons/Menu";
 import Account from "../../../ui/icons/Account";
 import pages from "../../../../lib/pages";
 import Link from "next/link";
+import { useRouter } from "next/router";
 import s from "./mobileNav.module.scss";
 
 const MobileNav: FC = () => {
+  const router = useRouter();
   const [nav, setNav] = useState(true);
   const navButtonClick = () => {
     setNav(!nav);
