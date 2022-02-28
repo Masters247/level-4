@@ -13,21 +13,24 @@ const DragMove = (props: any) => {
 
   const [isDragging, setIsDragging] = useState(false);
 
-  useEffect(() => {
-    console.log(window);
-  }, []);
+  // useEffect(() => {
+  //   // console.log(window);
+  // }, []);
 
   const handlePointerDown = (e: any) => {
+    console.log("Pointer Down");
     setIsDragging(true);
     onPointerDown(e);
   };
 
   const handlePointerUp = (e: any) => {
+    console.log("Pointer Up");
     setIsDragging(false);
     onPointerUp(e);
   };
 
   const handlePointerMove = (e: any) => {
+    console.log("Pointer Move");
     if (isDragging) onDragMove(e);
     onPointerMove(e);
   };
