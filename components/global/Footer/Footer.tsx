@@ -33,7 +33,7 @@ const Footer: FC = () => {
         <div className={`${s.footerElements} ${s.footer2}`}>
           <h2>Products</h2>
           <ul>
-            {pages[0].pages?.map((page: any) => (
+            {pages[1].products?.map((page: any) => (
               <li key={page.name} className={page?.class}>
                 <Link href={page.link} passHref>
                   <a>{page.name}</a>
@@ -45,7 +45,7 @@ const Footer: FC = () => {
         <div className={`${s.footerElements} ${s.footer3}`}>
           <h2>Information</h2>
           <ul>
-            {pages[1].products?.map((page: any) => (
+            {pages[0].pages?.map((page: any) => (
               <li key={page.name} className={page?.class}>
                 <Link href={page.link} passHref>
                   <a>{page.name}</a>
