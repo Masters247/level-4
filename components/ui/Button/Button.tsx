@@ -25,6 +25,7 @@ const Button: FC<Props> = forwardRef(
       loading = false,
       className,
       disabled = false,
+      // What HTML element to render
       Component = "a",
       href,
       ...rest
