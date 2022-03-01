@@ -1,9 +1,9 @@
 import { FC, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import MobileNav from "../nav/mobile-Nav/MobileNav";
-import DesktopNavOne from "../nav/desktop-Nav/DesktopNavOne";
-import DesktopNavTwo from "../nav/desktop-Nav/DesktopNavTwo";
+import MobileNav from "../nav/mobile-nav/MobileNav";
+import DesktopNavOne from "../nav/desktop-nav/DesktopNavOne";
+import DesktopNavTwo from "../nav/desktop-nav/DesktopNavTwo";
 import s from "./header.module.scss";
 
 const Header: FC = () => {
