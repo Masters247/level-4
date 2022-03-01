@@ -1,10 +1,7 @@
 import { FC } from "react";
-import Link from "next/link";
-import Image from "next/image";
-import MobileNav from "../Nav/Mobile-nav/MobileNav";
-import DesktopNavOne from "../Nav/Desktop-nav/DesktopNavOne";
-import DesktopNavTwo from "../Nav/Desktop-nav/DesktopNavTwo";
+
 import s from "./header.module.scss";
+import { Nav } from "../Nav";
 
 const Header: FC = () => {
   return (
@@ -13,19 +10,7 @@ const Header: FC = () => {
         <p>25 years in golf making products personal</p>
       </div>
       <div className={s.mainHeader}>
-        <DesktopNavOne />
-        <Link href="/" passHref>
-          <a className={s.imageWrap}>
-            <Image
-              src="/Level-4-Lge.png"
-              width={650}
-              height={166}
-              alt="Level Four Logo"
-            />
-          </a>
-        </Link>
-        <DesktopNavTwo />
-        <MobileNav />
+        <Nav />
       </div>
     </header>
   );
