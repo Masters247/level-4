@@ -1,5 +1,6 @@
 import React, { useRef, useEffect, useState } from "react";
 import s from "./productUi.module.scss";
+import Gesture from "../Gesture/Gesture";
 import Resize from "../Resize-image/Resize";
 import ResizeImage from "../Resize-image/ResizeImage";
 import DragMove from "../Drag-move/DragMove";
@@ -19,7 +20,9 @@ function App() {
 
   return (
     <div className={s.App}>
-      <section className={s.AppHeader}>
+      <Gesture />
+
+      {/* <section className={s.AppHeader}>
         <DragMove onDragMove={handleDragMove}>
           <div
             id="drag"
@@ -31,7 +34,7 @@ function App() {
             <span className={s.span}></span>
           </div>
         </DragMove>
-      </section>
+      </section> */}
     </div>
   );
 }
