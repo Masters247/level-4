@@ -32,7 +32,7 @@
 
       .menuLine {
         @include flexCenter;
-        height: 0.25em;
+        height: 0.2em;
         width: 2em;
         background-color: $black;
         margin: 0.5em;
@@ -44,7 +44,7 @@
       }
 
       .bar2 {
-        transform: translateY(-8.5px) translateY(50%) rotate(45deg);
+        transform: translateY(-7px) translateY(50%) rotate(45deg);
       }
     }
   }
