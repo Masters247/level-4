@@ -2,7 +2,6 @@ import { useState, useEffect, useRef } from "react";
 import Rotate from "../../ui/icons/Rotate";
 import Image from "next/image";
 import s from "./resizeImage.module.scss";
-import Draggable from "react-draggable";
 
 const ResizeImage = () => {
   const ref = useRef(null);

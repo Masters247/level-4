@@ -2,13 +2,17 @@
 
 .header {
   @include boxShadow;
-  position: relative;
+
   z-index: 2;
 
   .topBanner {
+    display: none;
     padding: 1em;
     font-family: sofia-pro, sans-serif;
     border-bottom: 1px solid $black;
+    @media screen and (min-width: $media-tablet) {
+      @include flexCenter;
+    }
     p {
       font-size: 0.75rem;
       font-weight: 400;
@@ -22,11 +26,5 @@
     position: relative;
     @include flexCenter;
     justify-content: space-between;
-    .imageWrap {
-      position: absolute;
-      left: calc(50% - 60px);
-      width: 120px;
-      margin: 0.2em auto 0;
-    }
   }
 }

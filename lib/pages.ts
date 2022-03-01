@@ -12,6 +12,7 @@ const pages = [
       { name: "Headware", link: "/headwear" },
       { name: "Accessories", link: "/accessories" },
       { name: "Bespoke", link: "/bespoke" },
+      { name: "Custom", link: "/product-customiser" },
     ],
   },
 ];

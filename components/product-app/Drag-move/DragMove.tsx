@@ -1,6 +1,7 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect, useState } from "react";
+import PropTypes from "prop-types";
 
-const DragMove = (props: any) => {
+export default function DragMove(props: any) {
   const {
     onPointerDown,
     onPointerUp,
@@ -9,55 +10,64 @@ const DragMove = (props: any) => {
     children,
     style,
     className,
+    isSvg = false,
   } = props;
 
   const [isDragging, setIsDragging] = useState(false);
 
-  // useEffect(() => {
-  //   // console.log(window);
-  // }, []);
-
-  // console.log("no event", isDragging);
-
   const handlePointerDown = (e: any) => {
-    // console.log("Pointer Down");
     setIsDragging(true);
+
     onPointerDown(e);
   };
 
   const handlePointerUp = (e: any) => {
-    // console.log("Pointer Up");
     setIsDragging(false);
+
     onPointerUp(e);
   };
 
   const handlePointerMove = (e: any) => {
-    // console.log("Pointer Move");
     if (isDragging) onDragMove(e);
+
     onPointerMove(e);
   };
 
-  const handlePointerLeave = (e: any) => {
-    // console.log("Pointer leave");
-    setIsDragging(false);
-  };
+  useEffect(() => {
+    window.addEventListener("pointerup", handlePointerUp);
+
+    return () => {
+      window.removeEventListener("pointerup", handlePointerUp);
+    };
+  }, []);
+
+  // Dynamically render a <g> or <div> tag
+  const Tag = isSvg ? "g" : "div";
 
   return (
-    <div
-      id="drag"
+    <Tag
       onPointerDown={handlePointerDown}
-      onPointerUp={handlePointerUp}
       onPointerMove={handlePointerMove}
-      onPointerLeave={handlePointerLeave}
       style={style}
       className={className}
     >
       {children}
-    </div>
+    </Tag>
   );
-};
+}
 
-export default DragMove;
+const { func, element, shape, bool, string } = PropTypes;
+
+DragMove.propTypes = {
+  onDragMove: func.isRequired,
+  onPointerDown: func,
+  onPointerUp: func,
+  onPointerMove: func,
+  children: element,
+  style: shape({}),
+  className: string,
+  isSvg: bool,
+};
 
 DragMove.defaultProps = {
   onPointerDown: () => {},
