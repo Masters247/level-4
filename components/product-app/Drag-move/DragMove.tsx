@@ -17,37 +17,44 @@ export default function DragMove(props: any) {
 
   const handlePointerDown = (e: any) => {
     setIsDragging(true);
-
     onPointerDown(e);
   };
 
   const handlePointerUp = (e: any) => {
     setIsDragging(false);
-
     onPointerUp(e);
   };
 
   const handlePointerMove = (e: any) => {
     if (isDragging) onDragMove(e);
-
     onPointerMove(e);
+  };
+
+  const handlePointerLeave = (e: any) => {
+    setIsDragging(false);
+    onPointerUp(e);
   };
 
   useEffect(() => {
     window.addEventListener("pointerup", handlePointerUp);
+    window.addEventListener("mouseup", handlePointerUp);
 
     return () => {
       window.removeEventListener("pointerup", handlePointerUp);
+      window.removeEventListener("mouseup", handlePointerUp);
     };
   }, []);
 
-  // Dynamically render a <g> or <div> tag
   const Tag = isSvg ? "g" : "div";
 
   return (
     <Tag
-      onPointerDown={handlePointerDown}
-      onPointerMove={handlePointerMove}
+      onMouseDown={handlePointerDown}
+      onMouseMove={handlePointerMove}
+      onMouseLeave={handlePointerLeave}
+      // onPointerDown={handlePointerDown}
+      // onPointerMove={handlePointerMove}
+      // onPointerLeave={handlePointerLeave}
       style={style}
       className={className}
     >

@@ -12,26 +12,30 @@ const DesktopNav: FC = () => {
       <ul className={s.navLinks}>
         {pages[1].products?.map((page) => (
           <Link href={page.link} passHref key={page.name}>
-            <li>{page.name}</li>
+            <a>
+              <li>{page.name}</li>
+            </a>
           </Link>
         ))}
       </ul>
-
       <div className={s.logo}>
         <Link href="/" passHref>
-          <Image
-            src="/level-4-logo.svg"
-            width={120}
-            height={40}
-            alt="Level Four Logo"
-          />
+          <a>
+            <Image
+              src="/level-4-logo.svg"
+              width={120}
+              height={40}
+              alt="Level Four Logo"
+            />
+          </a>
         </Link>
       </div>
-
       <div className={s.navBottom}>
         <ul className={s.navLinks}>
           <Link href="/about-us" passHref>
-            <li>About Us</li>
+            <a>
+              <li>About Us</li>
+            </a>
           </Link>
         </ul>
         <div className={s.search}>
