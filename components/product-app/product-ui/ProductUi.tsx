@@ -1,8 +1,8 @@
 import React, { useRef, useEffect, useState } from "react";
 import s from "./productUi.module.scss";
-import Resize from "../resize-image/Resize";
-import ResizeImage from "../resize-image/ResizeImage";
-import DragMove from "../drag-move/DragMove";
+import Resize from "../Resize-image/Resize";
+import ResizeImage from "../Resize-image/ResizeImage";
+import DragMove from "../Drag-move/DragMove";
 
 function App() {
   const ref = useRef(null);

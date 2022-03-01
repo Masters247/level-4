@@ -1,5 +1,5 @@
 import { FC } from "react";
-import ProductUi from "../components/product-app/product-ui/ProductUi";
+import ProductUi from "../components/product-app/Product-ui/ProductUi";
 
 const ProductCustomiser: FC = () => {
   return (

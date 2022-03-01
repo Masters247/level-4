@@ -1,5 +1,5 @@
 import type { NextPage } from "next";
-import MailingList from "../components/global/mailingList/mailingList";
+import MailingList from "../components/global/MailingList/mailingList";
 import s from "../styles/pages/index.module.scss";
 
 const Home: NextPage = () => {
