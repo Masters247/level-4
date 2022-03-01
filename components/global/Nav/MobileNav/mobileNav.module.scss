@@ -1,4 +1,4 @@
-@use "../../../styles/base.scss" as *;
+@use "../../../../styles/base.scss" as *;
 
 .navWrapper {
   display: flex;
@@ -8,6 +8,10 @@
   width: 100%;
   height: 5em;
   transition: height 300ms ease-in-out;
+
+  @media screen and (min-width: $media-tablet) {
+    display: none;
+  }
 
   .headerWrapper {
     @include flexCenter;
@@ -28,7 +32,7 @@
 
       .menuLine {
         @include flexCenter;
-        height: 0.25em;
+        height: 0.2em;
         width: 2em;
         background-color: $black;
         margin: 0.5em;
@@ -40,7 +44,7 @@
       }
 
       .bar2 {
-        transform: translateY(-8.5px) translateY(50%) rotate(45deg);
+        transform: translateY(-7px) translateY(50%) rotate(45deg);
       }
     }
   }
@@ -57,7 +61,7 @@
       text-transform: uppercase;
       margin: 0.5em 0;
       letter-spacing: 0.1em;
-      font-weight: 400;
+      font-weight: 600;
     }
 
     .divide {
@@ -74,6 +78,7 @@
 
       .account {
         margin-right: 1em;
+
         display: flex;
         align-items: center;
       }

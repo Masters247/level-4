@@ -3,7 +3,7 @@ const Search = ({ styles }: any) => {
     <svg
       xmlns="http://www.w3.org/2000/svg"
       width="30.621"
-      height="30.621"
+      height="25"
       className={styles}
       viewBox="0 0 30.621 30.621"
     >

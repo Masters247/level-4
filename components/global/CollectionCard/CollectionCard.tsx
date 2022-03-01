@@ -19,6 +19,8 @@ const CollectionCard: FC<Props> = ({ collection }) => {
           width={collection.heroImage.width}
           height={collection.heroImage.height}
           layout="responsive"
+          placeholder="blur"
+          blurDataURL={collection.heroImage.url}
         />
       </div>
       <div className={s.cardText}>
