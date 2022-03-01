@@ -14,7 +14,12 @@ const Footer: FC = () => {
         <div className={`${s.footerElements} ${s.footer1}`}>
           <Link href="/" passHref>
             <a className={s.imageWrap}>
-              <Image src="/Level-4-Lge.png" width={375} height={166} />
+              <Image
+                src="/Level-4-Lge.png"
+                width={375}
+                height={166}
+                alt="Level Four Logo"
+              />
             </a>
           </Link>
           <div className={s.addressWrap}>
@@ -28,7 +33,7 @@ const Footer: FC = () => {
         <div className={`${s.footerElements} ${s.footer2}`}>
           <h4>Products</h4>
           <ul>
-            {pages[0].pages?.map((page: any) => (
+            {pages[1].products?.map((page: any) => (
               <li key={page.name} className={page?.class}>
                 <Link href={page.link} passHref>
                   <a>{page.name}</a>
@@ -40,7 +45,7 @@ const Footer: FC = () => {
         <div className={`${s.footerElements} ${s.footer3}`}>
           <h4>Information</h4>
           <ul>
-            {pages[1].products?.map((page: any) => (
+            {pages[0].pages?.map((page: any) => (
               <li key={page.name} className={page?.class}>
                 <Link href={page.link} passHref>
                   <a>{page.name}</a>
