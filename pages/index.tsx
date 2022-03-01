@@ -21,8 +21,7 @@ interface Props {
 
 const Home: NextPage<Props> = ({ collections }) => {
   return (
-    <div className={s.pageWrap}>
-      <p>Home Page</p>
+    <div>
       <VideoHero />
       <CollectionsGrid collections={collections} />
       <MailingList />

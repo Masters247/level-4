@@ -18,7 +18,7 @@ const Header: FC = () => {
           <a className={s.imageWrap}>
             <Image
               src="/Level-4-Lge.png"
-              width={375}
+              width={650}
               height={166}
               alt="Level Four Logo"
             />

@@ -25,16 +25,13 @@ li {
 h2 {
   font-weight: 400;
   text-transform: uppercase;
-  font-size: 50px;
-  @media (min-width: $media-desktop-small) {
-    font-size: 62px;
-  }
+  font-size: 1.5rem;
+  letter-spacing: 0.1em;
 }
 
 h4 {
   font-weight: 400;
   text-transform: uppercase;
-  font-size: 16px;
   letter-spacing: 0.25em;
   font-size: 1.25rem;
 }
