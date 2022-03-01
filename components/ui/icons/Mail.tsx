@@ -18,9 +18,9 @@ const Mail = ({ styles }: any) => {
           d="M5.707,6H27.359a2.715,2.715,0,0,1,2.707,2.707V24.946a2.715,2.715,0,0,1-2.707,2.707H5.707A2.715,2.715,0,0,1,3,24.946V8.707A2.715,2.715,0,0,1,5.707,6Z"
           fill="none"
           stroke="#000"
-          stroke-linecap="round"
-          stroke-linejoin="round"
-          stroke-width="2"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          strokeWidth="2"
         />
         <path
           id="Path_22"
@@ -29,9 +29,9 @@ const Mail = ({ styles }: any) => {
           transform="translate(0 -0.293)"
           fill="none"
           stroke="#000"
-          stroke-linecap="round"
-          stroke-linejoin="round"
-          stroke-width="2"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          strokeWidth="2"
         />
       </g>
     </svg>

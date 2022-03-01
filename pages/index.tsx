@@ -1,6 +1,6 @@
 import type { GetStaticProps, NextPage } from "next";
 import CollectionsGrid from "../components/global/CollectionsGrid";
-import MailingList from "../components/global/MailingList/mailingList"
+import MailingList from "../components/global/MailingList/mailingList";
 import VideoHero from "../components/global/Video";
 import collectionsQuery, {
   Collection,
@@ -23,9 +23,9 @@ const Home: NextPage<Props> = ({ collections }) => {
   return (
     <div className={s.pageWrap}>
       <p>Home Page</p>
-      <MailingList />
       <VideoHero />
       <CollectionsGrid collections={collections} />
+      <MailingList />
     </div>
   );
 };
