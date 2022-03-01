@@ -9,8 +9,9 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "formik": "^2.2.9",
+    "@mailchimp/mailchimp_marketing": "^3.0.74",
     "classnames": "^2.3.1",
+    "formik": "^2.2.9",
     "graphql-request": "^4.0.0",
     "next": "12.1.0",
     "react": "17.0.2",

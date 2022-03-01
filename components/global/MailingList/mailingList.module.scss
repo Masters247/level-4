@@ -4,17 +4,40 @@
   @include flexCenter;
   flex-direction: column;
   background-color: $grey-2;
-  min-height: 500px;
+  min-height: 20em;
+  @media (min-width: $media-tablet) {
+    min-height: 30em;
+  }
+  @media (min-width: $media-desktop-small) {
+    min-height: 40em;
+  }
+
+  h2 {
+    font-size: 2rem;
+    margin-bottom: 1.5em;
+    @media (min-width: $media-desktop-small) {
+      font-size: 4rem;
+    }
+  }
+
+  .thanks {
+    @include flexCenter;
+    flex-direction: column;
+  }
 
   .formWrap {
     @include flexCenter;
     margin-top: 2em;
     width: 70%;
+    max-width: 800px;
+    margin: 0 auto;
     border-bottom: 1px solid $black;
+
     form {
       display: flex;
       padding-bottom: 0.5em;
-      position: relative;
+      width: 90%;
+      justify-content: space-between;
       .input {
         margin-bottom: 0.5em;
         background-color: $grey-2;
@@ -26,11 +49,11 @@
       }
 
       .error {
-        display: flex;
-        align-items: flex-end;
+        @include flexCenter;
         text-transform: uppercase;
         font-size: 10px;
         color: $red-1;
+        margin: 0 1em 0.4em;
       }
 
       .formButton {
@@ -44,13 +67,17 @@
           display: none;
           text-transform: uppercase;
           font-size: 10px;
+          transition: 200ms;
           @media (min-width: $media-desktop-small) {
             display: block;
+            margin-bottom: 0.8em;
           }
         }
 
         &:hover {
-          color: $red-1;
+          p {
+            color: $red-1;
+          }
           .mailIcon {
             path {
               stroke: $red-1;

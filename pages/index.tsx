@@ -1,6 +1,6 @@
 import type { GetStaticProps, NextPage } from "next";
 import CollectionsGrid from "../components/global/CollectionsGrid";
-import MailingList from "../components/global/MailingList/mailingList";
+import MailingList from "../components/global/MailingList/MailingList";
 import VideoHero from "../components/global/Video";
 import collectionsQuery, {
   Collection,
