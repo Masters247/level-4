@@ -2,16 +2,20 @@
 
 .header {
   @include boxShadow;
+  position: relative;
+  z-index: 2;
 
   .topBanner {
-    padding: 0.5em;
+    padding: 1em;
     font-family: sofia-pro, sans-serif;
-    border-bottom: 1px solid $black-opacity-40;
+    border-bottom: 1px solid $black;
     p {
+      font-weight: 400;
       text-transform: uppercase;
       text-align: center;
     }
   }
+
   .mainHeader {
     min-height: 4em;
     position: relative;
