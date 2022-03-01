@@ -25,7 +25,6 @@ const Header: FC = () => {
           </a>
         </Link>
         <DesktopNavTwo />
-
         <MobileNav />
       </div>
     </header>
