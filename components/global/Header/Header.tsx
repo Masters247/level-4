@@ -1,7 +1,7 @@
 import { FC } from "react";
-
 import s from "./header.module.scss";
-import { Nav } from "../Nav";
+import { MobileNav } from "../Nav/MobileNav";
+import { DesktopNav } from "../Nav/DesktopNav";
 
 const Header: FC = () => {
   return (
@@ -9,9 +9,10 @@ const Header: FC = () => {
       <div className={s.topBanner}>
         <p>25 years in golf making products personal</p>
       </div>
-      <div className={s.mainHeader}>
-        <Nav />
-      </div>
+      <nav className={s.mainHeader}>
+        <MobileNav />
+        <DesktopNav />
+      </nav>
     </header>
   );
 };

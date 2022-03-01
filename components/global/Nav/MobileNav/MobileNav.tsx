@@ -1,22 +1,22 @@
 import Link from "next/link";
 import { FC, useState } from "react";
-import s from "./nav.module.scss";
+import s from "./mobileNav.module.scss";
 import Image from "next/image";
-import pages from "../../../lib/pages";
-import Account from "../../ui/icons/Account";
-import Search from "../../ui/icons/Search";
+import pages from "../../../../lib/pages";
+import Account from "../../../ui/icons/Account";
+import Search from "../../../ui/icons/Search";
 import { useLockBodyScroll } from "react-use";
 
 const Nav: FC = () => {
   const [open, setOpen] = useState(false);
   useLockBodyScroll(open);
   return (
-    <nav className={`${s.navWrapper} ${open ? s.open : ""}`}>
+    <div className={`${s.navWrapper} ${open ? s.open : ""}`}>
       <div className={s.headerWrapper}>
         <div className={s.mobileLogo} onClick={() => setOpen(false)}>
           <Link href="/" passHref>
             <Image
-              src="/Level-4-icon.svg"
+              src="/level-4-icon.svg"
               width={35}
               height={40}
               alt="Level Four Logo"
@@ -62,7 +62,7 @@ const Nav: FC = () => {
           </div>
         </div>
       </div>
-    </nav>
+    </div>
   );
 };
 
