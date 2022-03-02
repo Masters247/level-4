@@ -1,5 +1,5 @@
 import { FC } from "react";
-import ProductView from "../components/product-app/ProductView/ProductView";
+import ProductView from "../components/productApp/ProductView/ProductView";
 
 const ProductCustomiser: FC = () => {
   return (

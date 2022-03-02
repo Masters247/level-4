@@ -15,9 +15,9 @@ const ProductUi: FC = () => {
   return (
     <div className={s.productUiWrap}>
       <div className={s.colourButtonsWrap}>
-          {options.map((colour: any) => {
+          {options.map((colour: any, id: number) => {
               return (
-                  <button onClick={handleColour} className={s.colourButton} style={{
+                  <button key={id} onClick={handleColour} className={s.colourButton} style={{
                       backgroundColor: colour.colour
                   }}>
                   </button>
