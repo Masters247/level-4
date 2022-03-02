@@ -12,12 +12,18 @@ const Test = () => {
     height: 100,
   }));
 
+  const bind = useDrag();
+
+  const handleTestClick = () => {
+    console.log("clicked");
+  };
+
   const onResize = useCallback(() => {
-    console.log("fired");
-    setIsResizing(true);
     api.set({
       x: 20,
-      y: 200,
+      y: 20,
+      width: 100,
+      height: 100,
     });
   }, []);
 
@@ -25,9 +31,18 @@ const Test = () => {
     <div className={s.testWrap}>
       <animated.div className={s.test} style={{ x, y, width, height }}>
         Test
-        <div className={s.resizer}>
-        </div>
+        <div className={s.resizer}></div>
       </animated.div>
+      <button
+        style={{
+          zIndex: "4",
+          display: "block",
+          position: "absolute",
+          right: "0",
+        }}
+        onClick={onResize}>
+        test
+      </button>
     </div>
   );
 };
