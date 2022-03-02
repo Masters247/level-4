@@ -12,8 +12,6 @@ const Test = () => {
     height: 100,
   }));
 
-  const bind = useDrag();
-
   const handleTestClick = () => {
     console.log("clicked");
   };
