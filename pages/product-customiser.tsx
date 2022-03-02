@@ -1,10 +1,10 @@
 import { FC } from "react";
-import ProductUi from "../components/product-app/Product-ui/ProductUi";
+import ProductView from "../components/product-app/ProductView/ProductView";
 
 const ProductCustomiser: FC = () => {
   return (
     <div className="div">
-      <ProductUi />
+      <ProductView />
     </div>
   );
 };

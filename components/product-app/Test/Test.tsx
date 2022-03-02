@@ -1,71 +1,35 @@
-import React, { useEffect, useRef } from "react";
+import { useCallback, useRef, useState } from "react";
 import { useSpring, animated } from "@react-spring/web";
-import { createUseGesture, dragAction, pinchAction } from "@use-gesture/react";
-import s from "./gesture.module.scss";
+import { useDrag } from "@use-gesture/react";
+import s from "./test.module.scss";
 
-const useGesture = createUseGesture([dragAction, pinchAction]);
-
-const Gesture = () => {
-  useEffect(() => {
-    const handler = (e: any) => e.preventDefault();
-    document.addEventListener("gesturestart", handler);
-    document.addEventListener("gesturechange", handler);
-    document.addEventListener("gestureend", handler);
-    return () => {
-      document.removeEventListener("gesturestart", handler);
-      document.removeEventListener("gesturechange", handler);
-      document.removeEventListener("gestureend", handler);
-    };
-  }, []);
-
-  const [style, api] = useSpring(() => ({
+const Test = () => {
+  const [isResizing, setIsResizing] = useState(false);
+  const [{ x, y, width, height }, api] = useSpring(() => ({
     x: 0,
     y: 0,
-    scale: 1,
-    rotateZ: 0,
+    width: 100,
+    height: 100,
   }));
-  const ref: any = useRef(null);
 
-  useGesture(
-    {
-      // onHover: ({ active, event }) => console.log('hover', event, active),
-      // onMove: ({ event }) => console.log('move', event),
-      onDrag: ({ pinching, cancel, offset: [x, y], ...rest }) => {
-        if (pinching) return cancel();
-        api.start({ x, y });
-      },
-      onPinch: ({
-        origin: [ox, oy],
-        first,
-        movement: [ms],
-        offset: [s, a],
-        memo,
-      }) => {
-        if (first) {
-          const { width, height, x, y } = ref.current.getBoundingClientRect();
-          const tx = ox - (x + width / 2);
-          const ty = oy - (y + height / 2);
-          memo = [style.x.get(), style.y.get(), tx, ty];
-        }
-
-        const x = memo[0] - ms * memo[2];
-        const y = memo[1] - ms * memo[3];
-        api.start({ scale: s, rotateZ: a, x, y });
-        return memo;
-      },
-    },
-    {
-      target: ref,
-      drag: { from: () => [style.x.get(), style.y.get()] },
-      pinch: { scaleBounds: { min: 0.5, max: 2 }, rubberband: true },
-    }
-  );
+  const onResize = useCallback(() => {
+    console.log("fired");
+    setIsResizing(true);
+    api.set({
+      x: 20,
+      y: 200,
+    });
+  }, []);
 
   return (
-    <div className={`flex fill center ${s.container}`}>
-      <animated.div className={s.card} ref={ref} style={style}></animated.div>
+    <div className={s.testWrap}>
+      <animated.div className={s.test} style={{ x, y, width, height }}>
+        Test
+        <div className={s.resizer}>
+        </div>
+      </animated.div>
     </div>
   );
 };
 
-export default Gesture;
+export default Test;
