@@ -43,7 +43,7 @@ const ProductUi: FC = () => {
       <div className={s.uiButtonsWrap}>
         {uiButtons.map((button: any, i: any) => {
           return (
-            <button className={`${s.uiButton} ${button.class} `}>
+            <button key={i} className={`${s.uiButton} ${button.class} `}>
               {button.text}
             </button>
           );
