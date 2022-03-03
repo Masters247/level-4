@@ -22,21 +22,6 @@ const HorizontalAlign = ({ styles }: any) => {
           </g>
         </g>
       </g>
-      <g></g>
-      <g></g>
-      <g></g>
-      <g></g>
-      <g></g>
-      <g></g>
-      <g></g>
-      <g></g>
-      <g></g>
-      <g></g>
-      <g></g>
-      <g></g>
-      <g></g>
-      <g></g>
-      <g></g>
     </svg>
   );
 };

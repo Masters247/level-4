@@ -22,21 +22,6 @@ const VerticalAlign = ({ styles }: any) => {
           </g>
         </g>
       </g>
-      <g></g>
-      <g></g>
-      <g></g>
-      <g></g>
-      <g></g>
-      <g></g>
-      <g></g>
-      <g></g>
-      <g></g>
-      <g></g>
-      <g></g>
-      <g></g>
-      <g></g>
-      <g></g>
-      <g></g>
     </svg>
   );
 };
