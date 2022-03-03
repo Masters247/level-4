@@ -1,6 +1,7 @@
 import { useCallback, useRef, useState } from "react";
 import { useSpring, animated } from "@react-spring/web";
 import { useDrag } from "@use-gesture/react";
+import { useLockBodyScroll } from "react-use";
 import ProductUiPanel from "../ProductUi/ProductUiPanel";
 import s from "./productView.module.scss";
 
@@ -15,9 +16,12 @@ const ProductView = () => {
   const containerRef = useRef<HTMLDivElement | null>(null);
   const dragEl = useRef<HTMLDivElement | null>(null);
 
+  useLockBodyScroll();
+
   const bind = useDrag(
     (state) => {
       const isResizing = state?.event.target === dragEl.current;
+      useLockBodyScroll();
       if (isResizing) {
         api.set({
           width: state.offset[0],
