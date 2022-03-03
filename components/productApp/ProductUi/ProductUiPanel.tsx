@@ -1,5 +1,6 @@
 import { FC } from "react";
-import s from "./productUi.module.scss";
+import s from "./productUiPanel.module.scss";
+
 const options = [
   { colour: "#909090" },
   { colour: "#909090" },
@@ -33,7 +34,8 @@ const ProductUi: FC = () => {
                 className={s.colourButton}
                 style={{
                   backgroundColor: colour.colour,
-                }}></button>
+                }}
+              ></button>
             );
           })}
         </div>

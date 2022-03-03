@@ -1,0 +1,14 @@
+@use "../../../styles/base.scss" as *;
+.uiControlsWrap {
+  position: absolute;
+  right: 0.5em;
+  display: flex;
+  top: 0.5em;
+  .control {
+    @include flexCenter;
+    border: 1px solid;
+    width: 1.5em;
+    height: 1.5em;
+    margin-left: 0.5em;
+  }
+}

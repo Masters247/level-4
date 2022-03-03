@@ -1,33 +1,34 @@
-
-@use "../../../styles/base.scss" as * ;
+@use "../../../styles/base.scss" as *;
 
 .testWrap {
-    position: relative;
-    min-height: 600px;
-    width: 100vw;
-    background-color: rgb(191, 191, 255);
- 
-    .test{
-        border: 1px dashed $black;
-        top: 0px;
-        left: 0px;
-        position:absolute;
-        cursor: grab;
-        @include flexCenter;
-        background-color: red;
-        .resizer {
-            position: absolute;
-            width: 20px;
-            height: 20px;
-            border-radius: 50%;
-            background-color: blue;
-            bottom: -20px;
-            right: -20px;
-            touch-action: none;
-            cursor: nwse-resize;
+  position: relative;
+  top: 3.3em;
+  border: 1px dashed $grey-4;
+  position: relative;
+  width: calc(100vw - 2em);
+  height: 26em;
+  max-width: 36em;
+  margin: 0 auto;
+  background-color: rgb(191, 191, 255);
 
-            
-        }
+  .test {
+    border: 1px dashed $black;
+    top: 0px;
+    left: 0px;
+    position: absolute;
+    cursor: grab;
+    @include flexCenter;
+    background-color: red;
+    .resizer {
+      position: absolute;
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      background-color: blue;
+      bottom: -20px;
+      right: -20px;
+      touch-action: none;
+      cursor: nwse-resize;
     }
-
+  }
 }

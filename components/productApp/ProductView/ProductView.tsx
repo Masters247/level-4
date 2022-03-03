@@ -1,12 +1,12 @@
 import React, { FC } from "react";
 import s from "./productView.module.scss";
-import ProductUi from "../ProductUi/ProductUi";
+import ProductUiPanel from "../ProductUi/ProductUiPanel";
 import Test from "../Test/Test";
 
 const ProductView: FC = () => {
   return (
     <div className={s.productViewWrap}>
-      <ProductUi />
+      <ProductUiPanel />
       <Test />
     </div>
   );
