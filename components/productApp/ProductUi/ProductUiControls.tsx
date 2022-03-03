@@ -8,20 +8,17 @@ const ProcuctUiControls = ({ center, vertical, horizontal }: any) => {
   const controls = [
     {
       name: "c",
-      class: s.center,
-      icon: <Center />,
+      icon: <Center styles={s.center} />,
       function: center,
     },
     {
       name: "cv",
-      class: s.centerVertical,
-      icon: <VerticalAlign />,
+      icon: <VerticalAlign styles={s.centerVertical} />,
       function: vertical,
     },
     {
       name: "ch",
-      class: s.centerHorizontal,
-      icon: <HorizontalAlign />,
+      icon: <HorizontalAlign styles={s.centerHorizontal} />,
       function: horizontal,
     },
   ];
@@ -29,11 +26,7 @@ const ProcuctUiControls = ({ center, vertical, horizontal }: any) => {
     <div className={s.uiControlsWrap}>
       {controls.map((cont: any) => {
         return (
-          <button
-            key={cont.name}
-            onClick={cont.function}
-            className={`${s.control} ${cont.class}`}
-          >
+          <button key={cont.name} onClick={cont.function} className={s.control}>
             {cont.icon}
           </button>
         );

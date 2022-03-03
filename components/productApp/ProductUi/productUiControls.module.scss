@@ -7,8 +7,30 @@
   .control {
     @include flexCenter;
     border: 1px solid;
-    width: 1.5em;
-    height: 1.5em;
+    padding: 0.2em;
+    width: 1.7em;
+    height: 1.7em;
     margin-left: 0.5em;
+    .center {
+      path {
+        stroke: $black;
+      }
+    }
+    .centerVertical {
+      path {
+        stroke: $black;
+      }
+      rect {
+        fill: $black;
+      }
+    }
+    .centerHorizontal {
+      path {
+        stroke: $black;
+      }
+      rect {
+        fill: $black;
+      }
+    }
   }
 }

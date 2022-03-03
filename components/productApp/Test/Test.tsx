@@ -6,7 +6,6 @@ import ProductUiControls from "../ProductUi/ProductUiControls";
 import s from "./test.module.scss";
 
 const Test = () => {
-  const [isResizing, setIsResizing] = useState(false);
   const [{ x, y, width, height }, api] = useSpring(() => ({
     x: 0,
     y: 0,
@@ -51,6 +50,7 @@ const Test = () => {
       y: containerHeight / 2 - getHeight,
     });
   };
+
   const handleVertical = () => {
     const getHeight = height.get() / 2;
     const containerHeight: any = containerRef.current?.clientHeight;
@@ -58,6 +58,7 @@ const Test = () => {
       y: containerHeight / 2 - getHeight,
     });
   };
+
   const handleHorizontal = () => {
     const getWidth = width.get() / 2;
     const containerWidth: any = containerRef.current?.clientWidth;
@@ -65,15 +66,6 @@ const Test = () => {
       x: containerWidth / 2 - getWidth,
     });
   };
-
-  const onResize = useCallback(() => {
-    api.set({
-      x: 20,
-      y: 20,
-      width: 100,
-      height: 100,
-    });
-  }, []);
 
   return (
     <div className={s.testWrap} ref={containerRef}>
@@ -87,7 +79,6 @@ const Test = () => {
         style={{ x, y, width, height }}
         {...bind()}
       >
-        Test
         <div className={s.resizer}></div>
       </animated.div>
     </div>

@@ -44,7 +44,7 @@ const ProductUi: FC = () => {
         {uiButtons.map((button: any, i: any) => {
           return (
             <button key={i} className={`${s.uiButton} ${button.class} `}>
-              {button.text}
+              <p>{button.text}</p>
             </button>
           );
         })}

@@ -18,17 +18,22 @@
     position: absolute;
     cursor: grab;
     @include flexCenter;
-    background-color: red;
     .resizer {
       position: absolute;
-      width: 20px;
-      height: 20px;
+      width: 15px;
+      height: 15px;
       border-radius: 50%;
-      background-color: blue;
+      background-color: $white;
       bottom: -20px;
       right: -20px;
       touch-action: none;
       cursor: nwse-resize;
+      @include boxShadow;
+      transition: 300ms;
+      &:hover,
+      &:focus {
+        background-color: $button-primary;
+      }
     }
   }
 }
