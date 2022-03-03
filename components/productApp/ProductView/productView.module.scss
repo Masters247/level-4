@@ -5,3 +5,42 @@
   position: relative;
   min-height: 45em;
 }
+
+.viewportWrap {
+  position: relative;
+  top: 2.6em;
+  border: 1px dashed $grey-4;
+  position: relative;
+  width: calc(100vw - 2em);
+  height: 26em;
+  max-width: 36em;
+  margin: 0 auto;
+  background-color: rgb(191, 191, 255);
+  @include boxShadow;
+
+  .viewport {
+    border: 1px dashed $black;
+    top: 0px;
+    left: 0px;
+    position: absolute;
+    cursor: grab;
+    @include flexCenter;
+    .resizer {
+      position: absolute;
+      width: 15px;
+      height: 15px;
+      border-radius: 50%;
+      background-color: $white;
+      bottom: -5px;
+      right: -5px;
+      touch-action: none;
+      cursor: nwse-resize;
+      @include boxShadow;
+      transition: 300ms;
+      &:hover,
+      &:focus {
+        background-color: $button-primary;
+      }
+    }
+  }
+}

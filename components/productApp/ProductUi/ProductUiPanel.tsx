@@ -1,5 +1,8 @@
 import { FC } from "react";
 import s from "./productUiPanel.module.scss";
+import Center from "../../ui/icons/Center";
+import HorizontalAlign from "../../ui/icons/HorizontalAlign";
+import VerticalAlign from "../../ui/icons/VerticalAlign";
 
 const options = [
   { colour: "#909090" },
@@ -9,7 +12,7 @@ const options = [
 ];
 
 const uiButtons = [
-  { icon: "", class: s.resize, text: "resize" },
+  // { icon: "", class: s.resize, text: "resize" },
   { icon: "", class: s.image, text: "new image" },
   { icon: "", class: s.undo, text: "undo" },
   { icon: "", class: s.redo, text: "redo" },
@@ -17,14 +20,47 @@ const uiButtons = [
   { icon: "", class: s.download, text: "download" },
 ];
 
-const ProductUi: FC = () => {
+const ProductUi = ({ center, vertical, horizontal }: any) => {
   const handleColour = () => {
     console.log("colour click");
   };
+  const controls = [
+    {
+      name: "c",
+      icon: <Center styles={s.center} />,
+      function: center,
+    },
+    {
+      name: "cv",
+      icon: <VerticalAlign styles={s.centerVertical} />,
+      function: vertical,
+    },
+    {
+      name: "ch",
+      icon: <HorizontalAlign styles={s.centerHorizontal} />,
+      function: horizontal,
+    },
+  ];
   return (
     <div className={s.productUiWrap}>
+      <div className={s.uiControlsWrap}>
+        <p>Alignment:</p>
+        <div className={s.controlsWrap}>
+          {controls.map((cont: any) => {
+            return (
+              <button
+                key={cont.name}
+                onClick={cont.function}
+                className={s.control}
+              >
+                {cont.icon}
+              </button>
+            );
+          })}
+        </div>
+      </div>
       <div className={s.productColourWrap}>
-        <h3>Product Colour:</h3>
+        <p>Colour:</p>
         <div className={s.colourButtonsWrap}>
           {options.map((colour: any, id: number) => {
             return (
