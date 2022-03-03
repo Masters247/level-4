@@ -1,23 +1,17 @@
 @use "../../../styles/base.scss" as *;
 
 .productUiWrap {
+  margin: 4em auto;
+  position: relative;
+  width: calc(100vw - 2em);
+  max-width: 20em;
   z-index: 1;
-  position: absolute;
-  right: 0;
-  bottom: 0;
-  margin: 1em;
   background-color: $white;
-  max-width: 360px;
-  width: calc(100% - 2em);
   @include boxShadow;
   border-radius: 5px;
-  @media (min-width: 390px) {
-    right: calc(50% - 180px);
-    bottom: 1em;
-    margin: 0;
-  }
+
   .uiControlsWrap {
-    margin: 1em;
+    padding: 1em;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -29,35 +23,18 @@
       display: flex;
       .control {
         background-color: $white;
-        @include flexCenter;
+        // @include flexCenter;
         border: 1px solid $grey-4;
         @include boxShadow;
-        padding: 0.2em;
         width: 24px;
         height: 24px;
         margin-left: 0.4em;
-
-        // .center {
-        //   path {
-        //     stroke: $black;
-        //   }
-        // }
-        // .centerVertical {
-        //   path {
-        //     stroke: $black;
-        //   }
-        //   rect {
-        //     fill: $black;
-        //   }
-        // }
-        // .centerHorizontal {
-        //   path {
-        //     stroke: $black;
-        //   }
-        //   rect {
-        //     fill: $black;
-        //   }
-        // }
+        path {
+          stroke: $black;
+        }
+        g g path {
+          stroke: $black;
+        }
       }
     }
   }
@@ -101,18 +78,33 @@
   .uiButtonsWrap {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    margin: 1em;
+    padding: 1em;
     grid-gap: 1em;
     .uiButton {
       text-transform: uppercase;
+      @include flexCenter;
+      height: 2.3em;
+
+      .undo {
+        width: 15px;
+        margin-left: 0.5em;
+      }
+
+      .redo {
+        width: 15px;
+        margin-right: 0.5em;
+      }
+
       p {
         font-weight: 600;
       }
 
       background-color: $white;
       border: 1px solid $grey-4;
-      // padding: 0.2em;
       @include boxShadow;
+    }
+    .undoWrap {
+      flex-direction: row-reverse;
     }
     .image {
       grid-column: 1 / 3;

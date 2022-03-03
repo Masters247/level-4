@@ -3,6 +3,8 @@ import s from "./productUiPanel.module.scss";
 import Center from "../../ui/icons/Center";
 import HorizontalAlign from "../../ui/icons/HorizontalAlign";
 import VerticalAlign from "../../ui/icons/VerticalAlign";
+import Undo from "../../ui/icons/Undo";
+import Redo from "../../ui/icons/Redo";
 
 const options = [
   { colour: "#909090" },
@@ -14,8 +16,8 @@ const options = [
 const uiButtons = [
   // { icon: "", class: s.resize, text: "resize" },
   { icon: "", class: s.image, text: "new image" },
-  { icon: "", class: s.undo, text: "undo" },
-  { icon: "", class: s.redo, text: "redo" },
+  { icon: <Undo styles={s.undo} />, class: s.undoWrap, text: "undo" },
+  { icon: <Redo styles={s.redo} />, class: s.redoWrap, text: "redo" },
   { icon: "", class: s.save, text: "save for letter" },
   { icon: "", class: s.download, text: "download" },
 ];
@@ -80,6 +82,7 @@ const ProductUi = ({ center, vertical, horizontal }: any) => {
         {uiButtons.map((button: any, i: any) => {
           return (
             <button key={i} className={`${s.uiButton} ${button.class} `}>
+              {button.icon}
               <p>{button.text}</p>
             </button>
           );
