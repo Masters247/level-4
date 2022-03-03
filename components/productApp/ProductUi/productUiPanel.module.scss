@@ -23,7 +23,6 @@
       display: flex;
       .control {
         background-color: $white;
-        // @include flexCenter;
         border: 1px solid $grey-4;
         @include boxShadow;
         width: 24px;
@@ -34,6 +33,16 @@
         }
         g g path {
           stroke: $black;
+        }
+        .center {
+          padding: 0 2px 2px 0;
+        }
+        .center,
+        .ccenterVertical,
+        .centerHorizontal {
+          // width: 23px;
+          // height: 23px;
+          // background-color: red;
         }
       }
     }
