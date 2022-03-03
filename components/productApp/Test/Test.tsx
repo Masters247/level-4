@@ -1,7 +1,7 @@
 import { useCallback, useRef, useState } from "react";
 import { useSpring, animated } from "@react-spring/web";
 import { useDrag } from "@use-gesture/react";
-import ProductUiControls from "../ProductUi/productUiControls";
+import ProductUiControls from "../ProductUi/ProductUiControls";
 
 import s from "./test.module.scss";
 
