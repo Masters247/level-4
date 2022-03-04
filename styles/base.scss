@@ -17,8 +17,6 @@ $media-tablet: 650px;
 $media-desktop-small: 950px;
 $media-desktop: 1020px;
 
-$ui-font-size: 0.8rem;
-
 @mixin flexCenter {
   display: flex;
   justify-content: center;
