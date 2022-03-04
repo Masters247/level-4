@@ -68,7 +68,7 @@ const ProductUi = ({ center, vertical, horizontal, showhide, state }: any) => {
     <div
       className={s.productUiWrap}
       style={{
-        top: state ? "30em" : "39em",
+        top: state ? "28em" : "38em",
       }}
     >
       <div className={s.uiControlsWrap}>

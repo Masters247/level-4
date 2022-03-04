@@ -4,12 +4,10 @@
   font-size: 0.8rem;
   font-weight: 600;
   text-transform: uppercase;
-  padding: 0.6em 0;
 }
 
 .productUiWrap {
   position: absolute;
-  top: 30em;
   left: calc(50% - (50vw - 1em));
   width: calc(100vw - 2em);
   max-width: 20em;
@@ -92,6 +90,7 @@
     padding: 1em;
     grid-gap: 1em;
     .uiButton {
+      min-height: 3em;
       text-transform: uppercase;
       @include flexCenter;
 
