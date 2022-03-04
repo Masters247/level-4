@@ -16,12 +16,9 @@ const ProductView = () => {
   const containerRef = useRef<HTMLDivElement | null>(null);
   const dragEl = useRef<HTMLDivElement | null>(null);
 
-  useLockBodyScroll();
-
   const bind = useDrag(
     (state) => {
       const isResizing = state?.event.target === dragEl.current;
-      useLockBodyScroll();
       if (isResizing) {
         api.set({
           width: state.offset[0],

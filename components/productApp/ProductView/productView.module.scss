@@ -21,6 +21,7 @@
 
   .viewport {
     // border-radius: 5px;
+    touch-action: none;
     border: 1px dashed $grey-4;
     top: 0px;
     left: 0px;
