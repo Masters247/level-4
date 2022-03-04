@@ -1,0 +1,38 @@
+@use "../../../assets/base.scss" as *;
+.dotsWrap {
+  position: absolute;
+  left: calc(50% - 100px);
+  width: 200px;
+  @include center;
+
+  .active,
+  .dots {
+    cursor: pointer;
+    @include center;
+    margin: 0 3px;
+    height: 15px;
+    width: 15px;
+    border: none;
+    outline: none;
+    border-radius: 50%;
+    transition: 200ms;
+    &:hover {
+      background-color: $red-1;
+    }
+  }
+
+  .dots {
+    background-color: $black-opacity-80;
+  }
+
+  .active {
+    $background-colour: $grey-opacity-20;
+  }
+  .buttonActive {
+    background-color: $grey-opacity-50;
+  }
+  bottom: 149px;
+  @media screen and (min-width: $breakpoint-tablet) {
+    bottom: 120px;
+  }
+}

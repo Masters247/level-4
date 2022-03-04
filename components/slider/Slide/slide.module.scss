@@ -1,0 +1,13 @@
+@use "../../../assets/base.scss" as *;
+
+.slide {
+  position: relative;
+  height: 40vh;
+  min-height: 400px;
+  width: 100vw;
+  transition: 1000ms;
+  @media screen and (min-width: $breakpoint-tablet) {
+    height: 60vh;
+    min-height: 500px;
+  }
+}

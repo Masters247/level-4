@@ -1,9 +1,9 @@
 @use "../../../styles/base.scss" as *;
 
 .productViewWrap {
-  // background-color: rgb(157, 157, 243);
   position: relative;
   min-height: 48em;
+  background-color: $grey-1;
 }
 
 .viewportWrap {
@@ -15,12 +15,8 @@
   width: calc(100vw - 2em);
   max-width: 20em;
   margin: 0 auto;
-  // background-color: rgb(191, 191, 255);
   @include boxShadow;
-  // border-radius: 5px;
-
   .viewport {
-    // border-radius: 5px;
     touch-action: none;
     border: 1px dashed $grey-4;
     top: 0px;

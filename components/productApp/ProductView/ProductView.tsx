@@ -6,6 +6,8 @@ import ProductUiPanel from "../ProductUi/ProductUiPanel";
 import s from "./productView.module.scss";
 
 const ProductView = () => {
+  const [control, setControl] = useState(true);
+
   const [{ x, y, width, height }, api] = useSpring(() => ({
     x: 0,
     y: 0,
@@ -90,21 +92,30 @@ const ProductView = () => {
     });
   };
 
+  const handleControls = () => {
+    setControl(!control);
+  };
+
   return (
     <div className={s.productViewWrap}>
-      <div className={s.viewportWrap} ref={containerRef}>
-        <animated.div
-          className={s.viewport}
-          style={{ x, y, width, height }}
-          {...bind()}
-        >
-          <div className={s.resizer} ref={dragEl}></div>
-        </animated.div>
-      </div>
+      {control ? (
+        <div className={s.viewportWrap} ref={containerRef}>
+          <animated.div
+            className={s.viewport}
+            style={{ x, y, width, height }}
+            {...bind()}
+          >
+            <div className={s.resizer} ref={dragEl}></div>
+          </animated.div>
+        </div>
+      ) : null}
+
       <ProductUiPanel
         center={handleCenter}
         vertical={handleVertical}
         horizontal={handleHorizontal}
+        showhide={handleControls}
+        state={control}
       />
     </div>
   );
