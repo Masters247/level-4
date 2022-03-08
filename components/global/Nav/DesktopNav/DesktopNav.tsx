@@ -22,6 +22,7 @@ const DesktopNav: FC = () => {
         <Link href="/" passHref>
           <a>
             <Image
+              priority
               src="/level-4-logo.svg"
               width={120}
               height={40}

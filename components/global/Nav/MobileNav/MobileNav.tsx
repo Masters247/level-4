@@ -15,12 +15,15 @@ const Nav: FC = () => {
       <div className={s.headerWrapper}>
         <div className={s.mobileLogo} onClick={() => setOpen(false)}>
           <Link href="/" passHref>
-            <Image
-              src="/level-4-icon.svg"
-              width={35}
-              height={40}
-              alt="Level Four Logo"
-            />
+            <a>
+              <Image
+                priority
+                src="/level-4-icon.svg"
+                width={35}
+                height={40}
+                alt="Level Four Logo"
+              />
+            </a>
           </Link>
         </div>
         <div className={s.mobileMenu} onClick={() => setOpen(!open)}>
@@ -35,7 +38,9 @@ const Nav: FC = () => {
         <ul className={s.navLinks}>
           {pages[0].pages?.map((page) => (
             <Link href={page.link} passHref key={page.name}>
-              <li onClick={() => setOpen(!open)}>{page.name}</li>
+              <a>
+                <li onClick={() => setOpen(!open)}>{page.name}</li>
+              </a>
             </Link>
           ))}
         </ul>
@@ -45,7 +50,9 @@ const Nav: FC = () => {
         <ul className={s.navLinks}>
           {pages[1].products?.map((page) => (
             <Link href={page.link} passHref key={page.name}>
-              <li onClick={() => setOpen(!open)}>{page.name}</li>
+              <a>
+                <li onClick={() => setOpen(!open)}>{page.name}</li>
+              </a>
             </Link>
           ))}
         </ul>

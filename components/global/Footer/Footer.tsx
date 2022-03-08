@@ -15,6 +15,7 @@ const Footer: FC = () => {
           <Link href="/" passHref>
             <a className={s.imageWrap}>
               <Image
+                // priority
                 src="/level-4-logo.svg"
                 width={650}
                 height={166}
