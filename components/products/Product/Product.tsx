@@ -3,7 +3,6 @@ import ProductColourButtons from "./ProductColourButtons";
 import Image from "next/image";
 import Link from "next/link";
 import s from "./product.module.scss";
-import { getImageSize } from "next/dist/server/image-optimizer";
 
 const Product = ({ p, i }: any) => {
   const [productView, setProductView] = useState(1);

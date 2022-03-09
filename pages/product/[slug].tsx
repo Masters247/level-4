@@ -1,8 +1,8 @@
 import type { NextPage } from "next";
 import { GraphQLClient, gql } from "graphql-request";
+import { useState } from "react";
 import productQuery from "../../lib/graphcms-querys/productQuery";
 import Slider from "../../components/slider/Slider/Slider";
-import ProductColourButtons from "../../components/products/Product/ProductColourButtons";
 import Image from "next/image";
 import s from "../../styles/pages/productPage.module.scss";
 
@@ -65,13 +65,33 @@ const height = "300px";
 const width = "300px";
 
 const Product: NextPage<Props> = ({ data }) => {
+  const [productColour, setProductColour] = useState(0);
+
   const { product } = data;
 
-  const images = product.productVariantColours[0].images.map((i: any) => i.url);
+  const hexOne = product.productVariantColours[0].colour.hex;
+  const hexTwo = product.productVariantColours[1].colour.hex;
+  const hexThree = product.productVariantColours[2].colour.hex;
+  const hexFour = product.productVariantColours[3].colour.hex;
 
-  const handleColourClick = () => {
-    console.log("click");
+  const handleColourClick = (e: any, hex: any) => {
+    if (hex === hexOne) {
+      setProductColour(0);
+    }
+    if (hex === hexTwo) {
+      setProductColour(1);
+    }
+    if (hex === hexThree) {
+      setProductColour(2);
+    }
+    if (hex === hexFour) {
+      setProductColour(3);
+    }
   };
+
+  const images = product.productVariantColours[productColour].images.map(
+    (i: any) => i.url
+  );
 
   return (
     <div className={s.pageWrap}>
@@ -92,27 +112,33 @@ const Product: NextPage<Props> = ({ data }) => {
       </section>
       <section className={s.productColoursWrap}>
         <div className={s.productColoursButtons}>
-          {product.productVariantColours.map((c: any, i: any) => (
-            <div className={s.border} key={i}>
-              <button
-                className={s.colour}
-                style={{
-                  backgroundColor: `${c.colour.hex}`,
-                }}
-              ></button>
-            </div>
-          ))}
+          {product.productVariantColours.map((c: any, i: any) => {
+            const hex = c.colour.hex;
+            return (
+              <div className={s.border} key={i}>
+                <button
+                  onClick={(e) => handleColourClick(e, hex)}
+                  className={s.colour}
+                  style={{
+                    backgroundColor: `${c.colour.hex}`,
+                  }}
+                ></button>
+              </div>
+            );
+          })}
         </div>
         <div className={s.productColours}>
-          {product.productVariantColours[0].images.map((image: any) => (
-            <Image
-              key={image.url}
-              layout="responsive"
-              src={image.url}
-              height={200}
-              width={200}
-            />
-          ))}
+          {product.productVariantColours[productColour].images.map(
+            (image: any) => (
+              <Image
+                key={image.url}
+                layout="responsive"
+                src={image.url}
+                height={200}
+                width={200}
+              />
+            )
+          )}
         </div>
       </section>
     </div>
