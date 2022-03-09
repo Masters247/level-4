@@ -10,6 +10,8 @@ interface Props {
   positioning?: string;
   slides: { image: StaticImageData }[];
   time: number;
+  width: string;
+  height: string;
 }
 
 const Slider: FC<Props> = ({
@@ -18,15 +20,14 @@ const Slider: FC<Props> = ({
   positioning,
   slides,
   time,
+  width,
+  height,
 }) => {
   const [state, setState] = useState({
     opacity: 1,
     position: positioning,
     activeSlide: 0,
   });
-
-  // console.log("autoplay", autoPlay);
-  // console.log("numberOf", numberOfSlides);
 
   const { opacity, position, activeSlide } = state;
   const autoPlayRef: any = useRef();
@@ -78,9 +79,11 @@ const Slider: FC<Props> = ({
         {slides.map((slide: any, i: number) => {
           return (
             <Slide
+              width={width}
+              height={height}
               style={opacity}
               key={slide + i}
-              image={slide.image}
+              image={slide}
               id={i}
               position={position}
               active={activeSlide}
@@ -88,15 +91,6 @@ const Slider: FC<Props> = ({
           );
         })}
       </SlideContainer>
-      {/*       
-      <Dots slides={slides} active={activeSlide} />
-
-      <button onClick={nextSlide} className={s.next}>
-        Next
-      </button>
-      <button onClick={prevSlide} className={s.prev}>
-        Prev
-      </button> */}
     </div>
   );
 };

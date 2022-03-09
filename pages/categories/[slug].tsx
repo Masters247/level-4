@@ -1,11 +1,9 @@
 import type { NextPage } from "next";
-import Product from "../../components/products/Product/Product";
-import Link from "next/link";
-import { GraphQLClient, gql } from "graphql-request";
 import Image from "next/image";
-import s from "../../styles/pages/categories.module.scss";
+import { GraphQLClient, gql } from "graphql-request";
+import Product from "../../components/products/Product/Product";
 import categoryQuery from "../../lib/graphcms-querys/categoryQuery";
-import { useState } from "react";
+import s from "../../styles/pages/categories.module.scss";
 
 export async function getStaticPaths() {
   const categories = await categoryQuery();

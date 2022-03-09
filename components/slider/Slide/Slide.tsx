@@ -1,7 +1,7 @@
 import Image from "next/image";
 import s from "./slide.module.scss";
 
-const Slide = ({ active, id, style, image, position }: any) => {
+const Slide = ({ active, id, style, image, position, width, height }: any) => {
   const seen = id === active ? style : 0;
 
   return (
@@ -14,6 +14,8 @@ const Slide = ({ active, id, style, image, position }: any) => {
         className={s.slide}
         style={{
           opacity: seen,
+          width: width,
+          height: height,
         }}
       >
         <Image
@@ -21,8 +23,7 @@ const Slide = ({ active, id, style, image, position }: any) => {
           priority={true}
           src={image}
           layout="fill"
-          alt="Golf-Foundation Home Page"
-          placeholder="blur"
+          alt="Caps"
         />
       </div>
     </div>

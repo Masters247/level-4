@@ -11,6 +11,8 @@ const Product = ({ p, i }: any) => {
   const productImageLength = p.productVariantColours.map(
     (l: any) => l.images.length
   );
+  const slug = p.productSlug;
+
   const hexOne = p.productVariantColours[0].colour.hex;
   const hexTwo = p.productVariantColours[1].colour.hex;
   const hexThree = p.productVariantColours[2].colour.hex;
@@ -57,10 +59,7 @@ const Product = ({ p, i }: any) => {
           }
         />
       </div>
-      {/* To do
-            need to create dyamic pages for products
-        */}
-      <Link href="/" passHref>
+      <Link href={`/product/${slug}`} passHref>
         <a>
           <p>{p.name}</p>
         </a>

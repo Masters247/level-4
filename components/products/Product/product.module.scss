@@ -14,7 +14,6 @@
   }
   .productColours {
     @include flexCenter;
-
     .border {
       @include flexCenter;
       cursor: pointer;
@@ -23,8 +22,8 @@
       margin: 0 0.2em;
       .colour {
         display: flex;
-        width: 10px;
-        height: 10px;
+        width: 12px;
+        height: 12px;
       }
     }
   }

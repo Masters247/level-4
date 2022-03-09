@@ -1,0 +1,46 @@
+@use "../base.scss" as *;
+.pageWrap {
+  padding: 4em 0;
+  .hero {
+    margin: 0 auto;
+    height: 300px;
+    width: 300px;
+  }
+  .info {
+    padding: 4em 2em;
+    h1 {
+      text-align: center;
+      margin-bottom: 1em;
+    }
+    p {
+      margin: 0 auto;
+      max-width: 23em;
+      text-align: center;
+    }
+  }
+  .productColoursWrap {
+    display: grid;
+    grid-template-columns: 1fr 8fr;
+    background-color: $grey--1;
+    .productColoursButtons {
+      @include flexCenter;
+      flex-direction: column;
+      .border {
+        @include flexCenter;
+        cursor: pointer;
+        border: 1px solid $grey-4;
+        padding: 2px;
+        margin: 0.2em 0;
+        .colour {
+          display: flex;
+          width: 12px;
+          height: 12px;
+        }
+      }
+    }
+    .productColours {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+    }
+  }
+}
