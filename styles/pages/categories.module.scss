@@ -2,10 +2,12 @@
 
 .heroWrap {
   .heroText {
-    height: 23em;
     padding: 4em 2em;
     @include flexCenter;
     flex-direction: column;
+    @media (min-width: $media-desktop) {
+      height: 23em;
+    }
     h1 {
       margin-bottom: 1em;
       text-transform: uppercase;
@@ -41,33 +43,6 @@
     @media (min-width: $media-desktop-large) {
       max-width: calc(1020px + 2em);
       grid-template-columns: 1fr 1fr 1fr 1fr;
-    }
-    .productWrap {
-      max-width: 260px;
-      .productImageWrap {
-        display: block;
-        border-radius: 50%;
-        overflow: hidden;
-        cursor: pointer;
-      }
-      p {
-        margin: 2em 0 1em;
-        text-align: center;
-      }
-      .productColours {
-        @include flexCenter;
-
-        .border {
-          cursor: pointer;
-          border: 1px solid $grey-4;
-          padding: 0.1em;
-          margin: 0 0.2em;
-          .colour {
-            width: 1.2em;
-            height: 1.2em;
-          }
-        }
-      }
     }
   }
 }

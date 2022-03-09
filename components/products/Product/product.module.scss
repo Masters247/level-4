@@ -1,0 +1,31 @@
+@use "../../../styles/base.scss" as *;
+
+.productWrap {
+  max-width: 260px;
+  .productImageWrap {
+    display: block;
+    border-radius: 50%;
+    overflow: hidden;
+    cursor: pointer;
+  }
+  p {
+    margin: 2em 0 1em;
+    text-align: center;
+  }
+  .productColours {
+    @include flexCenter;
+
+    .border {
+      @include flexCenter;
+      cursor: pointer;
+      border: 1px solid $grey-4;
+      padding: 2px;
+      margin: 0 0.2em;
+      .colour {
+        display: flex;
+        width: 10px;
+        height: 10px;
+      }
+    }
+  }
+}

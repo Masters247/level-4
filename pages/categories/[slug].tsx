@@ -1,4 +1,5 @@
 import type { NextPage } from "next";
+import Product from "../../components/products/Product/Product";
 import Link from "next/link";
 import { GraphQLClient, gql } from "graphql-request";
 import Image from "next/image";
@@ -58,8 +59,6 @@ export async function getStaticProps({ params }: any) {
 
   const data = await graphcms.request(query);
 
-  console.log("data", data);
-
   return {
     props: { data },
     revalidate: 10,
@@ -71,7 +70,6 @@ interface Props {
 }
 
 const Category: NextPage<Props> = ({ data }) => {
-  const [capView, setCapView] = useState(1);
   const { categories } = data;
 
   return (
@@ -100,56 +98,9 @@ const Category: NextPage<Props> = ({ data }) => {
         <div className={s.productsWrap}>
           {categories[0].products.map((p: any, i: any) => {
             const num = 0;
+            const product = i;
 
-            const handleImageClick = (e: any, i: any) => {
-              console.log("index", i);
-              if (i === 0) {
-                if (capView < 2) {
-                  setCapView(capView + 1);
-                } else {
-                  setCapView(0);
-                }
-              }
-            };
-            return (
-              <div key={p.name} className={s.productWrap}>
-                <div
-                  className={s.productImageWrap}
-                  onClick={(e) => handleImageClick(e, i)}
-                >
-                  <Image
-                    layout="responsive"
-                    src={p.productVariantColours[i].images[capView].url}
-                    placeholder="blur"
-                    blurDataURL={p.productVariantColours[i].images[capView].url}
-                    height={p.productVariantColours[i].images[capView].height}
-                    width={p.productVariantColours[i].images[capView].width}
-                  />
-                </div>
-                {/* To do
-                    need to create dyamic pages for products
-                */}
-                <Link href="/" passHref>
-                  <a>
-                    <p>{p.name}</p>
-                  </a>
-                </Link>
-                <div className={s.productColours}>
-                  {p.productVariantColours.map((c: any, i: any) => {
-                    return (
-                      <div className={s.border} key={i}>
-                        <div
-                          className={s.colour}
-                          style={{
-                            backgroundColor: `${c.colour.hex}`,
-                          }}
-                        ></div>
-                      </div>
-                    );
-                  })}
-                </div>
-              </div>
-            );
+            return <Product key={i} p={p} i={i} />;
           })}
         </div>
       </section>
