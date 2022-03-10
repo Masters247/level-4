@@ -1,5 +1,6 @@
 import { FC, useState, useEffect, useRef } from "react";
-import SlideContainer from "../SlideContainer/SlideContainer";
+import Thumbnails from "../Thumbnails/Thumbnails";
+import SlideContainer from "../SlideContainer/SliderContainer";
 import Slide from "../Slide/Slide";
 import s from "./slider.module.scss";
 
@@ -73,24 +74,28 @@ const Slider: FC<Props> = ({
   };
 
   return (
-    <div className={s.slider}>
-      <SlideContainer>
-        {slides.map((slide: any, i: number) => {
-          return (
-            <Slide
-              width={width}
-              height={height}
-              style={opacity}
-              key={slide + i}
-              image={slide}
-              id={i}
-              position={position}
-              active={activeSlide}
-            />
-          );
-        })}
-        {/* <Thumbnails /> */}
-      </SlideContainer>
+    <div
+      className={s.slider}
+      style={{
+        margin: "0 auto",
+        height: `${height}`,
+        width: `${width}`,
+      }}
+    >
+      {slides.map((slide: any, i: number) => {
+        return (
+          <Slide
+            width={width}
+            height={height}
+            style={opacity}
+            key={slide + i}
+            image={slide}
+            id={i}
+            position={position}
+            active={activeSlide}
+          />
+        );
+      })}
     </div>
   );
 };

@@ -1,0 +1,26 @@
+.thumbnails {
+  z-index: 1;
+  display: grid;
+
+  margin: 1em auto;
+
+  grid-gap: 1em;
+  position: relative;
+  cursor: pointer;
+  .chevLeft,
+  .chevRight {
+    z-index: 2;
+    width: 23px;
+    height: 23px;
+    position: absolute;
+    top: calc(50% - 10px);
+    cursor: pointer;
+  }
+  .chevLeft {
+    left: -2em;
+  }
+  .chevRight {
+    right: -2em;
+    transform: rotate(180deg);
+  }
+}

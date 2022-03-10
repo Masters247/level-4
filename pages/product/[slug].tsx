@@ -2,7 +2,7 @@ import type { NextPage } from "next";
 import { GraphQLClient, gql } from "graphql-request";
 import { useState } from "react";
 import productQuery from "../../lib/graphcms-querys/productQuery";
-import Slider from "../../components/slider/Slider/Slider";
+import SliderContainer from "../../components/slider/SlideContainer/SliderContainer";
 import Image from "next/image";
 import s from "../../styles/pages/productPage.module.scss";
 
@@ -83,39 +83,18 @@ const Product: NextPage<Props> = ({ data }) => {
     }
   };
 
-  const [autoPlay, setAutoPlay] = useState(true);
-  const [time, setTime] = useState(7000);
-  const [position, setPosition] = useState("absolute");
-  const [height, setHeight] = useState("300px");
-  const [width, setWidth] = useState("300px");
-
-  const handleEnter = () => {
-    setAutoPlay(false);
-  };
-
-  const handleLeave = () => {
-    setAutoPlay(true);
-  };
-
   const images = product.productVariantColours[0].images.map((i: any) => i.url);
 
   return (
     <div className={s.pageWrap}>
-      <section
-        className={s.hero}
-        onPointerEnter={handleEnter}
-        onPointerLeave={handleLeave}
-      >
-        <Slider
-          width={width}
-          height={height}
-          autoPlay={autoPlay}
-          numberOfSlides={images.length}
-          slides={images}
-          time={time}
-          positioning={position}
-        />
-      </section>
+      <SliderContainer
+        autoPlay={true}
+        time={4000}
+        position={"absolute"}
+        height={"300px"}
+        width={"300px"}
+        images={images}
+      />
       <section className={s.info}>
         <h1>{product.name}</h1>
         <p>{product.description}</p>

@@ -8,6 +8,8 @@ const Slide = ({ active, id, style, image, position, width, height }: any) => {
     <div
       style={{
         position: position,
+        height: `${height}`,
+        width: `${width}`,
       }}
     >
       <div

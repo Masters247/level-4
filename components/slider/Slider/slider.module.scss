@@ -1,11 +1,7 @@
 @use "../../../styles/base.scss" as *;
 .slider {
-  // height: 80vh;
-  // overflow: hidden;
-  // position: relative;
   .next,
   .prev {
-    // top: 80vh;
     position: absolute;
   }
   .next {
