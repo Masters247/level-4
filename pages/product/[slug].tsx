@@ -58,15 +58,9 @@ interface Props {
 }
 
 // SLIDER PROPS CONTROLS
-const autoPlay = true;
-const time = 7000;
-const position = "absolute";
-const height = "300px";
-const width = "300px";
 
 const Product: NextPage<Props> = ({ data }) => {
   const [productColour, setProductColour] = useState(0);
-
   const { product } = data;
 
   const hexOne = product.productVariantColours[0].colour.hex;
@@ -89,13 +83,29 @@ const Product: NextPage<Props> = ({ data }) => {
     }
   };
 
-  const images = product.productVariantColours[productColour].images.map(
-    (i: any) => i.url
-  );
+  const [autoPlay, setAutoPlay] = useState(true);
+  const [time, setTime] = useState(1000);
+  const [position, setPosition] = useState("absolute");
+  const [height, setHeight] = useState("300px");
+  const [width, setWidth] = useState("300px");
+
+  const handleEnter = () => {
+    setAutoPlay(false);
+  };
+
+  const handleLeave = () => {
+    setAutoPlay(true);
+  };
+
+  const images = product.productVariantColours[0].images.map((i: any) => i.url);
 
   return (
     <div className={s.pageWrap}>
-      <section className={s.hero}>
+      <section
+        className={s.hero}
+        onPointerEnter={handleEnter}
+        onPointerLeave={handleLeave}
+      >
         <Slider
           width={width}
           height={height}

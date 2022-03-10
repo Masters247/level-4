@@ -9,7 +9,7 @@
   height: 5em;
   transition: height 300ms ease-in-out;
 
-  @media screen and (min-width: $media-tablet) {
+  @media screen and (min-width: $media-desktop-medium-large) {
     display: none;
   }
 
