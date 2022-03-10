@@ -1,9 +1,10 @@
+import Thumb from "../Thumb/Thumb";
 import s from "./thumbnails.module.scss";
 
 const Thumbnails = () => {
   return (
     <div>
-      <p>Thumbnail</p>
+      <Thumb />
     </div>
   );
 };

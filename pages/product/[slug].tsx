@@ -84,7 +84,7 @@ const Product: NextPage<Props> = ({ data }) => {
   };
 
   const [autoPlay, setAutoPlay] = useState(true);
-  const [time, setTime] = useState(1000);
+  const [time, setTime] = useState(7000);
   const [position, setPosition] = useState("absolute");
   const [height, setHeight] = useState("300px");
   const [width, setWidth] = useState("300px");

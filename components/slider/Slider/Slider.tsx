@@ -1,5 +1,4 @@
 import { FC, useState, useEffect, useRef } from "react";
-import Dots from "../Dots/Dots";
 import SlideContainer from "../SlideContainer/SlideContainer";
 import Slide from "../Slide/Slide";
 import s from "./slider.module.scss";
@@ -90,6 +89,7 @@ const Slider: FC<Props> = ({
             />
           );
         })}
+        {/* <Thumbnails /> */}
       </SlideContainer>
     </div>
   );
