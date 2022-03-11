@@ -19,27 +19,22 @@
     }
   }
   .productImagesWrap {
+    margin-top: 2em;
     position: relative;
-    background-color: $grey--1;
-    height: 200px;
+    background-color: $grey-0;
     padding: 0 2em;
     .productColoursButtons {
-      min-height: 30px;
+      z-index: 10;
+      position: absolute;
       @include flexCenter;
       @media (min-width: $media-tablet) {
-        position: absolute;
         flex-direction: column;
       }
     }
-
-    .productImages {
-      @include flexCenter;
-
-      .imageWrap {
-        height: 100%;
-        width: 100%;
-        min-height: 50px;
-        min-width: 50px;
+    .productImagesWrap {
+      display: grid;
+      justify-content: center;
+      span {
         max-height: 300px;
         max-width: 300px;
       }

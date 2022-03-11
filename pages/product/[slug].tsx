@@ -1,6 +1,6 @@
 import type { NextPage } from "next";
 import { GraphQLClient, gql } from "graphql-request";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Visualise from "../../components/productApp/Visualise/Visualise";
 import productQuery from "../../lib/graphcms-querys/productQuery";
 import ProductColourButtons from "../../components/products/Product/ProductColourButtons";
@@ -8,6 +8,7 @@ import SliderContainer from "../../components/slider/SlideContainer/SliderContai
 import Image from "next/image";
 import s from "../../styles/pages/productPage.module.scss";
 import Personal from "../../components/productApp/Personal/Personal";
+import { useWindowSize } from "react-use";
 
 export async function getStaticPaths() {
   const products = await productQuery();
@@ -34,6 +35,11 @@ export async function getStaticProps({ params }: any) {
       product(where: { productSlug: "${params.slug}" }) {
         name
         description
+        featureImage {
+          height
+          url
+          width
+        }
         productVariantColours {
           images {
             url
@@ -61,6 +67,7 @@ interface Props {
 }
 
 const Product: NextPage<Props> = ({ data }) => {
+  const { width, height } = useWindowSize();
   const [productColour, setProductColour] = useState(0);
   const { product } = data;
 
@@ -68,7 +75,15 @@ const Product: NextPage<Props> = ({ data }) => {
     setProductColour(i);
   };
 
-  const images = product.productVariantColours[0].images.map((i: any) => i.url);
+  // const images = product.productVariantColours[0].images.map((i: any) => i.url);
+  const images = product.featureImage.map((i: any) => i.url);
+
+  const colourLength = product.productVariantColours.length;
+
+  const imagesLength =
+    product.productVariantColours[productColour].images.length;
+
+  console.log(product);
 
   return (
     <div className={s.pageWrap}>
@@ -85,7 +100,21 @@ const Product: NextPage<Props> = ({ data }) => {
         <p>{product.description}</p>
       </section>
       <section className={s.productImagesWrap}>
-        <div className={s.productColoursButtons}>
+        <div
+          className={s.productColoursButtons}
+          style={{
+            left: `${
+              width < 650
+                ? `calc(50% - ((${colourLength} * 24px) / 2))`
+                : "20px"
+            }`,
+            top: `${
+              width < 650
+                ? "-35px"
+                : `calc(50% - ((${colourLength} * 24px) / 2))`
+            }`,
+          }}
+        >
           {product.productVariantColours.map((c: any, i: any) => {
             return (
               <ProductColourButtons
@@ -97,19 +126,28 @@ const Product: NextPage<Props> = ({ data }) => {
             );
           })}
         </div>
-        <div className={s.productImages}>
+        <div
+          className={s.productImagesWrap}
+          style={{
+            gridTemplateColumns: `repeat(${imagesLength}, 1fr)`,
+            maxWidth: `calc((300px * ${imagesLength}) + (${
+              imagesLength - 1
+            } * 1em))`,
+            gridGap: "1em",
+            margin: " 0 auto",
+          }}
+        >
           {product.productVariantColours[productColour].images.map(
             (image: any) => (
-              <div className={s.imageWrap} key={image.url}>
-                <Image
-                  layout="responsive"
-                  src={image.url}
-                  height={200}
-                  width={200}
-                  placeholder="blur"
-                  blurDataURL={image.url}
-                />
-              </div>
+              <Image
+                key={image.url}
+                layout="responsive"
+                src={image.url}
+                height={200}
+                width={200}
+                placeholder="blur"
+                blurDataURL={image.url}
+              />
             )
           )}
         </div>
