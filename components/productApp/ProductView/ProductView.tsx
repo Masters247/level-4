@@ -1,11 +1,12 @@
 import { useCallback, useRef, useState } from "react";
 import { useSpring, animated } from "@react-spring/web";
+import Image from "next/image";
 import { useDrag } from "@use-gesture/react";
 import { useLockBodyScroll } from "react-use";
 import ProductUiPanel from "../ProductUi/ProductUiPanel";
 import s from "./productView.module.scss";
 
-const ProductView = () => {
+const ProductView = ({ image }: any) => {
   const [control, setControl] = useState(true);
 
   const [{ x, y, width, height }, api] = useSpring(() => ({
@@ -98,25 +99,38 @@ const ProductView = () => {
 
   return (
     <div className={s.productViewWrap}>
-      {control ? (
-        <div className={s.viewportWrap} ref={containerRef}>
-          <animated.div
-            className={s.viewport}
-            style={{ x, y, width, height }}
-            {...bind()}
-          >
-            <div className={s.resizer} ref={dragEl}></div>
-          </animated.div>
-        </div>
-      ) : null}
+      <div className={s.imageWrap}>
+        <Image
+          src={image.url}
+          priority
+          layout="fixed"
+          width={500}
+          height={500}
+          placeholder="blur"
+          blurDataURL={image.url}
+        />
+      </div>
+      <div className={s.productView}>
+        {control ? (
+          <div className={s.viewportWrap} ref={containerRef}>
+            <animated.div
+              className={s.viewport}
+              style={{ x, y, width, height }}
+              {...bind()}
+            >
+              <div className={s.resizer} ref={dragEl}></div>
+            </animated.div>
+          </div>
+        ) : null}
 
-      <ProductUiPanel
-        center={handleCenter}
-        vertical={handleVertical}
-        horizontal={handleHorizontal}
-        showhide={handleControls}
-        state={control}
-      />
+        <ProductUiPanel
+          center={handleCenter}
+          vertical={handleVertical}
+          horizontal={handleHorizontal}
+          showhide={handleControls}
+          state={control}
+        />
+      </div>
     </div>
   );
 };

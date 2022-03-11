@@ -3,7 +3,14 @@
 .productViewWrap {
   position: relative;
   min-height: 46em;
-  background-color: $grey-1;
+  // background-color: $grey-1;
+}
+.productView {
+  position: absolute;
+  top: 0;
+  min-height: 46em;
+  left: calc(50% - (20em / 2));
+  // background-color: $grey-1;
 }
 
 .viewportWrap {

@@ -35,6 +35,7 @@ export async function getStaticProps({ params }: any) {
       product(where: { productSlug: "${params.slug}" }) {
         name
         description
+        productSlug
         featureImage {
           height
           url
@@ -67,7 +68,7 @@ interface Props {
 }
 
 const Product: NextPage<Props> = ({ data }) => {
-  const { width, height } = useWindowSize();
+  const { width } = useWindowSize();
   const [productColour, setProductColour] = useState(0);
   const { product } = data;
 
@@ -75,7 +76,6 @@ const Product: NextPage<Props> = ({ data }) => {
     setProductColour(i);
   };
 
-  // const images = product.productVariantColours[0].images.map((i: any) => i.url);
   const images = product.featureImage.map((i: any) => i.url);
 
   const colourLength = product.productVariantColours.length;
@@ -83,7 +83,7 @@ const Product: NextPage<Props> = ({ data }) => {
   const imagesLength =
     product.productVariantColours[productColour].images.length;
 
-  console.log(product);
+  // console.log(product.productSlug);
 
   return (
     <div className={s.pageWrap}>
@@ -152,7 +152,7 @@ const Product: NextPage<Props> = ({ data }) => {
           )}
         </div>
       </section>
-      <Visualise />
+      <Visualise slug={product.productSlug} />
       <Personal />
     </div>
   );

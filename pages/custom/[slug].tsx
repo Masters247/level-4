@@ -29,17 +29,10 @@ export async function getStaticProps({ params }: any) {
   const query = gql`
     query Product {
       product(where: { productSlug: "${params.slug}" }) {
-        name
-        description
-        productVariantColours {
-          images {
-            url
-            width
-            height
-          }
-          colour {
-            hex
-          }
+        featureImage {
+          height
+          url
+          width
         }
       }
     }
@@ -57,21 +50,15 @@ interface Props {
   data: any;
 }
 
-const Product: NextPage<Props> = ({ data }) => {
-  const [productColour, setProductColour] = useState(0);
+const Custom: NextPage<Props> = ({ data }) => {
   const { product } = data;
-
-  const images = product.productVariantColours[0].images.map((i: any) => i.url);
+  console.log(product.featureImage[0]);
 
   return (
     <div className={s.pageWrap}>
-      <ProductView />
-      <section className={s.info}>
-        <h1>{product.name}</h1>
-        <p>{product.description}</p>
-      </section>
+      <ProductView image={product.featureImage[0]} />
     </div>
   );
 };
 
-export default Product;
+export default Custom;
