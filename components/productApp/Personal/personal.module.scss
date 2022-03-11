@@ -1,0 +1,22 @@
+@use "../../../styles/base.scss" as *;
+.personalWrap {
+  background-color: $grey--1;
+  @include flexCenter;
+  flex-direction: column;
+  padding: 4em 2em;
+  h2 {
+    max-width: 10em;
+    margin-bottom: 2em;
+    text-align: center;
+  }
+  .button {
+    width: 23em;
+  }
+  @media (min-width: $media-desktop) {
+    min-height: 600px;
+    h2 {
+      font-size: 4rem;
+      margin-bottom: 0.5em;
+    }
+  }
+}

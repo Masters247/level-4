@@ -24,3 +24,4 @@ const Thumbnails = ({ thumbnails }: any) => {
 };
 
 export default Thumbnails;
+s;

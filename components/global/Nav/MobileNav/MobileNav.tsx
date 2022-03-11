@@ -34,14 +34,14 @@ const Nav: FC = () => {
         </div>
       </div>
 
-      <div className={`${s.navContent} ${open ? s.show : s.hidden}`}>
+      <nav className={`${s.navContent} ${open ? s.show : s.hidden}`}>
         <ul className={s.navLinks}>
           {pages[0].pages?.map((page) => (
-            <Link href={page.link} passHref key={page.name}>
-              <a>
-                <li onClick={() => setOpen(!open)}>{page.name}</li>
-              </a>
-            </Link>
+            <li key={page.name}>
+              <Link href={page.link} passHref>
+                <a onClick={() => setOpen(!open)}>{page.name}</a>
+              </Link>
+            </li>
           ))}
         </ul>
 
@@ -49,11 +49,11 @@ const Nav: FC = () => {
 
         <ul className={s.navLinks}>
           {pages[1].products?.map((page) => (
-            <Link href={page.link} passHref key={page.name}>
-              <a>
-                <li onClick={() => setOpen(!open)}>{page.name}</li>
-              </a>
-            </Link>
+            <li key={page.name}>
+              <Link href={page.link} passHref>
+                <a onClick={() => setOpen(!open)}>{page.name}</a>
+              </Link>
+            </li>
           ))}
         </ul>
 
@@ -68,7 +68,7 @@ const Nav: FC = () => {
             <Search />
           </div>
         </div>
-      </div>
+      </nav>
     </div>
   );
 };

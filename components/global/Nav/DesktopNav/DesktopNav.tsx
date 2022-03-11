@@ -10,12 +10,12 @@ const DesktopNav: FC = () => {
   return (
     <div className={s.navWrapper}>
       <ul className={s.navLinks}>
-        {pages[1].products?.map((page) => (
-          <Link href={page.link} passHref key={page.name}>
-            <a>
-              <li>{page.name}</li>
-            </a>
-          </Link>
+        {pages[1].products?.map((page, i) => (
+          <li key={i}>
+            <Link href={page.link} passHref key={page.name}>
+              <a>{page.name}</a>
+            </Link>
+          </li>
         ))}
       </ul>
       <div className={s.logo}>
@@ -32,13 +32,9 @@ const DesktopNav: FC = () => {
         </Link>
       </div>
       <div className={s.navBottom}>
-        <ul className={s.navLinks}>
-          <Link href="/about-us" passHref>
-            <a>
-              <li>About Us</li>
-            </a>
-          </Link>
-        </ul>
+        <Link href="/about-us" passHref>
+          <a>About Us</a>
+        </Link>
         <div className={s.search}>
           <Search />
         </div>

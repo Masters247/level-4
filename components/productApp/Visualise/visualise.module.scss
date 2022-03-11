@@ -1,0 +1,48 @@
+@use "../../../styles/base.scss" as *;
+
+.visualiseWrap {
+  @include flexCenter;
+  flex-direction: column;
+  flex-flow: column-reverse;
+  padding: 4em 2em;
+  @media (min-width: $media-desktop) {
+    flex-direction: row;
+    min-height: 600px;
+  }
+  .imageWrap {
+    @include flexCenter;
+    background-color: $grey--1;
+    width: calc(100vw - 4em);
+    height: calc(100vw - 4em);
+    max-width: 23em;
+    max-height: 23em;
+    margin: 2em auto 0;
+    @media (min-width: $media-desktop) {
+      margin: 0;
+    }
+  }
+  .visualiseText {
+    h2 {
+      text-align: center;
+    }
+    p {
+      text-align: center;
+      margin: 2em 0;
+      max-width: 23em;
+    }
+    .button {
+      max-width: 23em;
+      margin: 0 auto;
+    }
+    @media (min-width: $media-desktop) {
+      padding-left: 4em;
+      h2,
+      p {
+        text-align: left;
+      }
+      .button {
+        margin: 0;
+      }
+    }
+  }
+}

@@ -1,10 +1,12 @@
 import type { NextPage } from "next";
 import { GraphQLClient, gql } from "graphql-request";
 import { useState } from "react";
+import Visualise from "../../components/productApp/Visualise/Visualise";
 import productQuery from "../../lib/graphcms-querys/productQuery";
 import SliderContainer from "../../components/slider/SlideContainer/SliderContainer";
 import Image from "next/image";
 import s from "../../styles/pages/productPage.module.scss";
+import Personal from "../../components/productApp/Personal/Personal";
 
 export async function getStaticPaths() {
   const products = await productQuery();
@@ -57,8 +59,6 @@ interface Props {
   data: any;
 }
 
-// SLIDER PROPS CONTROLS
-
 const Product: NextPage<Props> = ({ data }) => {
   const [productColour, setProductColour] = useState(0);
   const { product } = data;
@@ -93,7 +93,7 @@ const Product: NextPage<Props> = ({ data }) => {
         position={"absolute"}
         height={"300px"}
         width={"300px"}
-        images={images}
+        slides={images}
       />
       <section className={s.info}>
         <h1>{product.name}</h1>
@@ -130,6 +130,8 @@ const Product: NextPage<Props> = ({ data }) => {
           )}
         </div>
       </section>
+      <Visualise />
+      <Personal />
     </div>
   );
 };
