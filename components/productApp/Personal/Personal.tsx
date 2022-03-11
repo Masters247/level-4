@@ -8,11 +8,9 @@ const Personal = () => {
     <section className={s.personalWrap}>
       <h2>Products made personal</h2>
       <Link href="/" passHref>
-        <Button
-          className={s.button}
-          variant="primary"
-          children="Build Your Range"
-        />
+        <Button className={s.button} variant="primary">
+          Build Your Range
+        </Button>
       </Link>
     </section>
   );

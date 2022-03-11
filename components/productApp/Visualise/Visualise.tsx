@@ -14,11 +14,9 @@ const Visualise = () => {
           brand on. Start now and get a quote from our trusted sales team.
         </p>
         <Link href="/" passHref>
-          <Button
-            className={s.button}
-            variant="primary"
-            children="Personalise this item"
-          />
+          <Button className={s.button} variant="primary">
+            Personalise this item
+          </Button>
         </Link>
       </div>
     </section>
