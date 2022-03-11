@@ -69,6 +69,7 @@ interface Props {
 
 const Category: NextPage<Props> = ({ data }) => {
   const { categories } = data;
+  console.log(categories);
 
   return (
     <div className={s.categoriesPageWrap}>

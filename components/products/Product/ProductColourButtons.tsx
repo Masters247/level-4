@@ -1,9 +1,8 @@
-import s from "./product.module.scss";
+import s from "./productColourButtons.module.scss";
 
-const ProductColourButtons = ({ c, colour }: any) => {
-  const hex = c.colour.hex;
+const ProductColourButtons = ({ hex, handleColourClick, i }: any) => {
   return (
-    <div onClick={(e) => colour(e, hex)} className={s.border}>
+    <div onClick={(e) => handleColourClick(e, i)} className={s.border}>
       <button
         className={s.colour}
         style={{

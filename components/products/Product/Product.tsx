@@ -5,17 +5,12 @@ import Link from "next/link";
 import s from "./product.module.scss";
 
 const Product = ({ p, i }: any) => {
-  const [productView, setProductView] = useState(1);
+  const [productView, setProductView] = useState(0);
   const [productColour, setProductColour] = useState(i);
   const productImageLength = p.productVariantColours.map(
     (l: any) => l.images.length
   );
   const slug = p.productSlug;
-
-  const hexOne = p.productVariantColours[0].colour.hex;
-  const hexTwo = p.productVariantColours[1].colour.hex;
-  const hexThree = p.productVariantColours[2].colour.hex;
-  const hexFour = p.productVariantColours[3].colour.hex;
 
   const handleImageClick = () => {
     if (productView < productImageLength[0] - 1) {
@@ -25,19 +20,8 @@ const Product = ({ p, i }: any) => {
     }
   };
 
-  const handleColourClick = (e: any, hex: any) => {
-    if (hex === hexOne) {
-      setProductColour(0);
-    }
-    if (hex === hexTwo) {
-      setProductColour(1);
-    }
-    if (hex === hexThree) {
-      setProductColour(2);
-    }
-    if (hex === hexFour) {
-      setProductColour(3);
-    }
+  const handleColourClick = (e: any, i: any) => {
+    setProductColour(i);
   };
 
   return (
@@ -66,7 +50,12 @@ const Product = ({ p, i }: any) => {
       <div className={s.productColours}>
         {p.productVariantColours.map((c: any, i: any) => {
           return (
-            <ProductColourButtons key={i} c={c} colour={handleColourClick} />
+            <ProductColourButtons
+              key={i}
+              i={i}
+              hex={c.colour.hex}
+              handleColourClick={handleColourClick}
+            />
           );
         })}
       </div>

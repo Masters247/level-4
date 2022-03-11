@@ -3,6 +3,7 @@ import { GraphQLClient, gql } from "graphql-request";
 import { useState } from "react";
 import Visualise from "../../components/productApp/Visualise/Visualise";
 import productQuery from "../../lib/graphcms-querys/productQuery";
+import ProductColourButtons from "../../components/products/Product/ProductColourButtons";
 import SliderContainer from "../../components/slider/SlideContainer/SliderContainer";
 import Image from "next/image";
 import s from "../../styles/pages/productPage.module.scss";
@@ -63,24 +64,8 @@ const Product: NextPage<Props> = ({ data }) => {
   const [productColour, setProductColour] = useState(0);
   const { product } = data;
 
-  const hexOne = product.productVariantColours[0].colour.hex;
-  const hexTwo = product.productVariantColours[1].colour.hex;
-  const hexThree = product.productVariantColours[2].colour.hex;
-  const hexFour = product.productVariantColours[3].colour.hex;
-
-  const handleColourClick = (e: any, hex: any) => {
-    if (hex === hexOne) {
-      setProductColour(0);
-    }
-    if (hex === hexTwo) {
-      setProductColour(1);
-    }
-    if (hex === hexThree) {
-      setProductColour(2);
-    }
-    if (hex === hexFour) {
-      setProductColour(3);
-    }
+  const handleColourClick = (e: any, i: any) => {
+    setProductColour(i);
   };
 
   const images = product.productVariantColours[0].images.map((i: any) => i.url);
@@ -99,33 +84,32 @@ const Product: NextPage<Props> = ({ data }) => {
         <h1>{product.name}</h1>
         <p>{product.description}</p>
       </section>
-      <section className={s.productColoursWrap}>
+      <section className={s.productImagesWrap}>
         <div className={s.productColoursButtons}>
           {product.productVariantColours.map((c: any, i: any) => {
-            const hex = c.colour.hex;
             return (
-              <div className={s.border} key={i}>
-                <button
-                  onClick={(e) => handleColourClick(e, hex)}
-                  className={s.colour}
-                  style={{
-                    backgroundColor: `${c.colour.hex}`,
-                  }}
-                ></button>
-              </div>
+              <ProductColourButtons
+                key={i}
+                i={i}
+                hex={c.colour.hex}
+                handleColourClick={handleColourClick}
+              />
             );
           })}
         </div>
-        <div className={s.productColours}>
+        <div className={s.productImages}>
           {product.productVariantColours[productColour].images.map(
             (image: any) => (
-              <Image
-                key={image.url}
-                layout="responsive"
-                src={image.url}
-                height={200}
-                width={200}
-              />
+              <div className={s.imageWrap} key={image.url}>
+                <Image
+                  layout="responsive"
+                  src={image.url}
+                  height={200}
+                  width={200}
+                  placeholder="blur"
+                  blurDataURL={image.url}
+                />
+              </div>
             )
           )}
         </div>
