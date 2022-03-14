@@ -47,7 +47,7 @@ export async function getStaticProps({ params }: any) {
 }
 
 interface Props {
-  data: any;
+  data?: any;
 }
 
 const Custom: NextPage<Props> = ({ data }) => {
@@ -55,7 +55,7 @@ const Custom: NextPage<Props> = ({ data }) => {
 
   return (
     <div className={s.pageWrap}>
-      <ProductView image={product.featureImage[0]} />
+      <ProductView image={product?.featureImage[0]} />
     </div>
   );
 };
