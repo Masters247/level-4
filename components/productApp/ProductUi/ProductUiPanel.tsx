@@ -12,15 +12,7 @@ import Hide from "../../ui/icons/Hide";
 import Save from "../../ui/icons/Save";
 import Download from "../../ui/icons/Download";
 
-const options = [
-  { colour: "#909090" },
-  { colour: "#909090" },
-  { colour: "#909090" },
-  { colour: "#909090" },
-];
-
 const buttons = [
-  // { icon: "", class: s.resize, text: "resize" },
   { icon: "", class: s.image, text: "new image" },
   { icon: <Undo styles={s.undo} />, class: s.undoWrap, text: "undo" },
   { icon: <Redo styles={s.redo} />, class: s.redoWrap, text: "redo" },

@@ -10,6 +10,7 @@ const ProductView = ({
   image,
   productColoutVariants,
   handleColourClick,
+  id,
 }: any) => {
   const [control, setControl] = useState(true);
 
@@ -102,7 +103,7 @@ const ProductView = ({
   };
 
   return (
-    <div className={s.productViewWrap}>
+    <div id={id} className={s.productViewWrap}>
       <div className={s.imageWrap}>
         <Image
           src={image.url}

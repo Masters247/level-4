@@ -1,10 +1,13 @@
 import type { NextPage } from "next";
 import { GraphQLClient, gql } from "graphql-request";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import ProductView from "../../components/productApp/ProductView/ProductView";
 import productQuery from "../../lib/graphcms-querys/productQuery";
+import html2canvas from "html2canvas";
 import Image from "next/image";
 import s from "../../styles/pages/productPage.module.scss";
+import { cp } from "fs/promises";
+import { Any } from "@react-spring/types";
 
 export async function getStaticPaths() {
   const products = await productQuery();
@@ -60,18 +63,49 @@ interface Props {
 
 const Custom: NextPage<Props> = ({ data }) => {
   const [colour, setColour] = useState(0);
+
+  const [screenShot, setScreenShot] = useState(false);
+  const [screenShotImage, setScreenShotImage] = useState(null);
   const { product } = data;
   const handleColourClick = (e: any, i: any) => {
     setColour(i);
   };
 
+  const handleScreenShot = () => {
+    setScreenShot(true);
+  };
+
+  console.log("before useEffect", screenShot);
+
+  useEffect(() => {
+    console.log("start of useEffect", screenShot);
+    {
+      screenShot &&
+        html2canvas(document.querySelector("#customView")).then(function (
+          canvas
+        ) {
+          document.querySelector("#screenShot").appendChild(canvas);
+          setScreenShotImage(canvas);
+        });
+    }
+    console.log("end of useEffect", screenShot);
+    setScreenShot(false);
+  }, [screenShot]);
+
+  console.log("after useEffect", screenShot);
+
+  console.log("screenshot image", screenShotImage);
+
   return (
-    <div className={s.pageWrap}>
+    <div id="capture" className={s.pageWrap}>
+      <button onClick={handleScreenShot}>screenshot</button>
       <ProductView
+        id="customView"
         image={product?.productVariantColours[colour].customImage}
         productColoutVariants={product.productVariantColours}
         handleColourClick={handleColourClick}
       />
+      <div id="screenShot" className="screenshot"></div>
     </div>
   );
 };
