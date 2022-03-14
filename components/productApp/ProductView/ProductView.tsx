@@ -132,9 +132,9 @@ const ProductView = ({
                 }}
               >
                 <Image
-                  src="/TheLogoMan.png"
-                  width={100}
-                  height={100}
+                  src="/squareLogo.png"
+                  width={300}
+                  height={300}
                   layout="responsive"
                 />
               </div>
