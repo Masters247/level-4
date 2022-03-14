@@ -52,7 +52,6 @@ interface Props {
 
 const Custom: NextPage<Props> = ({ data }) => {
   const { product } = data;
-  console.log(product.featureImage[0]);
 
   return (
     <div className={s.pageWrap}>
