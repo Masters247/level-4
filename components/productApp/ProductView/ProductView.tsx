@@ -6,7 +6,11 @@ import { useLockBodyScroll } from "react-use";
 import ProductUiPanel from "../ProductUi/ProductUiPanel";
 import s from "./productView.module.scss";
 
-const ProductView = ({ image }: any) => {
+const ProductView = ({
+  image,
+  productColoutVariants,
+  handleColourClick,
+}: any) => {
   const [control, setControl] = useState(true);
 
   const [{ x, y, width, height }, api] = useSpring(() => ({
@@ -115,20 +119,38 @@ const ProductView = ({ image }: any) => {
           <div className={s.viewportWrap} ref={containerRef}>
             <animated.div
               className={s.viewport}
-              style={{ x, y, width, height }}
+              style={{ x, y, width, height, zIndex: "1" }}
               {...bind()}
             >
+              <div
+                className="imageWrap"
+                style={{
+                  width: "100%",
+                  height: "100%",
+                  zIndex: "-10",
+                  pointerEvents: "none",
+                }}
+              >
+                <Image
+                  src="/TheLogoMan.png"
+                  width={100}
+                  height={100}
+                  layout="responsive"
+                />
+              </div>
               <div className={s.resizer} ref={dragEl}></div>
             </animated.div>
           </div>
         ) : null}
 
         <ProductUiPanel
+          productColoutVariants={productColoutVariants}
           center={handleCenter}
           vertical={handleVertical}
           horizontal={handleHorizontal}
           showhide={handleControls}
           state={control}
+          handleColourClick={handleColourClick}
         />
       </div>
     </div>

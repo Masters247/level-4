@@ -3,6 +3,8 @@ import s from "./productUiPanel.module.scss";
 import Center from "../../ui/icons/Center";
 import HorizontalAlign from "../../ui/icons/HorizontalAlign";
 import VerticalAlign from "../../ui/icons/VerticalAlign";
+import ProductButtons from "./ProductButtons";
+import ProductColourButtons from "../../products/Product/ProductColourButtons";
 import Undo from "../../ui/icons/Undo";
 import Redo from "../../ui/icons/Redo";
 import Show from "../../ui/icons/Show";
@@ -34,11 +36,15 @@ const buttons = [
   },
 ];
 
-const ProductUi = ({ center, vertical, horizontal, showhide, state }: any) => {
-  const uiButtons = state ? buttons : buttons.slice(3, 5);
-  const handleColour = () => {
-    console.log("colour click");
-  };
+const ProductUiPanel = ({
+  center,
+  vertical,
+  horizontal,
+  showhide,
+  state,
+  productColoutVariants,
+  handleColourClick,
+}: any) => {
   const controler = [
     {
       name: "center",
@@ -91,39 +97,23 @@ const ProductUi = ({ center, vertical, horizontal, showhide, state }: any) => {
         <div className={s.productColourWrap}>
           <p>Colour:</p>
           <div className={s.colourButtonsWrap}>
-            {options.map((colour: any, id: number) => {
+            {productColoutVariants.map((colour: any, i: any) => {
               return (
-                <button
-                  key={id}
-                  onClick={handleColour}
-                  className={s.colourButton}
-                  style={{
-                    backgroundColor: colour.colour,
-                  }}
-                ></button>
+                <ProductColourButtons
+                  hex={colour.colour.hex}
+                  hexSecondary={colour.secondaryColour.hex}
+                  handleColourClick={handleColourClick}
+                  i={i}
+                  key={i}
+                />
               );
             })}
           </div>
         </div>
       ) : null}
-
-      <div
-        className={s.uiButtonsWrap}
-        style={{
-          paddingTop: state ? "1em" : "0em",
-        }}
-      >
-        {uiButtons.map((button: any, i: any) => {
-          return (
-            <button key={i} className={`${s.uiButton} ${button.class} `}>
-              {button.icon}
-              <p>{button.text}</p>
-            </button>
-          );
-        })}
-      </div>
+      <ProductButtons state={state} />
     </div>
   );
 };
 
-export default ProductUi;
+export default ProductUiPanel;

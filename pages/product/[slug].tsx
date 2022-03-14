@@ -50,6 +50,9 @@ export async function getStaticProps({ params }: any) {
           colour {
             hex
           }
+          secondaryColour {
+            hex
+          }
         }
       }
     }
@@ -115,12 +118,13 @@ const Product: NextPage<Props> = ({ data }) => {
             }`,
           }}
         >
-          {product.productVariantColours.map((c: any, i: any) => {
+          {product.productVariantColours.map((colour: any, i: any) => {
             return (
               <ProductColourButtons
                 key={i}
                 i={i}
-                hex={c.colour.hex}
+                hex={colour.colour.hex}
+                hexSecondary={colour.secondaryColour.hex}
                 handleColourClick={handleColourClick}
               />
             );

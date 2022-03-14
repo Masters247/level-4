@@ -49,6 +49,9 @@ export async function getStaticProps({ params }: any) {
           colour {
             hex
           }
+          secondaryColour {
+            hex
+          }
         }
       }
     }
@@ -69,7 +72,7 @@ interface Props {
 
 const Category: NextPage<Props> = ({ data }) => {
   const { categories } = data;
-  console.log(categories);
+  // console.log(categories);
 
   return (
     <div className={s.categoriesPageWrap}>
@@ -95,11 +98,11 @@ const Category: NextPage<Props> = ({ data }) => {
           <h2>{categories[0].productsTitle}</h2>
         </div>
         <div className={s.productsWrap}>
-          {categories[0].products.map((p: any, i: any) => {
+          {categories[0].products.map((products: any, i: any) => {
             const num = 0;
             const product = i;
 
-            return <Product key={i} p={p} i={i} />;
+            return <Product key={i} products={products} i={i} />;
           })}
         </div>
       </section>

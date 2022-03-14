@@ -27,15 +27,23 @@ export async function getStaticProps({ params }: any) {
   });
 
   const query = gql`
-    query Product {
-      product(where: { productSlug: "${params.slug}" }) {
-        featureImage {
-          height
+  query Product {
+    product(where: {productSlug: "${params.slug}"}) {
+      productVariantColours {
+        customImage {
           url
           width
+          height
+        }
+        colour {
+          hex
+        }
+        secondaryColour {
+          hex
         }
       }
     }
+  }
   `;
 
   const data = await graphcms.request(query);
@@ -51,11 +59,19 @@ interface Props {
 }
 
 const Custom: NextPage<Props> = ({ data }) => {
+  const [colour, setColour] = useState(0);
   const { product } = data;
+  const handleColourClick = (e: any, i: any) => {
+    setColour(i);
+  };
 
   return (
     <div className={s.pageWrap}>
-      <ProductView image={product?.featureImage[0]} />
+      <ProductView
+        image={product?.productVariantColours[colour].customImage}
+        productColoutVariants={product.productVariantColours}
+        handleColourClick={handleColourClick}
+      />
     </div>
   );
 };

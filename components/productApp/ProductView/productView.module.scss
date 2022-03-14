@@ -39,12 +39,12 @@
     .resizer {
       border: 1px solid $grey-4;
       position: absolute;
-      width: 15px;
-      height: 15px;
+      width: 26px;
+      height: 26px;
       border-radius: 50%;
       background-color: $white;
-      bottom: -5px;
-      right: -5px;
+      bottom: -13px;
+      right: -13px;
       touch-action: none;
       cursor: nwse-resize;
       @include boxShadow;

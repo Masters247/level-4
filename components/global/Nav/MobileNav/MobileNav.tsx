@@ -10,6 +10,10 @@ import { useLockBodyScroll } from "react-use";
 const Nav: FC = () => {
   const [open, setOpen] = useState(false);
   useLockBodyScroll(open);
+
+  const handleMenuToggle = () => {
+    setOpen(!open);
+  };
   return (
     <div className={`${s.navWrapper} ${open ? s.open : ""}`}>
       <div className={s.headerWrapper}>
@@ -26,7 +30,7 @@ const Nav: FC = () => {
             </a>
           </Link>
         </div>
-        <div className={s.mobileMenu} onClick={() => setOpen(!open)}>
+        <div className={s.mobileMenu} onClick={handleMenuToggle}>
           <div className={s.menuIcon}>
             <div className={`${s.menuLine}  ${open ? s.bar1 : ""}`}></div>
             <div className={`${s.menuLine} ${open ? s.bar2 : ""}`}></div>
@@ -39,7 +43,7 @@ const Nav: FC = () => {
           {pages[0].pages?.map((page) => (
             <li key={page.name}>
               <Link href={page.link} passHref>
-                <a onClick={() => setOpen(!open)}>{page.name}</a>
+                <a onClick={handleMenuToggle}>{page.name}</a>
               </Link>
             </li>
           ))}
@@ -51,7 +55,7 @@ const Nav: FC = () => {
           {pages[1].products?.map((page) => (
             <li key={page.name}>
               <Link href={page.link} passHref>
-                <a onClick={() => setOpen(!open)}>{page.name}</a>
+                <a onClick={handleMenuToggle}>{page.name}</a>
               </Link>
             </li>
           ))}
