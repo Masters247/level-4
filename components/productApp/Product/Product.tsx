@@ -1,5 +1,6 @@
 import { useState } from "react";
 import ProductColourButtons from "./ProductColourButtons";
+import { Button } from "../../ui/Button";
 import Image from "next/image";
 import Link from "next/link";
 import s from "./product.module.scss";
@@ -49,9 +50,7 @@ const Product = ({ products, i }: any) => {
         />
       </div>
       <Link href={`/product/${slug}`} passHref>
-        <a>
-          <p>{products.name}</p>
-        </a>
+        <a className={s.textLink}>{products.name}</a>
       </Link>
       <div className={s.productColours}>
         {products.productVariantColours.map((colour: any, i: any) => {
@@ -66,6 +65,11 @@ const Product = ({ products, i }: any) => {
           );
         })}
       </div>
+      <Link href={`/product/${slug}`} passHref>
+        <Button className={s.button} variant="primary">
+          View
+        </Button>
+      </Link>
     </div>
   );
 };

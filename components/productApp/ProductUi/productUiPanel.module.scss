@@ -9,6 +9,7 @@
 .cameraWrap {
   width: 100%;
   @include flexCenter;
+
   .cameraContainer {
     @include flexCenter;
     @include boxShadow;
@@ -17,7 +18,6 @@
     border-radius: 10px;
     cursor: pointer;
     z-index: 100;
-    // background-color: $button-primary;
   }
 }
 
@@ -29,6 +29,7 @@
   z-index: 1;
   background-color: $white;
   border-radius: 5px;
+  @include boxShadow;
 
   @media (min-width: 352px) {
     left: calc(50% - 10em);
@@ -45,6 +46,7 @@
     }
     .controlsWrap {
       display: flex;
+
       .control {
         background-color: $white;
         border: 1px solid $grey-4;
@@ -64,6 +66,7 @@
       }
     }
   }
+
   .productColourWrap {
     margin: 0em 1em 0;
     display: flex;
@@ -132,6 +135,7 @@
         }
       }
     }
+
     .download {
       background-color: $button-primary;
     }

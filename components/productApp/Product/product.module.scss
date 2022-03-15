@@ -8,11 +8,21 @@
     overflow: hidden;
     cursor: pointer;
   }
-  p {
-    margin: 2em 0 1em;
+  .textLink {
+    display: block;
+    margin: 1.5em 0 1em;
     text-align: center;
+    transition: 300ms;
+    &:hover {
+      color: $button-primary;
+    }
   }
   .productColours {
     @include flexCenter;
+    margin-bottom: 1em;
+  }
+  .button {
+    max-width: 10em;
+    margin: 0 auto;
   }
 }

@@ -6,24 +6,35 @@ import Redo from "../../ui/icons/Redo";
 import Save from "../../ui/icons/Save";
 import Download from "../../ui/icons/Download";
 
-const buttons = [
-  // { icon: "", class: s.resize, text: "resize" },
-  { icon: "", class: s.image, text: "new image" },
-  { icon: <Undo styles={s.undo} />, class: s.undoWrap, text: "undo" },
-  { icon: <Redo styles={s.redo} />, class: s.redoWrap, text: "redo" },
-  {
-    icon: <Save styles={s.saveIcon} />,
-    class: s.save,
-    text: "save",
-  },
-  {
-    icon: <Download styles={s.downloadIcon} />,
-    class: s.download,
-    text: "download",
-  },
-];
-
-const ProductButtons = ({ state }: any) => {
+const ProductButtons = ({ state, handleScreenShot }: any) => {
+  const buttons = [
+    // { icon: "", class: s.resize, text: "resize" },
+    { icon: "", class: s.image, text: "new image", function: handleScreenShot },
+    {
+      icon: <Undo styles={s.undo} />,
+      class: s.undoWrap,
+      text: "undo",
+      function: "",
+    },
+    {
+      icon: <Redo styles={s.redo} />,
+      class: s.redoWrap,
+      text: "redo",
+      function: "",
+    },
+    {
+      icon: <Save styles={s.saveIcon} />,
+      class: s.save,
+      text: "save",
+      function: "",
+    },
+    {
+      icon: <Download styles={s.downloadIcon} />,
+      class: s.download,
+      text: "download",
+      function: handleScreenShot,
+    },
+  ];
   const uiButtons = state ? buttons : buttons.slice(3, 5);
   return (
     <div
@@ -34,7 +45,11 @@ const ProductButtons = ({ state }: any) => {
     >
       {uiButtons.map((button: any, i: any) => {
         return (
-          <button key={i} className={`${s.uiButton} ${button.class} `}>
+          <button
+            key={i}
+            className={`${s.uiButton} ${button.class} `}
+            onClick={button.function}
+          >
             {button.icon}
             <p>{button.text}</p>
           </button>

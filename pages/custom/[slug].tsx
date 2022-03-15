@@ -77,9 +77,19 @@ const Custom: NextPage<Props> = ({ data }) => {
     const documentScreen: any = document.querySelector("#screenShot");
     {
       screenShot &&
-        html2canvas(documentCustom).then(function (canvas: any) {
-          documentScreen.appendChild(canvas);
-          setScreenShotImage(canvas);
+        html2canvas(documentCustom, {}).then((canvas: any) => {
+          var image = canvas
+            .toDataURL("image/png")
+            .replace("image/png", "image/octet-stream");
+
+          /* this allows for the image to be downloaded */
+          window.location.href = image;
+          window.localStorage.setItem("image", image);
+          // const newImage = window.localStorage.getItem("image");
+
+          // console.log("Locally stored image", newImage);
+
+          // documentScreen.appendChild(newImage);
         });
     }
     setScreenShot(false);

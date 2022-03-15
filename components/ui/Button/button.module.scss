@@ -13,12 +13,10 @@
 .primary {
   background-color: $button-primary;
   color: $white;
-
-  @media screen and (min-width: $media-tablet) {
-    &:hover {
-      background-color: transparent;
-      color: $black;
-    }
+  border: 1px solid $button-primary;
+  &:hover {
+    background-color: transparent;
+    color: $button-primary;
   }
 }
 

@@ -4,7 +4,7 @@ import Center from "../../ui/icons/Center";
 import HorizontalAlign from "../../ui/icons/HorizontalAlign";
 import VerticalAlign from "../../ui/icons/VerticalAlign";
 import ProductButtons from "./ProductButtons";
-import ProductColourButtons from "../../products/Product/ProductColourButtons";
+import ProductColourButtons from "../Product/ProductColourButtons";
 import Undo from "../../ui/icons/Undo";
 import Redo from "../../ui/icons/Redo";
 import Show from "../../ui/icons/Show";
@@ -66,17 +66,17 @@ const ProductUiPanel = ({
 
   return (
     <>
-      <div className={s.cameraWrap}>
+      {/* <div className={s.cameraWrap}>
         {!state && (
           <button className={s.cameraContainer} onClick={handleScreenShot}>
             <Camera styles={s.camera} />
           </button>
         )}
-      </div>
+      </div> */}
       <div
         className={s.productUiWrap}
         style={{
-          top: state ? "28em" : "38em",
+          top: "28em",
         }}
       >
         <div className={s.uiControlsWrap}>
@@ -113,7 +113,7 @@ const ProductUiPanel = ({
             </div>
           </div>
         ) : null}
-        <ProductButtons state={state} />
+        <ProductButtons state={state} handleScreenShot={handleScreenShot} />
       </div>
     </>
   );
