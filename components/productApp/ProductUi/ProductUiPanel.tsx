@@ -1,4 +1,4 @@
-import { FC } from "react";
+import { useState, useEffect } from "react";
 import s from "./productUiPanel.module.scss";
 import Center from "../../ui/icons/Center";
 import HorizontalAlign from "../../ui/icons/HorizontalAlign";
@@ -10,7 +10,9 @@ import Redo from "../../ui/icons/Redo";
 import Show from "../../ui/icons/Show";
 import Hide from "../../ui/icons/Hide";
 import Save from "../../ui/icons/Save";
+import Camera from "../../ui/icons/Camera";
 import Download from "../../ui/icons/Download";
+import html2canvas from "html2canvas";
 
 const buttons = [
   { icon: "", class: s.image, text: "new image" },
@@ -60,51 +62,81 @@ const ProductUiPanel = ({
     },
   ];
 
+  const [screenShot, setScreenShot] = useState(false);
+  const [screenShotImage, setScreenShotImage] = useState(null);
+
+  const handleScreenShot = () => {
+    setScreenShot(true);
+  };
+
+  useEffect(() => {
+    {
+      screenShot &&
+        html2canvas(document.querySelector("#customView")).then(function (
+          canvas
+        ) {
+          document.querySelector("#screenShot").appendChild(canvas);
+          setScreenShotImage(canvas);
+        });
+    }
+    setScreenShot(false);
+  }, [screenShot]);
+
   const controls = state ? controler : controler.slice(3, 4);
 
   return (
-    <div
-      className={s.productUiWrap}
-      style={{
-        top: state ? "28em" : "38em",
-      }}
-    >
-      <div className={s.uiControlsWrap}>
-        {state ? <p>Controls:</p> : <p>Show Controls:</p>}
-        <div className={s.controlsWrap}>
-          {controls.map((cont: any) => {
-            return (
-              <button
-                key={cont.name}
-                onClick={cont?.function}
-                className={s.control}
-              >
-                {cont.icon}
-              </button>
-            );
-          })}
-        </div>
+    <>
+      <div className={s.cameraWrap}>
+        {!state && (
+          <button className={s.cameraContainer} onClick={handleScreenShot}>
+            <Camera styles={s.camera} />
+          </button>
+        )}
       </div>
-      {state ? (
-        <div className={s.productColourWrap}>
-          <p>Colour:</p>
-          <div className={s.colourButtonsWrap}>
-            {productColoutVariants.map((colour: any, i: any) => {
+
+      <div
+        className={s.productUiWrap}
+        style={{
+          top: state ? "28em" : "38em",
+        }}
+      >
+        <div className={s.uiControlsWrap}>
+          {state ? <p>Controls:</p> : <p>Show Controls:</p>}
+          <div className={s.controlsWrap}>
+            {controls.map((cont: any) => {
               return (
-                <ProductColourButtons
-                  hex={colour.colour.hex}
-                  hexSecondary={colour.secondaryColour.hex}
-                  handleColourClick={handleColourClick}
-                  i={i}
-                  key={i}
-                />
+                <button
+                  key={cont.name}
+                  onClick={cont?.function}
+                  className={s.control}
+                >
+                  {cont.icon}
+                </button>
               );
             })}
           </div>
         </div>
-      ) : null}
-      <ProductButtons state={state} />
-    </div>
+        {state ? (
+          <div className={s.productColourWrap}>
+            <p>Colour:</p>
+            <div className={s.colourButtonsWrap}>
+              {productColoutVariants.map((colour: any, i: any) => {
+                return (
+                  <ProductColourButtons
+                    hex={colour.colour.hex}
+                    hexSecondary={colour.secondaryColour.hex}
+                    handleColourClick={handleColourClick}
+                    i={i}
+                    key={i}
+                  />
+                );
+              })}
+            </div>
+          </div>
+        ) : null}
+        <ProductButtons state={state} />
+      </div>
+    </>
   );
 };
 

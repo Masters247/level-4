@@ -103,21 +103,24 @@ const ProductView = ({
   };
 
   return (
-    <div id={id} className={s.productViewWrap}>
-      <div className={s.imageWrap}>
-        <Image
-          src={image.url}
-          priority
-          layout="fixed"
-          width={500}
-          height={500}
-          placeholder="blur"
-          blurDataURL={image.url}
-        />
-      </div>
-      <div className={s.productView}>
-        {control ? (
-          <div className={s.viewportWrap} ref={containerRef}>
+    <div className={s.appWrap}>
+      <div className={s.productViewWrap} id="customView">
+        <div className={s.imageWrap}>
+          <Image
+            src={image.url}
+            priority
+            layout="fixed"
+            width={500}
+            height={500}
+            placeholder="blur"
+            blurDataURL={image.url}
+          />
+        </div>
+        <div className={s.productView}>
+          <div
+            className={`${control ? s.viewportWrap : s.viewPortClear}`}
+            ref={containerRef}
+          >
             <animated.div
               className={s.viewport}
               style={{ x, y, width, height, zIndex: "1" }}
@@ -142,18 +145,17 @@ const ProductView = ({
               <div className={s.resizer} ref={dragEl}></div>
             </animated.div>
           </div>
-        ) : null}
-
-        <ProductUiPanel
-          productColoutVariants={productColoutVariants}
-          center={handleCenter}
-          vertical={handleVertical}
-          horizontal={handleHorizontal}
-          showhide={handleControls}
-          state={control}
-          handleColourClick={handleColourClick}
-        />
+        </div>
       </div>
+      <ProductUiPanel
+        productColoutVariants={productColoutVariants}
+        center={handleCenter}
+        vertical={handleVertical}
+        horizontal={handleHorizontal}
+        showhide={handleControls}
+        state={control}
+        handleColourClick={handleColourClick}
+      />
     </div>
   );
 };

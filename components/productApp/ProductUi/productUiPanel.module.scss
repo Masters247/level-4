@@ -6,6 +6,21 @@
   text-transform: uppercase;
 }
 
+.cameraWrap {
+  width: 100%;
+  @include flexCenter;
+  .cameraContainer {
+    @include flexCenter;
+    @include boxShadow;
+    width: 50px;
+    height: 50px;
+    border-radius: 10px;
+    cursor: pointer;
+    z-index: 100;
+    // background-color: $button-primary;
+  }
+}
+
 .productUiWrap {
   position: absolute;
   left: calc(50% - (50vw - 1em));
@@ -13,8 +28,8 @@
   max-width: 20em;
   z-index: 1;
   background-color: $white;
-  @include boxShadow;
   border-radius: 5px;
+
   @media (min-width: 352px) {
     left: calc(50% - 10em);
   }
@@ -24,6 +39,7 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
+
     p {
       @include uiFont;
     }

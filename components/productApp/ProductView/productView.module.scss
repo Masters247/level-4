@@ -1,23 +1,20 @@
 @use "../../../styles/base.scss" as *;
-
-.productViewWrap {
+.appWrap {
   position: relative;
   min-height: 46em;
+}
+.productViewWrap {
   @include flexCenter;
   width: 100vw;
   overflow: hidden;
-  align-items: flex-start;
-  // background-color: $grey-1;
-  .imageWrap {
-  }
 }
 .productView {
   position: absolute;
   top: 0;
   min-height: 46em;
   left: calc(50% - (20em / 2));
-  // background-color: $grey-1;
 }
+.viewPortClear,
 .viewportWrap {
   position: relative;
   top: 1em;
@@ -53,6 +50,17 @@
       &:focus {
         background-color: $button-primary;
       }
+    }
+  }
+}
+
+.viewPortClear {
+  border: 1px dashed rgba(255, 255, 255, 0);
+  box-shadow: none;
+  .viewport {
+    border: 1px dashed rgba(255, 255, 255, 0);
+    .resizer {
+      display: none;
     }
   }
 }
