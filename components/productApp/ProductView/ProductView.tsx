@@ -10,6 +10,7 @@ const ProductView = ({
   image,
   productColoutVariants,
   handleColourClick,
+  handleScreenShot,
   id,
 }: any) => {
   const [control, setControl] = useState(true);
@@ -155,6 +156,7 @@ const ProductView = ({
         showhide={handleControls}
         state={control}
         handleColourClick={handleColourClick}
+        handleScreenShot={handleScreenShot}
       />
     </div>
   );

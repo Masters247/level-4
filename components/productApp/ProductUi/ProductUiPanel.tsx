@@ -12,7 +12,6 @@ import Hide from "../../ui/icons/Hide";
 import Save from "../../ui/icons/Save";
 import Camera from "../../ui/icons/Camera";
 import Download from "../../ui/icons/Download";
-import html2canvas from "html2canvas";
 
 const buttons = [
   { icon: "", class: s.image, text: "new image" },
@@ -38,6 +37,7 @@ const ProductUiPanel = ({
   state,
   productColoutVariants,
   handleColourClick,
+  handleScreenShot,
 }: any) => {
   const controler = [
     {
@@ -61,29 +61,6 @@ const ProductUiPanel = ({
       function: showhide,
     },
   ];
-
-  const [screenShot, setScreenShot] = useState(false);
-  const [screenShotImage, setScreenShotImage] = useState(null);
-
-  const handleScreenShot = () => {
-    setScreenShot(true);
-  };
-
-  let document: any;
-
-  useEffect(() => {
-    {
-      screenShot &&
-        html2canvas(document.querySelector("#customView")).then(function (
-          canvas: any
-        ) {
-          document.querySelector("#screenShot").appendChild(canvas);
-
-          setScreenShotImage(canvas);
-        });
-    }
-    setScreenShot(false);
-  }, [screenShot]);
 
   const controls = state ? controler : controler.slice(3, 4);
 
