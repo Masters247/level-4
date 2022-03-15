@@ -3,8 +3,6 @@ import { GraphQLClient, gql } from "graphql-request";
 import { useState, useEffect } from "react";
 import ProductView from "../../components/productApp/ProductView/ProductView";
 import productQuery from "../../lib/graphcms-querys/productQuery";
-import html2canvas from "html2canvas";
-import Image from "next/image";
 import s from "../../styles/pages/productPage.module.scss";
 
 export async function getStaticPaths() {
@@ -61,34 +59,13 @@ interface Props {
 
 const Custom: NextPage<Props> = ({ data }) => {
   const [colour, setColour] = useState(0);
-
-  // const [screenShot, setScreenShot] = useState(false);
-  // const [screenShotImage, setScreenShotImage] = useState(null);
   const { product } = data;
   const handleColourClick = (e: any, i: any) => {
     setColour(i);
   };
 
-  // const handleScreenShot = () => {
-  //   setScreenShot(true);
-  // };
-
-  // useEffect(() => {
-  //   {
-  //     screenShot &&
-  //       html2canvas(document.querySelector("#customView")).then(function (
-  //         canvas
-  //       ) {
-  //         document.querySelector("#screenShot").appendChild(canvas);
-  //         setScreenShotImage(canvas);
-  //       });
-  //   }
-  //   setScreenShot(false);
-  // }, [screenShot]);
-
   return (
     <div id="capture" className={s.pageWrap}>
-      {/* <button onClick={handleScreenShot}>screenshot</button> */}
       <ProductView
         image={product?.productVariantColours[colour].customImage}
         productColoutVariants={product.productVariantColours}

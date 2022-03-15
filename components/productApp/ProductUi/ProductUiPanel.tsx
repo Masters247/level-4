@@ -69,13 +69,16 @@ const ProductUiPanel = ({
     setScreenShot(true);
   };
 
+  let document: any;
+
   useEffect(() => {
     {
       screenShot &&
         html2canvas(document.querySelector("#customView")).then(function (
-          canvas
+          canvas: any
         ) {
           document.querySelector("#screenShot").appendChild(canvas);
+
           setScreenShotImage(canvas);
         });
     }
@@ -93,7 +96,6 @@ const ProductUiPanel = ({
           </button>
         )}
       </div>
-
       <div
         className={s.productUiWrap}
         style={{
