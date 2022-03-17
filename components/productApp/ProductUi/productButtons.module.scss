@@ -64,4 +64,8 @@
   .download {
     background-color: $button-primary;
   }
+  .disabled {
+    opacity: 0.2;
+    cursor: not-allowed;
+  }
 }

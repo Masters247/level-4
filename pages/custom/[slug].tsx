@@ -79,12 +79,14 @@ const Custom: NextPage<Props> = ({ data }) => {
       screenShot &&
         html2canvas(documentCustom, {}).then((canvas: any) => {
           var image = canvas
-            .toDataURL("image/png")
-            .replace("image/png", "image/octet-stream");
+            .toDataURL("image/jpeg")
+            .replace("image/jpeg", "image/octet-stream");
+
+          console.log(image);
 
           /* this allows for the image to be downloaded */
           window.location.href = image;
-          window.localStorage.setItem("image", image);
+          // window.localStorage.setItem("image", image);
           // const newImage = window.localStorage.getItem("image");
 
           // console.log("Locally stored image", newImage);

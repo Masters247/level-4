@@ -5,6 +5,7 @@ import Redo from "../../ui/icons/Redo";
 // import Hide from "../../ui/icons/Hide";
 import Save from "../../ui/icons/Save";
 import Download from "../../ui/icons/Download";
+import { useEffect } from "react";
 
 const ProductButtons = ({ state, handleScreenShot }: any) => {
   const buttons = [
@@ -14,19 +15,19 @@ const ProductButtons = ({ state, handleScreenShot }: any) => {
       icon: <Undo styles={s.undo} />,
       class: s.undoWrap,
       text: "undo",
-      function: "",
+      // function: "",
     },
     {
       icon: <Redo styles={s.redo} />,
       class: s.redoWrap,
       text: "redo",
-      function: "",
+      // function: "",
     },
     {
       icon: <Save styles={s.saveIcon} />,
       class: s.save,
       text: "save",
-      function: "",
+      // function: "",
     },
     {
       icon: <Download styles={s.downloadIcon} />,
@@ -36,6 +37,7 @@ const ProductButtons = ({ state, handleScreenShot }: any) => {
     },
   ];
   const uiButtons = state ? buttons : buttons.slice(3, 5);
+
   return (
     <div
       className={s.uiButtonsWrap}
@@ -45,14 +47,31 @@ const ProductButtons = ({ state, handleScreenShot }: any) => {
     >
       {uiButtons.map((button: any, i: any) => {
         return (
-          <button
-            key={i}
-            className={`${s.uiButton} ${button.class} `}
-            onClick={button.function}
-          >
-            {button.icon}
-            <p>{button.text}</p>
-          </button>
+          <>
+            {(state && button.text === "download") ||
+            (state && button.text === "save") ? (
+              <button
+                id={button.text}
+                key={i}
+                className={`${s.uiButton} ${button.class} ${s.disabled}`}
+                onClick={button?.function}
+                disabled
+              >
+                {button.icon}
+                <p>{button.text}</p>
+              </button>
+            ) : (
+              <button
+                id={button.text}
+                key={i}
+                className={`${s.uiButton} ${button.class} `}
+                onClick={button?.function}
+              >
+                {button.icon}
+                <p>{button.text}</p>
+              </button>
+            )}
+          </>
         );
       })}
     </div>

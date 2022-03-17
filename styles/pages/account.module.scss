@@ -1,0 +1,31 @@
+@use "../base.scss" as *;
+.accountDetailsWrap {
+  margin: 4em 1em;
+  .tabWrap {
+    margin: 2em 0;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    .button {
+      height: 40px;
+      color: $grey-2;
+      text-transform: uppercase;
+      font-weight: 600;
+      border-bottom: 1px solid $grey-3;
+    }
+    .active {
+      color: $black;
+      border-top: 1px solid $grey-3;
+      border-left: 1px solid $grey-3;
+      border-right: 1px solid $grey-3;
+      border-bottom: none;
+    }
+  }
+  .accountDetails {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-gap: 1em;
+  }
+  .save {
+    margin-top: 3em;
+  }
+}
