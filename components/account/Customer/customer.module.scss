@@ -4,7 +4,9 @@
   grid-template-columns: 1fr 8fr 1fr;
   grid-gap: 1em;
   border-bottom: 1px solid $grey-3;
+
   .details {
+    opacity: 1;
     height: 60px;
     display: flex;
     justify-content: flex-end;
@@ -12,16 +14,19 @@
 
     h3 {
       text-transform: uppercase;
-      align-content: center;
       font-weight: 600;
     }
     p {
       font-size: 0.8em;
-      align-items: center;
+      text-align: right;
     }
     .pencil {
+      cursor: pointer;
       width: 15px;
       fill: $grey-5;
     }
+  }
+  .details:nth-child(1) {
+    justify-content: flex-start;
   }
 }

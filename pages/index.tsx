@@ -7,9 +7,6 @@ import collectionsQuery, {
 } from "../lib/graphcms-querys/collectionsQuery";
 import categorySlugsQuery from "../lib/graphcms-querys/categoryQuery";
 import s from "../styles/pages/index.module.scss";
-import { PrismaClient } from "@prisma/client";
-
-const prisma = new PrismaClient();
 
 export const getStaticProps: GetStaticProps = async () => {
   const collections = await collectionsQuery();
@@ -29,7 +26,7 @@ interface Props {
 const Home: NextPage<Props> = ({ collections, slugs }) => {
   return (
     <div>
-      <h1>Form Test Planet Scale</h1>
+      <h1>Home Page</h1>
       {/* <VideoHero />
       <CollectionsGrid collections={collections} />
       <MailingList /> */}

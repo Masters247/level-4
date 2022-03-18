@@ -1,7 +1,10 @@
 import Customer from "../../components/account/Customer/Customer";
+import cn from "classnames";
+import useDelayedRender from "use-delayed-render";
 import { useState } from "react";
 import { Button } from "../../components/ui/Button";
 import s from "../../styles/pages/account.module.scss";
+import { a } from "@react-spring/web";
 
 const customer = [
   { type: "name", data: "dan" },
@@ -13,21 +16,65 @@ const customer = [
 ];
 
 const Account = () => {
-  const [state, setState] = useState(true);
+  const [isDetailsShown, setIsDetailsShown] = useState(true);
+
+  const { mounted: isDetailsMounted, rendered: isDetailsRendered } =
+    useDelayedRender(isDetailsShown, {
+      enterDelay: 300,
+      exitDelay: 300,
+    });
+
+  const toggleAccountView = () => {
+    if (isDetailsMounted) {
+      setIsDetailsShown(false);
+    } else {
+      setIsDetailsShown(true);
+    }
+  };
+
   return (
     <div className={s.accountDetailsWrap}>
       <h1>Your Account</h1>
       <div className={s.tabWrap}>
-        <button className={`${s.button} ${state && s.active}`}>Details</button>
-        <button className={`${s.button} ${!state && s.active}`}>
+        <button
+          onClick={toggleAccountView}
+          className={`${s.button} ${isDetailsShown && s.activeDetails}`}
+        >
+          Details
+        </button>
+        <button
+          onClick={toggleAccountView}
+          className={`${s.button} ${!isDetailsShown && s.activeDesigns}`}
+        >
           My Designs
         </button>
       </div>
-      <div className={s.accountDetails}>
-        {customer.map((person: any) => (
-          <Customer type={person.type} data={person.data} />
-        ))}
-      </div>
+      {isDetailsMounted && (
+        <div
+          className={
+            isDetailsRendered ? s.accountDetailsShow : s.accountDetailsHide
+          }
+        >
+          {customer.map((person: any, i: number) => (
+            <Customer
+              key={i + person.type}
+              type={person.type}
+              data={person.data}
+            />
+          ))}
+        </div>
+      )}
+
+      {!isDetailsMounted && (
+        <div
+          className={
+            !isDetailsRendered ? s.accountDetailsShow : s.accountDetailsHide
+          }
+        >
+          Designs
+        </div>
+      )}
+
       <Button variant="primary" className={s.save} Component="button">
         Save changes
       </Button>

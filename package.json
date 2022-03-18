@@ -24,6 +24,7 @@
     "react-draggable": "^4.4.4",
     "react-use": "^17.3.2",
     "sass": "^1.49.8",
+    "use-delayed-render": "^0.0.7",
     "yup": "^0.32.11"
   },
   "devDependencies": {
