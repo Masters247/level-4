@@ -111,6 +111,7 @@ const ProductView = ({
         <div className={s.imageWrap}>
           <Image
             src={image.url}
+            quality={100}
             priority
             layout="fixed"
             width={500}

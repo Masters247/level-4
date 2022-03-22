@@ -102,11 +102,11 @@ const ProductUiPanel = ({
               {productColoutVariants.map((colour: any, i: any) => {
                 return (
                   <ProductColourButtons
+                    key={i}
                     hex={colour.colour.hex}
                     hexSecondary={colour.secondaryColour.hex}
                     handleColourClick={handleColourClick}
                     i={i}
-                    key={i}
                   />
                 );
               })}

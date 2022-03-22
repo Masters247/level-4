@@ -7,6 +7,7 @@ import collectionsQuery, {
 } from "../lib/graphcms-querys/collectionsQuery";
 import categorySlugsQuery from "../lib/graphcms-querys/categoryQuery";
 import s from "../styles/pages/index.module.scss";
+import { useSession, signIn, signOut } from "next-auth/react";
 
 export const getStaticProps: GetStaticProps = async () => {
   const collections = await collectionsQuery();
@@ -23,10 +24,35 @@ interface Props {
   slugs: any;
 }
 
+function AuthLinks() {
+  const { data: session, status } = useSession();
+
+  const loading = status === "loading";
+
+  if (loading) return null;
+
+  return (
+    <>
+      <h1>Test</h1>
+      {session ? (
+        <p>
+          <span>Signed in as {session?.user?.email}</span>
+          <button onClick={signOut}>Sign out</button>
+        </p>
+      ) : (
+        <>
+          <button onClick={signIn}>Sign in</button>
+        </>
+      )}
+    </>
+  );
+}
+
 const Home: NextPage<Props> = ({ collections, slugs }) => {
   return (
     <div>
       <h1>Home Page</h1>
+      <AuthLinks />
       {/* <VideoHero />
       <CollectionsGrid collections={collections} />
       <MailingList /> */}

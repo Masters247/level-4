@@ -1,6 +1,6 @@
 import type { NextPage } from "next";
 import { GraphQLClient, gql } from "graphql-request";
-import { useState, useEffect } from "react";
+import { useState, useEffect, createContext } from "react";
 import ProductView from "../../components/productApp/ProductView/ProductView";
 import productQuery from "../../lib/graphcms-querys/productQuery";
 import s from "../../styles/pages/productPage.module.scss";
@@ -58,8 +58,13 @@ interface Props {
   data?: any;
 }
 
+// type CustomResult = ReturnType<NextPage<Props, Props>>
+
+// const ScreenShotContext = createContext();
+
 const Custom: NextPage<Props> = ({ data }) => {
   const [colour, setColour] = useState(0);
+
   const { product } = data;
   const handleColourClick = (e: any, i: any) => {
     setColour(i);
@@ -82,8 +87,6 @@ const Custom: NextPage<Props> = ({ data }) => {
             .toDataURL("image/jpeg")
             .replace("image/jpeg", "image/octet-stream");
 
-          console.log(image);
-
           /* this allows for the image to be downloaded */
           window.location.href = image;
           // window.localStorage.setItem("image", image);
@@ -105,6 +108,7 @@ const Custom: NextPage<Props> = ({ data }) => {
         handleColourClick={handleColourClick}
         handleScreenShot={handleScreenShot}
       />
+
       <div id="screenShot" className="screenshot"></div>
     </div>
   );
