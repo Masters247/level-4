@@ -1,8 +1,6 @@
 import { useState, useEffect, FC } from "react";
-
 import cn from "classnames";
-import ProductColour from "./productColour";
-
+import ProductColour from "./ProductColour";
 import s from "./productColourButtons.module.scss";
 
 interface Props {
