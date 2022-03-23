@@ -20,6 +20,12 @@
   .productColours {
     @include flexCenter;
     margin-bottom: 1em;
+    .coloursLeft {
+      margin-left: 0.3em;
+    }
+    .coloursRight {
+      margin-right: 0.3em;
+    }
   }
   .button {
     max-width: 10em;

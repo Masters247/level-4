@@ -98,8 +98,6 @@ const Category: NextPage<Props> = ({ data }) => {
         </div>
         <div className={s.productsWrap}>
           {categories[0].products.map((products: any, i: any) => {
-            const num = 0;
-            const product = i;
             return <Product key={i} products={products} i={i} />;
           })}
         </div>

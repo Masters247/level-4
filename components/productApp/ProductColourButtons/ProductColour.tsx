@@ -1,11 +1,6 @@
-import s from "./productColourButtons.module.scss";
+import s from "./productColour.module.scss";
 
-const ProductColourButtons = ({
-  hex,
-  handleColourClick,
-  i,
-  hexSecondary,
-}: any) => {
+const ProductColour = ({ hex, handleColourClick, i, hexSecondary }: any) => {
   return (
     <button onClick={(e) => handleColourClick(e, i)} className={s.border}>
       <div
@@ -30,4 +25,4 @@ const ProductColourButtons = ({
   );
 };
 
-export default ProductColourButtons;
+export default ProductColour;

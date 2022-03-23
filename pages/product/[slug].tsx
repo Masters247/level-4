@@ -3,6 +3,7 @@ import { GraphQLClient, gql } from "graphql-request";
 import { useState, useEffect } from "react";
 import Visualise from "../../components/productApp/Visualise/Visualise";
 import productQuery from "../../lib/graphcms-querys/productQuery";
+import ProductColourButtonsWrap from "../../components/productApp/ProductColourButtons/ProductColourButtonsWrap";
 import ProductColourButtons from "../../components/productApp/Product/ProductColourButtons";
 import SliderContainer from "../../components/slider/SlideContainer/SliderContainer";
 import Image from "next/image";
@@ -102,34 +103,17 @@ const Product: NextPage<Props> = ({ data }) => {
         <h1>{product.name}</h1>
         <p>{product.description}</p>
       </section>
-      <section className={s.productImagesWrap}>
-        <div
-          className={s.productColoursButtons}
-          style={{
-            left: `${
-              width < 650
-                ? `calc(50% - ((${colourLength} * 24px) / 2))`
-                : "20px"
-            }`,
-            top: `${
-              width < 650
-                ? "-35px"
-                : `calc(50% - ((${colourLength} * 24px) / 2))`
-            }`,
-          }}
-        >
-          {product.productVariantColours.map((colour: any, i: any) => {
-            return (
-              <ProductColourButtons
-                key={i}
-                i={i}
-                hex={colour.colour.hex}
-                hexSecondary={colour.secondaryColour.hex}
-                handleColourClick={handleColourClick}
-              />
-            );
-          })}
-        </div>
+      <section
+        className={s.productImagesWrap}
+        style={{
+          position: "relative",
+        }}
+      >
+        <ProductColourButtonsWrap
+          products={product}
+          colourClick={handleColourClick}
+          position={true}
+        />
         <div
           className={s.productImagesWrap}
           style={{

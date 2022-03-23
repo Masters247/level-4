@@ -1,0 +1,46 @@
+@use "../../../styles/base.scss" as *;
+.productColours {
+  z-index: 10;
+  margin: 0 auto 1em;
+  @include flexCenter;
+  margin-bottom: 1em;
+  .coloursRight,
+  .coloursLeft {
+    @include flexCenter;
+    width: 14px;
+    height: 14px;
+    p {
+      text-align: center;
+      transition: opacity 200ms ease;
+      font-size: 0.8em;
+    }
+  }
+  .coloursLeft {
+    margin-left: 0.3em;
+  }
+  .coloursRight {
+    margin-right: 0.3em;
+  }
+  .hide {
+    p {
+      opacity: 0;
+    }
+  }
+}
+
+.positionOne {
+  position: absolute;
+  left: calc(50% - 70px);
+  top: -3em;
+  @media (min-width: 500px) {
+    flex-direction: column;
+    left: 3em;
+    top: 3.5em;
+    .coloursLeft {
+      margin-left: 0;
+    }
+    .coloursRight {
+      margin-right: 0;
+    }
+  }
+}
