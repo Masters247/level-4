@@ -24,38 +24,37 @@ interface Props {
   slugs: any;
 }
 
-function AuthLinks() {
-  const { data: session, status } = useSession();
+// function AuthLinks() {
+//   const { data: session, status } = useSession();
 
-  const loading = status === "loading";
+//   const loading = status === "loading";
 
-  if (loading) return null;
+//   if (loading) return null;
 
-  return (
-    <>
-      <h1>Test</h1>
-      {session ? (
-        <p>
-          <span>Signed in as {session?.user?.email}</span>
-          <button onClick={signOut}>Sign out</button>
-        </p>
-      ) : (
-        <>
-          <button onClick={signIn}>Sign in</button>
-        </>
-      )}
-    </>
-  );
-}
+//   return (
+//     <>
+//       <h1>Test</h1>
+//       {session ? (
+//         <p>
+//           <span>Signed in as {session?.user?.email}</span>
+//           <button onClick={signOut}>Sign out</button>
+//         </p>
+//       ) : (
+//         <>
+//           <button onClick={signIn}>Sign in</button>
+//         </>
+//       )}
+//     </>
+//   );
+// }
 
 const Home: NextPage<Props> = ({ collections, slugs }) => {
   return (
     <div>
-      <h1>Home Page</h1>
-      <AuthLinks />
-      {/* <VideoHero />
+      {/* <AuthLinks /> */}
+      <VideoHero />
       <CollectionsGrid collections={collections} />
-      <MailingList /> */}
+      <MailingList />
     </div>
   );
 };
