@@ -10,6 +10,7 @@ import Image from "next/image";
 import s from "../../styles/pages/productPage.module.scss";
 import Personal from "../../components/productApp/Personal/Personal";
 import { useWindowSize } from "react-use";
+import { a } from "@react-spring/web";
 
 export async function getStaticPaths() {
   const products = await productQuery();
@@ -103,43 +104,47 @@ const Product: NextPage<Props> = ({ data }) => {
         <h1>{product.name}</h1>
         <p>{product.description}</p>
       </section>
+
       <section
-        className={s.productImagesWrap}
+        className={s.productImagesSection}
         style={{
           position: "relative",
         }}
       >
-        <ProductColourButtonsWrap
-          products={product}
-          colourClick={handleColourClick}
-          position={true}
-        />
-        <div
-          className={s.productImagesWrap}
-          style={{
-            gridTemplateColumns: `repeat(${imagesLength}, 1fr)`,
-            maxWidth: `calc((300px * ${imagesLength}) + (${
-              imagesLength - 1
-            } * 1em))`,
-            gridGap: "1em",
-            margin: " 0 auto",
-          }}
-        >
-          {product.productVariantColours[productColour].images.map(
-            (image: any) => (
-              <Image
-                key={image.url}
-                layout="responsive"
-                src={image.url}
-                height={200}
-                width={200}
-                placeholder="blur"
-                blurDataURL={image.url}
-              />
-            )
-          )}
+        <div className={s.productImagesBackgroundWrap}>
+          <ProductColourButtonsWrap
+            products={product}
+            colourClick={handleColourClick}
+            position={true}
+          />
+          <div
+            className={s.productImagesWrap}
+            style={{
+              gridTemplateColumns: `repeat(${imagesLength}, 1fr)`,
+              maxWidth: `calc((300px * ${imagesLength}) + (${
+                imagesLength - 1
+              } * 1em))`,
+              gridGap: "1em",
+              margin: " 0 auto",
+            }}
+          >
+            {product.productVariantColours[productColour].images.map(
+              (image: any) => (
+                <Image
+                  key={image.url}
+                  layout="responsive"
+                  src={image.url}
+                  height={200}
+                  width={200}
+                  placeholder="blur"
+                  blurDataURL={image.url}
+                />
+              )
+            )}
+          </div>
         </div>
       </section>
+
       <Visualise slug={product.productSlug} />
       <Personal />
     </div>

@@ -31,16 +31,20 @@
 .positionOne {
   position: absolute;
   left: calc(50% - 70px);
-  top: -3em;
-  @media (min-width: 500px) {
+  top: 1em;
+  @media (min-width: $media-tablet-small) {
     flex-direction: column;
-    left: 3em;
-    top: 3.5em;
+    left: 1em;
+    top: 4.55em;
     .coloursLeft {
       margin-left: 0;
     }
     .coloursRight {
       margin-right: 0;
+      margin-bottom: 0.15em;
     }
+  }
+  @media (min-width: $media-desktop) {
+    left: 2em;
   }
 }

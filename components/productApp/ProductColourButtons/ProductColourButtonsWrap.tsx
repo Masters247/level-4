@@ -82,28 +82,15 @@ const ProductColourButtonsWrap: FC<Props> = ({
         );
       })}
 
-      {/* 
-      
-      NEED TO SORT OUT THE BUTTON ON THE RIGHT TO BE SAME AS THE ONE ON THE LEFT
-    
-      */}
-
-      {productVariantColoursLength > 4 &&
-        productVariantColoursLength !==
-          productVariantColoursLength - colourRight && (
-          <button
-            onClick={showMoreColoursRight}
-            className={cn(
-              s.coloursLeft,
-              productVariantColoursLength < 4 &&
-                productVariantColoursLength !==
-                  productVariantColoursLength - colourRight &&
-                s.hide
-            )}
-          >
-            <p>+{colourRight}</p>
-          </button>
-        )}
+      {productVariantColoursLength < 4 ? null : (
+        <button
+          onClick={showMoreColoursRight}
+          className={cn(s.coloursLeft, colourRight === 0 && s.hide)}
+          disabled={colourRight === 0}
+        >
+          <p>+{colourRight}</p>
+        </button>
+      )}
     </div>
   );
 };
