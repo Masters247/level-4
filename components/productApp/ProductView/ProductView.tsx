@@ -108,8 +108,16 @@ const ProductView = ({
 
   return (
     <div className={s.appWrap}>
-      <div className={s.productViewWrap} id="customView">
-        <div className={s.imageWrap}>
+      <div className={s.productViewWrap}>
+        <div
+          id="capture"
+          className={s.imageWrap}
+          style={
+            {
+              // border: "4px solid #000",
+            }
+          }
+        >
           <Image
             src={image.url}
             quality={100}

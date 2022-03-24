@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import ProductColourButtonsWrap from "../ProductColourButtons/ProductColourButtonsWrap";
+import ProductColourButtonsWrap from "../ProductColourButtons/ProductColourButtons";
 import ProductColourButtons from "./ProductColourButtons";
 import { Button } from "../../ui/Button";
 import Image from "next/image";

@@ -3,14 +3,12 @@ import { GraphQLClient, gql } from "graphql-request";
 import { useState, useEffect } from "react";
 import Visualise from "../../components/productApp/Visualise/Visualise";
 import productQuery from "../../lib/graphcms-querys/productQuery";
-import ProductColourButtonsWrap from "../../components/productApp/ProductColourButtons/ProductColourButtonsWrap";
-import ProductColourButtons from "../../components/productApp/Product/ProductColourButtons";
+import ProductColourButtonsWrap from "../../components/productApp/ProductColourButtons/ProductColourButtons";
 import SliderContainer from "../../components/slider/SlideContainer/SliderContainer";
 import Image from "next/image";
 import s from "../../styles/pages/productPage.module.scss";
 import Personal from "../../components/productApp/Personal/Personal";
 import { useWindowSize } from "react-use";
-import { a } from "@react-spring/web";
 
 export async function getStaticPaths() {
   const products = await productQuery();
@@ -87,8 +85,6 @@ const Product: NextPage<Props> = ({ data }) => {
 
   const imagesLength =
     product.productVariantColours[productColour].images.length;
-
-  // console.log(product.productSlug);
 
   return (
     <div className={s.pageWrap}>

@@ -5,25 +5,31 @@
 }
 .productViewWrap {
   @include flexCenter;
-  width: 100vw;
+  width: 100%;
   overflow: hidden;
+  padding: 1em;
+  .imageWrap {
+    border-radius: 5px;
+  }
 }
 .productView {
   position: absolute;
   top: 0;
   min-height: 46em;
-  left: calc(50% - (20em / 2));
+  left: calc(50% - (50vw - 1em));
+  @media (min-width: 514px) {
+    left: calc(50% - (30em / 2));
+  }
 }
 .viewPortClear,
 .viewportWrap {
   position: relative;
-  top: 1em;
+  top: 2em;
   border: 1px dashed $grey-4;
   position: relative;
-  height: 26em;
+  height: 30em;
   width: calc(100vw - 2em);
-  max-width: 20em;
-  margin: 0 auto;
+  max-width: 30em;
   @include boxShadow;
   .viewport {
     touch-action: none;

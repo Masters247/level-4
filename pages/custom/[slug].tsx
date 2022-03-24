@@ -78,7 +78,7 @@ const Custom: NextPage<Props> = ({ data }) => {
   };
 
   useEffect(() => {
-    const documentCustom: any = document.querySelector("#customView");
+    const documentCustom: any = document.querySelector("#capture");
     const documentScreen: any = document.querySelector("#screenShot");
     {
       screenShot &&
@@ -101,7 +101,10 @@ const Custom: NextPage<Props> = ({ data }) => {
   }, [screenShot]);
 
   return (
-    <div id="capture" className={s.pageWrap}>
+    <div
+      // id="capture"
+      className={s.pageWrap}
+    >
       <ProductView
         image={product?.productVariantColours[colour].customImage}
         productColoutVariants={product.productVariantColours}
