@@ -6,7 +6,7 @@ import s from "./productColourButtons.module.scss";
 interface Props {
   products: any;
   colourClick: any;
-  position?: boolean;
+  position?: number;
 }
 
 const ProductColourButtonsWrap: FC<Props> = ({
@@ -56,7 +56,13 @@ const ProductColourButtonsWrap: FC<Props> = ({
   };
 
   return (
-    <div className={cn(s.productColours, position && s.positionOne)}>
+    <div
+      className={cn(
+        s.productColours,
+        position === 1 && s.positionOne,
+        position === 2 && s.positionTwo
+      )}
+    >
       {productVariantColoursLength < 4 ? null : (
         <button
           onClick={showMoreColoursLeft}

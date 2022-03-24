@@ -7,6 +7,7 @@ import ProductUiPanel from "../ProductUi/ProductUiPanel";
 import s from "./productView.module.scss";
 
 const ProductView = ({
+  products,
   image,
   productColoutVariants,
   handleColourClick,
@@ -152,6 +153,7 @@ const ProductView = ({
         </div>
       </div>
       <ProductUiPanel
+        products={products}
         productColoutVariants={productColoutVariants}
         center={handleCenter}
         vertical={handleVertical}

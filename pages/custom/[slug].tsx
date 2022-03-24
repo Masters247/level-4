@@ -107,6 +107,7 @@ const Custom: NextPage<Props> = ({ data }) => {
         productColoutVariants={product.productVariantColours}
         handleColourClick={handleColourClick}
         handleScreenShot={handleScreenShot}
+        products={product}
       />
 
       <div id="screenShot" className="screenshot"></div>

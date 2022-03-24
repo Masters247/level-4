@@ -115,7 +115,7 @@ const Product: NextPage<Props> = ({ data }) => {
           <ProductColourButtonsWrap
             products={product}
             colourClick={handleColourClick}
-            position={true}
+            position={1}
           />
           <div
             className={s.productImagesWrap}
