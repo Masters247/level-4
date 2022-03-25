@@ -6,47 +6,54 @@ import Save from "../../ui/icons/Save";
 import Download from "../../ui/icons/Download";
 
 const ProductButtons = ({ state, handleScreenShot }: any) => {
+  const buttons = [
+    // { icon: "", class: s.resize, text: "resize" },
+    { icon: "", class: s.image, text: "new image", function: handleScreenShot },
+    {
+      icon: <Undo styles={s.undo} />,
+      class: s.undoWrap,
+      text: "undo",
+      function: "",
+    },
+    {
+      icon: <Redo styles={s.redo} />,
+      class: s.redoWrap,
+      text: "redo",
+      function: "",
+    },
+    {
+      icon: <Save styles={s.saveIcon} />,
+      class: s.save,
+      text: "save",
+      function: "",
+    },
+    {
+      icon: <Download styles={s.downloadIcon} />,
+      class: s.download,
+      text: "download",
+      function: handleScreenShot,
+    },
+  ];
+  const uiButtons = state ? buttons : buttons.slice(3, 5);
   return (
-    <div className={cn(s.uiButtons, !state && s.uiButtonHidden)}>
-      <button
-        className={cn(s.uiButton, s.imageButton, !state && s.hide)}
-        // onClick={handleScreenShot}
-        disabled
-      >
-        <p>New Image</p>
-      </button>
-      <button
-        className={cn(s.uiButton, s.undoButton, !state && s.hide)}
-        // onClick={handleScreenShot}
-        disabled
-      >
-        <Undo styles={s.undoIcon} />
-        <p>undo</p>
-      </button>
-      <button
-        className={cn(s.uiButton, s.redoButton, !state && s.hide)}
-        // onClick={handleScreenShot}
-        disabled
-      >
-        <p>redo</p>
-        <Redo styles={s.redoIcon} />
-      </button>
-      <button
-        className={cn(s.uiButton, s.saveButton, state && s.disabled)}
-        // onClick={handleScreenShot}
-        disabled
-      >
-        <Save styles={s.saveIcon} />
-        <p>save</p>
-      </button>
-      <button
-        className={cn(s.uiButton, s.downloadButton, state && s.disabled)}
-        onClick={handleScreenShot}
-        disabled={state}
-      >
-        <Download styles={s.downloadIcon} />
-        <p>download</p>
-      </button>
+    <div
+      className={s.uiButtonsWrap}
+      style={{
+        paddingTop: state ? "1em" : "0em",
+      }}
+    >
+      {uiButtons.map((button: any, i: any) => {
+        return (
+          <button
+            key={i}
+            className={`${s.uiButton} ${button.class} `}
+            onClick={button.function}
+          >
+            {button.icon}
+            <p>{button.text}</p>
+          </button>
+        );
+      })}
     </div>
   );
 };

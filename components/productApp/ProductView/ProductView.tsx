@@ -7,7 +7,6 @@ import ProductUiPanel from "../ProductUi/ProductUiPanel";
 import s from "./productView.module.scss";
 
 const ProductView = ({
-  products,
   image,
   productColoutVariants,
   handleColourClick,
@@ -108,19 +107,10 @@ const ProductView = ({
 
   return (
     <div className={s.appWrap}>
-      <div className={s.productViewWrap}>
-        <div
-          id="capture"
-          className={s.imageWrap}
-          style={
-            {
-              // border: "4px solid #000",
-            }
-          }
-        >
+      <div className={s.productViewWrap} id="customView">
+        <div className={s.imageWrap}>
           <Image
             src={image.url}
-            quality={100}
             priority
             layout="fixed"
             width={500}
@@ -161,7 +151,6 @@ const ProductView = ({
         </div>
       </div>
       <ProductUiPanel
-        products={products}
         productColoutVariants={productColoutVariants}
         center={handleCenter}
         vertical={handleVertical}

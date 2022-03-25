@@ -3,7 +3,7 @@ import { GraphQLClient, gql } from "graphql-request";
 import { useState, useEffect } from "react";
 import Visualise from "../../components/productApp/Visualise/Visualise";
 import productQuery from "../../lib/graphcms-querys/productQuery";
-import ProductColourButtonsWrap from "../../components/productApp/ProductColourButtons/ProductColourButtons";
+import ProductColourButtons from "../../components/productApp/Product/ProductColourButtons";
 import SliderContainer from "../../components/slider/SlideContainer/SliderContainer";
 import Image from "next/image";
 import s from "../../styles/pages/productPage.module.scss";
@@ -86,6 +86,8 @@ const Product: NextPage<Props> = ({ data }) => {
   const imagesLength =
     product.productVariantColours[productColour].images.length;
 
+  // console.log(product.productSlug);
+
   return (
     <div className={s.pageWrap}>
       <SliderContainer
@@ -100,47 +102,60 @@ const Product: NextPage<Props> = ({ data }) => {
         <h1>{product.name}</h1>
         <p>{product.description}</p>
       </section>
-
-      <section
-        className={s.productImagesSection}
-        style={{
-          position: "relative",
-        }}
-      >
-        <div className={s.productImagesBackgroundWrap}>
-          <ProductColourButtonsWrap
-            products={product}
-            colourClick={handleColourClick}
-            position={1}
-          />
-          <div
-            className={s.productImagesWrap}
-            style={{
-              gridTemplateColumns: `repeat(${imagesLength}, 1fr)`,
-              maxWidth: `calc((300px * ${imagesLength}) + (${
-                imagesLength - 1
-              } * 1em))`,
-              gridGap: "1em",
-              margin: " 0 auto",
-            }}
-          >
-            {product.productVariantColours[productColour].images.map(
-              (image: any) => (
-                <Image
-                  key={image.url}
-                  layout="responsive"
-                  src={image.url}
-                  height={200}
-                  width={200}
-                  placeholder="blur"
-                  blurDataURL={image.url}
-                />
-              )
-            )}
-          </div>
+      <section className={s.productImagesWrap}>
+        <div
+          className={s.productColoursButtons}
+          style={{
+            left: `${
+              width < 650
+                ? `calc(50% - ((${colourLength} * 24px) / 2))`
+                : "20px"
+            }`,
+            top: `${
+              width < 650
+                ? "-35px"
+                : `calc(50% - ((${colourLength} * 24px) / 2))`
+            }`,
+          }}
+        >
+          {product.productVariantColours.map((colour: any, i: any) => {
+            return (
+              <ProductColourButtons
+                key={i}
+                i={i}
+                hex={colour.colour.hex}
+                hexSecondary={colour.secondaryColour.hex}
+                handleColourClick={handleColourClick}
+              />
+            );
+          })}
+        </div>
+        <div
+          className={s.productImagesWrap}
+          style={{
+            gridTemplateColumns: `repeat(${imagesLength}, 1fr)`,
+            maxWidth: `calc((300px * ${imagesLength}) + (${
+              imagesLength - 1
+            } * 1em))`,
+            gridGap: "1em",
+            margin: " 0 auto",
+          }}
+        >
+          {product.productVariantColours[productColour].images.map(
+            (image: any) => (
+              <Image
+                key={image.url}
+                layout="responsive"
+                src={image.url}
+                height={200}
+                width={200}
+                placeholder="blur"
+                blurDataURL={image.url}
+              />
+            )
+          )}
         </div>
       </section>
-
       <Visualise slug={product.productSlug} />
       <Personal />
     </div>

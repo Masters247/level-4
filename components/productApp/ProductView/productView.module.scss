@@ -10,7 +10,7 @@
 }
 .productViewWrap {
   @include flexCenter;
-  width: 100%;
+  width: 100vw;
   overflow: hidden;
   .imageWrap {
     border-radius: 5px;

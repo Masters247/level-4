@@ -4,7 +4,7 @@ import Center from "../../ui/icons/Center";
 import HorizontalAlign from "../../ui/icons/HorizontalAlign";
 import VerticalAlign from "../../ui/icons/VerticalAlign";
 import ProductButtons from "./ProductButtons";
-import ProductColourButtonsWrap from "../ProductColourButtons/ProductColourButtons";
+import ProductColourButtons from "../Product/ProductColourButtons";
 import Undo from "../../ui/icons/Undo";
 import Redo from "../../ui/icons/Redo";
 import Show from "../../ui/icons/Show";
@@ -29,7 +29,6 @@ const buttons = [
 ];
 
 const ProductUiPanel = ({
-  products,
   center,
   vertical,
   horizontal,
@@ -81,6 +80,25 @@ const ProductUiPanel = ({
             );
           })}
         </div>
+        {state ? (
+          <div className={s.productColourWrap}>
+            <p>Colour:</p>
+            <div className={s.colourButtonsWrap}>
+              {productColoutVariants.map((colour: any, i: any) => {
+                return (
+                  <ProductColourButtons
+                    hex={colour.colour.hex}
+                    hexSecondary={colour.secondaryColour.hex}
+                    handleColourClick={handleColourClick}
+                    i={i}
+                    key={i}
+                  />
+                );
+              })}
+            </div>
+          </div>
+        ) : null}
+        <ProductButtons state={state} handleScreenShot={handleScreenShot} />
       </div>
       {state && (
         <div className={s.productColourWrap}>
