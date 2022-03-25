@@ -4,7 +4,7 @@ import Center from "../../ui/icons/Center";
 import HorizontalAlign from "../../ui/icons/HorizontalAlign";
 import VerticalAlign from "../../ui/icons/VerticalAlign";
 import ProductButtons from "./ProductButtons";
-import ProductColourButtons from "../Product/ProductColourButtons";
+import ProductColourButtons from "../ProductColourButtons/ProductColourButtons";
 import Undo from "../../ui/icons/Undo";
 import Redo from "../../ui/icons/Redo";
 import Show from "../../ui/icons/Show";
@@ -66,7 +66,7 @@ const ProductUiPanel = ({
 
   return (
     <div className={s.productUiWrap}>
-      <h1>{products.name}</h1>
+      {/* <h1>{products.name}</h1> */}
       <div className={s.uiControlsWrap}>
         {state ? <h2>Controls:</h2> : <h2>Show Controls:</h2>}
         <div className={s.controlsWrap}>

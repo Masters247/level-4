@@ -1,0 +1,64 @@
+@use "../../../styles/base.scss" as *;
+
+// this layout is used on the categories page and is the default layout
+.productColours {
+  z-index: 10;
+  margin: 0 auto 1em;
+  @include flexCenter;
+  margin-bottom: 1em;
+  .coloursRight,
+  .coloursLeft {
+    @include flexCenter;
+    width: 14px;
+    height: 14px;
+    // width: 18px;
+    // height: 18px;
+    p {
+      text-align: center;
+      transition: opacity 200ms ease, color 200ms ease;
+      font-size: 0.8em;
+      &:hover,
+      &:focus {
+        color: $button-primary;
+      }
+    }
+  }
+  .coloursLeft {
+    margin-left: 0.3em;
+  }
+  .coloursRight {
+    margin-right: 0.3em;
+  }
+  .hide {
+    p {
+      opacity: 0.5;
+    }
+  }
+}
+
+// this layout is used on the product page
+.positionOne {
+  position: absolute;
+  left: calc(50% - 70px);
+  top: 1em;
+  @media (min-width: $media-tablet-small) {
+    flex-direction: column;
+    left: 1em;
+    top: 4.95em;
+    .coloursLeft {
+      margin-left: 0;
+    }
+    .coloursRight {
+      margin-right: 0;
+      margin-bottom: 0.15em;
+    }
+  }
+  @media (min-width: $media-desktop) {
+    left: 2em;
+  }
+}
+
+// this is layout is used on the custom page inside the ui panel
+.positionTwo {
+  margin: 0;
+}
