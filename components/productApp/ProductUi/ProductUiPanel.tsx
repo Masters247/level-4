@@ -11,7 +11,6 @@ import Show from "../../ui/icons/Show";
 import Hide from "../../ui/icons/Hide";
 import Save from "../../ui/icons/Save";
 import Download from "../../ui/icons/Download";
-import Camera from "../../ui/icons/Camera";
 
 const buttons = [
   { icon: "", class: s.image, text: "new image" },
@@ -36,7 +35,6 @@ const ProductUiPanel = ({
   horizontal,
   showhide,
   state,
-  productColoutVariants,
   handleColourClick,
   handleScreenShot,
 }: any) => {
@@ -67,8 +65,9 @@ const ProductUiPanel = ({
 
   return (
     <div className={s.productUiWrap}>
+      <h1>{products.name}</h1>
       <div className={s.uiControlsWrap}>
-        {state ? <p>Controls:</p> : <p>Show Controls:</p>}
+        {state ? <h2>Controls:</h2> : <h2>Show Controls:</h2>}
         <div className={s.controlsWrap}>
           {controls.map((cont: any) => {
             return (
@@ -83,16 +82,23 @@ const ProductUiPanel = ({
           })}
         </div>
       </div>
-      {state ? (
+      {state && (
         <div className={s.productColourWrap}>
-          <p>Colour:</p>
+          <h2>Colour:</h2>
           <ProductColourButtonsWrap
             products={products}
             colourClick={handleColourClick}
             position={2}
           />
         </div>
-      ) : null}
+      )}
+      {state && (
+        <div className={s.embelishment}>
+          <h2>Embelishment:</h2>
+          <p>Embroidered</p>
+        </div>
+      )}
+
       <ProductButtons state={state} handleScreenShot={handleScreenShot} />
     </div>
   );

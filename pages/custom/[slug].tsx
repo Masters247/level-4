@@ -29,6 +29,7 @@ export async function getStaticProps({ params }: any) {
   const query = gql`
   query Product {
     product(where: {productSlug: "${params.slug}"}) {
+      name
       productVariantColours {
         customImage {
           url
@@ -76,6 +77,8 @@ const Custom: NextPage<Props> = ({ data }) => {
   const handleScreenShot = () => {
     setScreenShot(true);
   };
+
+  console.log(product);
 
   useEffect(() => {
     const documentCustom: any = document.querySelector("#capture");

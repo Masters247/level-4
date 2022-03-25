@@ -1,15 +1,22 @@
 @use "../../../styles/base.scss" as *;
 .appWrap {
   position: relative;
-  min-height: 46em;
+  min-height: 50em;
+  @media (min-width: $media-desktop-small) {
+    min-height: auto;
+    max-width: 850px;
+    margin: 0 auto;
+  }
 }
 .productViewWrap {
   @include flexCenter;
   width: 100%;
   overflow: hidden;
-  padding: 1em;
   .imageWrap {
     border-radius: 5px;
+  }
+  @media (min-width: $media-desktop-small) {
+    justify-content: flex-start;
   }
 }
 .productView {
@@ -18,19 +25,25 @@
   min-height: 46em;
   left: calc(50% - (50vw - 1em));
   @media (min-width: 514px) {
-    left: calc(50% - (30em / 2));
+    left: calc(50% - (250px));
+  }
+  @media (min-width: $media-desktop-small) {
+    left: 0em;
   }
 }
 .viewPortClear,
 .viewportWrap {
   position: relative;
-  top: 2em;
+  top: 1em;
   border: 1px dashed $grey-4;
   position: relative;
-  height: 30em;
+  height: 500px;
   width: calc(100vw - 2em);
-  max-width: 30em;
+  max-width: 500px;
   @include boxShadow;
+  @media (min-width: $media-desktop-small) {
+    box-shadow: none;
+  }
   .viewport {
     touch-action: none;
     border: 1px dashed $grey-4;

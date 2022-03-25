@@ -4,33 +4,25 @@
   font-size: 0.8rem;
   font-weight: 600;
   text-transform: uppercase;
-}
-
-.cameraWrap {
-  width: 100%;
-  @include flexCenter;
-
-  .cameraContainer {
-    @include flexCenter;
-    @include boxShadow;
-    width: 50px;
-    height: 50px;
-    border-radius: 10px;
-    cursor: pointer;
-    z-index: 100;
+  @media (min-width: $media-desktop-small) {
+    font-size: 1em;
+    font-weight: 500;
   }
 }
 
 .productUiWrap {
   position: absolute;
+  top: 33em;
   left: calc(50% - (50vw - 1em));
   width: calc(100vw - 2em);
   max-width: 20em;
   z-index: 1;
   background-color: $white;
-  border-radius: 5px;
   @include boxShadow;
-
+  h1 {
+    text-align: center;
+    padding: 0.5em 0 0 0.5em;
+  }
   @media (min-width: 352px) {
     left: calc(50% - 10em);
   }
@@ -41,7 +33,7 @@
     align-items: center;
     justify-content: space-between;
 
-    p {
+    h2 {
       @include uiFont;
     }
     .controlsWrap {
@@ -72,7 +64,7 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    p {
+    h2 {
       @include uiFont;
     }
     .colourButtonsWrap {
@@ -100,7 +92,7 @@
         margin-right: 0.5em;
       }
 
-      p {
+      h2 {
         @include uiFont;
       }
 
@@ -126,7 +118,7 @@
     .save {
       border: none;
       background-color: $grey-4;
-      p {
+      h2 {
         display: none;
         @media (min-width: 650px) {
           display: block;
@@ -138,6 +130,52 @@
 
     .download {
       background-color: $button-primary;
+    }
+  }
+
+  .embelishment {
+    display: none;
+  }
+
+  @media (min-width: $media-desktop-small) {
+    background-color: $grey-0;
+    padding: 1.2em;
+    left: calc(500px + 2em);
+    top: 1em;
+    box-shadow: none;
+    h1 {
+      text-align: left;
+    }
+    .uiControlsWrap {
+      flex-direction: column;
+      align-items: flex-start;
+      h2 {
+        margin-bottom: 1em;
+      }
+      .control {
+        &:nth-child(1) {
+          margin-left: 0;
+        }
+      }
+    }
+
+    .productColourWrap {
+      flex-direction: column;
+      align-items: flex-start;
+      h2 {
+        margin-bottom: 1em;
+      }
+    }
+    .embelishment {
+      display: block;
+
+      h2 {
+        @include uiFont;
+        margin: 1em 1em;
+      }
+      p {
+        margin-left: 1em;
+      }
     }
   }
 }

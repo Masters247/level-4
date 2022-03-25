@@ -2,11 +2,8 @@ import s from "./productButtons.module.scss";
 import Undo from "../../ui/icons/Undo";
 import Redo from "../../ui/icons/Redo";
 import cn from "classnames";
-// import Show from "../../ui/icons/Show";
-// import Hide from "../../ui/icons/Hide";
 import Save from "../../ui/icons/Save";
 import Download from "../../ui/icons/Download";
-import { useEffect, useContext } from "react";
 
 const ProductButtons = ({ state, handleScreenShot }: any) => {
   return (
