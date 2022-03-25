@@ -1,11 +1,11 @@
-import { useState, useEffect, FC } from "react";
+import { useState, FC } from "react";
 import cn from "classnames";
 import ProductColour from "./ProductColour";
 import s from "./productColourButtons.module.scss";
 
 interface Props {
   products: any;
-  colourClick: any;
+  colourClick: () => void;
   position?: number;
 }
 
@@ -61,8 +61,7 @@ const ProductColourButtonsWrap: FC<Props> = ({
         s.productColours,
         position === 1 && s.positionOne,
         position === 2 && s.positionTwo
-      )}
-    >
+      )}>
       {productVariantColoursLength < 4 ? null : (
         <button
           onClick={showMoreColoursLeft}
@@ -70,8 +69,7 @@ const ProductColourButtonsWrap: FC<Props> = ({
             s.coloursRight,
             productColourView.start === 0 && s.hide
           )}
-          disabled={productColourView.start === 0}
-        >
+          disabled={productColourView.start === 0}>
           <p>+{colourLeft}</p>
         </button>
       )}
@@ -92,8 +90,7 @@ const ProductColourButtonsWrap: FC<Props> = ({
         <button
           onClick={showMoreColoursRight}
           className={cn(s.coloursLeft, colourRight === 0 && s.hide)}
-          disabled={colourRight === 0}
-        >
+          disabled={colourRight === 0}>
           <p>+{colourRight}</p>
         </button>
       )}

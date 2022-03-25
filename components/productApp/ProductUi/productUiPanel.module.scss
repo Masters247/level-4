@@ -4,44 +4,36 @@
   font-size: 0.8rem;
   font-weight: 600;
   text-transform: uppercase;
-}
-
-.cameraWrap {
-  width: 100%;
-  @include flexCenter;
-
-  .cameraContainer {
-    @include flexCenter;
-    @include boxShadow;
-    width: 50px;
-    height: 50px;
-    border-radius: 10px;
-    cursor: pointer;
-    z-index: 100;
+  @media (min-width: $media-desktop-small) {
+    font-size: 1em;
+    font-weight: 500;
   }
 }
 
 .productUiWrap {
-  position: absolute;
-  left: calc(50% - (50vw - 1em));
-  width: calc(100vw - 2em);
-  max-width: 20em;
-  z-index: 1;
-  background-color: $white;
-  border-radius: 5px;
+  padding: 1em;
   @include boxShadow;
+  background-color: $white;
+  // border: 1px rgb(0, 217, 255) solid;
+  left: calc(50% - (50vw - 1em));
+  margin-top: 1em;
+  max-width: 20em;
+  position: absolute;
+  width: calc(100vw - 2em);
+  z-index: 1;
 
-  @media (min-width: 352px) {
-    left: calc(50% - 10em);
+  h1 {
+    text-align: center;
+    font-size: 1.3em;
   }
 
   .uiControlsWrap {
-    padding: 1em;
+    padding: 1em 0;
     display: flex;
     align-items: center;
     justify-content: space-between;
 
-    p {
+    h2 {
       @include uiFont;
     }
     .controlsWrap {
@@ -68,11 +60,10 @@
   }
 
   .productColourWrap {
-    margin: 0em 1em 0;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    p {
+    h2 {
       @include uiFont;
     }
     .colourButtonsWrap {
@@ -80,13 +71,20 @@
     }
   }
 
+  .embelishment {
+    display: none;
+    h2 {
+      @include uiFont;
+      padding: 1em 0;
+    }
+  }
+
   .uiButtonsWrap {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    padding: 1em;
+    padding: 1em 0;
     grid-gap: 1em;
     .uiButton {
-      min-height: 3em;
       text-transform: uppercase;
       @include flexCenter;
 
@@ -128,7 +126,7 @@
       background-color: $grey-4;
       p {
         display: none;
-        @media (min-width: 650px) {
+        @media (min-width: $media-tablet) {
           display: block;
           color: $white;
           @include uiFont;
@@ -138,6 +136,43 @@
 
     .download {
       background-color: $button-primary;
+    }
+  }
+
+  @media (min-width: 352px) {
+    left: calc(50% - 10em);
+  }
+  @media (min-width: $media-desktop-small) {
+    background-color: $grey-0;
+    box-shadow: none;
+    top: calc(50% - 240px);
+    left: calc(500px + 1.8em);
+    margin-top: 0;
+    padding: 2em;
+    h1 {
+      text-align: left;
+    }
+    .embelishment {
+      display: block;
+    }
+
+    .uiControlsWrap {
+      flex-direction: column;
+      align-items: flex-start;
+      .controlsWrap {
+        margin-top: 0.5em;
+        .control {
+          margin-left: 0;
+        }
+      }
+    }
+
+    .productColourWrap {
+      flex-direction: column;
+      align-items: flex-start;
+      h2 {
+        margin-bottom: 0.5em;
+      }
     }
   }
 }

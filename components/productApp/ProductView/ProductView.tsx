@@ -108,16 +108,8 @@ const ProductView = ({
 
   return (
     <div className={s.appWrap}>
-      <div className={s.productViewWrap}>
-        <div
-          id="capture"
-          className={s.imageWrap}
-          style={
-            {
-              // border: "4px solid #000",
-            }
-          }
-        >
+      <div className={s.productViewportContainer}>
+        <div id="capture" className={s.imageWrap}>
           <Image
             src={image.url}
             quality={100}
@@ -129,16 +121,14 @@ const ProductView = ({
             blurDataURL={image.url}
           />
         </div>
-        <div className={s.productView}>
+        <div className={s.productViewport}>
           <div
-            className={`${control ? s.viewportWrap : s.viewPortClear}`}
-            ref={containerRef}
-          >
+            className={`${control ? s.customArear : s.customArearHide}`}
+            ref={containerRef}>
             <animated.div
-              className={s.viewport}
+              className={s.customLogo}
               style={{ x, y, width, height, zIndex: "1" }}
-              {...bind()}
-            >
+              {...bind()}>
               <div
                 className="imageWrap"
                 style={{
@@ -146,8 +136,7 @@ const ProductView = ({
                   height: "100%",
                   zIndex: "-10",
                   pointerEvents: "none",
-                }}
-              >
+                }}>
                 <Image
                   src="/squareLogo.png"
                   width={300}

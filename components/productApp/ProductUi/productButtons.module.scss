@@ -10,7 +10,7 @@
   display: grid;
   grid-template-columns: 1fr 1fr;
   grid-gap: 1em;
-  padding: 1em;
+  padding: 1em 0 0;
   .imageButton {
     grid-column: 1 / 3;
   }
