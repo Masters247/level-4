@@ -5,7 +5,7 @@ import s from "./productColourButtons.module.scss";
 
 interface Props {
   products: any;
-  colourClick: () => void;
+  colourClick: any;
   position?: number;
 }
 

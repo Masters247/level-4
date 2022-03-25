@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import ProductColourButtonsWrap from "../ProductColourButtons/ProductColourButtons";
+import ProductColourButtons from "../ProductColourButtons/ProductColourButtons";
 import { Button } from "../../ui/Button";
 import Image from "next/image";
 import Link from "next/link";
@@ -56,7 +56,7 @@ const Product = ({ products, i }: any) => {
         <a className={s.textLink}>{products.name}</a>
       </Link>
 
-      <ProductColourButtonsWrap products={products} colourClick={colourClick} />
+      <ProductColourButtons products={products} colourClick={colourClick} />
 
       <Link href={`/product/${slug}`} passHref>
         <Button className={s.button} variant="primary">
