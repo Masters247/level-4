@@ -1,5 +1,5 @@
-import { useState } from "react";
-import ProductColourButtons from "./ProductColourButtons";
+import { useState, useEffect } from "react";
+import ProductColourButtons from "../ProductColourButtons/ProductColourButtons";
 import { Button } from "../../ui/Button";
 import Image from "next/image";
 import Link from "next/link";
@@ -21,7 +21,7 @@ const Product = ({ products, i }: any) => {
     }
   };
 
-  const handleColourClick = (e: any, i: any) => {
+  const colourClick = (e: any, i: any) => {
     setProductColour(i);
   };
 
@@ -52,19 +52,9 @@ const Product = ({ products, i }: any) => {
       <Link href={`/product/${slug}`} passHref>
         <a className={s.textLink}>{products.name}</a>
       </Link>
-      <div className={s.productColours}>
-        {products.productVariantColours.map((colour: any, i: any) => {
-          return (
-            <ProductColourButtons
-              key={i}
-              i={i}
-              hex={colour.colour.hex}
-              handleColourClick={handleColourClick}
-              hexSecondary={colour.secondaryColour.hex}
-            />
-          );
-        })}
-      </div>
+
+      <ProductColourButtons products={products} colourClick={colourClick} />
+
       <Link href={`/product/${slug}`} passHref>
         <Button className={s.button} variant="primary">
           View

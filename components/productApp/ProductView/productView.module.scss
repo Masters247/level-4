@@ -1,50 +1,47 @@
 @use "../../../styles/base.scss" as *;
 .appWrap {
   position: relative;
-  min-height: 50em;
+  min-height: 54.5em;
+  margin: 1em 0;
+  // border: 1px rgb(195, 0, 255) solid;
+
   @media (min-width: $media-desktop-small) {
-    min-height: auto;
     max-width: 850px;
-    margin: 0 auto;
+    margin: 1em auto;
+    min-height: auto;
   }
 }
-.productViewWrap {
+.productViewportContainer {
+  position: "relative";
   @include flexCenter;
   width: 100vw;
   overflow: hidden;
+  // border: 1px rgb(0, 255, 72) solid;
   .imageWrap {
-    border-radius: 5px;
+    // border: 1px red solid;
+  }
+  @media (min-width: $media-desktop-small) {
+    justify-content: flex-start;
   }
   @media (min-width: $media-desktop-small) {
     justify-content: flex-start;
   }
 }
-.productView {
+.productViewport {
   position: absolute;
   top: 0;
-  min-height: 46em;
-  left: calc(50% - (50vw - 1em));
-  @media (min-width: 514px) {
-    left: calc(50% - (250px));
-  }
-  @media (min-width: $media-desktop-small) {
-    left: 0em;
-  }
+  // border: 1px blue solid;
 }
-.viewPortClear,
-.viewportWrap {
+.customArearHide,
+.customArear {
   position: relative;
-  top: 1em;
   border: 1px dashed $grey-4;
   position: relative;
   height: 500px;
   width: calc(100vw - 2em);
   max-width: 500px;
   @include boxShadow;
-  @media (min-width: $media-desktop-small) {
-    box-shadow: none;
-  }
-  .viewport {
+  .customLogo {
     touch-action: none;
     border: 1px dashed $grey-4;
     top: 0px;
@@ -72,10 +69,10 @@
     }
   }
 }
-.viewPortClear {
+.customArearHide {
   border: 1px dashed rgba(255, 255, 255, 0);
   box-shadow: none;
-  .viewport {
+  .customLogo {
     border: 1px dashed rgba(255, 255, 255, 0);
     .resizer {
       display: none;

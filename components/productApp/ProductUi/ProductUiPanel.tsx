@@ -35,7 +35,9 @@ const ProductUiPanel = ({
   showhide,
   state,
   handleColourClick,
+  productColoutVariants,
   handleScreenShot,
+  products,
 }: any) => {
   const controler = [
     {
@@ -73,8 +75,7 @@ const ProductUiPanel = ({
               <button
                 key={cont.name}
                 onClick={cont?.function}
-                className={s.control}
-              >
+                className={s.control}>
                 {cont.icon}
               </button>
             );
@@ -103,7 +104,7 @@ const ProductUiPanel = ({
       {state && (
         <div className={s.productColourWrap}>
           <h2>Colour:</h2>
-          <ProductColourButtonsWrap
+          <ProductColourButtons
             products={products}
             colourClick={handleColourClick}
             position={2}
@@ -116,7 +117,6 @@ const ProductUiPanel = ({
           <p>Embroidered</p>
         </div>
       )}
-
       <ProductButtons state={state} handleScreenShot={handleScreenShot} />
     </div>
   );

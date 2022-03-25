@@ -3,7 +3,7 @@ import { GraphQLClient, gql } from "graphql-request";
 import { useState, useEffect } from "react";
 import ProductView from "../../components/productApp/ProductView/ProductView";
 import productQuery from "../../lib/graphcms-querys/productQuery";
-import s from "../../styles/pages/productPage.module.scss";
+import s from "../../styles/pages/customPage.module.scss";
 import html2canvas from "html2canvas";
 
 export async function getStaticPaths() {
@@ -99,7 +99,9 @@ const Custom: NextPage<Props> = ({ data }) => {
   }, [screenShot]);
 
   return (
-    <div id="capture" className={s.pageWrap}>
+    <div
+      // id="capture"
+      className={s.pageWrap}>
       <ProductView
         image={product?.productVariantColours[colour].customImage}
         productColoutVariants={product.productVariantColours}
