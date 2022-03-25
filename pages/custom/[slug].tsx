@@ -1,6 +1,6 @@
 import type { NextPage } from "next";
 import { GraphQLClient, gql } from "graphql-request";
-import { useState, useEffect, createContext } from "react";
+import { useState, useEffect } from "react";
 import ProductView from "../../components/productApp/ProductView/ProductView";
 import productQuery from "../../lib/graphcms-querys/productQuery";
 import s from "../../styles/pages/productPage.module.scss";
@@ -58,13 +58,8 @@ interface Props {
   data?: any;
 }
 
-// type CustomResult = ReturnType<NextPage<Props, Props>>
-
-// const ScreenShotContext = createContext();
-
 const Custom: NextPage<Props> = ({ data }) => {
   const [colour, setColour] = useState(0);
-
   const { product } = data;
   const handleColourClick = (e: any, i: any) => {
     setColour(i);
@@ -78,18 +73,18 @@ const Custom: NextPage<Props> = ({ data }) => {
   };
 
   useEffect(() => {
-    const documentCustom: any = document.querySelector("#capture");
+    const documentCustom: any = document.querySelector("#customView");
     const documentScreen: any = document.querySelector("#screenShot");
     {
       screenShot &&
         html2canvas(documentCustom, {}).then((canvas: any) => {
           var image = canvas
-            .toDataURL("image/jpeg")
-            .replace("image/jpeg", "image/octet-stream");
+            .toDataURL("image/png")
+            .replace("image/png", "image/octet-stream");
 
           /* this allows for the image to be downloaded */
           window.location.href = image;
-          // window.localStorage.setItem("image", image);
+          window.localStorage.setItem("image", image);
           // const newImage = window.localStorage.getItem("image");
 
           // console.log("Locally stored image", newImage);
@@ -101,18 +96,13 @@ const Custom: NextPage<Props> = ({ data }) => {
   }, [screenShot]);
 
   return (
-    <div
-      // id="capture"
-      className={s.pageWrap}
-    >
+    <div id="capture" className={s.pageWrap}>
       <ProductView
         image={product?.productVariantColours[colour].customImage}
         productColoutVariants={product.productVariantColours}
         handleColourClick={handleColourClick}
         handleScreenShot={handleScreenShot}
-        products={product}
       />
-
       <div id="screenShot" className="screenshot"></div>
     </div>
   );

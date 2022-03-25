@@ -4,14 +4,14 @@ import Center from "../../ui/icons/Center";
 import HorizontalAlign from "../../ui/icons/HorizontalAlign";
 import VerticalAlign from "../../ui/icons/VerticalAlign";
 import ProductButtons from "./ProductButtons";
-import ProductColourButtonsWrap from "../ProductColourButtons/ProductColourButtons";
+import ProductColourButtons from "../Product/ProductColourButtons";
 import Undo from "../../ui/icons/Undo";
 import Redo from "../../ui/icons/Redo";
 import Show from "../../ui/icons/Show";
 import Hide from "../../ui/icons/Hide";
 import Save from "../../ui/icons/Save";
-import Download from "../../ui/icons/Download";
 import Camera from "../../ui/icons/Camera";
+import Download from "../../ui/icons/Download";
 
 const buttons = [
   { icon: "", class: s.image, text: "new image" },
@@ -30,7 +30,6 @@ const buttons = [
 ];
 
 const ProductUiPanel = ({
-  products,
   center,
   vertical,
   horizontal,
@@ -66,35 +65,57 @@ const ProductUiPanel = ({
   const controls = state ? controler : controler.slice(3, 4);
 
   return (
-    <div className={s.productUiWrap}>
-      <div className={s.uiControlsWrap}>
-        {state ? <p>Controls:</p> : <p>Show Controls:</p>}
-        <div className={s.controlsWrap}>
-          {controls.map((cont: any) => {
-            return (
-              <button
-                key={cont.name}
-                onClick={cont?.function}
-                className={s.control}
-              >
-                {cont.icon}
-              </button>
-            );
-          })}
+    <>
+      {/* <div className={s.cameraWrap}>
+        {!state && (
+          <button className={s.cameraContainer} onClick={handleScreenShot}>
+            <Camera styles={s.camera} />
+          </button>
+        )}
+      </div> */}
+      <div
+        className={s.productUiWrap}
+        style={{
+          top: "28em",
+        }}
+      >
+        <div className={s.uiControlsWrap}>
+          {state ? <p>Controls:</p> : <p>Show Controls:</p>}
+          <div className={s.controlsWrap}>
+            {controls.map((cont: any) => {
+              return (
+                <button
+                  key={cont.name}
+                  onClick={cont?.function}
+                  className={s.control}
+                >
+                  {cont.icon}
+                </button>
+              );
+            })}
+          </div>
         </div>
+        {state ? (
+          <div className={s.productColourWrap}>
+            <p>Colour:</p>
+            <div className={s.colourButtonsWrap}>
+              {productColoutVariants.map((colour: any, i: any) => {
+                return (
+                  <ProductColourButtons
+                    hex={colour.colour.hex}
+                    hexSecondary={colour.secondaryColour.hex}
+                    handleColourClick={handleColourClick}
+                    i={i}
+                    key={i}
+                  />
+                );
+              })}
+            </div>
+          </div>
+        ) : null}
+        <ProductButtons state={state} handleScreenShot={handleScreenShot} />
       </div>
-      {state ? (
-        <div className={s.productColourWrap}>
-          <p>Colour:</p>
-          <ProductColourButtonsWrap
-            products={products}
-            colourClick={handleColourClick}
-            position={2}
-          />
-        </div>
-      ) : null}
-      <ProductButtons state={state} handleScreenShot={handleScreenShot} />
-    </div>
+    </>
   );
 };
 

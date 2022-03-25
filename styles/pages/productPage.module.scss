@@ -18,26 +18,26 @@
       text-align: center;
     }
   }
-
-  .productImagesSection {
-    @include flexCenter;
-    min-height: 280px;
+  .productImagesWrap {
+    margin-top: 2em;
+    position: relative;
     background-color: $grey-0;
-    .productImagesBackgroundWrap {
-      width: 100%;
-      .productImagesWrap {
-        display: grid;
-        justify-content: center;
-        span {
-          max-height: 300px;
-          max-width: 300px;
-        }
+    padding: 0 2em;
+    .productColoursButtons {
+      z-index: 10;
+      position: absolute;
+      @include flexCenter;
+      @media (min-width: $media-tablet) {
+        flex-direction: column;
       }
     }
-  }
-  @media (min-width: $media-tablet-small) {
-    .productImagesSection {
-      padding: 0 2.5em;
+    .productImagesWrap {
+      display: grid;
+      justify-content: center;
+      span {
+        max-height: 300px;
+        max-width: 300px;
+      }
     }
   }
 }
