@@ -18,7 +18,6 @@ const categoryQuerySlug = async ({ variables }: any) => {
           }
         }
       `);
-  console.log("graphcms", categories);
   return categories;
 };
 
