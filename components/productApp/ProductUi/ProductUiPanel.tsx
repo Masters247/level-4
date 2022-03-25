@@ -4,7 +4,7 @@ import Center from "../../ui/icons/Center";
 import HorizontalAlign from "../../ui/icons/HorizontalAlign";
 import VerticalAlign from "../../ui/icons/VerticalAlign";
 import ProductButtons from "./ProductButtons";
-import ProductColourButtons from "../ProductColourButtons/ProductColourButtons";
+import ProductColourButtonsWrap from "../ProductColourButtons/ProductColourButtons";
 import Undo from "../../ui/icons/Undo";
 import Redo from "../../ui/icons/Redo";
 import Show from "../../ui/icons/Show";
@@ -29,15 +29,15 @@ const buttons = [
 ];
 
 const ProductUiPanel = ({
+  products,
   center,
   vertical,
   horizontal,
   showhide,
   state,
-  handleColourClick,
   productColoutVariants,
+  handleColourClick,
   handleScreenShot,
-  products,
 }: any) => {
   const controler = [
     {
@@ -66,7 +66,7 @@ const ProductUiPanel = ({
 
   return (
     <div className={s.productUiWrap}>
-      {/* <h1>{products.name}</h1> */}
+      <h1>{products.name}</h1>
       <div className={s.uiControlsWrap}>
         {state ? <h2>Controls:</h2> : <h2>Show Controls:</h2>}
         <div className={s.controlsWrap}>
@@ -81,30 +81,11 @@ const ProductUiPanel = ({
             );
           })}
         </div>
-        {state ? (
-          <div className={s.productColourWrap}>
-            <p>Colour:</p>
-            <div className={s.colourButtonsWrap}>
-              {productColoutVariants.map((colour: any, i: any) => {
-                return (
-                  <ProductColourButtons
-                    hex={colour.colour.hex}
-                    hexSecondary={colour.secondaryColour.hex}
-                    handleColourClick={handleColourClick}
-                    i={i}
-                    key={i}
-                  />
-                );
-              })}
-            </div>
-          </div>
-        ) : null}
-        <ProductButtons state={state} handleScreenShot={handleScreenShot} />
       </div>
       {state && (
         <div className={s.productColourWrap}>
           <h2>Colour:</h2>
-          <ProductColourButtons
+          <ProductColourButtonsWrap
             products={products}
             colourClick={handleColourClick}
             position={2}

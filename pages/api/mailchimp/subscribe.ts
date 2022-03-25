@@ -23,8 +23,8 @@ export default async function handler(
       }
     );
 
-    if (response.status === "pending") res.status(200).json(response);
     if (response.status === "subscribed") res.status(200).json(response);
+    if (response.status === "pending") res.status(200).json(response);
     if (response.status === "unsubscribed") res.status(200).json(response);
   } catch (err: any) {
     if (err) res.status(404).json(err.response.body);

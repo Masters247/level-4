@@ -7,11 +7,11 @@ import s from "./product.module.scss";
 
 const Product = ({ products, i }: any) => {
   const [productView, setProductView] = useState(0);
-  const [productColour, setProductColour] = useState(i);
+  const [productColour, setProductColour] = useState(0);
+
   const productImageLength = products.productVariantColours.map(
     (l: any) => l.images.length
   );
-  const slug = products.productSlug;
 
   const handleImageClick = () => {
     if (productView < productImageLength[0] - 1) {
@@ -25,11 +25,14 @@ const Product = ({ products, i }: any) => {
     setProductColour(i);
   };
 
+  const slug = products.productSlug;
+
   return (
     <div key={products.name} className={s.productWrap}>
       <div className={s.productImageWrap} onClick={handleImageClick}>
         <Image
           layout="responsive"
+          quality={50}
           src={
             products.productVariantColours[productColour].images[productView]
               .url

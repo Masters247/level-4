@@ -14,14 +14,11 @@
 .productViewportContainer {
   position: "relative";
   @include flexCenter;
-  width: 100vw;
+  width: 100%;
   overflow: hidden;
   // border: 1px rgb(0, 255, 72) solid;
   .imageWrap {
     // border: 1px red solid;
-  }
-  @media (min-width: $media-desktop-small) {
-    justify-content: flex-start;
   }
   @media (min-width: $media-desktop-small) {
     justify-content: flex-start;
