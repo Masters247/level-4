@@ -1,0 +1,38 @@
+@use "../base.scss" as *;
+
+.pageWrap {
+  background-color: $grey-0;
+  min-height: 700px;
+  @include flexCenter;
+  .signInForm {
+    background-color: $white;
+    padding: 2em;
+    margin: 0.5em;
+    h1 {
+      text-align: center;
+    }
+    p {
+      margin: 1em 0;
+      max-width: 400px;
+      text-align: center;
+    }
+    .providerWrap {
+      @include flexCenter;
+      flex-direction: column;
+      button {
+        text-transform: uppercase;
+        font-weight: 500;
+        border: 1px solid $black;
+        padding: 1em;
+        transition: background-color 200ms ease, color 200ms ease,
+          border 200ms ease;
+        letter-spacing: 0.15em;
+        &:hover {
+          background-color: $button-primary;
+          color: $white;
+          border: 1px solid $white;
+        }
+      }
+    }
+  }
+}

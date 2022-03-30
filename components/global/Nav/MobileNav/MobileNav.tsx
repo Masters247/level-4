@@ -6,14 +6,26 @@ import pages from "../../../../lib/pages";
 import Account from "../../../ui/icons/Account";
 import Search from "../../../ui/icons/Search";
 import { useLockBodyScroll } from "react-use";
+import { signIn, signOut, useSession } from "next-auth/react";
 
 const Nav: FC = () => {
+  const { data: session } = useSession();
+
   const [open, setOpen] = useState(false);
   useLockBodyScroll(open);
 
   const handleMenuToggle = () => {
     setOpen(!open);
   };
+
+  const handleSignIn = () => {
+    signIn();
+  };
+
+  const handleSignOut = () => {
+    signOut();
+  };
+
   return (
     <div className={`${s.navWrapper} ${open ? s.open : ""}`}>
       <div className={s.headerWrapper}>
@@ -64,10 +76,25 @@ const Nav: FC = () => {
         <div className={s.divide}></div>
 
         <div className={s.navBottom}>
-          <div className={s.account}>
-            <Account />
+          <div
+            className={s.account}
+            style={{
+              cursor: "pointer",
+            }}
+          >
+            {!session ? (
+              <button onClick={handleSignIn}>
+                <Account />
+              </button>
+            ) : (
+              <>
+                <span>{session.user?.name}</span>
+                <button onClick={handleSignOut}>
+                  <p>sign out</p>
+                </button>
+              </>
+            )}
           </div>
-
           <div className={s.search}>
             <Search />
           </div>

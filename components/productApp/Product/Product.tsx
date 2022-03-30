@@ -52,7 +52,6 @@ const Product = ({ products, i }: any) => {
           }
         />
       </div>
-      Test
       <Link href={`/product/${slug}`} passHref>
         <a className={s.textLink}>{products.name}</a>
       </Link>
