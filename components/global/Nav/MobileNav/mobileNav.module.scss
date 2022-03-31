@@ -78,9 +78,11 @@
 
       .account {
         margin-right: 1em;
-
         display: flex;
         align-items: center;
+        span {
+          margin-right: 1em;
+        }
       }
 
       .search {

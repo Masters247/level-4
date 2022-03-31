@@ -1,5 +1,13 @@
 import s from "../styles/pages/signIn.module.scss";
-import { getProviders, getCsrfToken, signIn } from "next-auth/react";
+import {
+  getProviders,
+  getCsrfToken,
+  signIn,
+  useSession,
+} from "next-auth/react";
+import Image from "next/image";
+import { useState } from "react";
+import { useRouter } from "next/router";
 
 export async function getServerSideProps(context: any) {
   const providers = await getProviders();
@@ -10,6 +18,19 @@ export async function getServerSideProps(context: any) {
 }
 
 const SignIn = ({ providers, csrfToken }: any) => {
+  const { data: session, status }: any = useSession();
+  const [loading, setLoading] = useState(false);
+  const router = useRouter();
+
+  const handleSignIn = (id: any) => {
+    signIn(id);
+    setLoading(true);
+  };
+
+  if (status === "authenticated") {
+    router.push("/account");
+  }
+
   return (
     <div className={s.pageWrap}>
       <div className={s.signInForm}>
@@ -21,9 +42,15 @@ const SignIn = ({ providers, csrfToken }: any) => {
         </p>
         {Object.values(providers).map((provider: any) => (
           <div key={provider.name} className={s.providerWrap}>
-            <button onClick={() => signIn(provider.id)}>
-              Sign in with {provider.name}
-            </button>
+            {loading ? (
+              <div className={s.loggingIn}>
+                <Image src={"/loadingIcon.gif"} width={50} height={50} />
+              </div>
+            ) : (
+              <button onClick={() => handleSignIn(provider.id)}>
+                Sign in with {provider.name}
+              </button>
+            )}
           </div>
         ))}
       </div>

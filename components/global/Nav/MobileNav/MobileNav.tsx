@@ -6,7 +6,7 @@ import pages from "../../../../lib/pages";
 import Account from "../../../ui/icons/Account";
 import Search from "../../../ui/icons/Search";
 import { useLockBodyScroll } from "react-use";
-import { signIn, signOut, useSession } from "next-auth/react";
+import { signIn, useSession } from "next-auth/react";
 
 const Nav: FC = () => {
   const { data: session } = useSession();
@@ -20,10 +20,6 @@ const Nav: FC = () => {
 
   const handleSignIn = () => {
     signIn();
-  };
-
-  const handleSignOut = () => {
-    signOut();
   };
 
   return (
@@ -87,12 +83,9 @@ const Nav: FC = () => {
                 <Account />
               </button>
             ) : (
-              <>
-                <span>{session.user?.name}</span>
-                <button onClick={handleSignOut}>
-                  <p>sign out</p>
-                </button>
-              </>
+              <Link href="/account" passHref>
+                <a onClick={handleMenuToggle}>{session.user?.name}</a>
+              </Link>
             )}
           </div>
           <div className={s.search}>

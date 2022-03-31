@@ -59,10 +59,6 @@ interface Props {
   data?: any;
 }
 
-// type CustomResult = ReturnType<NextPage<Props, Props>>
-
-// const ScreenShotContext = createContext();
-
 const Custom: NextPage<Props> = ({ data }) => {
   const [colour, setColour] = useState(0);
 
@@ -90,7 +86,7 @@ const Custom: NextPage<Props> = ({ data }) => {
 
           /* this allows for the image to be downloaded */
           window.location.href = image;
-          // window.localStorage.setItem("image", image);
+          window.localStorage.setItem("image", image);
           // const newImage = window.localStorage.getItem("image");
 
           // console.log("Locally stored image", newImage);
@@ -102,9 +98,7 @@ const Custom: NextPage<Props> = ({ data }) => {
   }, [screenShot]);
 
   return (
-    <div
-      // id="capture"
-      className={s.pageWrap}>
+    <div className={s.pageWrap}>
       <ProductView
         image={product?.productVariantColours[colour].customImage}
         productColoutVariants={product.productVariantColours}

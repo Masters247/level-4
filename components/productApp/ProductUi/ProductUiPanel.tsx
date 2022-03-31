@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import s from "./productUiPanel.module.scss";
+import cn from "classnames";
 import Center from "../../ui/icons/Center";
 import HorizontalAlign from "../../ui/icons/HorizontalAlign";
 import VerticalAlign from "../../ui/icons/VerticalAlign";
@@ -65,7 +66,7 @@ const ProductUiPanel = ({
   const controls = state ? controler : controler.slice(3, 4);
 
   return (
-    <div className={s.productUiWrap}>
+    <div className={cn(s.productUiWrap)}>
       <h1>{products.name}</h1>
       <div className={s.uiControlsWrap}>
         {state ? <h2>Controls:</h2> : <h2>Show Controls:</h2>}
@@ -75,7 +76,8 @@ const ProductUiPanel = ({
               <button
                 key={cont.name}
                 onClick={cont?.function}
-                className={s.control}>
+                className={s.control}
+              >
                 {cont.icon}
               </button>
             );

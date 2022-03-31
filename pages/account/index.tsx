@@ -1,23 +1,24 @@
+import type { NextPage } from "next";
 import Customer from "../../components/account/Customer/Customer";
 import cn from "classnames";
+import Image from "next/image";
 import useDelayedRender from "use-delayed-render";
 import { useState } from "react";
 import { Button } from "../../components/ui/Button";
 import s from "../../styles/pages/account.module.scss";
-import { a } from "@react-spring/web";
+import { useRouter } from "next/router";
+import { signOut, useSession } from "next-auth/react";
 
-const customer = [
-  { type: "name", data: "dan" },
-  { type: "email", data: "danecouzens@gmail.com" },
-  { type: "password", data: "kdkljsfo" },
-  { type: "organisation", data: "the band academy" },
-  { type: "country", data: "United Kingdom" },
-  { type: "marketing", data: "On" },
-];
+const Account: NextPage = () => {
+  const router = useRouter();
+  const { data: session, status }: any = useSession({
+    required: true,
+    onUnauthenticated() {
+      router.push("/");
+    },
+  });
 
-const Account = () => {
   const [isDetailsShown, setIsDetailsShown] = useState(true);
-
   const { mounted: isDetailsMounted, rendered: isDetailsRendered } =
     useDelayedRender(isDetailsShown, {
       enterDelay: 300,
@@ -32,9 +33,44 @@ const Account = () => {
     }
   };
 
+  const handleSignOut = () => {
+    signOut();
+  };
+
+  const customer = [
+    { type: "name", data: `${session?.user.name}` },
+    { type: "email", data: `${session?.user.email}` },
+    // { type: "image", data: `${session?.user.image}` },
+    // { type: "password", data: "kdkljsfo" },
+    // { type: "organisation", data: "the band academy" },
+    // { type: "country", data: "United Kingdom" },
+    // { type: "marketing", data: "On" },
+  ];
+
+  if (status === "loading") {
+    return (
+      <div className={s.loggingOut}>
+        <Image src={"/loadingIcon.gif"} width={50} height={50} />
+      </div>
+    );
+  }
+
   return (
     <div className={s.accountDetailsWrap}>
-      <h1>Your Account</h1>
+      <div className={s.titleWrap}>
+        <h1>Your Account</h1>
+        {session && (
+          <div className={s.loggedInTitle}>
+            {/* <p>Hello, {session.user.name} &#40;not You&#41;</p> */}
+            <span>
+              <Image src={session.user.image} width={30} height={30} />
+            </span>
+            <button onClick={handleSignOut}>
+              <p>Sign Out</p>
+            </button>
+          </div>
+        )}
+      </div>
       <div className={s.tabWrap}>
         <button
           onClick={toggleAccountView}
@@ -64,7 +100,6 @@ const Account = () => {
           ))}
         </div>
       )}
-
       {!isDetailsMounted && (
         <div
           className={
@@ -74,7 +109,6 @@ const Account = () => {
           Designs
         </div>
       )}
-
       <Button variant="primary" className={s.save} Component="button">
         Save changes
       </Button>

@@ -109,43 +109,49 @@ const ProductView = ({
   return (
     <div className={s.appWrap}>
       <div className={s.productViewportContainer}>
-        <div id="capture" className={s.imageWrap}>
-          <Image
-            src={image.url}
-            quality={100}
-            priority
-            layout="fixed"
-            width={500}
-            height={500}
-            placeholder="blur"
-            blurDataURL={image.url}
-          />
-        </div>
-        <div className={s.productViewport}>
-          <div
-            className={`${control ? s.customArear : s.customArearHide}`}
-            ref={containerRef}>
-            <animated.div
-              className={s.customLogo}
-              style={{ x, y, width, height, zIndex: "1" }}
-              {...bind()}>
-              <div
-                className="imageWrap"
-                style={{
-                  width: "100%",
-                  height: "100%",
-                  zIndex: "-10",
-                  pointerEvents: "none",
-                }}>
-                <Image
-                  src="/squareLogo.png"
-                  width={300}
-                  height={300}
-                  layout="responsive"
-                />
-              </div>
-              <div className={s.resizer} ref={dragEl}></div>
-            </animated.div>
+        <div id="capture" className={s.imageCaptureWrap}>
+          <div className={s.imageWrap}>
+            <Image
+              src={image.url}
+              quality={100}
+              priority
+              layout="fixed"
+              width={500}
+              height={500}
+              placeholder="blur"
+              blurDataURL={image.url}
+            />
+          </div>
+          <div className={s.productViewport}>
+            <div
+              className={`${control ? s.customArear : s.customArearHide}`}
+              ref={containerRef}
+            >
+              <animated.div
+                className={s.customLogo}
+                style={{ x, y, width, height, zIndex: "1" }}
+                {...bind()}
+              >
+                <div
+                  className="imageWrap"
+                  style={{
+                    width: "100%",
+                    height: "100%",
+                    zIndex: "-10",
+                    pointerEvents: "none",
+                  }}
+                >
+                  <div className={s.innerWrap}></div>
+                  <Image
+                    src="/squareLogo.png"
+                    width={300}
+                    height={300}
+                    layout="responsive"
+                  />
+                </div>
+                <div className={s.resizer} ref={dragEl}></div>
+              </animated.div>
+            </div>
           </div>
         </div>
       </div>

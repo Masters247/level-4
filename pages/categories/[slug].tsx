@@ -3,6 +3,7 @@ import { GraphQLClient, gql } from "graphql-request";
 import Image from "next/image";
 import categoryQuery from "../../lib/graphcms-querys/categoryQuery";
 import Product from "../../components/productApp/Product/Product";
+import PictureGrid from "../../components/global/PictureGrid/pictureGrid";
 import s from "../../styles/pages/categories.module.scss";
 
 export async function getStaticPaths() {
@@ -102,6 +103,7 @@ const Category: NextPage<Props> = ({ data }) => {
           })}
         </div>
       </section>
+      <PictureGrid radius={""} title={"trending styles"} />
     </div>
   );
 };

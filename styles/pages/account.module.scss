@@ -1,13 +1,26 @@
 @use "../base.scss" as *;
 .accountDetailsWrap {
   margin: 4em 1em;
-  @media (min-width: 960px) {
+  @media (min-width: $media-tablet-small) {
     margin: 4em 2em;
-    max-width: 1150px;
   }
-  @media (min-width: 1150px) {
+  @media (min-width: $media-desktop-small) {
     margin: 4em auto;
-    max-width: calc(1150px - 4em);
+    max-width: calc(950px - 4em);
+  }
+  .titleWrap {
+    display: flex;
+    justify-content: space-between;
+    .loggedInTitle {
+      @include flexCenter;
+      flex-direction: column;
+      p {
+        font-size: 0.8em;
+      }
+      span {
+        border-radius: 50%;
+      }
+    }
   }
   .tabWrap {
     margin: 2em 0;
@@ -44,11 +57,9 @@
         height: 1px;
         width: 100%;
         width: 100%;
-
         background-color: $grey-3;
       }
     }
-
     .activeDetails {
       &::after {
         opacity: 1;
@@ -93,34 +104,24 @@
       grid-gap: 2em;
     }
   }
-
   .accountDetailsShow {
     opacity: 1;
     transition: opacity 300ms ease-in;
-    @media (min-width: 960px) {
+    @media (min-width: $media-desktop-small) {
       display: grid;
       grid-template-columns: 1fr 1fr;
       grid-gap: 2em;
     }
   }
-
-  // .accountDetails {
-  //   display: grid;
-  //   grid-template-columns: 1fr;
-  //   grid-gap: 1em;
-  //   opacity: 1;
-  //   transition: opacity 2s ease;
-  // }
-
-  // .accountDetailShow {
-  //   opacity: 0;
-  //   transition: opacity 2s ease;
-  //   display: grid;
-  //   grid-template-columns: 1fr;
-  //   grid-gap: 1em;
-  // }
-
   .save {
     margin-top: 3em;
   }
+}
+.loggingOut {
+  h1 {
+    margin-bottom: 1em;
+  }
+  margin: 4em 2em;
+  @include flexCenter;
+  flex-direction: column;
 }

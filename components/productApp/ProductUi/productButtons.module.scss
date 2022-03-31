@@ -87,6 +87,9 @@
     &::after {
       transform: rotate(-15deg);
     }
+    &:hover {
+      opacity: 0.2;
+    }
   }
 }
 

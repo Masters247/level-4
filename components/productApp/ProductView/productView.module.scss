@@ -17,9 +17,14 @@
   width: 100%;
   overflow: hidden;
   // border: 1px rgb(0, 255, 72) solid;
-  .imageWrap {
-    // border: 1px red solid;
+  .imageCaptureWrap {
+    // border: 1px solid red;
+
+    .imageWrap {
+      // border: 1px red solid;
+    }
   }
+
   @media (min-width: $media-desktop-small) {
     justify-content: flex-start;
   }
@@ -27,7 +32,16 @@
 .productViewport {
   position: absolute;
   top: 0;
-  // border: 1px blue solid;
+  left: calc(50% - (50vw - 1em));
+  width: calc(100vw - 2em);
+  max-width: 500px;
+  // border: 1px rgb(0, 255, 72) solid;
+  @media (min-width: 532px) {
+    left: calc(50% - 250px);
+  }
+  @media (min-width: $media-desktop-small) {
+    left: 0;
+  }
 }
 .customArearHide,
 .customArear {

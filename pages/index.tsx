@@ -7,6 +7,7 @@ import collectionsQuery, {
 } from "../lib/graphcms-querys/collectionsQuery";
 import categorySlugsQuery from "../lib/graphcms-querys/categoryQuery";
 import s from "../styles/pages/index.module.scss";
+import PictureGrid from "../components/global/PictureGrid/pictureGrid";
 import { useSession, signIn, signOut } from "next-auth/react";
 
 export const getStaticProps: GetStaticProps = async () => {
@@ -29,6 +30,7 @@ const Home: NextPage<Props> = ({ collections, slugs }) => {
     <div>
       <VideoHero />
       <CollectionsGrid collections={collections} />
+      <PictureGrid title={"trending styles"} radius={"50%"} />
       <MailingList />
     </div>
   );
