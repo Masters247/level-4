@@ -2,6 +2,7 @@ import { useState } from "react";
 import React from "react";
 import s from "./imageUploader.module.scss";
 import Add from "../../ui/icons/Add";
+import Remove from "../../ui/icons/Remove";
 import ImageUploading from "react-images-uploading";
 
 const ImageUploader = () => {
@@ -58,11 +59,12 @@ const ImageUploader = () => {
                 <div key={`image-${index}`} className={s.imageItem}>
                   <img src={image.data_url} alt="" />
                   <div className={s.imageItemBtnWrapper}>
-                    <button type="button" onClick={() => onImageUpdate(index)}>
+                    {/* <button type="button" onClick={() => onImageUpdate(index)}>
                       <p>Update</p>
-                    </button>
+                    </button> */}
                     <button type="button" onClick={() => onImageRemove(index)}>
-                      <p>Remove</p>
+                      <Remove styles={s.remove} />
+                      {/* <p>Remove</p> */}
                     </button>
                   </div>
                 </div>

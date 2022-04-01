@@ -3,6 +3,7 @@ import { useSpring, animated } from "@react-spring/web";
 import Image from "next/image";
 import { useDrag } from "@use-gesture/react";
 import { useLockBodyScroll } from "react-use";
+import ImageUploader from "../ImageUploader/ImageUploader";
 import ProductUiPanel from "../ProductUi/ProductUiPanel";
 import s from "./productView.module.scss";
 
@@ -107,66 +108,69 @@ const ProductView = ({
   };
 
   return (
-    <div className={s.appWrap}>
-      <div className={s.productViewportContainer}>
-        <div id="capture" className={s.imageCaptureWrap}>
-          <div className={s.imageWrap}>
-            <Image
-              src={image.url}
-              quality={100}
-              priority
-              layout="fixed"
-              width={500}
-              height={500}
-              placeholder="blur"
-              blurDataURL={image.url}
-            />
-          </div>
-          <div className={s.productViewport}>
-            <div
-              className={`${control ? s.customArear : s.customArearHide}`}
-              ref={containerRef}
-            >
-              <animated.div
-                className={s.customLogo}
-                style={{ x, y, width, height, zIndex: "1" }}
-                {...bind()}
+    <>
+      <ImageUploader />
+      <div className={s.appWrap}>
+        <div className={s.productViewportContainer}>
+          <div id="capture" className={s.imageCaptureWrap}>
+            <div className={s.imageWrap}>
+              <Image
+                src={image.url}
+                quality={100}
+                priority
+                layout="fixed"
+                width={500}
+                height={500}
+                placeholder="blur"
+                blurDataURL={image.url}
+              />
+            </div>
+            <div className={s.productViewport}>
+              <div
+                className={`${control ? s.customArear : s.customArearHide}`}
+                ref={containerRef}
               >
-                <div
-                  className="imageWrap"
-                  style={{
-                    width: "100%",
-                    height: "100%",
-                    zIndex: "-10",
-                    pointerEvents: "none",
-                  }}
+                <animated.div
+                  className={s.customLogo}
+                  style={{ x, y, width, height, zIndex: "1" }}
+                  {...bind()}
                 >
-                  <div className={s.innerWrap}></div>
-                  <Image
-                    src="/squareLogo.png"
-                    width={300}
-                    height={300}
-                    layout="responsive"
-                  />
-                </div>
-                <div className={s.resizer} ref={dragEl}></div>
-              </animated.div>
+                  <div
+                    className="imageWrap"
+                    style={{
+                      width: "100%",
+                      height: "100%",
+                      zIndex: "-10",
+                      pointerEvents: "none",
+                    }}
+                  >
+                    <div className={s.innerWrap}></div>
+                    <Image
+                      src="/squareLogo.png"
+                      width={300}
+                      height={300}
+                      layout="responsive"
+                    />
+                  </div>
+                  <div className={s.resizer} ref={dragEl}></div>
+                </animated.div>
+              </div>
             </div>
           </div>
         </div>
+        <ProductUiPanel
+          products={products}
+          productColoutVariants={productColoutVariants}
+          center={handleCenter}
+          vertical={handleVertical}
+          horizontal={handleHorizontal}
+          showhide={handleControls}
+          state={control}
+          handleColourClick={handleColourClick}
+          handleScreenShot={handleScreenShot}
+        />
       </div>
-      <ProductUiPanel
-        products={products}
-        productColoutVariants={productColoutVariants}
-        center={handleCenter}
-        vertical={handleVertical}
-        horizontal={handleHorizontal}
-        showhide={handleControls}
-        state={control}
-        handleColourClick={handleColourClick}
-        handleScreenShot={handleScreenShot}
-      />
-    </div>
+    </>
   );
 };
 

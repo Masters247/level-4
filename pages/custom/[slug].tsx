@@ -77,7 +77,7 @@ const Custom: NextPage<Props> = ({ data }) => {
 
   useEffect(() => {
     const documentCustom: any = document.querySelector("#capture");
-    const documentScreen: any = document.querySelector("#screenShot");
+    // const documentScreen: any = document.querySelector("#screenShot");
     {
       screenShot &&
         html2canvas(documentCustom, {}).then((canvas: any) => {
@@ -100,8 +100,8 @@ const Custom: NextPage<Props> = ({ data }) => {
 
   return (
     <div className={s.pageWrap}>
-      <ImageUploader />
-      {/* <ProductView
+      {/* <ImageUploader /> */}
+      <ProductView
         image={product?.productVariantColours[colour].customImage}
         productColoutVariants={product.productVariantColours}
         handleColourClick={handleColourClick}
@@ -109,7 +109,7 @@ const Custom: NextPage<Props> = ({ data }) => {
         products={product}
       />
 
-      <div id="screenShot" className="screenshot"></div> */}
+      <div id="screenShot" className="screenshot"></div>
     </div>
   );
 };
