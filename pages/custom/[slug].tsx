@@ -5,6 +5,7 @@ import ProductView from "../../components/productApp/ProductView/ProductView";
 import productQuery from "../../lib/graphcms-querys/productQuery";
 import s from "../../styles/pages/customPage.module.scss";
 import html2canvas from "html2canvas";
+import ImageUploader from "../../components/productApp/ImageUploader/ImageUploader";
 
 export async function getStaticPaths() {
   const products = await productQuery();
@@ -99,7 +100,8 @@ const Custom: NextPage<Props> = ({ data }) => {
 
   return (
     <div className={s.pageWrap}>
-      <ProductView
+      <ImageUploader />
+      {/* <ProductView
         image={product?.productVariantColours[colour].customImage}
         productColoutVariants={product.productVariantColours}
         handleColourClick={handleColourClick}
@@ -107,7 +109,7 @@ const Custom: NextPage<Props> = ({ data }) => {
         products={product}
       />
 
-      <div id="screenShot" className="screenshot"></div>
+      <div id="screenShot" className="screenshot"></div> */}
     </div>
   );
 };

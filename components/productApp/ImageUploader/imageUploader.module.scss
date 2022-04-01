@@ -1,0 +1,72 @@
+@use "../../../styles/base.scss" as *;
+.imageUploaderWrap {
+  padding: 1em;
+  margin: 1em;
+  background-color: $grey-0;
+  .uploadImageWrap {
+    .imageButtonWrap {
+      @include flexCenter;
+    }
+
+    .uploadButton {
+      padding: 1em;
+      height: 100px;
+      width: 100px;
+      border: 1px dashed $black;
+      transition: background-color 200ms ease;
+      position: relative;
+      .buttonTextWrap {
+        top: 0;
+        left: 0;
+        padding: 1em;
+        height: 100px;
+        width: 100px;
+        position: absolute;
+        @include flexCenter;
+      }
+      p {
+        transition: opacity 200ms ease;
+      }
+
+      .add {
+        polygon {
+          fill: $grey-2;
+          transition: fill 200ms ease;
+        }
+      }
+
+      &:hover {
+        background-color: $grey-1;
+        p {
+          opacity: 0;
+        }
+        .add {
+          polygon {
+            fill: $grey-4;
+          }
+        }
+      }
+    }
+    .removeAllImagesButton {
+      padding: 1em;
+      height: 100px;
+      width: 100px;
+      border: 1px solid $black;
+      margin-left: 1em;
+    }
+    .newImageWrap {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      grid-gap: 1em;
+      margin-top: 1em;
+      .imageItem {
+        padding: 1em;
+        border: 1px dashed $black;
+        min-width: 10px;
+        img {
+          width: 100%;
+        }
+      }
+    }
+  }
+}
