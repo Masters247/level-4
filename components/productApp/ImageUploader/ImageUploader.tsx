@@ -1,17 +1,23 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import React from "react";
 import s from "./imageUploader.module.scss";
 import Add from "../../ui/icons/Add";
 import Remove from "../../ui/icons/Remove";
 import ImageUploading from "react-images-uploading";
 
-const ImageUploader = ({ logo }: any) => {
+const ImageUploader = ({ setLogo }: any) => {
   const [images, setImages] = useState([]);
   const maxNumber = 69;
 
+  console.log("Image uploader", setLogo);
+
   const onChange = (imageList: any) => {
     setImages(imageList);
-    logo(imageList);
+    console.log(
+      "Image Set to set Logo from Image Uploader",
+      imageList[0].data_url
+    );
+    setLogo(imageList[0].data_url);
   };
 
   return (

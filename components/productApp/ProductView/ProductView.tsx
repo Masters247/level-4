@@ -16,6 +16,8 @@ const ProductView = ({
   id,
 }: any) => {
   const [control, setControl] = useState(true);
+  const [imageWidth, setImageWidth]: any = useState(80);
+  const [imageHeight, setImageHeight]: any = useState(80);
 
   const [{ x, y, width, height }, api] = useSpring(() => ({
     x: 0,
@@ -109,19 +111,18 @@ const ProductView = ({
 
   const [logo, setLogo]: any = useState(null);
   const [imageUpload, setImageUpload]: any = useState(true);
-  const [imageWidth, setImageWidth]: any = useState(null);
-  const [imageHeight, setImageHeight]: any = useState(null);
-
-  console.log("imageWidth", imageWidth);
 
   const handleImageUpload = () => {
     setImageUpload(!imageUpload);
   };
 
+  // console.log("Product View log =", logo);
+  console.log("Image width =", imageWidth);
+  console.log("Image height =", imageHeight);
+
   return (
     <>
-      {/* <ImageUploader logo={setLogo} /> */}
-      {!imageUpload && <ImageUploader logo={setLogo} />}
+      {!imageUpload && <ImageUploader setLogo={setLogo} />}
       <ImageConverter
         imageData={logo}
         setImageWidth={setImageWidth}
@@ -153,7 +154,7 @@ const ProductView = ({
                   {...bind()}
                 >
                   <div
-                    className="imageWrap"
+                    // className="imageWrap"
                     style={{
                       width: "100%",
                       height: "100%",
@@ -164,7 +165,7 @@ const ProductView = ({
                     <div className={s.innerWrap}></div>
                     {logo !== null && (
                       <Image
-                        src={logo[0].data_url}
+                        src={logo}
                         width={imageWidth}
                         height={imageHeight}
                         layout="responsive"
