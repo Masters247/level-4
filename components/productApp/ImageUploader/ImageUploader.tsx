@@ -5,12 +5,13 @@ import Add from "../../ui/icons/Add";
 import Remove from "../../ui/icons/Remove";
 import ImageUploading from "react-images-uploading";
 
-const ImageUploader = () => {
+const ImageUploader = ({ logo }: any) => {
   const [images, setImages] = useState([]);
   const maxNumber = 69;
 
   const onChange = (imageList: any) => {
     setImages(imageList);
+    logo(imageList);
   };
 
   return (
@@ -57,16 +58,14 @@ const ImageUploader = () => {
             <div className={s.newImageWrap}>
               {imageList.map((image, index) => (
                 <div key={`image-${index}`} className={s.imageItem}>
-                  <img src={image.data_url} alt="" />
-                  <div className={s.imageItemBtnWrapper}>
-                    {/* <button type="button" onClick={() => onImageUpdate(index)}>
-                      <p>Update</p>
-                    </button> */}
-                    <button type="button" onClick={() => onImageRemove(index)}>
-                      <Remove styles={s.remove} />
-                      {/* <p>Remove</p> */}
-                    </button>
-                  </div>
+                  <img src={image.data_url} alt="uploaded logo" />
+                  <button
+                    className={s.imageItemBtn}
+                    type="button"
+                    onClick={() => onImageRemove(index)}
+                  >
+                    <Remove styles={s.remove} />
+                  </button>
                 </div>
               ))}
             </div>

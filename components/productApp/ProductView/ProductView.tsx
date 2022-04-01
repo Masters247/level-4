@@ -2,8 +2,8 @@ import { useCallback, useRef, useState } from "react";
 import { useSpring, animated } from "@react-spring/web";
 import Image from "next/image";
 import { useDrag } from "@use-gesture/react";
-import { useLockBodyScroll } from "react-use";
 import ImageUploader from "../ImageUploader/ImageUploader";
+import ImageConverter from "../ImageConverter/ImageConverter";
 import ProductUiPanel from "../ProductUi/ProductUiPanel";
 import s from "./productView.module.scss";
 
@@ -107,9 +107,26 @@ const ProductView = ({
     setControl(!control);
   };
 
+  const [logo, setLogo]: any = useState(null);
+  const [imageUpload, setImageUpload]: any = useState(true);
+  const [imageWidth, setImageWidth]: any = useState(null);
+  const [imageHeight, setImageHeight]: any = useState(null);
+
+  console.log("imageWidth", imageWidth);
+
+  const handleImageUpload = () => {
+    setImageUpload(!imageUpload);
+  };
+
   return (
     <>
-      <ImageUploader />
+      {/* <ImageUploader logo={setLogo} /> */}
+      {!imageUpload && <ImageUploader logo={setLogo} />}
+      <ImageConverter
+        imageData={logo}
+        setImageWidth={setImageWidth}
+        setImageHeight={setImageHeight}
+      />
       <div className={s.appWrap}>
         <div className={s.productViewportContainer}>
           <div id="capture" className={s.imageCaptureWrap}>
@@ -145,12 +162,14 @@ const ProductView = ({
                     }}
                   >
                     <div className={s.innerWrap}></div>
-                    <Image
-                      src="/squareLogo.png"
-                      width={300}
-                      height={300}
-                      layout="responsive"
-                    />
+                    {logo !== null && (
+                      <Image
+                        src={logo[0].data_url}
+                        width={imageWidth}
+                        height={imageHeight}
+                        layout="responsive"
+                      />
+                    )}
                   </div>
                   <div className={s.resizer} ref={dragEl}></div>
                 </animated.div>
@@ -168,6 +187,8 @@ const ProductView = ({
           state={control}
           handleColourClick={handleColourClick}
           handleScreenShot={handleScreenShot}
+          handleImageUpload={handleImageUpload}
+          stateUploader={imageUpload}
         />
       </div>
     </>

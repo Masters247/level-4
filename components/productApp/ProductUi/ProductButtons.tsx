@@ -2,25 +2,25 @@ import s from "./productButtons.module.scss";
 import Undo from "../../ui/icons/Undo";
 import Redo from "../../ui/icons/Redo";
 import cn from "classnames";
-// import Show from "../../ui/icons/Show";
-// import Hide from "../../ui/icons/Hide";
 import Save from "../../ui/icons/Save";
 import Download from "../../ui/icons/Download";
-import { useEffect, useContext } from "react";
 
-const ProductButtons = ({ state, handleScreenShot }: any) => {
+const ProductButtons = ({
+  state,
+  handleScreenShot,
+  handleImageUpload,
+  stateUploader,
+}: any) => {
   return (
     <div className={cn(s.uiButtons, !state && s.uiButtonHidden)}>
       <button
         className={cn(s.uiButton, s.imageButton, !state && s.hide)}
-        // onClick={handleScreenShot}
-        disabled
+        onClick={handleImageUpload}
       >
-        <p>New Image</p>
+        {!stateUploader ? <p>Close Image Uploader</p> : <p>New Image</p>}
       </button>
       <button
         className={cn(s.uiButton, s.undoButton, !state && s.hide)}
-        // onClick={handleScreenShot}
         disabled
       >
         <Undo styles={s.undoIcon} />
@@ -28,7 +28,6 @@ const ProductButtons = ({ state, handleScreenShot }: any) => {
       </button>
       <button
         className={cn(s.uiButton, s.redoButton, !state && s.hide)}
-        // onClick={handleScreenShot}
         disabled
       >
         <p>redo</p>
@@ -36,7 +35,6 @@ const ProductButtons = ({ state, handleScreenShot }: any) => {
       </button>
       <button
         className={cn(s.uiButton, s.saveButton, state && s.disabled)}
-        // onClick={handleScreenShot}
         disabled
       >
         <Save styles={s.saveIcon} />
