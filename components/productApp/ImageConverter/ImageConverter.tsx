@@ -11,7 +11,7 @@ const ImageConverter = ({ imageData, setImageWidth, setImageHeight }: any) => {
       //   };
 
       i.src = imageData;
-      console.log("image data", imageData);
+      // console.log("image data", imageData);
 
       setImageWidth(i.width);
       setImageHeight(i.height);

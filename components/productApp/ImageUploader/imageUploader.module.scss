@@ -2,7 +2,7 @@
 .imageUploaderWrap {
   z-index: 200;
   position: absolute;
-  top: 6em;
+  top: 5em;
   width: 100%;
   max-width: 500px;
   padding: 2em 2em 1em;
@@ -98,7 +98,11 @@
         img {
           width: 100%;
         }
-        .imageItemBtn {
+        .picked {
+          background-color: red;
+        }
+
+        .imageCloseBtn {
           position: absolute;
           top: -0.2em;
           right: -0.2em;
@@ -109,6 +113,9 @@
           }
         }
       }
+    }
+    .newImageWrapPaddingBottom {
+      padding-bottom: 1em;
     }
   }
   @media (min-width: $media-tablet-small) {

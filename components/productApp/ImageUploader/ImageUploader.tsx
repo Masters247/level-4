@@ -1,12 +1,12 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
+import cn from "classnames";
 import React from "react";
 import s from "./imageUploader.module.scss";
 import Add from "../../ui/icons/Add";
 import Remove from "../../ui/icons/Remove";
 import ImageUploading from "react-images-uploading";
-import Slide from "../../slider/Slide/Slide";
 
-const ImageUploader = ({ setLogo, handleImageUpload }: any) => {
+const ImageUploader = ({ logo, setLogo, handleImageUpload }: any) => {
   const [images, setImages] = useState([]);
   const maxNumber = 69;
 
@@ -18,6 +18,12 @@ const ImageUploader = ({ setLogo, handleImageUpload }: any) => {
       setLogo(null);
     }
   };
+
+  const handleLogoPick = (imageList: any, index: any) => {
+    setLogo(imageList[index].data_url);
+  };
+
+  console.log(logo);
 
   return (
     <div className={s.imageUploaderWrap}>
@@ -66,12 +72,24 @@ const ImageUploader = ({ setLogo, handleImageUpload }: any) => {
                 <p>Remove all images</p>
               </button>
             </div>
-            <div className={s.newImageWrap}>
+            <div
+              className={cn(
+                s.newImageWrap,
+                imageList.length > 0 && s.newImageWrapPaddingBottom
+              )}
+            >
               {imageList.map((image, index) => (
                 <div key={`image-${index}`} className={s.imageItem}>
-                  <img src={image.data_url} alt="uploaded logo" />
                   <button
-                    className={s.imageItemBtn}
+                    onClick={() => handleLogoPick(imageList, index)}
+                    className={cn(logo !== index && s.picked)}
+                    style={{ height: "100%", width: "100%" }}
+                  >
+                    <img src={image.data_url} alt="uploaded logo" />
+                  </button>
+
+                  <button
+                    className={s.imageCloseBtn}
                     type="button"
                     onClick={() => onImageRemove(index)}
                   >

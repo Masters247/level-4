@@ -121,8 +121,8 @@ const ProductView = ({
   };
 
   // console.log("Product View log =", logo);
-  console.log("Image width =", imageWidth);
-  console.log("Image height =", imageHeight);
+  // console.log("Image width =", imageWidth);
+  // console.log("Image height =", imageHeight);
 
   return (
     <>
@@ -130,6 +130,7 @@ const ProductView = ({
         <ImageUploader
           setLogo={setLogo}
           handleImageUpload={handleImageUpload}
+          logo={logo}
         />
       )}
       <ImageConverter
