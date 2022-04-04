@@ -5,13 +5,26 @@
   top: 6em;
   width: 100%;
   max-width: 500px;
-  padding: 1em;
+  padding: 2em 2em 1em;
   background-color: $grey-0;
   .uploadImageWrap {
+    position: relative;
+    .buttonCloseImageUpload {
+      position: absolute;
+      top: -2.1em;
+      right: -2.1em;
+      z-index: 10;
+      .remove {
+        width: 30px;
+        height: 30px;
+        stroke: $button-primary;
+      }
+    }
     .imageButtonWrap {
       display: grid;
       grid-template-columns: repeat(2, 1fr);
       grid-gap: 1em;
+      padding-bottom: 1em;
     }
     .uploadButton {
       padding: 1em;
@@ -76,7 +89,6 @@
       display: grid;
       grid-template-columns: repeat(3, 1fr);
       grid-gap: 1em;
-      margin-top: 1em;
       .imageItem {
         @include flexCenter;
         position: relative;

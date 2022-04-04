@@ -114,6 +114,10 @@ const ProductView = ({
 
   const handleImageUpload = () => {
     setImageUpload(!imageUpload);
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
   };
 
   // console.log("Product View log =", logo);
@@ -122,7 +126,12 @@ const ProductView = ({
 
   return (
     <>
-      {!imageUpload && <ImageUploader setLogo={setLogo} />}
+      {!imageUpload && (
+        <ImageUploader
+          setLogo={setLogo}
+          handleImageUpload={handleImageUpload}
+        />
+      )}
       <ImageConverter
         imageData={logo}
         setImageWidth={setImageWidth}
@@ -153,23 +162,18 @@ const ProductView = ({
                   style={{ x, y, width, height, zIndex: "1" }}
                   {...bind()}
                 >
-                  <div
-                    // className="imageWrap"
-                    style={{
-                      width: "100%",
-                      height: "100%",
-                      zIndex: "-10",
-                      pointerEvents: "none",
-                    }}
-                  >
-                    <div className={s.innerWrap}></div>
+                  <div className={s.imageOuterWrap}>
                     {logo !== null && (
-                      <Image
-                        src={logo}
-                        width={imageWidth}
-                        height={imageHeight}
-                        layout="responsive"
-                      />
+                      <div className={s.logoImageWrap}>
+                        <img
+                          className={s.logoImage}
+                          src={logo}
+                          style={{
+                            maxWidth: `${imageWidth}`,
+                            maxHeight: `${imageHeight}`,
+                          }}
+                        />
+                      </div>
                     )}
                   </div>
                   <div className={s.resizer} ref={dragEl}></div>

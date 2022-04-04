@@ -4,20 +4,19 @@ import s from "./imageUploader.module.scss";
 import Add from "../../ui/icons/Add";
 import Remove from "../../ui/icons/Remove";
 import ImageUploading from "react-images-uploading";
+import Slide from "../../slider/Slide/Slide";
 
-const ImageUploader = ({ setLogo }: any) => {
+const ImageUploader = ({ setLogo, handleImageUpload }: any) => {
   const [images, setImages] = useState([]);
   const maxNumber = 69;
 
-  console.log("Image uploader", setLogo);
-
   const onChange = (imageList: any) => {
     setImages(imageList);
-    console.log(
-      "Image Set to set Logo from Image Uploader",
-      imageList[0].data_url
-    );
-    setLogo(imageList[0].data_url);
+    if (imageList.length !== 0) {
+      setLogo(imageList[0].data_url);
+    } else {
+      setLogo(null);
+    }
   };
 
   return (
@@ -40,6 +39,12 @@ const ImageUploader = ({ setLogo }: any) => {
         }) => (
           // write your building UI
           <div className={s.uploadImageWrap}>
+            <button
+              className={s.buttonCloseImageUpload}
+              onClick={handleImageUpload}
+            >
+              <Remove styles={s.remove} />
+            </button>
             <div className={s.imageButtonWrap}>
               <button
                 type="button"

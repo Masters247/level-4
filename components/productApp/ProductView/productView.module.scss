@@ -36,6 +36,22 @@
   width: calc(100vw - 2em);
   max-width: 500px;
   // border: 1px rgb(0, 255, 72) solid;
+  .imageOuterWrap {
+    width: 100%;
+    height: 100%;
+    z-index: -10;
+    pointer-events: none;
+    @include flexCenter;
+  }
+  .logoImageWrap {
+    display: grid;
+    align-content: center;
+    .logoImage {
+      width: 100%;
+      height: 100%;
+    }
+  }
+
   @media (min-width: 532px) {
     left: calc(50% - 250px);
   }
