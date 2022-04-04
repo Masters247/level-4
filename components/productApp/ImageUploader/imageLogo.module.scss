@@ -1,0 +1,51 @@
+@use "../../../styles/base.scss" as *;
+.imagesWrap {
+  position: relative;
+}
+.imageItem {
+  opacity: 0.4;
+  transition: opacity 200ms ease, border 200ms ease;
+  @include flexCenter;
+  position: relative;
+  border: 1px dashed $black;
+  min-width: 10px;
+  z-index: 10;
+  img {
+    width: 100%;
+  }
+
+  .handleRemoveButton {
+    cursor: crosshair;
+    z-index: 100;
+    position: absolute;
+    top: -0.2em;
+    right: -0.2em;
+    // border: 1px solid green;
+    .remove {
+      width: 25px;
+      height: 25px;
+      stroke: $button-primary;
+    }
+  }
+
+  .handleLogoPickButton {
+    // border: 1px solid blue;
+  }
+}
+.picked {
+  opacity: 1;
+  border: 1px solid $button-primary;
+  @include boxShadow;
+  // background-color: red;
+  .handleRemoveButton {
+    z-index: 100;
+    position: absolute;
+    top: -0.2em;
+    right: -0.2em;
+    .remove {
+      width: 25px;
+      height: 25px;
+      stroke: $button-primary;
+    }
+  }
+}
