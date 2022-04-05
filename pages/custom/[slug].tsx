@@ -100,7 +100,6 @@ const Custom: NextPage<Props> = ({ data }) => {
 
   return (
     <div className={s.pageWrap}>
-      {/* <ImageUploader /> */}
       <ProductView
         image={product?.productVariantColours[colour].customImage}
         productColoutVariants={product.productVariantColours}

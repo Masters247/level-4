@@ -2,11 +2,13 @@
 .imageUploaderWrap {
   z-index: 200;
   position: absolute;
-  top: 5em;
+  top: 0;
   width: 100%;
   max-width: 500px;
   padding: 2em 2em 1em;
   background-color: $grey-0;
+  max-height: 500px;
+  overflow-y: scroll;
   .uploadImageWrap {
     position: relative;
     .buttonCloseImageUpload {
@@ -121,8 +123,8 @@
   @media (min-width: $media-tablet-small) {
     left: calc(50% - 250px);
   }
-  @media (min-width: $media-tablet) {
-    top: 9.1em;
-    left: calc(50% - 250px);
+  @media (min-width: $media-desktop-small) {
+    left: 0;
+    background-color: $grey-2;
   }
 }

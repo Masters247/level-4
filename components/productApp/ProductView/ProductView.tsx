@@ -125,7 +125,7 @@ const ProductView = ({
   // console.log("Image height =", imageHeight);
 
   return (
-    <>
+    <div className={s.appWrap}>
       {!imageUpload && (
         <ImageUploader
           setLogo={setLogo}
@@ -138,66 +138,63 @@ const ProductView = ({
         setImageWidth={setImageWidth}
         setImageHeight={setImageHeight}
       />
-      <div className={s.appWrap}>
-        <div className={s.productViewportContainer}>
-          <div id="capture" className={s.imageCaptureWrap}>
-            <div className={s.imageWrap}>
-              <Image
-                src={image.url}
-                quality={100}
-                priority
-                layout="fixed"
-                width={500}
-                height={500}
-                placeholder="blur"
-                blurDataURL={image.url}
-              />
-            </div>
-            <div className={s.productViewport}>
-              <div
-                className={`${control ? s.customArear : s.customArearHide}`}
-                ref={containerRef}
-              >
-                <animated.div
-                  className={s.customLogo}
-                  style={{ x, y, width, height, zIndex: "1" }}
-                  {...bind()}
-                >
-                  <div className={s.imageOuterWrap}>
-                    {logo !== null && (
-                      <div className={s.logoImageWrap}>
-                        <img
-                          className={s.logoImage}
-                          src={logo}
-                          style={{
-                            maxWidth: `${imageWidth}`,
-                            maxHeight: `${imageHeight}`,
-                          }}
-                        />
-                      </div>
-                    )}
-                  </div>
-                  <div className={s.resizer} ref={dragEl}></div>
-                </animated.div>
-              </div>
+
+      <div className={s.productViewportContainer}>
+        <div id="capture" className={s.imageCaptureWrap}>
+          <div className={s.imageWrap}>
+            <Image
+              src={image.url}
+              quality={100}
+              priority
+              layout="fixed"
+              width={500}
+              height={500}
+              placeholder="blur"
+              blurDataURL={image.url}
+            />
+          </div>
+          <div className={s.productViewport}>
+            <div
+              className={`${control ? s.customArear : s.customArearHide}`}
+              ref={containerRef}>
+              <animated.div
+                className={s.customLogo}
+                style={{ x, y, width, height, zIndex: "1" }}
+                {...bind()}>
+                <div className={s.imageOuterWrap}>
+                  {logo !== null && (
+                    <div className={s.logoImageWrap}>
+                      <img
+                        className={s.logoImage}
+                        src={logo}
+                        style={{
+                          maxWidth: `${imageWidth}`,
+                          maxHeight: `${imageHeight}`,
+                        }}
+                      />
+                    </div>
+                  )}
+                </div>
+                <div className={s.resizer} ref={dragEl}></div>
+              </animated.div>
             </div>
           </div>
         </div>
-        <ProductUiPanel
-          products={products}
-          productColoutVariants={productColoutVariants}
-          center={handleCenter}
-          vertical={handleVertical}
-          horizontal={handleHorizontal}
-          showhide={handleControls}
-          state={control}
-          handleColourClick={handleColourClick}
-          handleScreenShot={handleScreenShot}
-          handleImageUpload={handleImageUpload}
-          stateUploader={imageUpload}
-        />
       </div>
-    </>
+      <ProductUiPanel
+        products={products}
+        productColoutVariants={productColoutVariants}
+        center={handleCenter}
+        vertical={handleVertical}
+        horizontal={handleHorizontal}
+        showhide={handleControls}
+        state={control}
+        handleColourClick={handleColourClick}
+        handleScreenShot={handleScreenShot}
+        handleImageUpload={handleImageUpload}
+        stateUploader={imageUpload}
+      />
+    </div>
   );
 };
 
