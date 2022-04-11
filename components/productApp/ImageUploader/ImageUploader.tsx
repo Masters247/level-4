@@ -10,10 +10,15 @@ import ImageLogo from "./ImageLogo";
 const ImageUploader = ({ logo, setLogo, handleImageUpload }: any) => {
   const [localImages, setLocalImages] = useState([]);
   const [images, setImages] = useState([]);
+  const [arraySelect, setArraySelect] = useState([
+    { local: false },
+    { live: false },
+  ]);
   const [selectImage, setSelectImage] = useState(0);
-  const maxNumber = 20;
+  const maxNumber = 2;
 
   const onChange = (imageList: any) => {
+    console.log(window.localStorage);
     setImages(imageList);
     if (imageList.length !== 0) {
       setLogo(imageList[0].data_url);
@@ -21,6 +26,16 @@ const ImageUploader = ({ logo, setLogo, handleImageUpload }: any) => {
       setLogo(null);
     }
     window.localStorage.setItem("logo list", JSON.stringify(imageList));
+    // if (localImages?.length === 0) {
+    //   window.localStorage.setItem("logo list", JSON.stringify(imageList));
+    // } else {
+    //   let local: any = window.localStorage.getItem("logo list");
+    //   let obj = JSON.parse(local);
+    //   window.localStorage.setItem(
+    //     "logo list",
+    //     JSON.stringify(imageList.concat(obj))
+    //   );
+    // }
   };
 
   const handleLogoPick = (imageList: any, index: any) => {
@@ -40,7 +55,15 @@ const ImageUploader = ({ logo, setLogo, handleImageUpload }: any) => {
     }
   }, []);
 
-  console.log("local images", localImages);
+  const onImageLocalRemove = (index: any) => {
+    let local: any = window.localStorage.getItem("logo list");
+    let obj = JSON.parse(local);
+    obj.splice(index, 1);
+    window.localStorage.setItem("logo list", JSON.stringify(obj));
+    setLocalImages(obj);
+  };
+
+  // console.log("local images", localImages);
 
   return (
     <div className={s.imageUploaderWrap}>
@@ -61,7 +84,7 @@ const ImageUploader = ({ logo, setLogo, handleImageUpload }: any) => {
         }) => (
           // write your building UI
           <div className={s.uploadImageWrap}>
-            {console.log("live images", imageList)}
+            {/* {console.log("live images", imageList)} */}
             <button
               className={s.buttonCloseImageUpload}
               onClick={handleImageUpload}>
@@ -91,11 +114,11 @@ const ImageUploader = ({ logo, setLogo, handleImageUpload }: any) => {
                 s.newImageWrap,
                 imageList.length > 0 && s.newImageWrapPaddingBottom
               )}>
-              {console.log("local images", localImages)}
+              {/* {console.log("local images", localImages)} */}
 
               {imageList?.map((image, index) => {
                 return (
-                  <div key={index}>
+                  <div key={index} style={{ border: "1px dashed blue" }}>
                     {image !== null && (
                       <ImageLogo
                         key={index}
@@ -106,15 +129,19 @@ const ImageUploader = ({ logo, setLogo, handleImageUpload }: any) => {
                         image={image}
                         setSelectImage={setSelectImage}
                         selectImage={selectImage}
-                        local={false}
+                        isLocal={false}
+                        setArraySelect={setArraySelect}
+                        arraySelect={arraySelect}
+                        onImageLocalRemove={onImageLocalRemove}
                       />
                     )}
                   </div>
                 );
               })}
+
               {localImages?.map((image, index) => {
                 return (
-                  <div key={index}>
+                  <div key={index} style={{ border: "1px dashed red" }}>
                     {image !== null && (
                       <ImageLogo
                         key={index}
@@ -125,7 +152,10 @@ const ImageUploader = ({ logo, setLogo, handleImageUpload }: any) => {
                         image={image}
                         setSelectImage={setSelectImage}
                         selectImage={selectImage}
-                        local={true}
+                        isLocal={true}
+                        setArraySelect={setArraySelect}
+                        arraySelect={arraySelect}
+                        onImageLocalRemove={onImageLocalRemove}
                       />
                     )}
                   </div>

@@ -1,24 +1,73 @@
-.thumbnails {
-  z-index: 1;
-  display: grid;
-  margin: 1em auto;
-  grid-gap: 1em;
+@use "../../../styles/base.scss" as *;
+.thumbnailsOuterWrap {
+  // border: 1px solid green;
   position: relative;
-  cursor: pointer;
+  width: 230px;
+  margin: 1em auto;
+
   .chevLeft,
   .chevRight {
-    z-index: 2;
-    width: 23px;
-    height: 23px;
+    padding: 10px;
+    z-index: 10;
+    svg {
+      width: 23px;
+      height: 23px;
+    }
+    top: calc(50% - 22px);
     position: absolute;
-    top: calc(50% - 10px);
     cursor: pointer;
   }
   .chevLeft {
-    left: -2em;
+    left: -3.5em;
   }
   .chevRight {
-    right: -2em;
+    right: -3.5em;
     transform: rotate(180deg);
+  }
+  @media (min-width: $media-tablet) {
+    width: 320px;
+  }
+  @media (min-width: $media-desktop-small) {
+    width: 474px;
+  }
+}
+
+.thumbnailsWrap {
+  // border: 1px solid red;
+  position: relative;
+  width: 230px;
+  margin: 0 auto;
+  overflow: hidden;
+  @media (min-width: $media-tablet) {
+    width: 320px;
+  }
+  @media (min-width: $media-desktop-small) {
+    width: 474px;
+  }
+
+  .thumbnails {
+    // border: 1px solid blue;
+    cursor: pointer;
+    display: grid;
+    grid-gap: 10px;
+    z-index: 1;
+
+    @media (min-width: $media-tablet) {
+      width: 320px;
+    }
+    @media (min-width: $media-desktop-small) {
+      width: 474px;
+    }
+  }
+
+  .thumbWidth {
+    width: 70px;
+    // border: 1px solid grey;
+    @media (min-width: $media-tablet) {
+      width: 100px;
+    }
+    @media (min-width: $media-desktop-small) {
+      width: 150px;
+    }
   }
 }

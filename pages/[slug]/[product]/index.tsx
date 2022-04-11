@@ -1,20 +1,23 @@
 import type { NextPage } from "next";
 import { GraphQLClient, gql } from "graphql-request";
 import { useState, useEffect } from "react";
-import Visualise from "../../components/productApp/Visualise/Visualise";
-import productQuery from "../../lib/graphcms-querys/productQuery";
-import ProductColourButtonsWrap from "../../components/productApp/ProductColourButtons/ProductColourButtons";
-import SliderContainer from "../../components/slider/SlideContainer/SliderContainer";
+import Visualise from "../../../components/productApp/Visualise/Visualise";
+import productQuery from "../../../lib/graphcms-querys/productQuery";
+import ProductColourButtonsWrap from "../../../components/productApp/ProductColourButtons/ProductColourButtons";
+import SliderContainer from "../../../components/slider/SlideContainer/SliderContainer";
 import Image from "next/image";
-import s from "../../styles/pages/productPage.module.scss";
-import Personal from "../../components/productApp/Personal/Personal";
+import s from "../../../styles/pages/productPage.module.scss";
+import Personal from "../../../components/productApp/Personal/Personal";
 import { useWindowSize } from "react-use";
 
 export async function getStaticPaths() {
   const products = await productQuery();
 
-  const paths = products.map((s: any) => ({
-    params: { slug: s.productSlug },
+  const paths = products.map((p: any) => ({
+    params: {
+      slug: p.productCategory,
+      product: p.productSlug,
+    },
   }));
 
   return {
@@ -32,7 +35,7 @@ export async function getStaticProps({ params }: any) {
 
   const query = gql`
     query Product {
-      product(where: { productSlug: "${params.slug}" }) {
+      product(where: { productSlug: "${params.product}" }) {
         name
         description
         productSlug
@@ -92,8 +95,6 @@ const Product: NextPage<Props> = ({ data }) => {
         autoPlay={true}
         time={4000}
         position={"absolute"}
-        height={"300px"}
-        width={"300px"}
         slides={images}
       />
       <section className={s.info}>
@@ -105,8 +106,7 @@ const Product: NextPage<Props> = ({ data }) => {
         className={s.productImagesSection}
         style={{
           position: "relative",
-        }}
-      >
+        }}>
         <div className={s.productImagesBackgroundWrap}>
           <ProductColourButtonsWrap
             products={product}
@@ -122,8 +122,7 @@ const Product: NextPage<Props> = ({ data }) => {
               } * 1em))`,
               gridGap: "1em",
               margin: " 0 auto",
-            }}
-          >
+            }}>
             {product.productVariantColours[productColour].images.map(
               (image: any) => (
                 <Image

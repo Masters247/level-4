@@ -1,25 +1,50 @@
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 import Thumbnails from "../Thumbnails/Thumbnails";
 import Slider from "../Slider/Slider";
 import s from "./sliderContainer.module.scss";
 
-const SliderContainer = ({ width, height, position, slides, time }: any) => {
+const SliderContainer = ({ position, slides, time }: any) => {
   const [state, setState] = useState({
     opacity: 1,
-    // position: positioning,
+    positioning: position,
     activeSlide: 0,
   });
-  const { opacity, activeSlide } = state;
+
+  // console.log("slides", slides.length);
+  const { opacity, positioning, activeSlide } = state;
+  const autoPlayRef: any = useRef();
 
   const [autoPlay, setAutoPlay] = useState(true);
-  const [timeOf, setTime] = useState(time);
-  const [positionOf, setPosition] = useState(position);
-  const [heightOf, setHeight] = useState(width);
-  const [widthOf, setWidth] = useState(height);
+  const [timeOf, setTime] = useState(1000);
+  const numberOfSlides = slides.length;
+
+  console.log("number of slides", slides.length);
+
+  useEffect(() => {
+    autoPlayRef.current = nextSlide;
+  });
+
+  useEffect(() => {
+    const play = () => {
+      autoPlayRef.current();
+    };
+
+    if (autoPlay === true) {
+      const interval = setInterval(play, time);
+      return () => clearInterval(interval);
+    }
+  }, [autoPlay, time]);
+
+  const handleEnter = () => {
+    setAutoPlay(false);
+  };
+
+  const handleLeave = () => {
+    setAutoPlay(true);
+  };
 
   const nextSlide = () => {
-    console.log("click next");
-    setAutoPlay(false);
+    // console.log("active slide", activeSlide);
     if (activeSlide === slides.length - 1) {
       return setState({
         ...state,
@@ -33,8 +58,6 @@ const SliderContainer = ({ width, height, position, slides, time }: any) => {
   };
 
   const prevSlide = () => {
-    console.log("click prev");
-    setAutoPlay(false);
     if (activeSlide === 0) {
       return setState({
         ...state,
@@ -47,29 +70,36 @@ const SliderContainer = ({ width, height, position, slides, time }: any) => {
     });
   };
 
-  const handleEnter = () => {
-    setAutoPlay(false);
+  const handleThumbSlide = (i: any) => {
+    setState({
+      ...state,
+      activeSlide: i,
+    });
   };
 
-  const handleLeave = () => {
-    setAutoPlay(true);
-  };
   return (
     <section
       className={s.sliderContainer}
       onPointerEnter={handleEnter}
-      onPointerLeave={handleLeave}
-    >
+      onPointerLeave={handleLeave}>
       <Slider
-        width={widthOf}
-        height={heightOf}
         autoPlay={autoPlay}
         numberOfSlides={slides.length}
         slides={slides}
         time={timeOf}
-        positioning={positionOf}
+        positioning={positioning}
+        opacity={opacity}
+        activeSlide={activeSlide}
       />
-      <Thumbnails thumbnails={slides} />
+      {slides.length > 1 && (
+        <Thumbnails
+          thumbnails={slides}
+          handleThumbSlide={handleThumbSlide}
+          prevSlide={prevSlide}
+          nextSlide={nextSlide}
+          activeSlide={activeSlide}
+        />
+      )}
     </section>
   );
 };

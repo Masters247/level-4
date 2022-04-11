@@ -87,6 +87,7 @@
         background-color: $red-1;
       }
     }
+
     .newImageWrap {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
@@ -95,7 +96,6 @@
         @include flexCenter;
         position: relative;
         padding: 0.5em;
-        border: 1px dashed $black;
         min-width: 10px;
         img {
           width: 100%;

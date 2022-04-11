@@ -1,17 +1,20 @@
 import s from "./thumb.module.scss";
+import cn from "classnames";
 import Image from "next/image";
 
-const Thumb = ({ thumb, width }: any) => {
+const Thumb = ({
+  thumb,
+  thumbWidth,
+  index,
+  handleThumbSlide,
+  activeSlide,
+}: any) => {
   return (
-    <div
-      className={s.thumb}
-      style={{
-        width: `${width}`,
-        height: `${width}`,
-      }}
-    >
+    <button
+      onClick={() => handleThumbSlide(index)}
+      className={cn(s.thumb, thumbWidth, index === activeSlide && s.active)}>
       <Image src={thumb} layout="responsive" width={100} height={100} />
-    </div>
+    </button>
   );
 };
 

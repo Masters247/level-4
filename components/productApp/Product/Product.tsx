@@ -26,6 +26,8 @@ const Product = ({ products, i }: any) => {
   };
 
   const slug = products.productSlug;
+  const slugCategory = products.productCategory;
+  // console.log(products);
 
   return (
     <div key={products.name} className={s.productWrap}>
@@ -52,11 +54,11 @@ const Product = ({ products, i }: any) => {
           }
         />
       </div>
-      <Link href={`/product/${slug}`} passHref>
+      <Link href={`${slugCategory}/${slug}`} passHref>
         <a className={s.textLink}>{products.name}</a>
       </Link>
       <ProductColourButtons products={products} colourClick={colourClick} />
-      <Link href={`/product/${slug}`} passHref>
+      <Link href={`${slugCategory}/${slug}`} passHref>
         <Button className={s.button} variant="primary">
           View
         </Button>

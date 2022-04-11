@@ -1,9 +1,9 @@
 import s from "./imageLogo.module.scss";
 import cn from "classnames";
 import Remove from "../../ui/icons/Remove";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 const ImageLogo = ({
-  local,
+  isLocal,
   index,
   imageList,
   handleLogoPick,
@@ -11,14 +11,37 @@ const ImageLogo = ({
   image,
   setSelectImage,
   selectImage,
+  setArraySelect,
+  arraySelect,
+  onImageLocalRemove,
 }: any) => {
+  // console.log("is it localstorage", local);
+
+  useEffect(() => {
+    console.log("is array local", isLocal);
+  }, []);
+
   const handleSelected = (index: any) => {
     setSelectImage(index);
+    // if (local) {
+    //   setArraySelect([
+    //     { local: false },
+    //     {
+    //       live: true,
+    //     },
+    //   ]);
+    // } else {
+    //   setArraySelect([
+    //     {
+    //       local: true,
+    //     },
+    //     { live: false },
+    //   ]);
+    // }
   };
 
-  const onImageLocalRemove = (index: any) => {
-    console.log(index, "clicked");
-  };
+  // console.log("array select", arraySelect[1]);
+
   return (
     <div
       className={cn(s.imageItem, selectImage === index && s.picked)}
@@ -30,7 +53,7 @@ const ImageLogo = ({
         style={{ height: "100%", width: "100%" }}>
         <img src={image.data_url} alt="uploaded logo" />
       </button>
-      {local ? (
+      {isLocal ? (
         <button
           className={s.imageCloseBtn}
           type="button"
@@ -45,12 +68,6 @@ const ImageLogo = ({
           <Remove styles={s.remove} />
         </button>
       )}
-      {/* <button
-        className={s.imageCloseBtn}
-        type="button"
-        onClick={() => onImageRemove(index)}>
-        <Remove styles={s.remove} />
-      </button> */}
     </div>
   );
 };

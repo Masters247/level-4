@@ -1,2 +1,16 @@
-.thumb {
+@use "../../../styles/base.scss" as *;
+
+.active {
+  position: relative;
+
+  &:after {
+    position: absolute;
+    bottom: 0;
+    left: calc(25%);
+    content: "";
+    width: 50%;
+    height: 3px;
+    background-color: $button-primary;
+    @include boxShadow;
+  }
 }

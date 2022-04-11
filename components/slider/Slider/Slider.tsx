@@ -1,6 +1,5 @@
-import { FC, useState, useEffect, useRef } from "react";
-import Thumbnails from "../Thumbnails/Thumbnails";
-import SlideContainer from "../SlideContainer/SliderContainer";
+import { FC } from "react";
+import cn from "classnames";
 import Slide from "../Slide/Slide";
 import s from "./slider.module.scss";
 
@@ -10,88 +9,22 @@ interface Props {
   positioning?: string;
   slides: { image: StaticImageData }[];
   time: number;
-  width: string;
-  height: string;
+  activeSlide: number;
+  opacity: number;
 }
 
-const Slider: FC<Props> = ({
-  autoPlay,
-  numberOfSlides,
-  positioning,
-  slides,
-  time,
-  width,
-  height,
-}) => {
-  const [state, setState] = useState({
-    opacity: 1,
-    position: positioning,
-    activeSlide: 0,
-  });
-
-  const { opacity, position, activeSlide } = state;
-  const autoPlayRef: any = useRef();
-
-  useEffect(() => {
-    autoPlayRef.current = nextSlide;
-  });
-
-  useEffect(() => {
-    const play = () => {
-      autoPlayRef.current();
-    };
-
-    if (autoPlay === true) {
-      const interval = setInterval(play, time);
-      return () => clearInterval(interval);
-    }
-  }, [numberOfSlides, autoPlay, time]);
-
-  const nextSlide = () => {
-    if (activeSlide === slides.length - 1) {
-      return setState({
-        ...state,
-        activeSlide: 0,
-      });
-    }
-    setState({
-      ...state,
-      activeSlide: activeSlide + 1,
-    });
-  };
-
-  const prevSlide = () => {
-    if (activeSlide === 0) {
-      return setState({
-        ...state,
-        activeSlide: slides.length - 1,
-      });
-    }
-    setState({
-      ...state,
-      activeSlide: activeSlide - 1,
-    });
-  };
-
+const Slider: FC<Props> = ({ positioning, activeSlide, opacity, slides }) => {
   return (
-    <div
-      className={s.slider}
-      style={{
-        margin: "0 auto",
-        height: `${height}`,
-        width: `${width}`,
-      }}
-    >
+    <div className={cn(s.slider, s.widthHeight)}>
       {slides.map((slide: any, i: number) => {
         return (
           <Slide
-            width={width}
-            height={height}
+            widthHeight={s.widthHeight}
             style={opacity}
             key={slide + i}
             image={slide}
             id={i}
-            position={position}
+            position={positioning}
             active={activeSlide}
           />
         );

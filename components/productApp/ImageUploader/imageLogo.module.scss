@@ -7,7 +7,8 @@
   transition: opacity 200ms ease, border 200ms ease;
   @include flexCenter;
   position: relative;
-  border: 1px dashed $black;
+  // border: 1px dashed $black;
+  height: 100%;
   min-width: 10px;
   z-index: 10;
   img {
@@ -35,7 +36,9 @@
 .picked {
   opacity: 1;
   border: 1px solid $button-primary;
+  border: 10px solid $button-primary;
   @include boxShadow;
+  height: 100%;
   // background-color: red;
   .handleRemoveButton {
     z-index: 100;

@@ -9,8 +9,11 @@ const pages = [
   {
     products: [
       // { name: "Collections", link: "/categories/collections" },
-      { name: "Headwear", link: "/categories/headwear" },
-      { name: "Accessories", link: "/categories/accessories" },
+      { name: "Headwear", link: "/headwear" },
+      { name: "Accessories", link: "/accessories" },
+      { name: "Bespoke", link: "/bespoke" },
+      { name: "Brasswear", link: "/brasswear" },
+      { name: "Collections", link: "/collections" },
       // { name: "Bespoke", link: "/categories/bespoke" },
     ],
   },

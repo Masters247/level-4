@@ -9,8 +9,8 @@ import s from "../../styles/pages/categories.module.scss";
 export async function getStaticPaths() {
   const categories = await categoryQuery();
 
-  const paths = categories.map((s: any) => ({
-    params: { slug: s.categoriesSlug },
+  const paths = categories.map((c: any) => ({
+    params: { slug: c.categoriesSlug },
   }));
 
   return {
@@ -39,6 +39,7 @@ export async function getStaticProps({ params }: any) {
       heroText
       heroImageAltText
       products {
+        productCategory
         productSlug
         name
         productVariantColours {
@@ -73,6 +74,8 @@ interface Props {
 
 const Category: NextPage<Props> = ({ data }) => {
   const { categories } = data;
+
+  console.log("cata", categories);
 
   return (
     <div className={s.categoriesPageWrap}>

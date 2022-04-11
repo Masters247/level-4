@@ -1,5 +1,8 @@
 @use "../../../styles/base.scss" as *;
 .slider {
+  margin: 0 auto;
+  width: 300px;
+  height: 300px;
   .next,
   .prev {
     position: absolute;
@@ -17,5 +20,18 @@
   .unFade {
     opacity: 1;
     transition: 1000ms;
+  }
+}
+
+.widthHeight {
+  width: 300px;
+  height: 300px;
+  @media (min-width: $media-tablet) {
+    width: 400px;
+    height: 400px;
+  }
+  @media (min-width: $media-desktop-small) {
+    width: 500px;
+    height: 500px;
   }
 }
