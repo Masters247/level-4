@@ -11,6 +11,7 @@
     min-height: auto;
   }
 }
+
 .productViewportContainer {
   position: "relative";
   @include flexCenter;
@@ -18,9 +19,11 @@
   overflow: hidden;
   // border: 1px rgb(0, 255, 72) solid;
   .imageCaptureWrap {
+    // display: grid;
     // border: 1px solid red;
 
     .imageWrap {
+      // display: block;
       // border: 1px red solid;
     }
   }

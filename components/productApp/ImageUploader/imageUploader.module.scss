@@ -92,29 +92,6 @@
       display: grid;
       grid-template-columns: repeat(3, 1fr);
       grid-gap: 1em;
-      .imageItem {
-        @include flexCenter;
-        position: relative;
-        padding: 0.5em;
-        min-width: 10px;
-        img {
-          width: 100%;
-        }
-        .picked {
-          background-color: red;
-        }
-
-        .imageCloseBtn {
-          position: absolute;
-          top: -0.2em;
-          right: -0.2em;
-          .remove {
-            width: 25px;
-            height: 25px;
-            stroke: $button-primary;
-          }
-        }
-      }
     }
     .newImageWrapPaddingBottom {
       padding-bottom: 1em;

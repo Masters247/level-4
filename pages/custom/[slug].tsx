@@ -107,8 +107,6 @@ const Custom: NextPage<Props> = ({ data }) => {
         handleScreenShot={handleScreenShot}
         products={product}
       />
-
-      <div id="screenShot" className="screenshot"></div>
     </div>
   );
 };

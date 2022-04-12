@@ -31,6 +31,7 @@ const ProductView = ({
 
   const bind = useDrag(
     (state) => {
+      console.log("state", state.movement);
       (window as any).movement = state.movement;
       (window as any).offset = state.offset;
       const isResizing = state?.event.target === dragEl.current;
@@ -120,10 +121,6 @@ const ProductView = ({
     });
   };
 
-  // console.log("Product View log =", logo);
-  // console.log("Image width =", imageWidth);
-  // console.log("Image height =", imageHeight);
-
   return (
     <div className={s.appWrap}>
       {!imageUpload && (
@@ -138,7 +135,6 @@ const ProductView = ({
         setImageWidth={setImageWidth}
         setImageHeight={setImageHeight}
       />
-
       <div className={s.productViewportContainer}>
         <div id="capture" className={s.imageCaptureWrap}>
           <div className={s.imageWrap}>

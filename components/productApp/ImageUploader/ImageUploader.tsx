@@ -26,16 +26,6 @@ const ImageUploader = ({ logo, setLogo, handleImageUpload }: any) => {
       setLogo(null);
     }
     window.localStorage.setItem("logo list", JSON.stringify(imageList));
-    // if (localImages?.length === 0) {
-    //   window.localStorage.setItem("logo list", JSON.stringify(imageList));
-    // } else {
-    //   let local: any = window.localStorage.getItem("logo list");
-    //   let obj = JSON.parse(local);
-    //   window.localStorage.setItem(
-    //     "logo list",
-    //     JSON.stringify(imageList.concat(obj))
-    //   );
-    // }
   };
 
   const handleLogoPick = (imageList: any, index: any) => {
@@ -43,9 +33,6 @@ const ImageUploader = ({ logo, setLogo, handleImageUpload }: any) => {
   };
 
   useEffect(() => {
-    // if(localImages !== []) {
-    //   setSelectImage()
-    // }
     let local: any = window.localStorage.getItem("logo list");
     let obj = JSON.parse(local);
     if (localImages?.length === 0) {
@@ -62,8 +49,6 @@ const ImageUploader = ({ logo, setLogo, handleImageUpload }: any) => {
     window.localStorage.setItem("logo list", JSON.stringify(obj));
     setLocalImages(obj);
   };
-
-  // console.log("local images", localImages);
 
   return (
     <div className={s.imageUploaderWrap}>
@@ -114,8 +99,6 @@ const ImageUploader = ({ logo, setLogo, handleImageUpload }: any) => {
                 s.newImageWrap,
                 imageList.length > 0 && s.newImageWrapPaddingBottom
               )}>
-              {/* {console.log("local images", localImages)} */}
-
               {imageList?.map((image, index) => {
                 return (
                   <div key={index} style={{ border: "1px dashed blue" }}>

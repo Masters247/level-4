@@ -15,32 +15,13 @@ const ImageLogo = ({
   arraySelect,
   onImageLocalRemove,
 }: any) => {
-  // console.log("is it localstorage", local);
-
   useEffect(() => {
     console.log("is array local", isLocal);
   }, []);
 
   const handleSelected = (index: any) => {
     setSelectImage(index);
-    // if (local) {
-    //   setArraySelect([
-    //     { local: false },
-    //     {
-    //       live: true,
-    //     },
-    //   ]);
-    // } else {
-    //   setArraySelect([
-    //     {
-    //       local: true,
-    //     },
-    //     { live: false },
-    //   ]);
-    // }
   };
-
-  // console.log("array select", arraySelect[1]);
 
   return (
     <div
