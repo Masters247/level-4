@@ -8,17 +8,12 @@ import ImageUploading from "react-images-uploading";
 import ImageLogo from "./ImageLogo";
 
 const ImageUploader = ({ logo, setLogo, handleImageUpload }: any) => {
-  const [localImages, setLocalImages] = useState([]);
+  const [localImages, setLocalImages]: any = useState([]);
   const [images, setImages] = useState([]);
-  const [arraySelect, setArraySelect] = useState([
-    { local: false },
-    { live: false },
-  ]);
   const [selectImage, setSelectImage] = useState(0);
   const maxNumber = 2;
 
   const onChange = (imageList: any) => {
-    console.log(window.localStorage);
     setImages(imageList);
     if (imageList.length !== 0) {
       setLogo(imageList[0].data_url);
@@ -35,10 +30,12 @@ const ImageUploader = ({ logo, setLogo, handleImageUpload }: any) => {
   useEffect(() => {
     let local: any = window.localStorage.getItem("logo list");
     let obj = JSON.parse(local);
-    if (localImages?.length === 0) {
+    if (obj === null) {
+      return;
+    } else if (localImages?.length === 0) {
       setLocalImages(obj);
     } else {
-      setLocalImages(localImages.concat(obj));
+      setLocalImages(localImages?.concat(obj));
     }
   }, []);
 
@@ -67,9 +64,7 @@ const ImageUploader = ({ logo, setLogo, handleImageUpload }: any) => {
           isDragging,
           dragProps,
         }) => (
-          // write your building UI
           <div className={s.uploadImageWrap}>
-            {/* {console.log("live images", imageList)} */}
             <button
               className={s.buttonCloseImageUpload}
               onClick={handleImageUpload}>
@@ -94,17 +89,13 @@ const ImageUploader = ({ logo, setLogo, handleImageUpload }: any) => {
                 <p>Remove all images</p>
               </button>
             </div>
-            <div
-              className={cn(
-                s.newImageWrap,
-                imageList.length > 0 && s.newImageWrapPaddingBottom
-              )}>
-              {imageList?.map((image, index) => {
+
+            <div className={cn(s.newImageWrap)}>
+              {imageList?.map((image: any, index: any) => {
                 return (
-                  <div key={index} style={{ border: "1px dashed blue" }}>
+                  <div key={index}>
                     {image !== null && (
                       <ImageLogo
-                        key={index}
                         index={index}
                         imageList={imageList.concat(localImages)}
                         handleLogoPick={handleLogoPick}
@@ -113,31 +104,6 @@ const ImageUploader = ({ logo, setLogo, handleImageUpload }: any) => {
                         setSelectImage={setSelectImage}
                         selectImage={selectImage}
                         isLocal={false}
-                        setArraySelect={setArraySelect}
-                        arraySelect={arraySelect}
-                        onImageLocalRemove={onImageLocalRemove}
-                      />
-                    )}
-                  </div>
-                );
-              })}
-
-              {localImages?.map((image, index) => {
-                return (
-                  <div key={index} style={{ border: "1px dashed red" }}>
-                    {image !== null && (
-                      <ImageLogo
-                        key={index}
-                        index={index}
-                        imageList={imageList.concat(localImages)}
-                        handleLogoPick={handleLogoPick}
-                        onImageRemove={onImageRemove}
-                        image={image}
-                        setSelectImage={setSelectImage}
-                        selectImage={selectImage}
-                        isLocal={true}
-                        setArraySelect={setArraySelect}
-                        arraySelect={arraySelect}
                         onImageLocalRemove={onImageLocalRemove}
                       />
                     )}

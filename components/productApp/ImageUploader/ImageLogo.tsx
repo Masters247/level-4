@@ -11,17 +11,17 @@ const ImageLogo = ({
   image,
   setSelectImage,
   selectImage,
-  setArraySelect,
-  arraySelect,
   onImageLocalRemove,
 }: any) => {
-  useEffect(() => {
-    console.log("is array local", isLocal);
-  }, []);
+  // useEffect(() => {
+  //   console.log("is array local", isLocal);
+  // }, []);
 
   const handleSelected = (index: any) => {
     setSelectImage(index);
   };
+  // console.log("image list", imageList);
+  // console.log("select image", selectImage);
 
   return (
     <div

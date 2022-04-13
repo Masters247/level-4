@@ -1,4 +1,4 @@
-import { useCallback, useRef, useState } from "react";
+import { useRef, useState } from "react";
 import { useSpring, animated } from "@react-spring/web";
 import Image from "next/image";
 import { useDrag } from "@use-gesture/react";

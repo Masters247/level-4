@@ -5,7 +5,6 @@ import ProductView from "../../components/productApp/ProductView/ProductView";
 import productQuery from "../../lib/graphcms-querys/productQuery";
 import s from "../../styles/pages/customPage.module.scss";
 import html2canvas from "html2canvas";
-import ImageUploader from "../../components/productApp/ImageUploader/ImageUploader";
 
 export async function getStaticPaths() {
   const products = await productQuery();

@@ -10,8 +10,7 @@ const Remove = ({ styles }: any) => {
       x="0px"
       y="0px"
       viewBox="0 0 64 64"
-      enableBackground="new 0 0 64 64"
-    >
+      enableBackground="new 0 0 64 64">
       <g>
         <line
           fill="none"
