@@ -1,0 +1,25 @@
+@use "../base.scss" as *;
+.contactUsPageWrap {
+  margin: 4em 1em;
+  .detailsWrap {
+    padding-bottom: 2em;
+    border-bottom: 1px solid $black;
+  }
+  .title {
+    margin: 2em 0;
+    h1 {
+      margin-bottom: 1em;
+    }
+  }
+  .contactDetails {
+    h2 {
+      font-size: 1em;
+      font-weight: 400;
+      margin-bottom: 1em;
+      text-transform: capitalize;
+    }
+    p {
+      margin-bottom: 0.5em;
+    }
+  }
+}

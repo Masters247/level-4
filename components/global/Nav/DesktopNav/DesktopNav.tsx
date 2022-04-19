@@ -37,9 +37,9 @@ const DesktopNav: FC = () => {
             <a>About Us</a>
           </Link>
         </li>
-        <div className={s.search}>
+        {/* <div className={s.search}>
           <Search />
-        </div>
+        </div> */}
         <div className={s.account}>
           <Account />
         </div>

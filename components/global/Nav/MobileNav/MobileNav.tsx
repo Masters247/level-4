@@ -88,9 +88,9 @@ const Nav: FC = () => {
               </Link>
             )}
           </div>
-          <div className={s.search}>
+          {/* <div className={s.search}>
             <Search />
-          </div>
+          </div> */}
         </div>
       </nav>
     </div>

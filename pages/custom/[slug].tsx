@@ -2,6 +2,7 @@ import type { NextPage } from "next";
 import { GraphQLClient, gql } from "graphql-request";
 import { useState, useEffect, createContext } from "react";
 import ProductView from "../../components/productApp/ProductView/ProductView";
+import assetUpload from "../../lib/graphcms-uploads-mutations/upload";
 import productQuery from "../../lib/graphcms-querys/productQuery";
 import s from "../../styles/pages/customPage.module.scss";
 import html2canvas from "html2canvas";
@@ -87,6 +88,8 @@ const Custom: NextPage<Props> = ({ data }) => {
           /* this allows for the image to be downloaded */
           window.location.href = image;
           window.localStorage.setItem("image", image);
+
+          assetUpload(image);
           // const newImage = window.localStorage.getItem("image");
 
           // console.log("Locally stored image", newImage);

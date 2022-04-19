@@ -8,8 +8,38 @@ import { Button } from "../../components/ui/Button";
 import s from "../../styles/pages/account.module.scss";
 import { useRouter } from "next/router";
 import { signOut, useSession } from "next-auth/react";
+import { PrismaClient } from "@prisma/client";
 
-const Account: NextPage = () => {
+const prisma = new PrismaClient();
+
+export async function getServerSideProps() {
+  const users = await prisma.user.findMany();
+  return {
+    props: {
+      users,
+    },
+  };
+}
+
+async function saveUser(user: any) {
+  const response = await fetch("/api/users", {
+    method: "POST",
+    body: JSON.stringify(user),
+  });
+  if (!response.ok) {
+    throw new Error(response.statusText);
+  }
+
+  return await response.json();
+}
+
+interface Props {
+  users: any;
+}
+
+const Account: NextPage<Props> = ({ users }) => {
+  console.log("user from prisma", users);
+
   const router = useRouter();
   const { data: session, status }: any = useSession({
     required: true,

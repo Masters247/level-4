@@ -37,11 +37,13 @@ model Session {
 }
 
 model User {
-  id            String    @id @default(cuid())
+  id            String        @id @default(cuid())
   name          String?
-  email         String?   @unique
+  email         String?       @unique
   emailVerified DateTime?
   image         String?
+  customImages  CustomImage[]
+  logoImages    LogoImage[]
   accounts      Account[]
   sessions      Session[]
 }
@@ -52,4 +54,18 @@ model VerificationToken {
   expires    DateTime
 
   @@unique([identifier, token])
+}
+
+model CustomImage {
+  id       String @id @default(cuid())
+  imageUrl String
+  userId   String
+  user     User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model LogoImage {
+  id     String @id @default(cuid())
+  image  String
+  userId String
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
 }

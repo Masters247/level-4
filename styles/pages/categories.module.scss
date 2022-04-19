@@ -2,11 +2,16 @@
 
 .heroWrap {
   .heroText {
-    padding: 4em 2em;
+    height: 18em;
+    padding: 0 2em;
+    // padding: 4em 2em;
     @include flexCenter;
     flex-direction: column;
     @media (min-width: $media-desktop) {
       height: 23em;
+    }
+    @media (min-width: $media-desktop-large) {
+      height: 30em;
     }
     h1 {
       margin-bottom: 1em;
@@ -18,8 +23,14 @@
     }
   }
   .heroImage {
-    max-height: 23em;
+    max-height: 18em;
     overflow: hidden;
+    @media (min-width: $media-desktop) {
+      max-height: 23em;
+    }
+    @media (min-width: $media-desktop-large) {
+      max-height: 30em;
+    }
   }
 }
 .categoriesProductsWrap {
