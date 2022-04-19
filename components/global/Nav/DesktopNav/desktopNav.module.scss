@@ -45,17 +45,21 @@
   .navBottom {
     display: flex;
     align-items: center;
-    a {
-      text-transform: uppercase;
-      margin-right: 2em;
-      letter-spacing: 0.1em;
-      font-weight: 600;
-      font-size: 0.75rem;
-      cursor: pointer;
-      transition: opacity 300ms ease-in-out;
+    position: relative;
+    z-index: 10;
+    li {
+      a {
+        text-transform: uppercase;
+        margin-right: 2em;
+        letter-spacing: 0.1em;
+        font-weight: 600;
+        font-size: 0.75rem;
+        cursor: pointer;
+        transition: opacity 300ms ease;
 
-      &:hover {
-        opacity: 50%;
+        &:hover {
+          opacity: 50%;
+        }
       }
     }
 

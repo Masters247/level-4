@@ -32,9 +32,11 @@ const DesktopNav: FC = () => {
         </Link>
       </div>
       <div className={s.navBottom}>
-        <Link href="/about-us" passHref>
-          <a>About Us</a>
-        </Link>
+        <li>
+          <Link href="/about-us" passHref>
+            <a>About Us</a>
+          </Link>
+        </li>
         <div className={s.search}>
           <Search />
         </div>

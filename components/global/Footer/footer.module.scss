@@ -43,6 +43,14 @@
         li {
           text-align: center;
           margin: 0.25em 0;
+          a {
+            transition: opacity 300ms ease;
+
+            &:hover {
+              opacity: 50%;
+            }
+          }
+
           @media (min-width: $media-tablet) {
             text-align: left;
           }

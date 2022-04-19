@@ -1,10 +1,10 @@
+import Image from "next/image";
 import type { NextPage } from "next";
 import { GraphQLClient, gql } from "graphql-request";
-import Image from "next/image";
-import categoryQuery from "../../lib/graphcms-querys/categoryQuery";
-import Product from "../../components/productApp/Product/Product";
-import PictureGrid from "../../components/global/PictureGrid/pictureGrid";
 import s from "../../styles/pages/categories.module.scss";
+import Product from "../../components/productApp/Product/Product";
+import categoryQuery from "../../lib/graphcms-querys/categoryQuery";
+import PictureGrid from "../../components/global/PictureGrid/pictureGrid";
 
 export async function getStaticPaths() {
   const categories = await categoryQuery();
@@ -74,8 +74,6 @@ interface Props {
 
 const Category: NextPage<Props> = ({ data }) => {
   const { categories } = data;
-
-  console.log("cata", categories);
 
   return (
     <div className={s.categoriesPageWrap}>
