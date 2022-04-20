@@ -71,6 +71,10 @@ const Custom: NextPage<Props> = ({ data }) => {
   const [screenShot, setScreenShot] = useState(false);
   const [screenShotImage, setScreenShotImage] = useState(null);
 
+  const handleSaveCustomImage = () => {
+    console.log("save click");
+  };
+
   const handleScreenShot = () => {
     setScreenShot(true);
   };
@@ -87,7 +91,7 @@ const Custom: NextPage<Props> = ({ data }) => {
 
           /* this allows for the image to be downloaded */
           window.location.href = image;
-          window.localStorage.setItem("image", image);
+          // window.localStorage.setItem("image", image);
 
           assetUpload(image);
           // const newImage = window.localStorage.getItem("image");
@@ -107,6 +111,7 @@ const Custom: NextPage<Props> = ({ data }) => {
         productColoutVariants={product.productVariantColours}
         handleColourClick={handleColourClick}
         handleScreenShot={handleScreenShot}
+        handleSaveCustomImage={handleSaveCustomImage}
         products={product}
       />
     </div>

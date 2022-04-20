@@ -5,9 +5,10 @@ import s from "./collectionsGrid.module.scss";
 
 interface Props {
   collections: Collection[];
+  slugs: any;
 }
 
-const CollectionsGrid: FC<Props> = ({ collections }) => {
+const CollectionsGrid: FC<Props> = ({ collections, slugs }) => {
   return (
     <div className={s.gridWrapper}>
       {collections.map((collection) => (

@@ -4,7 +4,7 @@ const assetUpload = async (data: any) => {
   let image = new Image();
   image.src = data;
   image.onload = function () {
-    console.log("new image width", image.width);
+    // console.log("new image width", image.width);
   };
 };
 

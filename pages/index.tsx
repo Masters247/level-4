@@ -28,7 +28,7 @@ const Home: NextPage<Props> = ({ collections, slugs }) => {
   return (
     <div>
       <VideoHero />
-      <CollectionsGrid collections={collections} />
+      <CollectionsGrid collections={collections} slugs={slugs} />
       <PictureGrid title={"trending styles"} radius={"50%"} />
       <MailingList />
     </div>

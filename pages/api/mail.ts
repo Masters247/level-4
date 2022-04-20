@@ -20,7 +20,7 @@ export default function handler(req: any, res: any) {
       "danecouzens@gmail.com",
       //   "mollie@golfway.com",
     ],
-    from: "contact@level4.com",
+    from: "sales@level-four.co.uk",
     subject: "New contact form message",
     text: message,
     html: `<p>${message.replace(/\r\n/g, "<br>")}</p>`,

@@ -8,13 +8,12 @@ const pages = [
   },
   {
     products: [
-      // { name: "Collections", link: "/categories/collections" },
       { name: "Headwear", link: "/headwear" },
       { name: "Accessories", link: "/accessories" },
       // { name: "Bespoke", link: "/bespoke" },
-      { name: "Brasswear", link: "/brasswear" },
+      { name: "Brassware", link: "/brassware" },
+      { name: "Luggage", link: "/luggage" },
       // { name: "Collections", link: "/collections" },
-      // { name: "Bespoke", link: "/categories/bespoke" },
     ],
   },
 ];

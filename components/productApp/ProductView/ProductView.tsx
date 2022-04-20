@@ -13,6 +13,7 @@ const ProductView = ({
   productColoutVariants,
   handleColourClick,
   handleScreenShot,
+  handleSaveCustomImage,
   id,
 }: any) => {
   const [control, setControl] = useState(true);
@@ -31,7 +32,7 @@ const ProductView = ({
 
   const bind = useDrag(
     (state) => {
-      console.log("state", state.movement);
+      // console.log("state", state.movement);
       (window as any).movement = state.movement;
       (window as any).offset = state.offset;
       const isResizing = state?.event.target === dragEl.current;
@@ -152,11 +153,13 @@ const ProductView = ({
           <div className={s.productViewport}>
             <div
               className={`${control ? s.customArear : s.customArearHide}`}
-              ref={containerRef}>
+              ref={containerRef}
+            >
               <animated.div
                 className={s.customLogo}
                 style={{ x, y, width, height, zIndex: "1" }}
-                {...bind()}>
+                {...bind()}
+              >
                 <div className={s.imageOuterWrap}>
                   {logo !== null && (
                     <div className={s.logoImageWrap}>
@@ -185,6 +188,7 @@ const ProductView = ({
         horizontal={handleHorizontal}
         showhide={handleControls}
         state={control}
+        handleSaveCustomImage={handleSaveCustomImage}
         handleColourClick={handleColourClick}
         handleScreenShot={handleScreenShot}
         handleImageUpload={handleImageUpload}

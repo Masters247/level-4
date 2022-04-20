@@ -29,6 +29,7 @@
     .mobileMenu {
       @include flexCenter;
       height: 3em;
+      cursor: pointer;
 
       .menuLine {
         @include flexCenter;
