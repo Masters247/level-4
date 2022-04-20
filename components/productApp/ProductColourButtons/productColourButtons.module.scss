@@ -16,7 +16,8 @@
     p {
       text-align: center;
       transition: opacity 200ms ease, color 200ms ease;
-      font-size: 0.8em;
+      font-size: 1em;
+      font-weight: 400;
       &:hover,
       &:focus {
         color: $button-primary;

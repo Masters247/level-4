@@ -9,6 +9,7 @@ const ProductButtons = ({
   state,
   handleScreenShot,
   handleImageUpload,
+  handleSaveCustomImage,
   stateUploader,
 }: any) => {
   return (
@@ -35,7 +36,8 @@ const ProductButtons = ({
       </button>
       <button
         className={cn(s.uiButton, s.saveButton, state && s.disabled)}
-        disabled
+        onClick={handleSaveCustomImage}
+        disabled={state}
       >
         <Save styles={s.saveIcon} />
         <p>save</p>

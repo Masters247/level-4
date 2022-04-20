@@ -6,6 +6,9 @@ import assetUpload from "../../lib/graphcms-uploads-mutations/upload";
 import productQuery from "../../lib/graphcms-querys/productQuery";
 import s from "../../styles/pages/customPage.module.scss";
 import html2canvas from "html2canvas";
+// import { PrismaClient } from "@prisma/client";
+
+// const prisma = new PrismaClient();
 
 export async function getStaticPaths() {
   const products = await productQuery();

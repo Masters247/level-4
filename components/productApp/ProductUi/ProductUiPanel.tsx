@@ -17,6 +17,7 @@ const ProductUiPanel = ({
   showhide,
   state,
   productColoutVariants,
+  handleSaveCustomImage,
   handleColourClick,
   handleImageUpload,
   handleScreenShot,
@@ -87,6 +88,7 @@ const ProductUiPanel = ({
         state={state}
         handleImageUpload={handleImageUpload}
         handleScreenShot={handleScreenShot}
+        handleSaveCustomImage={handleSaveCustomImage}
       />
     </div>
   );

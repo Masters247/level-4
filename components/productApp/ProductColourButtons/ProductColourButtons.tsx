@@ -61,15 +61,17 @@ const ProductColourButtonsWrap: FC<Props> = ({
         s.productColours,
         position === 1 && s.positionOne,
         position === 2 && s.positionTwo
-      )}>
-      {productVariantColoursLength < 4 ? null : (
+      )}
+    >
+      {productVariantColoursLength <= 4 ? null : (
         <button
           onClick={showMoreColoursLeft}
           className={cn(
             s.coloursRight,
             productColourView.start === 0 && s.hide
           )}
-          disabled={productColourView.start === 0}>
+          disabled={productColourView.start === 0}
+        >
           <p>+{colourLeft}</p>
         </button>
       )}
@@ -86,11 +88,12 @@ const ProductColourButtonsWrap: FC<Props> = ({
         );
       })}
 
-      {productVariantColoursLength < 4 ? null : (
+      {productVariantColoursLength <= 4 ? null : (
         <button
           onClick={showMoreColoursRight}
           className={cn(s.coloursLeft, colourRight === 0 && s.hide)}
-          disabled={colourRight === 0}>
+          disabled={colourRight === 0}
+        >
           <p>+{colourRight}</p>
         </button>
       )}
