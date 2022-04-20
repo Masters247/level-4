@@ -1,4 +1,5 @@
 import type { GetStaticProps, NextPage } from "next";
+import ContactForm from "../components/global/ContactForm/ContactForm";
 import contactUsQuery from "../lib/graphcms-querys/contactPageQuery";
 import s from "../styles/pages/contactUsPage.module.scss";
 
@@ -31,8 +32,9 @@ const ContactUs: NextPage<Props> = ({ contactUs }) => {
           <p>{contactUs[0].email}</p>
         </div>
       </section>
-
-      <section className={s.form}></section>
+      <section className={s.form}>
+        <ContactForm />
+      </section>
     </div>
   );
 };

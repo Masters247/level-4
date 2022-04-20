@@ -1,6 +1,7 @@
 @use "../base.scss" as *;
 .contactUsPageWrap {
   margin: 4em 1em;
+
   .detailsWrap {
     padding-bottom: 2em;
     border-bottom: 1px solid $black;
@@ -9,6 +10,9 @@
     margin: 2em 0;
     h1 {
       margin-bottom: 1em;
+    }
+    p {
+      max-width: 500px;
     }
   }
   .contactDetails {
@@ -21,5 +25,33 @@
     p {
       margin-bottom: 0.5em;
     }
+  }
+  @media (min-width: $media-tablet-small) {
+    margin: 4em 2em;
+  }
+  @media (min-width: $media-desktop-small) {
+    // margin: 4em;
+    display: flex;
+    .form,
+    .detailsWrap {
+      width: 50%;
+      margin: 0 2em;
+    }
+
+    .title {
+      margin: 0 0 2em;
+    }
+    .detailsWrap {
+      border-bottom: none;
+      border-right: 1px solid $black;
+      // margin-right: 2em;
+      padding-right: 4em;
+    }
+    .form {
+    }
+  }
+  @media (min-width: $media-desktop-medium-large) {
+    max-width: 1225px;
+    margin: 4em auto;
   }
 }

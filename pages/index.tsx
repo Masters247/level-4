@@ -8,7 +8,6 @@ import collectionsQuery, {
 import categorySlugsQuery from "../lib/graphcms-querys/categoryQuery";
 import s from "../styles/pages/index.module.scss";
 import PictureGrid from "../components/global/PictureGrid/pictureGrid";
-import { useSession, signIn, signOut } from "next-auth/react";
 
 export const getStaticProps: GetStaticProps = async () => {
   const collections = await collectionsQuery();
