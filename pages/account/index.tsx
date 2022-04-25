@@ -13,7 +13,7 @@ import useSWR from "swr";
 
 const fetcher = (email: any) => fetch(email).then((res) => res.json());
 
-function userAccount(email: any) {
+function useAccount(email: any) {
   const { data: user, error } = useSWR(
     `/api/account/user?email=${email}`,
     fetcher,
@@ -40,7 +40,7 @@ const Account: NextPage = () => {
 
   const email = session?.user.email;
 
-  const { user, isLoading, isError } = userAccount(email);
+  const { user, isLoading, isError } = useAccount(email);
 
   const [isDetailsShown, setIsDetailsShown] = useState(true);
 
