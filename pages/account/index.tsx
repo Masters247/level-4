@@ -84,7 +84,12 @@ const Account: NextPage = () => {
         {session && (
           <div className={s.loggedInTitle}>
             <span>
-              <Image src={session.user.image} width={30} height={30} />
+              <Image
+                src={session.user.image}
+                width={30}
+                height={30}
+                alt="need to add something here"
+              />
             </span>
             <button onClick={handleSignOut}>
               <p>Sign Out</p>
