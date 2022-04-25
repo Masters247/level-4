@@ -24,6 +24,7 @@ const ProductColourButtonsWrap: FC<Props> = ({
   const [colourLeft, setColoursLeft] = useState(
     productVariantColoursLength - productVariantColoursLength
   );
+
   const [colourRight, setColoursRight] = useState(
     productVariantColoursLength - 4
   );
@@ -62,6 +63,9 @@ const ProductColourButtonsWrap: FC<Props> = ({
         position === 1 && s.positionOne,
         position === 2 && s.positionTwo
       )}
+      // style={{
+      //   left: `calc(50% - 76px)`,
+      // }}
     >
       {productVariantColoursLength <= 4 ? null : (
         <button

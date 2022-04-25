@@ -18,13 +18,13 @@
       text-align: center;
     }
   }
-
   .productImagesSection {
     @include flexCenter;
     min-height: 280px;
     background-color: $grey-0;
     .productImagesBackgroundWrap {
       width: 100%;
+      padding-top: 4em;
       .productImagesWrap {
         display: grid;
         justify-content: center;
@@ -38,6 +38,9 @@
   @media (min-width: $media-tablet-small) {
     .productImagesSection {
       padding: 0 2.5em;
+      .productImagesBackgroundWrap {
+        padding-top: 0em;
+      }
     }
   }
 }

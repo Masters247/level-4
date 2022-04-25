@@ -1,45 +1,35 @@
-import type { NextPage } from "next";
 import Customer from "../../components/account/Customer/Customer";
-import cn from "classnames";
-import Image from "next/image";
-import useDelayedRender from "use-delayed-render";
-import { useState } from "react";
-import { Button } from "../../components/ui/Button";
 import s from "../../styles/pages/account.module.scss";
-import { useRouter } from "next/router";
 import { signOut, useSession } from "next-auth/react";
-import { PrismaClient } from "@prisma/client";
+import { Button } from "../../components/ui/Button";
+import useDelayedRender from "use-delayed-render";
+import { prisma } from "../../lib/prisma";
+import { useRouter } from "next/router";
+import type { NextPage } from "next";
+import { useState } from "react";
+import Image from "next/image";
+import cn from "classnames";
+import useSWR from "swr";
 
-const prisma = new PrismaClient();
+const fetcher = (email: any) => fetch(email).then((res) => res.json());
 
-export async function getServerSideProps() {
-  const users = await prisma.user.findMany();
+function userAccount(email: any) {
+  const { data: user, error } = useSWR(
+    `/api/account/user?email=${email}`,
+    fetcher,
+    {
+      revalidateOnFocus: false,
+    }
+  );
+
   return {
-    props: {
-      users,
-    },
+    user: user,
+    isLoading: !error && !user,
+    isError: error,
   };
 }
 
-async function saveUser(user: any) {
-  const response = await fetch("/api/users", {
-    method: "POST",
-    body: JSON.stringify(user),
-  });
-  if (!response.ok) {
-    throw new Error(response.statusText);
-  }
-
-  return await response.json();
-}
-
-interface Props {
-  users: any;
-}
-
-const Account: NextPage<Props> = ({ users }) => {
-  console.log("user from prisma", users);
-
+const Account: NextPage = () => {
   const router = useRouter();
   const { data: session, status }: any = useSession({
     required: true,
@@ -48,7 +38,14 @@ const Account: NextPage<Props> = ({ users }) => {
     },
   });
 
+  const email = session?.user.email;
+
+  const { user, isLoading, isError } = userAccount(email);
+
   const [isDetailsShown, setIsDetailsShown] = useState(true);
+
+  console.log("user", user);
+
   const { mounted: isDetailsMounted, rendered: isDetailsRendered } =
     useDelayedRender(isDetailsShown, {
       enterDelay: 300,
@@ -68,13 +65,8 @@ const Account: NextPage<Props> = ({ users }) => {
   };
 
   const customer = [
-    { type: "name", data: `${session?.user.name}` },
-    { type: "email", data: `${session?.user.email}` },
-    // { type: "image", data: `${session?.user.image}` },
-    // { type: "password", data: "kdkljsfo" },
-    // { type: "organisation", data: "the band academy" },
-    // { type: "country", data: "United Kingdom" },
-    // { type: "marketing", data: "On" },
+    { type: "name", data: `${user?.name}` },
+    { type: "email", data: `${user?.email}` },
   ];
 
   if (status === "loading") {
@@ -91,7 +83,6 @@ const Account: NextPage<Props> = ({ users }) => {
         <h1>Your Account</h1>
         {session && (
           <div className={s.loggedInTitle}>
-            {/* <p>Hello, {session.user.name} &#40;not You&#41;</p> */}
             <span>
               <Image src={session.user.image} width={30} height={30} />
             </span>
@@ -121,13 +112,19 @@ const Account: NextPage<Props> = ({ users }) => {
             isDetailsRendered ? s.accountDetailsShow : s.accountDetailsHide
           }
         >
-          {customer.map((person: any, i: number) => (
-            <Customer
-              key={i + person.type}
-              type={person.type}
-              data={person.data}
-            />
-          ))}
+          {isLoading ? (
+            <p>is Loading...</p>
+          ) : (
+            <>
+              {customer.map((person: any, i: number) => (
+                <Customer
+                  key={i + person.type}
+                  type={person.type}
+                  data={person.data}
+                />
+              ))}
+            </>
+          )}
         </div>
       )}
       {!isDetailsMounted && (

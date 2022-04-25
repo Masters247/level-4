@@ -1,14 +1,14 @@
-import type { NextPage } from "next";
-import { GraphQLClient, gql } from "graphql-request";
-import { useState, useEffect, createContext } from "react";
 import ProductView from "../../components/productApp/ProductView/ProductView";
-import assetUpload from "../../lib/graphcms-uploads-mutations/upload";
 import productQuery from "../../lib/graphcms-querys/productQuery";
 import s from "../../styles/pages/customPage.module.scss";
+import { GraphQLClient, gql } from "graphql-request";
+import { useSession } from "next-auth/react";
+import { useState, useEffect } from "react";
 import html2canvas from "html2canvas";
-// import { PrismaClient } from "@prisma/client";
+import type { NextPage } from "next";
+import useSWR from "swr";
 
-// const prisma = new PrismaClient();
+const fetcher = (email: any) => fetch(email).then((res) => res.json());
 
 export async function getStaticPaths() {
   const products = await productQuery();
@@ -51,61 +51,94 @@ export async function getStaticProps({ params }: any) {
   }
   `;
 
-  const data = await graphcms.request(query);
+  const queryGraphCms = await graphcms.request(query);
 
   return {
-    props: { data },
+    props: { queryGraphCms },
     revalidate: 10,
   };
 }
 
-interface Props {
-  data?: any;
+function userAccount(email: any) {
+  const { data: user, error } = useSWR(
+    `/api/account/user?email=${email}`,
+    fetcher,
+    {
+      revalidateOnFocus: false,
+    }
+  );
+
+  return {
+    user: user,
+    isLoading: !error && !user,
+    isError: error,
+  };
 }
 
-const Custom: NextPage<Props> = ({ data }) => {
-  const [colour, setColour] = useState(0);
+interface Props {
+  queryGraphCms?: any;
+}
 
-  const { product } = data;
+const Custom: NextPage<Props> = ({ queryGraphCms }) => {
+  const [downloadCustomImage, setDownloadCustomImage] = useState(false);
+  const [saveCustomImage, setSaveCustomImage] = useState(false);
+  const { data: session }: any = useSession();
+  const [colour, setColour] = useState(0);
+  const { product } = queryGraphCms;
+
+  const email = session?.user.email;
+
+  const { user, isLoading, isError } = userAccount(email);
+
   const handleColourClick = (e: any, i: any) => {
     setColour(i);
   };
 
-  const [screenShot, setScreenShot] = useState(false);
-  const [screenShotImage, setScreenShotImage] = useState(null);
-
-  const handleSaveCustomImage = () => {
-    console.log("save click");
+  const handleScreenShot = () => {
+    setDownloadCustomImage(true);
   };
 
-  const handleScreenShot = () => {
-    setScreenShot(true);
+  const handleSaveCustomImage = () => {
+    setSaveCustomImage(true);
+    console.log("save image");
   };
 
   useEffect(() => {
     const documentCustom: any = document.querySelector("#capture");
-    // const documentScreen: any = document.querySelector("#screenShot");
     {
-      screenShot &&
-        html2canvas(documentCustom, {}).then((canvas: any) => {
-          var image = canvas
-            .toDataURL("image/jpeg")
-            .replace("image/jpeg", "image/octet-stream");
+      html2canvas(documentCustom, {}).then((canvas: any) => {
+        var image = canvas
+          .toDataURL("image/jpeg")
+          .replace("image/jpeg", "image/octet-stream");
 
-          /* this allows for the image to be downloaded */
+        const data = {
+          image,
+          user,
+        };
+
+        async function CustomImage() {
+          await fetch(`/api/productApp/customImage`, {
+            headers: { "Content-Type": "application/json" },
+            method: "POST",
+            body: JSON.stringify(data),
+          });
+        }
+        if (saveCustomImage) {
+          CustomImage();
+        }
+
+        if (downloadCustomImage) {
           window.location.href = image;
-          // window.localStorage.setItem("image", image);
+        }
 
-          assetUpload(image);
-          // const newImage = window.localStorage.getItem("image");
+        // const saveImage = async
 
-          // console.log("Locally stored image", newImage);
+        // saveCustomImages(image);
 
-          // documentScreen.appendChild(newImage);
-        });
+        // window.localStorage.setItem("image", image);
+      });
     }
-    setScreenShot(false);
-  }, [screenShot]);
+  }, [downloadCustomImage, saveCustomImage]);
 
   return (
     <div className={s.pageWrap}>

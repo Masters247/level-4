@@ -5,8 +5,14 @@ import s from "./desktopNav.module.scss";
 import Image from "next/image";
 import Account from "../../../ui/icons/Account";
 import Search from "../../../ui/icons/Search";
+import { signIn, useSession } from "next-auth/react";
 
 const DesktopNav: FC = () => {
+  const { data: session } = useSession();
+
+  const handleSignIn = () => {
+    signIn();
+  };
   return (
     <div className={s.navWrapper}>
       <ul className={s.navLinks}>
@@ -40,8 +46,21 @@ const DesktopNav: FC = () => {
         {/* <div className={s.search}>
           <Search />
         </div> */}
-        <div className={s.account}>
-          <Account />
+        <div
+          className={s.account}
+          style={{
+            cursor: "pointer",
+          }}
+        >
+          {!session ? (
+            <button onClick={handleSignIn}>
+              <Account />
+            </button>
+          ) : (
+            <Link href="/account" passHref>
+              <a>{session.user?.name}</a>
+            </Link>
+          )}
         </div>
       </div>
     </div>

@@ -11,8 +11,6 @@
     @include flexCenter;
     width: 14px;
     height: 14px;
-    // width: 18px;
-    // height: 18px;
     p {
       text-align: center;
       transition: opacity 200ms ease, color 200ms ease;
@@ -40,12 +38,12 @@
 // this layout is used on the product page
 .positionOne {
   position: absolute;
-  left: calc(50% - 70px);
+  left: calc(50% - 76px);
   top: 1em;
   @media (min-width: $media-tablet-small) {
     flex-direction: column;
     left: 1em;
-    top: 4.95em;
+    top: 5em;
     .coloursLeft {
       margin-left: 0;
     }

@@ -58,7 +58,7 @@ model VerificationToken {
 
 model CustomImage {
   id     String @id @default(cuid())
-  image  String
+  image  String @db.Text
   userId String
   user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
 }
