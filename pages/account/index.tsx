@@ -72,7 +72,7 @@ const Account: NextPage = () => {
   if (status === "loading") {
     return (
       <div className={s.loggingOut}>
-        <Image src={"/loadingIcon.gif"} width={50} height={50} />
+        <Image src={"/loadingIcon.gif"} width={50} height={50} alt="" />
       </div>
     );
   }
@@ -84,12 +84,7 @@ const Account: NextPage = () => {
         {session && (
           <div className={s.loggedInTitle}>
             <span>
-              <Image
-                src={session.user.image}
-                width={30}
-                height={30}
-                alt="need to add something here"
-              />
+              <Image src={session.user.image} width={30} height={30} alt="" />
             </span>
             <button onClick={handleSignOut}>
               <p>Sign Out</p>

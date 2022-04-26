@@ -44,7 +44,7 @@ const SignIn = ({ providers, csrfToken }: any) => {
           <div key={provider.name} className={s.providerWrap}>
             {loading ? (
               <div className={s.loggingIn}>
-                <Image src={"/loadingIcon.gif"} width={50} height={50} />
+                <Image src={"/loadingIcon.gif"} width={50} height={50} alt="" />
               </div>
             ) : (
               <button onClick={() => handleSignIn(provider.id)}>

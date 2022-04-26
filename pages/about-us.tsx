@@ -29,6 +29,7 @@ const AboutUs: NextPage<Props> = ({ aboutUs }) => {
         <div className={s.heroImage}>
           <Image
             layout="responsive"
+            alt=""
             // alt={categories[0].heroImageAltText}
             src={aboutUs[0].heroImageMobile.url}
             placeholder="blur"
@@ -47,6 +48,7 @@ const AboutUs: NextPage<Props> = ({ aboutUs }) => {
           <div className={s.imageItem}>
             <Image
               layout="responsive"
+              alt=""
               // alt={categories[0].heroImageAltText}
               src={aboutUs[0].categoryImageOne.url}
               placeholder="blur"
@@ -66,6 +68,7 @@ const AboutUs: NextPage<Props> = ({ aboutUs }) => {
             <Image
               layout="responsive"
               objectFit="cover"
+              alt=""
               // alt={categories[0].heroImageAltText}
               src={aboutUs[0].categoryImageTwo.url}
               placeholder="blur"
@@ -84,6 +87,7 @@ const AboutUs: NextPage<Props> = ({ aboutUs }) => {
             <Image
               layout="responsive"
               objectFit="cover"
+              alt=""
               // alt={categories[0].heroImageAltText}
               src={aboutUs[0].categoryImageThree.url}
               placeholder="blur"
