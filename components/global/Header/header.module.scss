@@ -2,8 +2,9 @@
 
 .header {
   @include boxShadow;
+  position: relative;
 
-  z-index: 2;
+  z-index: 200;
 
   .topBanner {
     display: none;

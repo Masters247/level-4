@@ -1,5 +1,38 @@
 @use "../base.scss" as *;
 .pageWrap {
-  padding: 0 0 0;
-  // border: 1px rgb(89, 89, 89) solid;
+  padding: 2em 0;
+  position: relative;
+  .cover {
+    position: absolute;
+    top: 0em;
+    z-index: 90;
+    width: 100%;
+    height: 100%;
+    background-color: $black-opacity-60;
+  }
+  .login {
+    position: absolute;
+    z-index: 100;
+    width: 200px;
+    text-align: center;
+    background-color: $grey-0;
+    padding: 20px;
+    left: calc(50% - 100px);
+    top: calc(50% - 92px);
+    p {
+      margin-bottom: 20px;
+      color: $red-1;
+      background-color: $white;
+      padding: 10px;
+    }
+    .loginButton {
+      background-color: $button-primary;
+      color: $white;
+      font-weight: 600;
+      text-transform: uppercase;
+      font-size: 0.8em;
+      min-height: 3em;
+      @include flexCenter;
+    }
+  }
 }

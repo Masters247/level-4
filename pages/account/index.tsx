@@ -1,4 +1,5 @@
 import Customer from "../../components/account/Customer/Customer";
+import Designs from "../../components/account/Designs/Designs";
 import s from "../../styles/pages/account.module.scss";
 import { signOut, useSession } from "next-auth/react";
 import { Button } from "../../components/ui/Button";
@@ -17,9 +18,7 @@ function useAccount(email: any) {
   const { data: user, error } = useSWR(
     `/api/account/user?email=${email}`,
     fetcher,
-    {
-      revalidateOnFocus: false,
-    }
+    { revalidateOnFocus: false }
   );
 
   return {
@@ -39,12 +38,10 @@ const Account: NextPage = () => {
   });
 
   const email = session?.user.email;
-
   const { user, isLoading, isError } = useAccount(email);
-
   const [isDetailsShown, setIsDetailsShown] = useState(true);
 
-  console.log("user", user);
+  // console.log("user", user.id);
 
   const { mounted: isDetailsMounted, rendered: isDetailsRendered } =
     useDelayedRender(isDetailsShown, {
@@ -133,12 +130,12 @@ const Account: NextPage = () => {
             !isDetailsRendered ? s.accountDetailsShow : s.accountDetailsHide
           }
         >
-          Designs
+          {isLoading ? <p>is Loading....</p> : <Designs userId={user.id} />}
         </div>
       )}
-      <Button variant="primary" className={s.save} Component="button">
+      {/* <Button variant="primary" className={s.save} Component="button">
         Save changes
-      </Button>
+      </Button> */}
     </div>
   );
 };

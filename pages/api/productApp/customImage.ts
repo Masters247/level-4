@@ -7,7 +7,7 @@ export default async function handler(
 ) {
   const customImg = req.body;
 
-  console.log("customer id", customImg.user.id);
+  // console.log("customer id", customImg.user.id);
   // console.log("custom image", customImg.image);
   // console.log("custom image", customImg.session.user.email);
 

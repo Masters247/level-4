@@ -109,7 +109,7 @@
     transition: opacity 300ms ease-in;
     @media (min-width: $media-desktop-small) {
       display: grid;
-      grid-template-columns: 1fr 1fr;
+      grid-template-columns: 1fr;
       grid-gap: 2em;
     }
   }

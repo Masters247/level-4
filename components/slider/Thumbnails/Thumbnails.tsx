@@ -27,7 +27,7 @@ const Thumbnails = ({
       setThumbNailsWidth(480);
     }
 
-    console.log(thumbNailswidth, "thumbNailsWith");
+    // console.log(thumbNailswidth, "thumbNailsWith");
 
     if (activeSlide === 0 || activeSlide === 2) {
       setMarginState(0);
@@ -49,7 +49,8 @@ const Thumbnails = ({
           style={{
             gridTemplateColumns: `repeat(${thumbnails.length}, ${thumbWidths}px)`,
             marginLeft: `calc(-${marginState}px)`,
-          }}>
+          }}
+        >
           {thumbnails.map((thumb: any, i: any) => (
             <Thumb
               key={i}

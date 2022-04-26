@@ -1,1 +1,34 @@
 @use "../../../styles/base.scss" as *;
+
+.loggingInWrap {
+  //   border: 1px solid blue;
+  display: flex;
+  justify-content: center;
+}
+
+.designs {
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-gap: 1em;
+  //   border: 1px solid red;
+  .imageWrap {
+    position: relative;
+    .deleteCustomButton {
+      position: absolute;
+      z-index: 10;
+      right: 5px;
+      top: 5px;
+      .removeIcon {
+        width: 30px;
+        opacity: 0.5;
+        height: 30px;
+      }
+    }
+    // border: 1px solid blue;
+    @include boxShadow;
+  }
+  @media (min-width: $media-tablet-small) {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}

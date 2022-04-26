@@ -30,7 +30,6 @@ const AboutUs: NextPage<Props> = ({ aboutUs }) => {
           <Image
             layout="responsive"
             alt=""
-            // alt={categories[0].heroImageAltText}
             src={aboutUs[0].heroImageMobile.url}
             placeholder="blur"
             blurDataURL={aboutUs[0].heroImageMobile.url}
@@ -49,7 +48,6 @@ const AboutUs: NextPage<Props> = ({ aboutUs }) => {
             <Image
               layout="responsive"
               alt=""
-              // alt={categories[0].heroImageAltText}
               src={aboutUs[0].categoryImageOne.url}
               placeholder="blur"
               objectFit="cover"
@@ -69,7 +67,6 @@ const AboutUs: NextPage<Props> = ({ aboutUs }) => {
               layout="responsive"
               objectFit="cover"
               alt=""
-              // alt={categories[0].heroImageAltText}
               src={aboutUs[0].categoryImageTwo.url}
               placeholder="blur"
               blurDataURL={aboutUs[0].categoryImageTwo.url}
@@ -88,7 +85,6 @@ const AboutUs: NextPage<Props> = ({ aboutUs }) => {
               layout="responsive"
               objectFit="cover"
               alt=""
-              // alt={categories[0].heroImageAltText}
               src={aboutUs[0].categoryImageThree.url}
               placeholder="blur"
               blurDataURL={aboutUs[0].categoryImageThree.url}

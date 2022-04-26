@@ -5,17 +5,17 @@ export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
-  const id: any = req.query.id;
+  const id: any = req.query.i;
 
   // console.log("id", id);
-  const getCustomImages = await prisma.customImage.findMany({
+  const deleteCustomImages = await prisma.customImage.delete({
     where: {
-      userId: id,
+      id: id,
     },
   });
 
-  const customImages = await JSON.parse(JSON.stringify(getCustomImages));
+  const deletedImages = await JSON.parse(JSON.stringify(deleteCustomImages));
   // console.log("getCustomImages custom Images", customImages);
 
-  res.status(200).json(customImages);
+  res.status(200).json(deletedImages);
 }
