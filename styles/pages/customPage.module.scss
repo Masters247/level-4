@@ -1,6 +1,7 @@
 @use "../base.scss" as *;
 .pageWrap {
   padding: 2em 0;
+  min-height: calc(100vh - 510px);
   position: relative;
   .cover {
     position: absolute;

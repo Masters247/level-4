@@ -6,18 +6,16 @@ export default async function handler(
   res: NextApiResponse
 ) {
   const customImg = req.body;
-
-  // console.log("customer id", customImg.user.id);
-  // console.log("custom image", customImg.image);
-  // console.log("custom image", customImg.session.user.email);
+  // console.log("custom image", customImg.productName);
+  // console.log("custom image", customImg.productCategory);
 
   const id = customImg.user.id;
-
-  // const userEmail = customImg.session.user.email;
 
   const addCustomImage = await prisma.customImage.create({
     data: {
       image: customImg.image,
+      category: customImg.productCategory,
+      productName: customImg.productName,
       user: {
         connect: {
           id: id,

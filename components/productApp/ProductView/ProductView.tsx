@@ -138,7 +138,13 @@ const ProductView = ({
       />
       <div className={s.productViewportContainer}>
         <div id="capture" className={s.imageCaptureWrap}>
-          <div className={s.imageWrap}>
+          <div
+            className={s.imageWrap}
+            style={{
+              width: "500px",
+              height: "500px",
+            }}
+          >
             <Image
               src={image.url}
               quality={100}

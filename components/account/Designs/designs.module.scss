@@ -1,5 +1,27 @@
 @use "../../../styles/base.scss" as *;
 
+.navFilterWrap {
+  margin-bottom: 2em;
+  @include flexCenter;
+  .navFilter {
+    @include flexCenter;
+    flex-wrap: wrap;
+    button {
+      &:nth-child(1) {
+        margin-left: 0;
+      }
+    }
+    button {
+      margin: 1em;
+      p {
+        text-transform: uppercase;
+        font-size: 1em;
+        font-weight: 600;
+      }
+    }
+  }
+}
+
 .loggingInWrap {
   //   border: 1px solid blue;
   display: flex;
@@ -12,23 +34,36 @@
   grid-template-columns: repeat(2, 1fr);
   grid-gap: 1em;
   //   border: 1px solid red;
-  .imageWrap {
-    position: relative;
-    .deleteCustomButton {
-      position: absolute;
-      z-index: 10;
-      right: 5px;
-      top: 5px;
-      .removeIcon {
-        width: 30px;
-        opacity: 0.5;
-        height: 30px;
+  .productWrap {
+    @include boxShadow;
+    .imageWrap {
+      position: relative;
+      .deleteCustomButton {
+        position: absolute;
+        z-index: 10;
+        right: 5px;
+        top: 5px;
+        .removeIcon {
+          width: 30px;
+          opacity: 0.5;
+          height: 30px;
+        }
+      }
+      // border: 1px solid blue;
+    }
+    .productName {
+      padding: 0.5em;
+      p {
+        text-align: center;
+        text-transform: uppercase;
       }
     }
-    // border: 1px solid blue;
-    @include boxShadow;
   }
+
   @media (min-width: $media-tablet-small) {
+    grid-template-columns: repeat(3, 1fr);
+  }
+  @media (min-width: $media-tablet) {
     grid-template-columns: repeat(4, 1fr);
   }
 }

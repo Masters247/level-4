@@ -34,6 +34,7 @@ export async function getStaticProps({ params }: any) {
   query Product {
     product(where: {productSlug: "${params.slug}"}) {
       name
+      productCategory
       productVariantColours {
         customImage {
           url
@@ -95,17 +96,14 @@ const Custom: NextPage<Props> = ({ queryGraphCms }) => {
 
   const handleScreenShot = () => {
     setDownloadCustomImage(true);
-    console.log("download image");
   };
 
   const handleSaveCustomImage = () => {
     if (session) {
       setSaveCustomImage(true);
-      console.log("is session");
     } else {
       setIsSession(false);
     }
-    console.log("save image");
   };
 
   useEffect(() => {
@@ -131,10 +129,14 @@ const Custom: NextPage<Props> = ({ queryGraphCms }) => {
             .toDataURL("image/jpeg")
             .replace("image/jpeg", "image/octet-stream");
           console.log("save image useEffect");
+
           const data = {
             image,
             user,
+            productName: product.name,
+            productCategory: product.productCategory,
           };
+
           async function CustomImage() {
             await fetch(`/api/productApp/customImage`, {
               headers: { "Content-Type": "application/json" },
