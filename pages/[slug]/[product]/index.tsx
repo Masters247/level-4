@@ -74,7 +74,7 @@ interface Props {
 }
 
 const Product: NextPage<Props> = ({ data }) => {
-  const { width } = useWindowSize();
+  // const { width } = useWindowSize();
   const [productColour, setProductColour] = useState(0);
   const { product } = data;
 
@@ -83,8 +83,6 @@ const Product: NextPage<Props> = ({ data }) => {
   };
 
   const images = product.featureImage.map((i: any) => i.url);
-
-  // const colourLength = product.productVariantColours.length;
 
   const imagesLength =
     product.productVariantColours[productColour].images.length;
