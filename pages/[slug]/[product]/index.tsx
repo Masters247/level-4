@@ -84,7 +84,7 @@ const Product: NextPage<Props> = ({ data }) => {
 
   const images = product.featureImage.map((i: any) => i.url);
 
-  const colourLength = product.productVariantColours.length;
+  // const colourLength = product.productVariantColours.length;
 
   const imagesLength =
     product.productVariantColours[productColour].images.length;
@@ -142,7 +142,6 @@ const Product: NextPage<Props> = ({ data }) => {
           </div>
         </div>
       </section>
-
       <Visualise slug={product.productSlug} />
       <Personal />
     </div>
