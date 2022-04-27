@@ -60,7 +60,7 @@ export async function getStaticProps({ params }: any) {
   };
 }
 
-function userAccount(email: any) {
+function useAccount(email: any) {
   const { data: user, error } = useSWR(
     `/api/account/user?email=${email}`,
     fetcher,
@@ -88,7 +88,7 @@ const Custom: NextPage<Props> = ({ queryGraphCms }) => {
   const [colour, setColour] = useState(0);
   const { product } = queryGraphCms;
   const email = session?.user.email;
-  const { user, isLoading, isError } = userAccount(email);
+  const { user, isLoading, isError } = useAccount(email);
 
   const handleColourClick = (e: any, i: any) => {
     setColour(i);
@@ -133,8 +133,8 @@ const Custom: NextPage<Props> = ({ queryGraphCms }) => {
           const data = {
             image,
             user,
-            productName: product.name,
-            productCategory: product.productCategory,
+            productName: product?.name,
+            productCategory: product?.productCategory,
           };
 
           async function CustomImage() {

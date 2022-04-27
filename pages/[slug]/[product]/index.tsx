@@ -106,7 +106,8 @@ const Product: NextPage<Props> = ({ data }) => {
         className={s.productImagesSection}
         style={{
           position: "relative",
-        }}>
+        }}
+      >
         <div className={s.productImagesBackgroundWrap}>
           <ProductColourButtonsWrap
             products={product}
@@ -122,10 +123,12 @@ const Product: NextPage<Props> = ({ data }) => {
               } * 1em))`,
               gridGap: "1em",
               margin: " 0 auto",
-            }}>
+            }}
+          >
             {product.productVariantColours[productColour].images.map(
               (image: any) => (
                 <Image
+                  alt=""
                   key={image.url}
                   layout="responsive"
                   src={image.url}

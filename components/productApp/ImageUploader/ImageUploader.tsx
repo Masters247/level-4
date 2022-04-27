@@ -54,7 +54,8 @@ const ImageUploader = ({ logo, setLogo, handleImageUpload }: any) => {
         value={images}
         onChange={onChange}
         maxNumber={maxNumber}
-        dataURLKey="data_url">
+        dataURLKey="data_url"
+      >
         {({
           imageList,
           onImageUpload,
@@ -67,7 +68,8 @@ const ImageUploader = ({ logo, setLogo, handleImageUpload }: any) => {
           <div className={s.uploadImageWrap}>
             <button
               className={s.buttonCloseImageUpload}
-              onClick={handleImageUpload}>
+              onClick={handleImageUpload}
+            >
               <Remove styles={s.remove} />
             </button>
             <div className={s.imageButtonWrap}>
@@ -76,7 +78,8 @@ const ImageUploader = ({ logo, setLogo, handleImageUpload }: any) => {
                 className={s.uploadButton}
                 style={isDragging ? { color: "red" } : undefined}
                 onClick={onImageUpload}
-                {...dragProps}>
+                {...dragProps}
+              >
                 <div className={s.buttonTextWrap}>
                   <p>Click or Drop here</p>
                 </div>
@@ -85,7 +88,8 @@ const ImageUploader = ({ logo, setLogo, handleImageUpload }: any) => {
               <button
                 type="button"
                 className={s.removeAllImagesButton}
-                onClick={onImageRemoveAll}>
+                onClick={onImageRemoveAll}
+              >
                 <p>Remove all images</p>
               </button>
             </div>
@@ -96,6 +100,7 @@ const ImageUploader = ({ logo, setLogo, handleImageUpload }: any) => {
                   <div key={index}>
                     {image !== null && (
                       <ImageLogo
+                        alt="uploaded logo"
                         index={index}
                         imageList={imageList.concat(localImages)}
                         handleLogoPick={handleLogoPick}
