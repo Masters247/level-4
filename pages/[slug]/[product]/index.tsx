@@ -74,7 +74,6 @@ interface Props {
 }
 
 const Product: NextPage<Props> = ({ data }) => {
-  // const { width } = useWindowSize();
   const [productColour, setProductColour] = useState(0);
   const { product } = data;
 

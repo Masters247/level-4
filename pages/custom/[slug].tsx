@@ -104,6 +104,8 @@ const Custom: NextPage<Props> = ({ queryGraphCms }) => {
     } else {
       setIsSession(false);
     }
+
+    console.log("handle save");
   };
 
   useEffect(() => {

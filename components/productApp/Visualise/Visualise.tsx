@@ -5,7 +5,6 @@ import s from "./visualise.module.scss";
 import Condition from "yup/lib/Condition";
 
 const Visualise = ({ slug }: any) => {
-  console.log(slug);
   return (
     <section className={s.visualiseWrap}>
       <div className={s.imageWrap}>Image</div>
