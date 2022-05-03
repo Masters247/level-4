@@ -14,9 +14,11 @@ const ProductView = ({
   handleColourClick,
   handleScreenShot,
   handleSaveCustomImage,
+  saveCustomImage,
+  control,
+  setControl,
   id,
 }: any) => {
-  const [control, setControl] = useState(true);
   const [imageWidth, setImageWidth]: any = useState(80);
   const [imageHeight, setImageHeight]: any = useState(80);
 

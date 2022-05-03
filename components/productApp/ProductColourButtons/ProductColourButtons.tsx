@@ -6,12 +6,14 @@ import s from "./productColourButtons.module.scss";
 interface Props {
   products: any;
   colourClick: any;
-  position?: number;
+  rotate?: any;
+  position?: any;
 }
 
 const ProductColourButtonsWrap: FC<Props> = ({
   products,
   colourClick,
+  rotate,
   position,
 }) => {
   const [productColourView, setProductColourView] = useState({
@@ -57,16 +59,7 @@ const ProductColourButtonsWrap: FC<Props> = ({
   };
 
   return (
-    <div
-      className={cn(
-        s.productColours,
-        position === 1 && s.positionOne,
-        position === 2 && s.positionTwo
-      )}
-      // style={{
-      //   left: `calc(50% - 76px)`,
-      // }}
-    >
+    <div className={cn(s.productColours, position)}>
       {productVariantColoursLength <= 4 ? null : (
         <button
           onClick={showMoreColoursLeft}
@@ -76,10 +69,9 @@ const ProductColourButtonsWrap: FC<Props> = ({
           )}
           disabled={productColourView.start === 0}
         >
-          <p>+{colourLeft}</p>
+          <p className={rotate}>+{colourLeft}</p>
         </button>
       )}
-
       {productVariantColoursLimit.map((colour: any, i: any) => {
         return (
           <ProductColour
@@ -91,14 +83,13 @@ const ProductColourButtonsWrap: FC<Props> = ({
           />
         );
       })}
-
       {productVariantColoursLength <= 4 ? null : (
         <button
           onClick={showMoreColoursRight}
           className={cn(s.coloursLeft, colourRight === 0 && s.hide)}
           disabled={colourRight === 0}
         >
-          <p>+{colourRight}</p>
+          <p className={rotate}>+{colourRight}</p>
         </button>
       )}
     </div>

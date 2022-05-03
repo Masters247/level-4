@@ -8,6 +8,7 @@ import html2canvas from "html2canvas";
 import type { NextPage } from "next";
 import Link from "next/link";
 import useSWR from "swr";
+
 const fetcher = (email: any) => fetch(email).then((res) => res.json());
 
 export async function getStaticPaths() {
@@ -84,6 +85,7 @@ const Custom: NextPage<Props> = ({ queryGraphCms }) => {
   const [downloadCustomImage, setDownloadCustomImage] = useState(false);
   const [saveCustomImage, setSaveCustomImage] = useState(false);
   const [isSession, setIsSession] = useState(true);
+  const [control, setControl] = useState(true);
   const { data: session }: any = useSession();
   const [colour, setColour] = useState(0);
   const { product } = queryGraphCms;
@@ -104,51 +106,55 @@ const Custom: NextPage<Props> = ({ queryGraphCms }) => {
     } else {
       setIsSession(false);
     }
-
-    console.log("handle save");
   };
 
   useEffect(() => {
     const documentCustom: any = document.querySelector("#capture");
     {
-      downloadCustomImage &&
-        html2canvas(documentCustom, {}).then((canvas: any) => {
-          var image = canvas
-            .toDataURL("image/jpeg")
-            .replace("image/jpeg", "image/octet-stream");
-          window.location.href = image;
-          setDownloadCustomImage(false);
-        });
+      downloadCustomImage && setControl(false);
+      html2canvas(documentCustom, {}).then((canvas: any) => {
+        var image = canvas
+          .toDataURL("image/jpeg")
+          .replace("image/jpeg", "image/octet-stream");
+        window.location.href = image;
+        setDownloadCustomImage(false);
+      });
     }
   }, [downloadCustomImage]);
 
   useEffect(() => {
     const documentCustom: any = document.querySelector("#capture");
     {
-      saveCustomImage &&
-        html2canvas(documentCustom, {}).then((canvas: any) => {
-          var image = canvas
-            .toDataURL("image/jpeg")
-            .replace("image/jpeg", "image/octet-stream");
-          console.log("save image useEffect");
+      saveCustomImage && setControl(false);
+      html2canvas(documentCustom, {}).then((canvas: any) => {
+        var image = canvas
+          .toDataURL("image/jpeg")
+          .replace("image/jpeg", "image/octet-stream");
+        console.log("save image useEffect");
 
-          const data = {
-            image,
-            user,
-            productName: product?.name,
-            productCategory: product?.productCategory,
-          };
+        const data = {
+          image,
+          user,
+          productName: product?.name,
+          productCategory: product?.productCategory,
+        };
 
-          async function CustomImage() {
-            await fetch(`/api/productApp/customImage`, {
-              headers: { "Content-Type": "application/json" },
-              method: "POST",
-              body: JSON.stringify(data),
-            });
-          }
-          CustomImage();
+        async function CustomImage() {
+          await fetch(`/api/productApp/customImage`, {
+            headers: { "Content-Type": "application/json" },
+            method: "POST",
+            body: JSON.stringify(data),
+          });
+        }
+        CustomImage();
+
+        setTimeout(saveImageTimeOut, 1000);
+
+        function saveImageTimeOut() {
           setSaveCustomImage(false);
-        });
+          setControl(true);
+        }
+      });
     }
   }, [saveCustomImage]);
 
@@ -169,6 +175,11 @@ const Custom: NextPage<Props> = ({ queryGraphCms }) => {
           </div>
         </div>
       ) : null}
+      {saveCustomImage ? (
+        <div className={s.pictureSavedModal}>
+          <p>Customisation Saved</p>
+        </div>
+      ) : null}
       <ProductView
         image={product?.productVariantColours[colour].customImage}
         productColoutVariants={product.productVariantColours}
@@ -176,6 +187,9 @@ const Custom: NextPage<Props> = ({ queryGraphCms }) => {
         handleScreenShot={handleScreenShot}
         handleSaveCustomImage={handleSaveCustomImage}
         products={product}
+        saveCustomImage={saveCustomImage}
+        setControl={setColour}
+        control={control}
       />
     </div>
   );

@@ -13,39 +13,64 @@ const ProductButtons = ({
   stateUploader,
 }: any) => {
   return (
-    <div className={cn(s.uiButtons, !state && s.uiButtonHidden)}>
+    <div
+      className={cn(
+        s.uiButtons
+        // !state && s.uiButtonHidden
+      )}
+    >
       <button
-        className={cn(s.uiButton, s.imageButton, !state && s.hide)}
+        className={cn(
+          s.uiButton,
+          s.imageButton
+          // !state && s.hide
+        )}
         onClick={handleImageUpload}
       >
         {!stateUploader ? <p>Close Image Uploader</p> : <p>New Image</p>}
       </button>
       <button
-        className={cn(s.uiButton, s.undoButton, !state && s.hide)}
+        className={cn(
+          s.uiButton,
+          s.undoButton
+          // !state && s.hide
+        )}
         disabled
       >
         <Undo styles={s.undoIcon} />
         <p>undo</p>
       </button>
       <button
-        className={cn(s.uiButton, s.redoButton, !state && s.hide)}
+        className={cn(
+          s.uiButton,
+          s.redoButton
+          // !state && s.hide
+        )}
         disabled
       >
         <p>redo</p>
         <Redo styles={s.redoIcon} />
       </button>
       <button
-        className={cn(s.uiButton, s.saveButton, state && s.disabled)}
+        className={cn(
+          s.uiButton,
+          s.saveButton
+          // state && s.disabled
+        )}
         onClick={handleSaveCustomImage}
-        disabled={state}
+        // disabled={state}
       >
         <Save styles={s.saveIcon} />
         <p>save</p>
       </button>
       <button
-        className={cn(s.uiButton, s.downloadButton, state && s.disabled)}
+        className={cn(
+          s.uiButton,
+          s.downloadButton
+          //  state && s.disabled
+        )}
         onClick={handleScreenShot}
-        disabled={state}
+        // disabled={state}
       >
         <Download styles={s.downloadIcon} />
         <p>download</p>

@@ -27,8 +27,6 @@ const SignIn = ({ providers, csrfToken }: any) => {
     setLoading(true);
   };
 
-  console.log("hello test");
-
   if (status === "authenticated") {
     router.push("/account");
   }

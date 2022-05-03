@@ -23,8 +23,12 @@
     min-height: 280px;
     background-color: $grey-0;
     .productImagesBackgroundWrap {
+      max-width: 945px;
+      position: relative;
       width: 100%;
-      padding-top: 4em;
+      .productColourWrap {
+        margin-top: 1em;
+      }
       .productImagesWrap {
         display: grid;
         justify-content: center;
@@ -40,6 +44,23 @@
       padding: 0 2.5em;
       .productImagesBackgroundWrap {
         padding-top: 0em;
+      }
+    }
+  }
+  @media (min-width: $media-tablet) {
+    .productImagesSection {
+      .productImagesBackgroundWrap {
+        .productColourWrap {
+          margin-top: 0;
+          position: absolute;
+          z-index: 10;
+          height: 100%;
+          @include flexCenter;
+          transform: rotate(90deg);
+          .rotate {
+            transform: rotate(-90deg);
+          }
+        }
       }
     }
   }

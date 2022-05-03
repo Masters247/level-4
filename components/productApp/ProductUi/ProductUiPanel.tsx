@@ -39,11 +39,11 @@ const ProductUiPanel = ({
       icon: <HorizontalAlign styles={s.centerHorizontal} />,
       function: horizontal,
     },
-    {
-      name: "show hide",
-      icon: state ? <Hide styles={s.showhide} /> : <Show styles={s.showhide} />,
-      function: showhide,
-    },
+    // {
+    //   name: "show hide",
+    //   icon: state ? <Hide styles={s.showhide} /> : <Show styles={s.showhide} />,
+    //   function: showhide,
+    // },
   ];
 
   const controls = state ? controler : controler.slice(3, 4);
@@ -52,9 +52,11 @@ const ProductUiPanel = ({
     <div className={cn(s.productUiWrap)}>
       <h1>{products.name}</h1>
       <div className={s.uiControlsWrap}>
-        {state ? <h2>Controls:</h2> : <h2>Show Controls:</h2>}
+        {/* {state ?  */}
+        <h2>Controls:</h2>
+        {/* : <h2>Show Controls:</h2>} */}
         <div className={s.controlsWrap}>
-          {controls.map((cont: any) => {
+          {controler.map((cont: any) => {
             return (
               <button
                 key={cont.name}
@@ -67,16 +69,16 @@ const ProductUiPanel = ({
           })}
         </div>
       </div>
-      {state && (
-        <div className={s.productColourWrap}>
-          <h2>Colour:</h2>
-          <ProductColourButtonsWrap
-            products={products}
-            colourClick={handleColourClick}
-            position={2}
-          />
-        </div>
-      )}
+      {/* {state && ( */}
+      <div className={s.productColourWrap}>
+        <h2>Colour:</h2>
+        <ProductColourButtonsWrap
+          products={products}
+          colourClick={handleColourClick}
+          position={s.position}
+        />
+      </div>
+      {/* )} */}
       {state && (
         <div className={s.embelishment}>
           <h2>Embelishment:</h2>

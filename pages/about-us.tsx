@@ -18,7 +18,6 @@ interface Props {
 }
 
 const AboutUs: NextPage<Props> = ({ aboutUs }) => {
-  console.log("about us", aboutUs);
   return (
     <div className={s.aboutUsPageWrap}>
       <section className={s.heroWrap}>

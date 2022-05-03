@@ -8,7 +8,6 @@ import SliderContainer from "../../../components/slider/SlideContainer/SliderCon
 import Image from "next/image";
 import s from "../../../styles/pages/productPage.module.scss";
 import Personal from "../../../components/productApp/Personal/Personal";
-import { useWindowSize } from "react-use";
 
 export async function getStaticPaths() {
   const products = await productQuery();
@@ -106,11 +105,13 @@ const Product: NextPage<Props> = ({ data }) => {
         }}
       >
         <div className={s.productImagesBackgroundWrap}>
-          <ProductColourButtonsWrap
-            products={product}
-            colourClick={handleColourClick}
-            position={1}
-          />
+          <div className={s.productColourWrap}>
+            <ProductColourButtonsWrap
+              products={product}
+              colourClick={handleColourClick}
+              rotate={s.rotate}
+            />
+          </div>
           <div
             className={s.productImagesWrap}
             style={{
