@@ -82,7 +82,7 @@ const ContactForm = () => {
                   <Field
                     name="password"
                     type="password"
-                    placeholder="*password"
+                    placeholder="*Password"
                   />
                   {errors.password && touched.password ? (
                     <div className={s.error}>{errors.password}</div>
