@@ -112,13 +112,14 @@ const Custom: NextPage<Props> = ({ queryGraphCms }) => {
     const documentCustom: any = document.querySelector("#capture");
     {
       downloadCustomImage && setControl(false);
-      html2canvas(documentCustom, {}).then((canvas: any) => {
-        var image = canvas
-          .toDataURL("image/jpeg")
-          .replace("image/jpeg", "image/octet-stream");
-        window.location.href = image;
-        setDownloadCustomImage(false);
-      });
+      downloadCustomImage &&
+        html2canvas(documentCustom, {}).then((canvas: any) => {
+          var image = canvas
+            .toDataURL("image/jpeg")
+            .replace("image/jpeg", "image/octet-stream");
+          window.location.href = image;
+          setDownloadCustomImage(false);
+        });
     }
   }, [downloadCustomImage]);
 
@@ -126,35 +127,36 @@ const Custom: NextPage<Props> = ({ queryGraphCms }) => {
     const documentCustom: any = document.querySelector("#capture");
     {
       saveCustomImage && setControl(false);
-      html2canvas(documentCustom, {}).then((canvas: any) => {
-        var image = canvas
-          .toDataURL("image/jpeg")
-          .replace("image/jpeg", "image/octet-stream");
-        console.log("save image useEffect");
+      saveCustomImage &&
+        html2canvas(documentCustom, {}).then((canvas: any) => {
+          var image = canvas
+            .toDataURL("image/jpeg")
+            .replace("image/jpeg", "image/octet-stream");
+          console.log("save image useEffect");
 
-        const data = {
-          image,
-          user,
-          productName: product?.name,
-          productCategory: product?.productCategory,
-        };
+          const data = {
+            image,
+            user,
+            productName: product?.name,
+            productCategory: product?.productCategory,
+          };
 
-        async function CustomImage() {
-          await fetch(`/api/productApp/customImage`, {
-            headers: { "Content-Type": "application/json" },
-            method: "POST",
-            body: JSON.stringify(data),
-          });
-        }
-        CustomImage();
+          async function CustomImage() {
+            await fetch(`/api/productApp/customImage`, {
+              headers: { "Content-Type": "application/json" },
+              method: "POST",
+              body: JSON.stringify(data),
+            });
+          }
+          CustomImage();
 
-        setTimeout(saveImageTimeOut, 1000);
+          setTimeout(saveImageTimeOut, 1000);
 
-        function saveImageTimeOut() {
-          setSaveCustomImage(false);
-          setControl(true);
-        }
-      });
+          function saveImageTimeOut() {
+            setSaveCustomImage(false);
+            setControl(true);
+          }
+        });
     }
   }, [saveCustomImage]);
 

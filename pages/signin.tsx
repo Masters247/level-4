@@ -8,6 +8,7 @@ import {
 import Image from "next/image";
 import { useState } from "react";
 import { useRouter } from "next/router";
+import CreateAccountForm from "../components/global/CreateAccountForm/CreateAccountForm";
 
 export async function getServerSideProps(context: any) {
   const providers = await getProviders();
@@ -40,7 +41,8 @@ const SignIn = ({ providers, csrfToken }: any) => {
           exclusive product releases, as well as being able to save your design
           progress using our visualiser tool.
         </p>
-        {Object.values(providers).map((provider: any) => (
+        <CreateAccountForm />
+        {/* {Object.values(providers).map((provider: any) => (
           <div key={provider.name} className={s.providerWrap}>
             {loading ? (
               <div className={s.loggingIn}>
@@ -52,7 +54,7 @@ const SignIn = ({ providers, csrfToken }: any) => {
               </button>
             )}
           </div>
-        ))}
+        ))} */}
       </div>
     </div>
   );

@@ -1,0 +1,85 @@
+@use "../../../styles/base.scss" as *;
+.formWrap {
+  @include flexCenter;
+  @media (min-width: $media-desktop-small) {
+    margin: 0;
+  }
+  h2 {
+    margin-bottom: 1.5rem;
+  }
+  @include flexCenter;
+  flex-direction: column;
+  .form {
+    width: 100%;
+    display: grid;
+    grid-gap: 1em;
+    .name,
+    .organisation,
+    .password,
+    .email {
+      width: 100%;
+      position: relative;
+      input {
+        width: 100%;
+        background-color: $white;
+        border: 1px solid $black;
+        min-height: 45px;
+        outline: none;
+        padding: 1rem;
+      }
+      .error {
+        top: 0.5em;
+        z-index: 10;
+        right: 0.5em;
+        position: absolute;
+        color: $red-1;
+        font-size: 0.8em;
+      }
+    }
+  }
+  .passwordInfo {
+    p {
+      text-align: left;
+      font-size: 0.6em;
+      color: $grey-4;
+      margin: 0;
+    }
+  }
+
+  .marketing {
+    display: flex;
+    align-items: center;
+    input {
+      margin-top: 0.3em;
+    }
+    p {
+      margin: 0 0 0 1em;
+      padding: 0;
+      font-size: 0.8em;
+    }
+  }
+  button {
+    width: 200px;
+    padding: 1rem;
+    margin-top: 2em;
+    background-color: $button-primary;
+    text-transform: uppercase;
+    font-weight: 400;
+    color: $white;
+    transition: 200ms;
+    &:hover {
+      background-color: $grey-1;
+    }
+  }
+}
+.thankYou {
+  @include flexCenter;
+  flex-direction: column;
+  padding: 2rem;
+  p {
+    margin: 2rem;
+  }
+  .link {
+    color: $white;
+  }
+}
