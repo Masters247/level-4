@@ -1,13 +1,13 @@
-import type { NextPage } from "next";
-import { GraphQLClient, gql } from "graphql-request";
-import { useState, useEffect } from "react";
-import Visualise from "../../../components/productApp/Visualise/Visualise";
-import productQuery from "../../../lib/graphcms-querys/productQuery";
 import ProductColourButtonsWrap from "../../../components/productApp/ProductColourButtons/ProductColourButtons";
 import SliderContainer from "../../../components/slider/SlideContainer/SliderContainer";
-import Image from "next/image";
-import s from "../../../styles/pages/productPage.module.scss";
+import Visualise from "../../../components/productApp/Visualise/Visualise";
 import Personal from "../../../components/productApp/Personal/Personal";
+import productQuery from "../../../lib/graphcms-querys/productQuery";
+import s from "../../../styles/pages/productPage.module.scss";
+import { GraphQLClient, gql } from "graphql-request";
+import { useState, useEffect } from "react";
+import type { NextPage } from "next";
+import Image from "next/image";
 
 export async function getStaticPaths() {
   const products = await productQuery();

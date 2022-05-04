@@ -2,14 +2,11 @@ import Customer from "../../components/account/Customer/Customer";
 import Designs from "../../components/account/Designs/Designs";
 import s from "../../styles/pages/account.module.scss";
 import { signOut, useSession } from "next-auth/react";
-import { Button } from "../../components/ui/Button";
 import useDelayedRender from "use-delayed-render";
-import { prisma } from "../../lib/prisma";
 import { useRouter } from "next/router";
 import type { NextPage } from "next";
 import { useState } from "react";
 import Image from "next/image";
-import cn from "classnames";
 import useSWR from "swr";
 
 const fetcher = (email: any) => fetch(email).then((res) => res.json());
@@ -40,8 +37,6 @@ const Account: NextPage = () => {
   const email = session?.user.email;
   const { user, isLoading, isError } = useAccount(email);
   const [isDetailsShown, setIsDetailsShown] = useState(true);
-
-  // console.log("user", user.id);
 
   const { mounted: isDetailsMounted, rendered: isDetailsRendered } =
     useDelayedRender(isDetailsShown, {

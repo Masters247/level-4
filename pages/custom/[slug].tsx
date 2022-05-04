@@ -1,4 +1,6 @@
 import ProductView from "../../components/productApp/ProductView/ProductView";
+import trendingQuery from "../../lib/graphcms-querys/trendingStylesQuery";
+import PictureGrid from "../../components/global/PictureGrid/pictureGrid";
 import productQuery from "../../lib/graphcms-querys/productQuery";
 import s from "../../styles/pages/customPage.module.scss";
 import { GraphQLClient, gql } from "graphql-request";
@@ -8,8 +10,6 @@ import html2canvas from "html2canvas";
 import type { NextPage } from "next";
 import Link from "next/link";
 import useSWR from "swr";
-import trendingQuery from "../../lib/graphcms-querys/trendingStylesQuery";
-import PictureGrid from "../../components/global/PictureGrid/pictureGrid";
 
 const fetcher = (email: any) => fetch(email).then((res) => res.json());
 
@@ -114,9 +114,13 @@ const Custom: NextPage<Props> = ({ queryGraphCms, trendingStyles }) => {
   };
 
   useEffect(() => {
-    const documentCustom: any = document.querySelector("#capture");
-    {
-      downloadCustomImage && setControl(false);
+    downloadCustomImage && setControl(false);
+    saveCustomImage && setControl(false);
+  }, [downloadCustomImage, saveCustomImage]);
+
+  useEffect(() => {
+    function downloadImage() {
+      const documentCustom: any = document.querySelector("#capture");
       downloadCustomImage &&
         html2canvas(documentCustom, {}).then((canvas: any) => {
           var image = canvas
@@ -126,12 +130,12 @@ const Custom: NextPage<Props> = ({ queryGraphCms, trendingStyles }) => {
           setDownloadCustomImage(false);
         });
     }
+    setTimeout(downloadImage, 1000);
   }, [downloadCustomImage]);
 
   useEffect(() => {
-    const documentCustom: any = document.querySelector("#capture");
-    {
-      saveCustomImage && setControl(false);
+    function saveImage() {
+      const documentCustom: any = document.querySelector("#capture");
       saveCustomImage &&
         html2canvas(documentCustom, {}).then((canvas: any) => {
           var image = canvas
@@ -163,6 +167,8 @@ const Custom: NextPage<Props> = ({ queryGraphCms, trendingStyles }) => {
           }
         });
     }
+
+    setTimeout(saveImage, 1000);
   }, [saveCustomImage]);
 
   return (

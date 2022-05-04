@@ -59,12 +59,12 @@
 .customArearHide,
 .customArear {
   position: relative;
-  border: 1px dashed $grey-4;
+  // border: 1px dashed $grey-4;
   position: relative;
   height: 500px;
   width: calc(100vw - 2em);
   max-width: 500px;
-  @include boxShadow;
+  // @include boxShadow;
   .customLogo {
     touch-action: none;
     border: 1px dashed $grey-4;

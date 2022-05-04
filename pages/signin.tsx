@@ -42,7 +42,7 @@ const SignIn = ({ providers, csrfToken }: any) => {
           progress using our visualiser tool.
         </p>
         <CreateAccountForm />
-        {/* {Object.values(providers).map((provider: any) => (
+        {Object.values(providers).map((provider: any) => (
           <div key={provider.name} className={s.providerWrap}>
             {loading ? (
               <div className={s.loggingIn}>
@@ -54,7 +54,7 @@ const SignIn = ({ providers, csrfToken }: any) => {
               </button>
             )}
           </div>
-        ))} */}
+        ))}
       </div>
     </div>
   );

@@ -41,8 +41,6 @@ const Designs: FC<Props> = ({ userId }) => {
     mutate();
   }
 
-  // console.log(pages[1].products?.map(()));
-
   const handleFilter = (category: any) => {
     // console.log("category", category);
   };
