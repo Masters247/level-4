@@ -1,40 +1,45 @@
 @use "../../../styles/base.scss" as *;
 
 .pictureGridWrap {
-  padding: 2em 1em;
+  padding: 2em 1em 1em;
   h2 {
     text-align: center;
     margin: 1em 0 2em;
   }
+
   .pictureGrid {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     grid-gap: 1em;
-    margin: 1em;
-    .picture {
-      background-color: $grey-0;
-      width: calc(50vw - 2.5em);
-      height: calc(50vw - 2.5em);
-      @include flexCenter;
-    }
+  }
+  .category {
+    max-width: calc(520px + 2em);
+    margin: 0 auto;
   }
 
   @media (min-width: $media-tablet) {
+    // padding: 2em;
     .pictureGrid {
-      grid-gap: 2em;
-      .picture {
-        width: calc(50vw - 3em);
-        height: calc(50vw - 3em);
-      }
+      grid-template-columns: repeat(4, 1fr);
+      // grid-gap: 2em;
+    }
+    .category {
+      max-width: calc(650px + 2em);
     }
   }
-  @media (min-width: $media-desktop-small) {
+
+  @media (min-width: $media-desktop-large) {
+    h2 {
+      text-align: center;
+      margin: 2em 0 3em;
+    }
+    padding: 2em;
     .pictureGrid {
       grid-gap: 2em;
-      .picture {
-        width: calc(50vw - 3em);
-        height: calc(50vw - 3em);
-      }
+      // max-width: calc(1020px + 2em);
+    }
+    .category {
+      max-width: calc(1020px + 2em);
     }
   }
 }

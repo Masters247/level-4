@@ -1,7 +1,7 @@
 import graphcms from "../graph-ql";
 
 const aboutUsQuery = async () => {
-    const {aboutUsPages} = await graphcms.request(`
+  const { aboutUsPages } = await graphcms.request(`
         query MyQuery {
         aboutUsPages {
             title
@@ -35,8 +35,7 @@ const aboutUsQuery = async () => {
         }
       }
       `);
-      return aboutUsPages
-
-} 
+  return aboutUsPages;
+};
 
 export default aboutUsQuery;

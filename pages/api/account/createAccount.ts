@@ -6,22 +6,18 @@ export default async function handler(
   res: NextApiResponse
 ) {
   const createAccount = req.body;
-  console.log("create account", createAccount);
 
-  //   const id = customImg.user.id;
+  console.log("createAccount", createAccount);
+  console.log("createAccount", typeof createAccount.name);
 
-  //   const addCustomImage = await prisma.user.create({
-  //     data: {
-  //       image: customImg.image,
-  //       category: customImg.productCategory,
-  //       productName: customImg.productName,
-  //       user: {
-  //         connect: {
-  //           id: id,
-  //         },
-  //       },
-  //     },
-  //   });
+  const addUser = await prisma.user.create({
+    data: {
+      name: createAccount.name,
+      organisation: createAccount.organisation,
+      email: createAccount.email,
+      password: createAccount.password,
+    },
+  });
 
-  //   res.status(200).json(addCustomImage);
+  res.status(200).json(addUser);
 }

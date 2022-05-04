@@ -28,9 +28,9 @@
         padding: 1rem;
       }
       .error {
-        top: 0.5em;
+        top: 0.6em;
         z-index: 10;
-        right: 0.5em;
+        right: 1em;
         position: absolute;
         color: $red-1;
         font-size: 0.8em;
@@ -53,6 +53,7 @@
       margin-top: 0.3em;
     }
     p {
+      text-align: left;
       margin: 0 0 0 1em;
       padding: 0;
       font-size: 0.8em;

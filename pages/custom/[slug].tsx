@@ -8,6 +8,8 @@ import html2canvas from "html2canvas";
 import type { NextPage } from "next";
 import Link from "next/link";
 import useSWR from "swr";
+import trendingQuery from "../../lib/graphcms-querys/trendingStylesQuery";
+import PictureGrid from "../../components/global/PictureGrid/pictureGrid";
 
 const fetcher = (email: any) => fetch(email).then((res) => res.json());
 
@@ -30,6 +32,8 @@ export async function getStaticProps({ params }: any) {
       authorization: `Bearer ${process.env.GRAPHCMS_TOKEN}`,
     },
   });
+
+  const trendingStyles = await trendingQuery();
 
   const query = gql`
   query Product {
@@ -56,7 +60,7 @@ export async function getStaticProps({ params }: any) {
   const queryGraphCms = await graphcms.request(query);
 
   return {
-    props: { queryGraphCms },
+    props: { queryGraphCms, trendingStyles },
     revalidate: 10,
   };
 }
@@ -79,9 +83,10 @@ function useAccount(email: any) {
 
 interface Props {
   queryGraphCms?: any;
+  trendingStyles?: any;
 }
 
-const Custom: NextPage<Props> = ({ queryGraphCms }) => {
+const Custom: NextPage<Props> = ({ queryGraphCms, trendingStyles }) => {
   const [downloadCustomImage, setDownloadCustomImage] = useState(false);
   const [saveCustomImage, setSaveCustomImage] = useState(false);
   const [isSession, setIsSession] = useState(true);
@@ -193,6 +198,7 @@ const Custom: NextPage<Props> = ({ queryGraphCms }) => {
         setControl={setColour}
         control={control}
       />
+      <PictureGrid radius={""} category={true} data={trendingStyles} />
     </div>
   );
 };

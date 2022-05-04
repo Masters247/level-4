@@ -10,7 +10,7 @@ const ContactForm = () => {
       .min(2, "Too Short!")
       .max(50, "Too Long!")
       .required("Required"),
-    business: Yup.string().min(6, "Too Short!").max(500, "Too Long!"),
+    organisation: Yup.string().min(6, "Too Short!").max(500, "Too Long!"),
     password: Yup.string()
       .min(8, "Too Short!")
       .max(20, "Too Long!")
@@ -25,9 +25,6 @@ const ContactForm = () => {
       {thankYou ? (
         <main className={s.thankYou}>
           <h2>Your account is ready</h2>
-          {/* <Link href="/search">
-            <a className={s.link}>Continue Shopping</a>
-          </Link> */}
         </main>
       ) : (
         <main className={s.formWrap}>
@@ -35,7 +32,7 @@ const ContactForm = () => {
             initialValues={{
               checked: [],
               name: "",
-              business: "",
+              organisation: "",
               email: "",
               password: "",
             }}
@@ -48,7 +45,7 @@ const ContactForm = () => {
                 body: JSON.stringify(formData),
               });
 
-              setThankYou(true);
+              // setThankYou(true);
             }}
           >
             {({ errors, touched }) => (
@@ -62,12 +59,12 @@ const ContactForm = () => {
 
                 <div className={s.organisation}>
                   <Field
-                    name="business"
-                    type="business"
+                    name="organisation"
+                    type="organisation"
                     placeholder="*Golf Club / Organisation / Business"
                   />
-                  {errors.business && touched.business ? (
-                    <div className={s.error}>{errors.business}</div>
+                  {errors.organisation && touched.organisation ? (
+                    <div className={s.error}>{errors.organisation}</div>
                   ) : null}
                 </div>
 

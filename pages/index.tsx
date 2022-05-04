@@ -6,15 +6,17 @@ import collectionsQuery, {
   Collection,
 } from "../lib/graphcms-querys/collectionsQuery";
 import categorySlugsQuery from "../lib/graphcms-querys/categoryQuery";
+import trendingQuery from "../lib/graphcms-querys/trendingStylesQuery";
 import s from "../styles/pages/index.module.scss";
 import PictureGrid from "../components/global/PictureGrid/pictureGrid";
 
 export const getStaticProps: GetStaticProps = async () => {
   const collections = await collectionsQuery();
   const slugs = await categorySlugsQuery();
+  const trendingStyles = await trendingQuery();
 
   return {
-    props: { collections, slugs },
+    props: { collections, slugs, trendingStyles },
     revalidate: 60,
   };
 };
@@ -22,14 +24,15 @@ export const getStaticProps: GetStaticProps = async () => {
 interface Props {
   collections: Collection[];
   slugs: any;
+  trendingStyles: any;
 }
 
-const Home: NextPage<Props> = ({ collections, slugs }) => {
+const Home: NextPage<Props> = ({ collections, slugs, trendingStyles }) => {
   return (
     <div>
       <VideoHero />
       <CollectionsGrid collections={collections} slugs={slugs} />
-      <PictureGrid title={"trending styles"} radius={"50%"} />
+      <PictureGrid radius={"50%"} data={trendingStyles} category={false} />
       <MailingList />
     </div>
   );

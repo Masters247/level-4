@@ -52,4 +52,11 @@
       font-weight: 300;
     }
   }
+
+  @media (min-width: $media-tablet) {
+    padding: 4em 0;
+  }
+  @media (min-width: $media-desktop) {
+    padding: 6em 0;
+  }
 }

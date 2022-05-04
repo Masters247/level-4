@@ -6,10 +6,6 @@ export default async function handler(
   res: NextApiResponse
 ) {
   const customImg = req.body;
-  // console.log("custom image", customImg.productName);
-  // console.log("custom image", customImg);
-
-  // console.log("custom image", customImg.productCategory);
 
   const id = customImg.user.id;
 
@@ -26,9 +22,5 @@ export default async function handler(
     },
   });
 
-  // console.log("create custom image", res);
-
   res.status(200).json(addCustomImage);
-
-  // console.log("create custom image", res);
 }

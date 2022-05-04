@@ -4,6 +4,7 @@ import { GraphQLClient, gql } from "graphql-request";
 import s from "../../styles/pages/categories.module.scss";
 import Product from "../../components/productApp/Product/Product";
 import categoryQuery from "../../lib/graphcms-querys/categoryQuery";
+import trendingQuery from "../../lib/graphcms-querys/trendingStylesQuery";
 import PictureGrid from "../../components/global/PictureGrid/pictureGrid";
 
 export async function getStaticPaths() {
@@ -26,10 +27,36 @@ export async function getStaticProps({ params }: any) {
     },
   });
 
+  const trendingStyles = await trendingQuery();
+
   const query = gql`
   query Category {
     categories(where: {categoriesSlug: "${params.slug}"}) {
       title
+      trendingStylesOneSlug
+      trendingStylesTwoSlug
+      trendingStylesThreeSlug
+      trendingStylesFourSlug
+      trendingStylesOne {
+        height
+        width
+        url
+      }
+      trendingStylesTwo {
+        height
+        width
+        url
+      }
+      trendingStylesThree {
+        height
+        width
+        url
+      }
+      trendingStylesFour {
+        height
+        width
+        url
+      }
       heroImage {
         height
         width
@@ -63,16 +90,17 @@ export async function getStaticProps({ params }: any) {
   const data = await graphcms.request(query);
 
   return {
-    props: { data },
+    props: { data, trendingStyles },
     revalidate: 10,
   };
 }
 
 interface Props {
   data: any;
+  trendingStyles: any;
 }
 
-const Category: NextPage<Props> = ({ data }) => {
+const Category: NextPage<Props> = ({ data, trendingStyles }) => {
   const { categories } = data;
 
   return (
@@ -104,7 +132,7 @@ const Category: NextPage<Props> = ({ data }) => {
           })}
         </div>
       </section>
-      <PictureGrid radius={""} title={"trending styles"} />
+      <PictureGrid radius={""} data={trendingStyles} category={true} />
     </div>
   );
 };
