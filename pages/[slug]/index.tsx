@@ -5,7 +5,7 @@ import s from "../../styles/pages/categories.module.scss";
 import Product from "../../components/productApp/Product/Product";
 import categoryQuery from "../../lib/graphcms-querys/categoryQuery";
 import trendingQuery from "../../lib/graphcms-querys/trendingStylesQuery";
-import PictureGrid from "../../components/global/PictureGrid/pictureGrid";
+import TrendingStyle from "../../components/global/TrendingStyle/TrendingStyle";
 
 export async function getStaticPaths() {
   const categories = await categoryQuery();
@@ -132,7 +132,7 @@ const Category: NextPage<Props> = ({ data, trendingStyles }) => {
           })}
         </div>
       </section>
-      <PictureGrid radius={""} data={trendingStyles} category={true} />
+      <TrendingStyle data={trendingStyles} category={true} />
     </div>
   );
 };

@@ -1,11 +1,12 @@
 import { FC } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import s from "./pictureGrid.module.scss";
+import s from "./trendingStyle.module.scss";
 import cn from "classnames";
+import { BlockList } from "net";
 
 interface Props {
-  radius?: String;
+  radius?: number;
   data?: any;
   category?: boolean;
   // category - Is the component on the home page or a category page
@@ -39,7 +40,14 @@ const PictureGrid: FC<Props> = ({ radius, data, category }) => {
       <div className={cn(s.pictureGrid, category && s.category)}>
         {trendingStyleArray.map((p: any, i: number) => (
           <Link href={p.slug} key={i} passHref>
-            <a className={s.picture} style={{ borderRadius: `${radius}` }}>
+            <a
+              style={{
+                display: "block",
+                // border: "1px solid red",
+                borderRadius: `${radius}%`,
+                overflow: "hidden",
+              }}
+            >
               <Image
                 layout="responsive"
                 alt=""

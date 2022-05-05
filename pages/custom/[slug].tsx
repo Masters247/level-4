@@ -1,6 +1,6 @@
 import ProductView from "../../components/productApp/ProductView/ProductView";
 import trendingQuery from "../../lib/graphcms-querys/trendingStylesQuery";
-import PictureGrid from "../../components/global/PictureGrid/pictureGrid";
+import TrendingStyle from "../../components/global/TrendingStyle/TrendingStyle";
 import productQuery from "../../lib/graphcms-querys/productQuery";
 import s from "../../styles/pages/customPage.module.scss";
 import { GraphQLClient, gql } from "graphql-request";
@@ -204,7 +204,7 @@ const Custom: NextPage<Props> = ({ queryGraphCms, trendingStyles }) => {
         setControl={setColour}
         control={control}
       />
-      <PictureGrid radius={""} category={true} data={trendingStyles} />
+      <TrendingStyle category={true} data={trendingStyles} />
     </div>
   );
 };

@@ -1,7 +1,7 @@
 @use "../../../styles/base.scss" as *;
 
 .pictureGridWrap {
-  padding: 2em 1em 1em;
+  padding: 2em;
   h2 {
     text-align: center;
     margin: 1em 0 2em;
@@ -18,25 +18,34 @@
   }
 
   @media (min-width: $media-tablet) {
-    // padding: 2em;
+    padding: 2em;
     .pictureGrid {
       grid-template-columns: repeat(4, 1fr);
-      // grid-gap: 2em;
     }
     .category {
       max-width: calc(650px + 2em);
     }
   }
 
+  @media (min-width: $media-desktop) {
+    h2 {
+      text-align: center;
+    }
+    padding: 3em;
+    .pictureGrid {
+      grid-gap: 2em;
+    }
+    .category {
+      max-width: calc(1020px + 2em);
+    }
+  }
   @media (min-width: $media-desktop-large) {
     h2 {
       text-align: center;
-      margin: 2em 0 3em;
     }
-    padding: 2em;
+    padding: 5em;
     .pictureGrid {
-      grid-gap: 2em;
-      // max-width: calc(1020px + 2em);
+      grid-gap: 3em;
     }
     .category {
       max-width: calc(1020px + 2em);
