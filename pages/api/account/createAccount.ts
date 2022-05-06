@@ -6,18 +6,15 @@ export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
-  const body = JSON.parse(req.body);
-
+  // const body = JSON.parse(req.body);
   // console.log("body", body);
-
-  const addUser = await prisma.user.create({
-    data: {
-      name: body.name,
-      organisation: body.organisation,
-      email: body.email,
-      password: body.password,
-    },
-  });
-
-  res.status(200).json(addUser);
+  // const addUser = await prisma.user.create({
+  //   data: {
+  //     name: body.name,
+  //     organisation: body.organisation,
+  //     email: body.email,
+  //     password: body.password,
+  //   },
+  // });
+  // res.status(200).json(addUser);
 }
