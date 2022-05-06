@@ -3,32 +3,42 @@ import Link from "next/link";
 import Image from "next/image";
 import s from "./trendingStyle.module.scss";
 import cn from "classnames";
-import { BlockList } from "net";
 
 interface Props {
   radius?: number;
-  data?: any;
+  trendingStyle?: any;
   category?: boolean;
-  // category - Is the component on the home page or a category page
 }
 
-const PictureGrid: FC<Props> = ({ radius, data, category }) => {
+const PictureGrid: FC<Props> = ({ radius, trendingStyle, category }) => {
+  const {
+    trendingStyleTitle,
+    trendingStylesOneSlug,
+    trendingStylesOneImage,
+    trendingStylesTwoSlug,
+    trendingStylesTwoImage,
+    trendingStylesThreeSlug,
+    trendingStylesThreeImage,
+    trendingStylesFourSlug,
+    trendingStylesFourImage,
+  } = trendingStyle;
+
   const trendingStyleArray = [
     {
-      slug: data[0].trendingStylesOneSlug,
-      picture: data[0].trendingStylesOneImage,
+      slug: trendingStylesOneSlug,
+      picture: trendingStylesOneImage,
     },
     {
-      slug: data[0].trendingStylesTwoSlug,
-      picture: data[0].trendingStylesTwoImage,
+      slug: trendingStylesTwoSlug,
+      picture: trendingStylesTwoImage,
     },
     {
-      slug: data[0].trendingStylesThreeSlug,
-      picture: data[0].trendingStylesThreeImage,
+      slug: trendingStylesThreeSlug,
+      picture: trendingStylesThreeImage,
     },
     {
-      slug: data[0].trendingStylesFourSlug,
-      picture: data[0].trendingStylesFourImage,
+      slug: trendingStylesFourSlug,
+      picture: trendingStylesFourImage,
     },
   ];
 
@@ -36,17 +46,17 @@ const PictureGrid: FC<Props> = ({ radius, data, category }) => {
     <section
       className={cn(s.pictureGridWrap, category && s.categorypictureGridWrap)}
     >
-      <h2>{data[0].trendingStyleTitle}</h2>
+      <h2>{trendingStyleTitle}</h2>
       <div className={cn(s.pictureGrid, category && s.category)}>
         {trendingStyleArray.map((p: any, i: number) => (
-          <Link href={p.slug} key={i} passHref>
+          <Link href={`/${p.slug}`} key={i} passHref>
             <a
               style={{
                 display: "block",
-                // border: "1px solid red",
                 borderRadius: `${radius}%`,
                 overflow: "hidden",
               }}
+              className={s.link}
             >
               <Image
                 layout="responsive"

@@ -1,14 +1,14 @@
 import graphcms from "../graph-ql";
 
-const categoryQuery = async () => {
-  const { categories } = await graphcms.request(`
+const categoryPagesSlugQuery = async () => {
+  const { categoryPages } = await graphcms.request(`
       query {
-        categories {
+        categoryPages {
           categoriesSlug
         }
       }
     `);
-  return categories;
+  return categoryPages;
 };
 
-export default categoryQuery;
+export default categoryPagesSlugQuery;

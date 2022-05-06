@@ -1,4 +1,4 @@
-import LevelUp from "../../components/global/LevelUp/LevelUp";
+import LevelUp from "../../components/global/FeatureBanner/FeatureBanner";
 import graphcms from "../graph-ql";
 
 const levelUpQuery = async () => {

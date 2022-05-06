@@ -11,8 +11,8 @@ interface Props {
 const CollectionsGrid: FC<Props> = ({ collections, slugs }) => {
   return (
     <div className={s.gridWrapper}>
-      {collections.map((collection) => (
-        <CollectionCard collection={collection} key={collection.id} />
+      {collections.map((collection, i) => (
+        <CollectionCard collection={collection} key={i} />
       ))}
     </div>
   );

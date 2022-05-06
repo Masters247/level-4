@@ -18,7 +18,7 @@ const SliderContainer = ({ position, slides, time }: any) => {
   const [timeOf, setTime] = useState(1000);
   const numberOfSlides = slides.length;
 
-  console.log("number of slides", slides.length);
+  // console.log("number of slides", slides.length);
 
   useEffect(() => {
     autoPlayRef.current = nextSlide;
@@ -81,7 +81,8 @@ const SliderContainer = ({ position, slides, time }: any) => {
     <section
       className={s.sliderContainer}
       onPointerEnter={handleEnter}
-      onPointerLeave={handleLeave}>
+      onPointerLeave={handleLeave}
+    >
       <Slider
         autoPlay={autoPlay}
         numberOfSlides={slides.length}

@@ -1,11 +1,12 @@
 import ProductView from "../../components/productApp/ProductView/ProductView";
 import trendingQuery from "../../lib/graphcms-querys/trendingStylesQuery";
 import TrendingStyle from "../../components/global/TrendingStyle/TrendingStyle";
-import productQuery from "../../lib/graphcms-querys/productQuery";
+import productQuery from "../../lib/graphcms-querys/productsPagesQuery";
 import s from "../../styles/pages/customPage.module.scss";
 import { GraphQLClient, gql } from "graphql-request";
 import { useSession } from "next-auth/react";
 import { useState, useEffect } from "react";
+import customPageQuery from "../../lib/graphcms-querys/customPageQuery";
 import html2canvas from "html2canvas";
 import type { NextPage } from "next";
 import Link from "next/link";
@@ -33,11 +34,11 @@ export async function getStaticProps({ params }: any) {
     },
   });
 
-  const trendingStyles = await trendingQuery();
+  const customPage = await customPageQuery();
 
   const query = gql`
   query Product {
-    product(where: {productSlug: "${params.slug}"}) {
+    productPage(where: {productSlug: "${params.slug}"}) {
       name
       productCategory
       productVariantColours {
@@ -60,7 +61,7 @@ export async function getStaticProps({ params }: any) {
   const queryGraphCms = await graphcms.request(query);
 
   return {
-    props: { queryGraphCms, trendingStyles },
+    props: { queryGraphCms, customPage },
     revalidate: 10,
   };
 }
@@ -83,17 +84,23 @@ function useAccount(email: any) {
 
 interface Props {
   queryGraphCms?: any;
-  trendingStyles?: any;
+  customPage?: any;
 }
 
-const Custom: NextPage<Props> = ({ queryGraphCms, trendingStyles }) => {
+const Custom: NextPage<Props> = ({ queryGraphCms, customPage }) => {
   const [downloadCustomImage, setDownloadCustomImage] = useState(false);
   const [saveCustomImage, setSaveCustomImage] = useState(false);
   const [isSession, setIsSession] = useState(true);
   const [control, setControl] = useState(true);
   const { data: session }: any = useSession();
   const [colour, setColour] = useState(0);
-  const { product } = queryGraphCms;
+  const { trendingStyle } = customPage[0];
+
+  const { productPage } = queryGraphCms;
+
+  const { name, productCategory, productSlug, productVariantColours } =
+    productPage;
+
   const email = session?.user.email;
   const { user, isLoading, isError } = useAccount(email);
 
@@ -146,8 +153,8 @@ const Custom: NextPage<Props> = ({ queryGraphCms, trendingStyles }) => {
           const data = {
             image,
             user,
-            productName: product?.name,
-            productCategory: product?.productCategory,
+            productName: name,
+            productCategory: productCategory,
           };
 
           async function CustomImage() {
@@ -194,17 +201,17 @@ const Custom: NextPage<Props> = ({ queryGraphCms, trendingStyles }) => {
         </div>
       ) : null}
       <ProductView
-        image={product?.productVariantColours[colour].customImage}
-        productColoutVariants={product.productVariantColours}
+        image={productVariantColours[colour].customImage}
+        productColoutVariants={productVariantColours}
         handleColourClick={handleColourClick}
         handleScreenShot={handleScreenShot}
         handleSaveCustomImage={handleSaveCustomImage}
-        products={product}
+        products={productPage}
         saveCustomImage={saveCustomImage}
         setControl={setColour}
         control={control}
       />
-      <TrendingStyle category={true} data={trendingStyles} />
+      <TrendingStyle category={true} trendingStyle={trendingStyle} />
     </div>
   );
 };

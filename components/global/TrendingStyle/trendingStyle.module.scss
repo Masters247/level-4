@@ -17,8 +17,17 @@
     margin: 0 auto;
   }
 
+  .link {
+    transition: 200ms;
+
+    &:hover {
+      opacity: 0.7;
+      @include boxShadow;
+    }
+  }
+
   @media (min-width: $media-tablet) {
-    padding: 2em;
+    padding: 3em;
     .pictureGrid {
       grid-template-columns: repeat(4, 1fr);
     }
@@ -31,7 +40,7 @@
     h2 {
       text-align: center;
     }
-    padding: 3em;
+    padding: 4em;
     .pictureGrid {
       grid-gap: 2em;
     }

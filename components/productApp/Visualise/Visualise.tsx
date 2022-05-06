@@ -1,13 +1,39 @@
 import Image from "next/image";
+import { FC } from "react";
 import { Button } from "../../ui/Button";
 import Link from "next/link";
 import s from "./visualise.module.scss";
-import Condition from "yup/lib/Condition";
 
-const Visualise = ({ slug }: any) => {
+interface Props {
+  slug: any;
+  image?: any;
+}
+
+const Visualise: FC<Props> = ({ slug, image }) => {
+  console.log("image", image);
   return (
     <section className={s.visualiseWrap}>
-      <div className={s.imageWrap}>Image</div>
+      <div className={s.imageWrap}>
+        {image === null ? (
+          <p
+            style={{
+              margin: "auto",
+            }}
+          >
+            Image
+          </p>
+        ) : (
+          <Image
+            layout="responsive"
+            alt=""
+            src={image.url}
+            blurDataURL={image.url}
+            placeholder="blur"
+            width={image.width}
+            height={image.height}
+          />
+        )}
+      </div>
       <div className={s.visualiseText}>
         <h2>Visualise</h2>
         <p>

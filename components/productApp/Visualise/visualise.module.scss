@@ -10,7 +10,7 @@
     min-height: 600px;
   }
   .imageWrap {
-    @include flexCenter;
+    display: grid;
     background-color: $grey--1;
     width: calc(100vw - 4em);
     height: calc(100vw - 4em);

@@ -3,14 +3,14 @@ import type { NextPage } from "next";
 import { GraphQLClient, gql } from "graphql-request";
 import s from "../../styles/pages/categories.module.scss";
 import Product from "../../components/productApp/Product/Product";
-import categoryQuery from "../../lib/graphcms-querys/categoryQuery";
-import trendingQuery from "../../lib/graphcms-querys/trendingStylesQuery";
+import categoryPagesSlugQuery from "../../lib/graphcms-querys/categoryQuery";
+import MailingList from "../../components/global/MailingList/MailingList";
 import TrendingStyle from "../../components/global/TrendingStyle/TrendingStyle";
 
 export async function getStaticPaths() {
-  const categories = await categoryQuery();
+  const categoryPages = await categoryPagesSlugQuery();
 
-  const paths = categories.map((c: any) => ({
+  const paths = categoryPages.map((c: any) => ({
     params: { slug: c.categoriesSlug },
   }));
 
@@ -27,36 +27,10 @@ export async function getStaticProps({ params }: any) {
     },
   });
 
-  const trendingStyles = await trendingQuery();
-
   const query = gql`
   query Category {
-    categories(where: {categoriesSlug: "${params.slug}"}) {
+    categoryPages(where: {categoriesSlug: "${params.slug}"}) {
       title
-      trendingStylesOneSlug
-      trendingStylesTwoSlug
-      trendingStylesThreeSlug
-      trendingStylesFourSlug
-      trendingStylesOne {
-        height
-        width
-        url
-      }
-      trendingStylesTwo {
-        height
-        width
-        url
-      }
-      trendingStylesThree {
-        height
-        width
-        url
-      }
-      trendingStylesFour {
-        height
-        width
-        url
-      }
       heroImage {
         height
         width
@@ -83,6 +57,33 @@ export async function getStaticProps({ params }: any) {
           }
         }
       }
+      trendingStyle {
+        trendingStylesFourImage {
+          height
+          url
+          width
+        }
+        trendingStylesFourSlug
+        trendingStylesOneImage {
+          height
+          url
+          width
+        }
+        trendingStylesOneSlug
+        trendingStylesThreeImage {
+          url
+          width
+          height
+        }
+        trendingStylesThreeSlug
+        trendingStylesTwoImage {
+          url
+          width
+          height
+        }
+        trendingStylesTwoSlug
+        trendingStyleTitle
+      }
     }
   }
   `;
@@ -90,49 +91,53 @@ export async function getStaticProps({ params }: any) {
   const data = await graphcms.request(query);
 
   return {
-    props: { data, trendingStyles },
+    props: { data },
     revalidate: 10,
   };
 }
 
 interface Props {
   data: any;
-  trendingStyles: any;
 }
 
-const Category: NextPage<Props> = ({ data, trendingStyles }) => {
-  const { categories } = data;
+const Category: NextPage<Props> = ({ data }) => {
+  const { categoryPages } = data;
+
+  const { trendingStyle } = categoryPages[0];
+
+  console.log("category pages", categoryPages);
 
   return (
     <div className={s.categoriesPageWrap}>
       <section className={s.heroWrap}>
         <div className={s.heroText}>
-          <h1>{categories[0].title}</h1>
-          <p>{categories[0].heroText}</p>
+          <h1>{categoryPages[0].title}</h1>
+          <p>{categoryPages[0].heroText}</p>
         </div>
         <div className={s.heroImage}>
           <Image
             layout="responsive"
-            alt={categories[0].heroImageAltText}
-            src={categories[0].heroImage[0].url}
+            alt={categoryPages[0].heroImageAltText}
+            src={categoryPages[0].heroImage[0].url}
             placeholder="blur"
-            blurDataURL={categories[0].heroImage[0].url}
-            height={categories[0].heroImage[0].height}
-            width={categories[0].heroImage[0].width}
+            blurDataURL={categoryPages[0].heroImage[0].url}
+            height={categoryPages[0].heroImage[0].height}
+            width={categoryPages[0].heroImage[0].width}
           />
         </div>
       </section>
       <section className={s.categoriesProductsWrap}>
         <div className={s.productsTitleWrap}>
-          <h2>{categories[0].productsTitle}</h2>
+          <h2>{categoryPages[0].productsTitle}</h2>
         </div>
         <div className={s.productsWrap}>
-          {categories[0].products.map((products: any, i: any) => {
+          {categoryPages[0].products.map((products: any, i: any) => {
             return <Product key={i} products={products} i={i} />;
           })}
         </div>
       </section>
-      <TrendingStyle data={trendingStyles} category={true} />
+      <TrendingStyle trendingStyle={trendingStyle} category={true} />
+      <MailingList />
     </div>
   );
 };

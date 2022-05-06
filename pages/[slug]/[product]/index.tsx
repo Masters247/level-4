@@ -1,18 +1,21 @@
 import ProductColourButtonsWrap from "../../../components/productApp/ProductColourButtons/ProductColourButtons";
 import SliderContainer from "../../../components/slider/SlideContainer/SliderContainer";
 import Visualise from "../../../components/productApp/Visualise/Visualise";
-import Personal from "../../../components/productApp/Personal/Personal";
-import productQuery from "../../../lib/graphcms-querys/productQuery";
 import s from "../../../styles/pages/productPage.module.scss";
+import FeatureBanner from "../../../components/global/FeatureBanner/FeatureBanner";
+
+import MailingList from "../../../components/global/MailingList/MailingList";
+import productsPagesQuery from "../../../lib/graphcms-querys/productsPagesQuery";
 import { GraphQLClient, gql } from "graphql-request";
 import { useState, useEffect } from "react";
 import type { NextPage } from "next";
 import Image from "next/image";
 
 export async function getStaticPaths() {
-  const products = await productQuery();
+  const productsPages = await productsPagesQuery();
+  console.log("product pages", productsPages);
 
-  const paths = products.map((p: any) => ({
+  const paths = productsPages.map((p: any) => ({
     params: {
       slug: p.productCategory,
       product: p.productSlug,
@@ -26,6 +29,7 @@ export async function getStaticPaths() {
 }
 
 export async function getStaticProps({ params }: any) {
+  console.log("params", params);
   const graphcms = new GraphQLClient(`${process.env.GRAPHCMS_URL}`, {
     headers: {
       authorization: `Bearer ${process.env.GRAPHCMS_TOKEN}`,
@@ -34,14 +38,24 @@ export async function getStaticProps({ params }: any) {
 
   const query = gql`
     query Product {
-      product(where: { productSlug: "${params.product}" }) {
+      productPage(where: { productSlug: "${params.product}" }) {
         name
         description
         productSlug
+        featureBanner {
+          heroTitle
+          buttonSlug
+          buttonText
+          heroImage {
+            height
+            url
+            width
+          }
+        }
         featureImage {
           height
-          url
           width
+          url
         }
         productVariantColours {
           images {
@@ -56,6 +70,11 @@ export async function getStaticProps({ params }: any) {
             hex
           }
         }
+        visualiseImage {
+          height
+          url
+          width
+        }
       }
     }
   `;
@@ -69,21 +88,31 @@ export async function getStaticProps({ params }: any) {
 }
 
 interface Props {
-  data: any;
+  data?: any;
 }
 
 const Product: NextPage<Props> = ({ data }) => {
   const [productColour, setProductColour] = useState(0);
-  const { product } = data;
+  const { productPage } = data;
+  const {
+    featureImage,
+    featureBanner,
+    productVariantColours,
+    name,
+    description,
+    productSlug,
+    visualiseImage,
+  } = productPage;
 
   const handleColourClick = (e: any, i: any) => {
     setProductColour(i);
   };
 
-  const images = product.featureImage.map((i: any) => i.url);
+  const images = featureImage.map((i: any) => i.url);
 
-  const imagesLength =
-    product.productVariantColours[productColour].images.length;
+  const imagesLength = productVariantColours[productColour].images.length;
+
+  console.log("visulise image", visualiseImage);
 
   return (
     <div className={s.pageWrap}>
@@ -94,8 +123,8 @@ const Product: NextPage<Props> = ({ data }) => {
         slides={images}
       />
       <section className={s.info}>
-        <h1>{product.name}</h1>
-        <p>{product.description}</p>
+        <h1>{name}</h1>
+        <p>{description}</p>
       </section>
 
       <section
@@ -107,7 +136,7 @@ const Product: NextPage<Props> = ({ data }) => {
         <div className={s.productImagesBackgroundWrap}>
           <div className={s.productColourWrap}>
             <ProductColourButtonsWrap
-              products={product}
+              products={productPage}
               colourClick={handleColourClick}
               rotate={s.rotate}
             />
@@ -123,25 +152,25 @@ const Product: NextPage<Props> = ({ data }) => {
               margin: " 0 auto",
             }}
           >
-            {product.productVariantColours[productColour].images.map(
-              (image: any) => (
-                <Image
-                  alt=""
-                  key={image.url}
-                  layout="responsive"
-                  src={image.url}
-                  height={200}
-                  width={200}
-                  placeholder="blur"
-                  blurDataURL={image.url}
-                />
-              )
-            )}
+            {productVariantColours[productColour].images.map((image: any) => (
+              <Image
+                alt=""
+                key={image.url}
+                layout="responsive"
+                src={image.url}
+                height={200}
+                width={200}
+                placeholder="blur"
+                blurDataURL={image.url}
+              />
+            ))}
           </div>
         </div>
       </section>
-      <Visualise slug={product.productSlug} />
-      <Personal />
+      <Visualise slug={productSlug} image={visualiseImage} />
+      {featureBanner === null ? null : (
+        <FeatureBanner featureBanner={featureBanner} />
+      )}
     </div>
   );
 };
