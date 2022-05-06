@@ -37,15 +37,15 @@ const ContactForm = () => {
               password: "",
             }}
             validationSchema={SignupSchema}
-            onSubmit={async (data) => {
+            onSubmit={async (data: any) => {
               const formData = data;
 
-              fetch("/api/account/createAccount", {
-                method: "post",
-                body: JSON.stringify(formData),
-              });
+              // fetch("/api/account/createAccount", {
+              //   method: "post",
+              //   body: JSON.stringify(formData),
+              // });
 
-              // setThankYou(true);
+              setThankYou(true);
             }}
           >
             {({ errors, touched }) => (
