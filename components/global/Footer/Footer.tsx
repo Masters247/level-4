@@ -12,7 +12,7 @@ const Footer: FC = () => {
     <footer className={s.footer}>
       <div className={s.mainFooter}>
         <div className={`${s.footerElements} ${s.footer1}`}>
-          <Link href="/" passHref>
+          <Link href="/" passHref prefetch={false}>
             <a className={s.imageWrap}>
               <Image
                 // priority
@@ -36,7 +36,7 @@ const Footer: FC = () => {
           <ul>
             {pages[1].products?.map((page: any) => (
               <li key={page.name} className={page?.class}>
-                <Link href={page.link} passHref>
+                <Link href={page.link} passHref prefetch={false}>
                   <a>{page.name}</a>
                 </Link>
               </li>
@@ -48,7 +48,7 @@ const Footer: FC = () => {
           <ul>
             {pages[0].pages?.map((page: any) => (
               <li key={page.name} className={page?.class}>
-                <Link href={page.link} passHref>
+                <Link href={page.link} passHref prefetch={false}>
                   <a>{page.name}</a>
                 </Link>
               </li>

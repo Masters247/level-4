@@ -21,6 +21,11 @@ const ProductView = ({
 }: any) => {
   const [imageWidth, setImageWidth]: any = useState(80);
   const [imageHeight, setImageHeight]: any = useState(80);
+  const [movementsArray, setMovementsArray]: any = useState([
+    { offset: 0, movement: 0 },
+  ]);
+  const [redo, setRedo]: any = useState([]);
+  const [undo, setUndo]: any = useState([]);
 
   const [{ x, y, width, height }, api] = useSpring(() => ({
     x: 0,
@@ -34,10 +39,12 @@ const ProductView = ({
 
   const bind = useDrag(
     (state) => {
-      // console.log("state", state.movement);
       (window as any).movement = state.movement;
       (window as any).offset = state.offset;
+
+      // console.log("state movement", state.offset);
       const isResizing = state?.event.target === dragEl.current;
+      console.log("bind", isResizing);
       if (isResizing) {
         api.set({
           width: state.offset[0],
@@ -53,6 +60,8 @@ const ProductView = ({
     {
       from: (event) => {
         const isResizing = event.target === dragEl.current;
+        // console.log("from", isResizing);
+
         if (isResizing) {
           return [width.get(), height.get()];
         } else {
@@ -63,6 +72,8 @@ const ProductView = ({
         const isResizing = state?.event.target === dragEl.current;
         const containerWidth: any = containerRef.current?.clientWidth ?? 0;
         const containerHeight: any = containerRef.current?.clientHeight ?? 0;
+
+        // console.log("bounds", isResizing);
         if (isResizing) {
           return {
             top: 50,
@@ -148,6 +159,7 @@ const ProductView = ({
             }}
           >
             <Image
+              sizes="500px"
               src={image.url}
               quality={100}
               priority

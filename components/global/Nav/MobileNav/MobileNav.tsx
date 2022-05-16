@@ -26,7 +26,7 @@ const Nav: FC = () => {
     <div className={`${s.navWrapper} ${open ? s.open : ""}`}>
       <div className={s.headerWrapper}>
         <div className={s.mobileLogo} onClick={() => setOpen(false)}>
-          <Link href="/" passHref>
+          <Link href="/" passHref prefetch={false}>
             <a>
               <Image
                 priority

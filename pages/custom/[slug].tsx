@@ -148,7 +148,7 @@ const Custom: NextPage<Props> = ({ queryGraphCms, customPage }) => {
           var image = canvas
             .toDataURL("image/jpeg")
             .replace("image/jpeg", "image/octet-stream");
-          console.log("save image useEffect");
+          // console.log("save image useEffect");
 
           const data = {
             image,

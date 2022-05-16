@@ -25,7 +25,7 @@ const DesktopNav: FC = () => {
         ))}
       </ul>
       <div className={s.logo}>
-        <Link href="/" passHref>
+        <Link href="/" passHref prefetch={false}>
           <a>
             <Image
               priority
