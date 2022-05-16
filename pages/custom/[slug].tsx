@@ -130,11 +130,12 @@ const Custom: NextPage<Props> = ({ queryGraphCms, customPage }) => {
       const documentCustom: any = document.querySelector("#capture");
       downloadCustomImage &&
         html2canvas(documentCustom, {}).then((canvas: any) => {
-          var image = canvas
+          let image = canvas
             .toDataURL("image/jpeg")
             .replace("image/jpeg", "image/octet-stream");
           window.location.href = image;
           setDownloadCustomImage(false);
+          setControl(true);
         });
     }
     setTimeout(downloadImage, 1000);
@@ -145,7 +146,7 @@ const Custom: NextPage<Props> = ({ queryGraphCms, customPage }) => {
       const documentCustom: any = document.querySelector("#capture");
       saveCustomImage &&
         html2canvas(documentCustom, {}).then((canvas: any) => {
-          var image = canvas
+          let image = canvas
             .toDataURL("image/jpeg")
             .replace("image/jpeg", "image/octet-stream");
           // console.log("save image useEffect");
@@ -176,7 +177,7 @@ const Custom: NextPage<Props> = ({ queryGraphCms, customPage }) => {
     }
 
     setTimeout(saveImage, 1000);
-  }, [saveCustomImage]);
+  }, [name, productCategory, saveCustomImage, user]);
 
   return (
     <div className={s.pageWrap}>
