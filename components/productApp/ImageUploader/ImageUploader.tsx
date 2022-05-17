@@ -11,7 +11,7 @@ const ImageUploader = ({ logo, setLogo, handleImageUpload }: any) => {
   const [localImages, setLocalImages]: any = useState([]);
   const [images, setImages] = useState([]);
   const [selectImage, setSelectImage] = useState(0);
-  const maxNumber = 2;
+  const maxNumber = 10;
 
   const onChange = (imageList: any) => {
     setImages(imageList);
@@ -33,9 +33,9 @@ const ImageUploader = ({ logo, setLogo, handleImageUpload }: any) => {
     if (obj === null) {
       return;
     } else if (localImages?.length === 0) {
-      setLocalImages(obj);
+      setImages(obj);
     } else {
-      setLocalImages(localImages?.concat(obj));
+      setImages(localImages?.concat(obj));
     }
   }, []);
 

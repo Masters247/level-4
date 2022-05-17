@@ -110,7 +110,22 @@ const Custom: NextPage<Props> = ({ queryGraphCms, customPage }) => {
   };
 
   const handleScreenShot = () => {
-    setDownloadCustomImage(true);
+    setControl(false);
+    toPng(document.getElementById("capture") as HTMLElement, {
+      cacheBust: true,
+      style: { backgroundColor: "transparent" },
+    })
+      .then((dataUrl) => {
+        const link = document.createElement("a");
+        link.download = `Level 4 ${productPage.name} Custom Design.png`;
+        link.setAttribute("crossOrigin", "anonymous");
+        link.href = dataUrl;
+        link.click();
+      })
+      .then(() => setControl(true))
+      .catch((err) => {
+        console.log("IMAGE DOWNLOAD ERROR: ", err);
+      });
   };
 
   const handleSaveCustomImage = () => {
@@ -121,37 +136,38 @@ const Custom: NextPage<Props> = ({ queryGraphCms, customPage }) => {
     }
   };
 
-  useEffect(() => {
-    downloadCustomImage && setControl(false);
-    saveCustomImage && setControl(false);
-  }, [downloadCustomImage, saveCustomImage]);
+  // useEffect(() => {
+  //   downloadCustomImage && setControl(false);
+  //   saveCustomImage && setControl(false);
+  // }, [downloadCustomImage, saveCustomImage]);
 
-  useEffect(() => {
-    const saveImage = () => {
-      downloadCustomImage &&
-        toPng(document.getElementById("capture") as HTMLElement, {
-          cacheBust: true,
-          style: { backgroundColor: "transparent" },
-        })
-          .then((dataUrl) => {
-            const link = document.createElement("a");
-            link.download = `Level 4 ${productPage.name} Custom Design.png`;
-            link.setAttribute("crossOrigin", "anonymous");
-            link.href = dataUrl;
-            link.click();
-          })
-          .then(() => {
-            setDownloadCustomImage(false);
-            setControl(true);
-          })
-          .catch((err) => {
-            console.log("IMAGE DOWNLOAD ERROR: ", err);
-          });
-    };
-    setTimeout(saveImage, 2000);
+  // useEffect(() => {
+  //   const saveImage = () => {
+  //     downloadCustomImage &&
+  //       toPng(document.getElementById("capture") as HTMLElement, {
+  //         cacheBust: true,
+  //         style: { backgroundColor: "transparent" },
+  //       })
+  //         .then((dataUrl) => {
+  //           const link = document.createElement("a");
+  //           link.download = `Level 4 ${productPage.name} Custom Design.png`;
+  //           link.setAttribute("crossOrigin", "anonymous");
+  //           link.href = dataUrl;
+  //           link.click();
+  //         })
+  //         .catch((err) => {
+  //           console.log("IMAGE DOWNLOAD ERROR: ", err);
+  //         });
+  //   };
+  //   setTimeout(saveImage, 2000);
 
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [downloadCustomImage]);
+  //   return () => {
+  //     clearTimeout();
+  //     setDownloadCustomImage(false);
+  //     setControl(true);
+  //   };
+  //   // eslint-disable-next-line react-hooks/exhaustive-deps
+  // }, [downloadCustomImage]);
 
   // useEffect(() => {
   //   function saveImage() {

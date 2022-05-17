@@ -159,17 +159,7 @@ const ProductView = ({
               height: "500px",
             }}
           >
-            <Image
-              src={image.url}
-              quality={100}
-              priority
-              layout="responsive"
-              width={500}
-              height={500}
-              // placeholder="blur"
-              // blurDataURL={image.url}
-              alt="product"
-            />
+            <img src={image.url} width={500} height={500} alt="product" />
           </div>
           <div className={s.productViewport}>
             <div
