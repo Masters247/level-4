@@ -136,6 +136,7 @@ const Custom: NextPage<Props> = ({ queryGraphCms, customPage }) => {
           .then((dataUrl) => {
             const link = document.createElement("a");
             link.download = `Level 4 ${productPage.name} Custom Design.png`;
+            link.setAttribute("crossOrigin", "anonymous");
             link.href = dataUrl;
             link.click();
           })
@@ -144,10 +145,10 @@ const Custom: NextPage<Props> = ({ queryGraphCms, customPage }) => {
             setControl(true);
           })
           .catch((err) => {
-            console.log(err);
+            console.log("IMAGE DOWNLOAD ERROR: ", err);
           });
     };
-    setTimeout(saveImage, 2500);
+    setTimeout(saveImage, 2000);
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [downloadCustomImage]);
