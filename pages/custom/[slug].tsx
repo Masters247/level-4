@@ -7,10 +7,11 @@ import { GraphQLClient, gql } from "graphql-request";
 import { useSession } from "next-auth/react";
 import { useState, useEffect } from "react";
 import customPageQuery from "../../lib/graphcms-querys/customPageQuery";
-import html2canvas from "html2canvas";
+// import html2canvas from "html2canvas";
 import type { NextPage } from "next";
 import Link from "next/link";
 import useSWR from "swr";
+import { toPng } from "html-to-image";
 
 const fetcher = (email: any) => fetch(email).then((res) => res.json());
 
@@ -126,58 +127,68 @@ const Custom: NextPage<Props> = ({ queryGraphCms, customPage }) => {
   }, [downloadCustomImage, saveCustomImage]);
 
   useEffect(() => {
-    function downloadImage() {
-      const documentCustom: any = document.querySelector("#capture");
+    const saveImage = () => {
       downloadCustomImage &&
-        html2canvas(documentCustom, {}).then((canvas: any) => {
-          let image = canvas
-            .toDataURL("image/jpeg")
-            .replace("image/jpeg", "image/octet-stream");
-          window.location.href = image;
-          setDownloadCustomImage(false);
-          setControl(true);
-        });
-    }
-    setTimeout(downloadImage, 1000);
+        toPng(document.getElementById("capture") as HTMLElement, {
+          cacheBust: true,
+          style: { backgroundColor: "transparent" },
+        })
+          .then((dataUrl) => {
+            const link = document.createElement("a");
+            link.download = `Level 4 ${productPage.name} Custom Design.png`;
+            link.href = dataUrl;
+            link.click();
+          })
+          .then(() => {
+            setDownloadCustomImage(false);
+            setControl(true);
+          })
+          .catch((err) => {
+            console.log(err);
+          });
+    };
+    setTimeout(saveImage, 2500);
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [downloadCustomImage]);
 
-  useEffect(() => {
-    function saveImage() {
-      const documentCustom: any = document.querySelector("#capture");
-      saveCustomImage &&
-        html2canvas(documentCustom, {}).then((canvas: any) => {
-          let image = canvas
-            .toDataURL("image/jpeg")
-            .replace("image/jpeg", "image/octet-stream");
-          // console.log("save image useEffect");
+  // useEffect(() => {
+  //   function saveImage() {
+  //     const documentCustom: any = document.querySelector("#capture");
+  //     saveCustomImage &&
+  //       html2canvas(documentCustom, {}).then((canvas: any) => {
+  //         let image = canvas
+  //           .toDataURL("image/jpeg")
+  //           .replace("image/jpeg", "image/octet-stream");
+  //         // console.log("save image useEffect");
 
-          const data = {
-            image,
-            user,
-            productName: name,
-            productCategory: productCategory,
-          };
+  //         const data = {
+  //           image,
+  //           user,
+  //           productName: name,
+  //           productCategory: productCategory,
+  //         };
 
-          async function CustomImage() {
-            await fetch(`/api/productApp/customImage`, {
-              headers: { "Content-Type": "application/json" },
-              method: "POST",
-              body: JSON.stringify(data),
-            });
-          }
-          CustomImage();
+  //         async function CustomImage() {
+  //           await fetch(`/api/productApp/customImage`, {
+  //             headers: { "Content-Type": "application/json" },
+  //             method: "POST",
+  //             body: JSON.stringify(data),
+  //           });
+  //         }
+  //         CustomImage();
 
-          setTimeout(saveImageTimeOut, 1000);
+  //         setTimeout(saveImageTimeOut, 1000);
 
-          function saveImageTimeOut() {
-            setSaveCustomImage(false);
-            setControl(true);
-          }
-        });
-    }
+  //         function saveImageTimeOut() {
+  //           setSaveCustomImage(false);
+  //           setControl(true);
+  //         }
+  //       });
+  //   }
 
-    setTimeout(saveImage, 1000);
-  }, [name, productCategory, saveCustomImage, user]);
+  //   setTimeout(saveImage, 1000);
+  // }, [name, productCategory, saveCustomImage, user]);
 
   return (
     <div className={s.pageWrap}>
