@@ -127,7 +127,7 @@ const Custom: NextPage<Props> = ({ queryGraphCms, customPage }) => {
           console.log("IMAGE DOWNLOAD ERROR: ", err);
         });
     };
-
+    // Need this timeout to ensure the image is loaded
     setTimeout(() => takeScreenShot(), 1000);
   };
 
