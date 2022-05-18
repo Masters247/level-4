@@ -11,6 +11,7 @@ import customPageQuery from "../../lib/graphcms-querys/customPageQuery";
 import html2canvas from "html2canvas";
 import Link from "next/link";
 import useSWR from "swr";
+const download = require("downloadjs");
 
 const fetcher = (email: any) => fetch(email).then((res) => res.json());
 
@@ -102,15 +103,32 @@ const Custom: NextPage<Props> = ({ queryGraphCms, customPage }) => {
     productPage;
 
   const email = session?.user.email;
-
-  const { user, isLoading, isError } = useAccount(email);
+  // const { user, isLoading, isError } = useAccount(email);
 
   const handleColourClick = (e: any, i: any) => {
     setColour(i);
   };
 
   const handleScreenShot = () => {
-    setDownloadCustomImage(true);
+    setControl(false);
+    const takeScreenShot = () => {
+      html2canvas(document.getElementById("capture") as HTMLElement, {
+        useCORS: true,
+      })
+        .then((canvas) => {
+          const image = canvas
+            .toDataURL("image/jpeg")
+            .replace("image/jpeg", "image/octet-stream");
+
+          download(image, `Level 4 | ${name}.jpg`, "image/jpeg");
+        })
+        .then(() => setControl(true))
+        .catch((err) => {
+          console.log("IMAGE DOWNLOAD ERROR: ", err);
+        });
+    };
+
+    setTimeout(() => takeScreenShot(), 1000);
   };
 
   const handleSaveCustomImage = () => {
@@ -121,62 +139,76 @@ const Custom: NextPage<Props> = ({ queryGraphCms, customPage }) => {
     }
   };
 
-  useEffect(() => {
-    downloadCustomImage && setControl(false);
-    saveCustomImage && setControl(false);
-  }, [downloadCustomImage, saveCustomImage]);
+  // useEffect(() => {
+  //   downloadCustomImage && setControl(false);
+  //   saveCustomImage && setControl(false);
+  // }, [downloadCustomImage, saveCustomImage]);
 
-  useEffect(() => {
-    function downloadImage() {
-      const documentCustom: any = document.querySelector("#capture");
-      downloadCustomImage &&
-        html2canvas(documentCustom, {}).then((canvas: any) => {
-          var image = canvas
-            .toDataURL("image/jpeg")
-            .replace("image/jpeg", "image/octet-stream");
-          window.location.href = image;
-          setDownloadCustomImage(false);
-        });
-    }
-    setTimeout(downloadImage, 1000);
-  }, [downloadCustomImage]);
+  // useEffect(() => {
+  //   const saveImage = () => {
+  //     downloadCustomImage &&
+  //       toPng(document.getElementById("capture") as HTMLElement, {
+  //         cacheBust: true,
+  //         style: { backgroundColor: "transparent" },
+  //       })
+  //         .then((dataUrl) => {
+  //           const link = document.createElement("a");
+  //           link.download = `Level 4 ${productPage.name} Custom Design.png`;
+  //           link.setAttribute("crossOrigin", "anonymous");
+  //           link.href = dataUrl;
+  //           link.click();
+  //         })
+  //         .catch((err) => {
+  //           console.log("IMAGE DOWNLOAD ERROR: ", err);
+  //         });
+  //   };
+  //   setTimeout(saveImage, 2000);
 
-  useEffect(() => {
-    function saveImage() {
-      const documentCustom: any = document.querySelector("#capture");
-      saveCustomImage &&
-        html2canvas(documentCustom, {}).then((canvas: any) => {
-          var image = canvas
-            .toDataURL("image/jpeg")
-            .replace("image/jpeg", "image/octet-stream");
+  //   return () => {
+  //     clearTimeout();
+  //     setDownloadCustomImage(false);
+  //     setControl(true);
+  //   };
+  //   // eslint-disable-next-line react-hooks/exhaustive-deps
+  // }, [downloadCustomImage]);
 
-          const data = {
-            image,
-            user,
-            productName: name,
-            productCategory: productCategory,
-          };
+  // useEffect(() => {
+  //   function saveImage() {
+  //     const documentCustom: any = document.querySelector("#capture");
+  //     saveCustomImage &&
+  //       html2canvas(documentCustom, {}).then((canvas: any) => {
+  //         let image = canvas
+  //           .toDataURL("image/jpeg")
+  //           .replace("image/jpeg", "image/octet-stream");
+  //         // console.log("save image useEffect");
 
-          async function CustomImage() {
-            await fetch(`/api/productApp/customImage`, {
-              headers: { "Content-Type": "application/json" },
-              method: "POST",
-              body: JSON.stringify(data),
-            });
-          }
-          CustomImage();
+  //         const data = {
+  //           image,
+  //           user,
+  //           productName: name,
+  //           productCategory: productCategory,
+  //         };
 
-          setTimeout(saveImageTimeOut, 1000);
+  //         async function CustomImage() {
+  //           await fetch(`/api/productApp/customImage`, {
+  //             headers: { "Content-Type": "application/json" },
+  //             method: "POST",
+  //             body: JSON.stringify(data),
+  //           });
+  //         }
+  //         CustomImage();
 
-          function saveImageTimeOut() {
-            setSaveCustomImage(false);
-            setControl(true);
-          }
-        });
-    }
+  //         setTimeout(saveImageTimeOut, 1000);
 
-    setTimeout(saveImage, 1000);
-  }, [saveCustomImage]);
+  //         function saveImageTimeOut() {
+  //           setSaveCustomImage(false);
+  //           setControl(true);
+  //         }
+  //       });
+  //   }
+
+  //   setTimeout(saveImage, 1000);
+  // }, [name, productCategory, saveCustomImage, user]);
 
   return (
     <div className={s.pageWrap}>

@@ -70,12 +70,12 @@ const ProductUiPanel = ({
           position={s.position}
         />
       </div>
-      {state && (
-        <div className={s.embelishment}>
-          <h2>Embelishment:</h2>
-          <p>Embroidered</p>
-        </div>
-      )}
+      {/* {state && ( */}
+      <div className={s.embelishment}>
+        <h2>Embelishment:</h2>
+        <p>Embroidered</p>
+      </div>
+      {/* )} */}
       <ProductButtons
         stateUploader={stateUploader}
         state={state}

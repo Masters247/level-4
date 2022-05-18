@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element */
 import { useRef, useState } from "react";
 import { useSpring, animated } from "@react-spring/web";
 import Image from "next/image";
@@ -158,16 +159,10 @@ const ProductView = ({
               height: "500px",
             }}
           >
-            <Image
-              sizes="500px"
+            <img
               src={image.url}
-              quality={100}
-              priority
-              layout="responsive"
-              width={500}
-              height={500}
-              placeholder="blur"
-              blurDataURL={image.url}
+              style={{ width: "500px", height: "500px" }}
+              alt="product"
             />
           </div>
           <div className={s.productViewport}>
@@ -184,6 +179,7 @@ const ProductView = ({
                   {logo !== null && (
                     <div className={s.logoImageWrap}>
                       <img
+                        alt="logo"
                         className={s.logoImage}
                         src={logo}
                         style={{

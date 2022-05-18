@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 const ImageConverter = ({ imageData, setImageWidth, setImageHeight }: any) => {
   useEffect(() => {
     if (imageData !== null) {
-      var i = new Image();
+      let i = new Image();
 
       //   i.onload = function () {
       //     alert(i.width + ", " + i.height);
@@ -18,7 +18,7 @@ const ImageConverter = ({ imageData, setImageWidth, setImageHeight }: any) => {
     }
   });
 
-  return <div></div>;
+  return null;
 };
 
 export default ImageConverter;
