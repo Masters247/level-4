@@ -13,13 +13,14 @@ import CreateAccountForm from "../components/global/CreateAccountForm/CreateAcco
 import { Button } from "../components/ui/Button";
 
 export async function getServerSideProps(context: any) {
+  const providers = await getProviders();
   const csrfToken = await getCsrfToken(context);
   return {
-    props: { csrfToken },
+    props: { csrfToken, providers },
   };
 }
 
-export default function SignIn({ csrfToken }: any) {
+export default function SignIn({ csrfToken, providers }: any) {
   return (
     <div className={s.pageWrap}>
       <div className={s.signInForm}>
@@ -33,10 +34,10 @@ export default function SignIn({ csrfToken }: any) {
           <input name="csrfToken" type="hidden" defaultValue={csrfToken} />
           <label>Email address</label>
           <input type="email" id="email" name="email" placeholder="Email" />
-
           <button type="submit">Sign in with Email</button>
         </form>
       </div>
+      <div className={s.signInForm}></div>
     </div>
   );
 }
