@@ -6,14 +6,14 @@ import s from "./contactForm.module.scss";
 
 const ContactForm = () => {
   const SignupSchema = Yup.object().shape({
-    firstName: Yup.string()
+    name: Yup.string()
       .min(2, "Too Short!")
       .max(50, "Too Long!")
       .required("Required"),
-    lastName: Yup.string()
-      .min(2, "Too Short!")
-      .max(50, "Too Long!")
-      .required("Required"),
+    // lastName: Yup.string()
+    //   .min(2, "Too Short!")
+    //   .max(50, "Too Long!")
+    //   .required("Required"),
     message: Yup.string()
       .min(6, "Too Short!")
       .max(500, "Too Long!")
@@ -42,8 +42,8 @@ const ContactForm = () => {
           <Formik
             initialValues={{
               checked: [],
-              firstName: "",
-              lastName: "",
+              name: "",
+              // lastName: "",
               business: "",
               email: "",
               message: "",
@@ -64,15 +64,19 @@ const ContactForm = () => {
               <Form className={s.form}>
                 <div className={s.formTop}>
                   <div className={s.wrap}>
-                    <label htmlFor="firstName">
-                      <span>&#42;</span> First Name
-                    </label>
-                    <Field className={s.name} name="firstName" />
-                    {errors.firstName && touched.firstName ? (
-                      <div className={s.error}>{errors.firstName}</div>
+                    {/* <label htmlFor="name">
+                      <span>&#42;</span> Name
+                    </label> */}
+                    <Field
+                      className={s.name}
+                      name="name"
+                      placeholder="*Email"
+                    />
+                    {errors.name && touched.name ? (
+                      <div className={s.error}>{errors.name}</div>
                     ) : null}
                   </div>
-                  <div className={s.wrap}>
+                  {/* <div className={s.wrap}>
                     <label htmlFor="lastName">
                       <span>&#42;</span> Last Name
                     </label>
@@ -80,14 +84,18 @@ const ContactForm = () => {
                     {errors.lastName && touched.lastName ? (
                       <div className={s.error}>{errors.lastName}</div>
                     ) : null}
-                  </div>
+                  </div> */}
                 </div>
                 <div className={s.formMiddle}>
                   <div className={s.email}>
-                    <label htmlFor="business">
+                    {/* <label htmlFor="business">
                       <span>&#42;</span> Golf Club / Organisation / Business
-                    </label>
-                    <Field name="business" type="business" />
+                    </label> */}
+                    <Field
+                      name="business"
+                      type="business"
+                      placeholder="*Golf Club / Organisation / Business"
+                    />
                     {errors.business && touched.business ? (
                       <div className={s.error}>{errors.business}</div>
                     ) : null}
@@ -95,10 +103,10 @@ const ContactForm = () => {
                 </div>
                 <div className={s.formMiddle}>
                   <div className={s.email}>
-                    <label htmlFor="email">
+                    {/* <label htmlFor="email">
                       <span>&#42;</span> Email
-                    </label>
-                    <Field name="email" type="email" />
+                    </label> */}
+                    <Field name="email" type="email" placeholder="*Email" />
                     {errors.email && touched.email ? (
                       <div className={s.error}>{errors.email}</div>
                     ) : null}
@@ -106,10 +114,11 @@ const ContactForm = () => {
                 </div>
                 <div className={s.formBottom}>
                   <div className={s.email}>
-                    <label htmlFor="message">
-                      <span>&#42;</span> Message
-                    </label>
-                    <Field name="message" as="textarea" />
+                    <Field
+                      name="message"
+                      as="textarea"
+                      placeholder="*Message"
+                    />
                     {errors.message && touched.message ? (
                       <div className={s.error}>{errors.message}</div>
                     ) : null}

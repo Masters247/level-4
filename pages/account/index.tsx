@@ -1,10 +1,10 @@
+import type { NextPage } from "next";
 import Customer from "../../components/account/Customer/Customer";
 import Designs from "../../components/account/Designs/Designs";
 import s from "../../styles/pages/account.module.scss";
 import { signOut, useSession } from "next-auth/react";
 import useDelayedRender from "use-delayed-render";
 import { useRouter } from "next/router";
-import type { NextPage } from "next";
 import { useState } from "react";
 import Image from "next/image";
 import useSWR from "swr";
@@ -75,9 +75,9 @@ const Account: NextPage = () => {
         <h1>Your Account</h1>
         {session && (
           <div className={s.loggedInTitle}>
-            <span>
-              <Image src={session.user.image} width={30} height={30} alt="" />
-            </span>
+            {/* <span>
+              <Image src={session?.user.image} width={30} height={30} alt="" />
+            </span> */}
             <button onClick={handleSignOut}>
               <p>Sign Out</p>
             </button>

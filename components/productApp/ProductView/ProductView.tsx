@@ -163,7 +163,7 @@ const ProductView = ({
               src={image.url}
               quality={100}
               priority
-              layout="fixed"
+              layout="responsive"
               width={500}
               height={500}
               placeholder="blur"

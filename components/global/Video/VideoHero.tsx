@@ -6,7 +6,7 @@ interface Props {
 }
 
 const VideoHero: FC<Props> = ({ video }) => {
-  console.log("videos", video);
+  // console.log("videos", video);
   return (
     <div className={s.videoWrapper}>
       <video autoPlay loop muted className={s.video}>

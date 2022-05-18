@@ -84,7 +84,10 @@ const Nav: FC = () => {
               </button>
             ) : (
               <Link href="/account" passHref>
-                <a onClick={handleMenuToggle}>{session.user?.name}</a>
+                <a onClick={handleMenuToggle}>
+                  {/* {session.user?.name} */}
+                  Account
+                </a>
               </Link>
             )}
           </div>

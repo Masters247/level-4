@@ -1,10 +1,14 @@
-import React, { useState } from "react";
-import Link from "next/link";
+import React, { useState, FC } from "react";
 import { Formik, Form, Field } from "formik";
 import * as Yup from "yup";
 import s from "./createAccountForm.module.scss";
 
-const ContactForm = () => {
+// interface Props {
+//   providers: any;
+//   csrfToken: any;
+// }
+
+const ContactForm: FC = () => {
   const SignupSchema = Yup.object().shape({
     name: Yup.string()
       .min(2, "Too Short!")
@@ -17,6 +21,8 @@ const ContactForm = () => {
       .required("Required"),
     email: Yup.string().email("Invalid email").required("Required"),
   });
+
+  // console.log("providers", providers, "csrfToken", csrfToken);
 
   const [thankYou, setThankYou] = useState(false);
 
@@ -40,10 +46,12 @@ const ContactForm = () => {
             onSubmit={async (data: any) => {
               const formData = data;
 
-              // fetch("/api/account/createAccount", {
-              //   method: "post",
-              //   body: JSON.stringify(formData),
-              // });
+              fetch("/api/account/createAccount", {
+                method: "post",
+                body: JSON.stringify(formData),
+              });
+
+              console.log("submitted");
 
               setThankYou(true);
             }}

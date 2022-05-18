@@ -1,3 +1,4 @@
+import type { NextPage } from "next";
 import ProductView from "../../components/productApp/ProductView/ProductView";
 import trendingQuery from "../../lib/graphcms-querys/trendingStylesQuery";
 import TrendingStyle from "../../components/global/TrendingStyle/TrendingStyle";
@@ -8,7 +9,6 @@ import { useSession } from "next-auth/react";
 import { useState, useEffect } from "react";
 import customPageQuery from "../../lib/graphcms-querys/customPageQuery";
 import html2canvas from "html2canvas";
-import type { NextPage } from "next";
 import Link from "next/link";
 import useSWR from "swr";
 
@@ -102,6 +102,7 @@ const Custom: NextPage<Props> = ({ queryGraphCms, customPage }) => {
     productPage;
 
   const email = session?.user.email;
+
   const { user, isLoading, isError } = useAccount(email);
 
   const handleColourClick = (e: any, i: any) => {
@@ -148,7 +149,6 @@ const Custom: NextPage<Props> = ({ queryGraphCms, customPage }) => {
           var image = canvas
             .toDataURL("image/jpeg")
             .replace("image/jpeg", "image/octet-stream");
-          // console.log("save image useEffect");
 
           const data = {
             image,

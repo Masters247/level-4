@@ -55,7 +55,7 @@ const Designs: FC<Props> = ({ userId }) => {
         </div>
       ) : (
         <>
-          <div className={s.navFilterWrap}>
+          {/* <div className={s.navFilterWrap}>
             <div className={s.navFilter}>
               {pages[1].products?.map((c: any, i: number) => (
                 <button
@@ -66,7 +66,7 @@ const Designs: FC<Props> = ({ userId }) => {
                 </button>
               ))}
             </div>
-          </div>
+          </div> */}
           <div className={s.designs}>
             {data.map((d: any, i: number) => (
               <div key={i} className={s.productWrap}>
