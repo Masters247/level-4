@@ -7,11 +7,11 @@ import { GraphQLClient, gql } from "graphql-request";
 import { useSession } from "next-auth/react";
 import { useState, useEffect } from "react";
 import customPageQuery from "../../lib/graphcms-querys/customPageQuery";
-// import html2canvas from "html2canvas";
+import html2canvas from "html2canvas";
 import type { NextPage } from "next";
 import Link from "next/link";
 import useSWR from "swr";
-import { toPng } from "html-to-image";
+const download = require("downloadjs");
 
 const fetcher = (email: any) => fetch(email).then((res) => res.json());
 
@@ -103,7 +103,7 @@ const Custom: NextPage<Props> = ({ queryGraphCms, customPage }) => {
     productPage;
 
   const email = session?.user.email;
-  const { user, isLoading, isError } = useAccount(email);
+  // const { user, isLoading, isError } = useAccount(email);
 
   const handleColourClick = (e: any, i: any) => {
     setColour(i);
@@ -111,21 +111,24 @@ const Custom: NextPage<Props> = ({ queryGraphCms, customPage }) => {
 
   const handleScreenShot = () => {
     setControl(false);
-    toPng(document.getElementById("capture") as HTMLElement, {
-      cacheBust: true,
-      style: { backgroundColor: "transparent" },
-    })
-      .then((dataUrl) => {
-        const link = document.createElement("a");
-        link.download = `Level 4 ${productPage.name} Custom Design.png`;
-        link.setAttribute("crossOrigin", "anonymous");
-        link.href = dataUrl;
-        link.click();
+    const takeScreenShot = () => {
+      html2canvas(document.getElementById("capture") as HTMLElement, {
+        useCORS: true,
       })
-      .then(() => setControl(true))
-      .catch((err) => {
-        console.log("IMAGE DOWNLOAD ERROR: ", err);
-      });
+        .then((canvas) => {
+          const image = canvas
+            .toDataURL("image/jpeg")
+            .replace("image/jpeg", "image/octet-stream");
+
+          download(image, `${name}.jpg`, "image/jpeg");
+        })
+        .then(() => setControl(true))
+        .catch((err) => {
+          console.log("IMAGE DOWNLOAD ERROR: ", err);
+        });
+    };
+
+    setTimeout(() => takeScreenShot(), 1000);
   };
 
   const handleSaveCustomImage = () => {

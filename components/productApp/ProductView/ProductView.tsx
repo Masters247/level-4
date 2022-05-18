@@ -159,7 +159,11 @@ const ProductView = ({
               height: "500px",
             }}
           >
-            <img src={image.url} width={500} height={500} alt="product" />
+            <img
+              src={image.url}
+              style={{ width: "500px", height: "500px" }}
+              alt="product"
+            />
           </div>
           <div className={s.productViewport}>
             <div
