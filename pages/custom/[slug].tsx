@@ -120,7 +120,7 @@ const Custom: NextPage<Props> = ({ queryGraphCms, customPage }) => {
             .toDataURL("image/jpeg")
             .replace("image/jpeg", "image/octet-stream");
 
-          download(image, `${name}.jpg`, "image/jpeg");
+          download(image, `Level 4 | ${name}.jpg`, "image/jpeg");
         })
         .then(() => setControl(true))
         .catch((err) => {

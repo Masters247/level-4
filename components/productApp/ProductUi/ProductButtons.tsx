@@ -27,7 +27,7 @@ const ProductButtons = ({
         )}
         onClick={handleImageUpload}
       >
-        {!stateUploader ? <p>Close Image Uploader</p> : <p>New Image</p>}
+        {!stateUploader ? <p>Close Image Uploader</p> : <p>New Logo</p>}
       </button>
       <button
         className={cn(
