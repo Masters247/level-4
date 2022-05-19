@@ -105,8 +105,6 @@ const Category: NextPage<Props> = ({ data }) => {
 
   const { trendingStyle } = categoryPages[0];
 
-  console.log("category pages", categoryPages);
-
   return (
     <div className={s.categoriesPageWrap}>
       <section className={s.heroWrap}>

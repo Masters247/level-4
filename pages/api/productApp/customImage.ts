@@ -31,8 +31,6 @@ export default async function handler(
 
   const upload = await s3.upload(params).promise();
 
-  console.log(upload);
-
   const addCustomImage = await prisma.customImage.create({
     data: {
       url: upload.Location,
@@ -47,5 +45,5 @@ export default async function handler(
     },
   });
 
-  res.status(200).json({});
+  res.status(200).json(addCustomImage);
 }

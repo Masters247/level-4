@@ -96,14 +96,10 @@ const Custom: NextPage<Props> = ({ queryGraphCms, customPage }) => {
   const { data: session }: any = useSession();
   const [colour, setColour] = useState(0);
   const { trendingStyle } = customPage[0];
-
   const { productPage } = queryGraphCms;
 
   const { name, productCategory, productSlug, productVariantColours } =
     productPage;
-
-  const email = session?.user.email;
-  // const { user, isLoading, isError } = useAccount(email);
 
   const handleColourClick = (e: any, i: any) => {
     setColour(i);
@@ -140,7 +136,7 @@ const Custom: NextPage<Props> = ({ queryGraphCms, customPage }) => {
             method: "POST",
             body: JSON.stringify({
               image,
-              userId: 1,
+              userId: session.user.userId,
               productName: name,
               productCategory,
             }),
@@ -155,14 +151,6 @@ const Custom: NextPage<Props> = ({ queryGraphCms, customPage }) => {
     // Need this timeout to ensure the image is loaded
     setTimeout(() => takeScreenShot(), 1000);
   };
-
-  // const handleSaveCustomImage = () => {
-  //   if (session) {
-  //     setSaveCustomImage(true);
-  //   } else {
-  //     setIsSession(false);
-  //   }
-  // };
 
   return (
     <div className={s.pageWrap}>

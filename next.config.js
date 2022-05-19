@@ -5,6 +5,7 @@ const nextConfig = {
       "media.graphcms.com",
       "avatars.githubusercontent.com",
       "media.graphassets.com",
+      "mg-webassets.s3.eu-west-2.amazonaws.com",
     ],
   },
   reactStrictMode: true,

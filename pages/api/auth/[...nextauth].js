@@ -4,7 +4,7 @@ import TwitterProvider from "next-auth/providers/twitter";
 import { PrismaAdapter } from "@next-auth/prisma-adapter";
 import { prisma } from "../../../lib/prisma";
 
-const options = {
+export default NextAuth({
   adapter: PrismaAdapter(prisma),
   providers: [
     EmailProvider({
@@ -34,6 +34,10 @@ const options = {
   pages: {
     signIn: "/signin",
   },
-};
-
-export default (req, res) => NextAuth(req, res, options);
+  callbacks: {
+    async session({ session, token, user }) {
+      session.user.userId = user.id;
+      return session;
+    },
+  },
+});

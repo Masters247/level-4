@@ -5,14 +5,39 @@
   min-height: 700px;
   @include flexCenter;
   .signInForm {
-    @include flexCenter;
-    flex-direction: column;
+    form {
+      @include flexCenter;
+      flex-direction: column;
+      input {
+        width: 100%;
+        background-color: $white;
+        border: 1px solid $black;
+        min-height: 45px;
+        outline: none;
+        padding: 1rem;
+        &::placeholder {
+          font-size: 1em;
+        }
+      }
+      label {
+        margin-bottom: 0.5em;
+      }
+      button {
+        padding: 1em;
+        background-color: $button-primary;
+        color: $white;
+        text-transform: uppercase;
+        font-weight: 500;
+        margin-top: 1em;
+        letter-spacing: 0.15em;
+      }
+    }
+
     background-color: $white;
     padding: 1em;
     margin: 1em 0;
     h1 {
       text-align: center;
-      // font-weight: 600;
     }
     p {
       margin: 2em 0;

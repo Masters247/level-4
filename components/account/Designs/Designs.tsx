@@ -79,12 +79,12 @@ const Designs: FC<Props> = ({ userId }) => {
                   </button>
                   <Image
                     layout="responsive"
-                    src={d.image}
+                    src={d.url}
                     width={500}
                     height={500}
                     alt=""
                     placeholder="blur"
-                    blurDataURL={d.image}
+                    blurDataURL={d.url}
                   />
                 </div>
                 <div className={s.productName}>
