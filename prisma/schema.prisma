@@ -62,9 +62,10 @@ model VerificationToken {
 
 model CustomImage {
   id          String @id @default(cuid())
-  image       String @db.Text
+  url         String @db.Text
   category    String
   productName String
+  s3Key       String
   userId      String
   user        User   @relation(fields: [userId], references: [id], onDelete: Cascade)
 }

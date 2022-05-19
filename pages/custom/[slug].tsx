@@ -114,99 +114,53 @@ const Custom: NextPage<Props> = ({ queryGraphCms, customPage }) => {
         useCORS: true,
       })
         .then((canvas) => {
-          const image = canvas
-            .toDataURL("image/jpeg")
-            .replace("image/jpeg", "image/octet-stream");
-
-          download(image, `Level 4 | ${name}.jpg`, "image/jpeg");
+          const image = canvas.toDataURL("image/jpeg");
+          download(image, `Level 4 | ${name}.jpeg`, "image/jpeg");
         })
         .then(() => setControl(true))
         .catch((err) => {
           console.log("IMAGE DOWNLOAD ERROR: ", err);
         });
     };
-
+    // Need this timeout to ensure the image is loaded
     setTimeout(() => takeScreenShot(), 1000);
   };
 
   const handleSaveCustomImage = () => {
-    if (session) {
-      setSaveCustomImage(true);
-    } else {
-      setIsSession(false);
-    }
+    setControl(false);
+    const takeScreenShot = () => {
+      html2canvas(document.getElementById("capture") as HTMLElement, {
+        useCORS: true,
+      })
+        .then((canvas) => {
+          const image = canvas.toDataURL("image/jpeg");
+          fetch("/api/productApp/customImage", {
+            method: "POST",
+            body: JSON.stringify({
+              image,
+              userId: 1,
+              productName: name,
+              productCategory,
+            }),
+            headers: { "Content-Type": "application/json" },
+          });
+        })
+        .then(() => setControl(true))
+        .catch((err) => {
+          console.log("IMAGE DOWNLOAD ERROR: ", err);
+        });
+    };
+    // Need this timeout to ensure the image is loaded
+    setTimeout(() => takeScreenShot(), 1000);
   };
 
-  // useEffect(() => {
-  //   downloadCustomImage && setControl(false);
-  //   saveCustomImage && setControl(false);
-  // }, [downloadCustomImage, saveCustomImage]);
-
-  // useEffect(() => {
-  //   const saveImage = () => {
-  //     downloadCustomImage &&
-  //       toPng(document.getElementById("capture") as HTMLElement, {
-  //         cacheBust: true,
-  //         style: { backgroundColor: "transparent" },
-  //       })
-  //         .then((dataUrl) => {
-  //           const link = document.createElement("a");
-  //           link.download = `Level 4 ${productPage.name} Custom Design.png`;
-  //           link.setAttribute("crossOrigin", "anonymous");
-  //           link.href = dataUrl;
-  //           link.click();
-  //         })
-  //         .catch((err) => {
-  //           console.log("IMAGE DOWNLOAD ERROR: ", err);
-  //         });
-  //   };
-  //   setTimeout(saveImage, 2000);
-
-  //   return () => {
-  //     clearTimeout();
-  //     setDownloadCustomImage(false);
-  //     setControl(true);
-  //   };
-  //   // eslint-disable-next-line react-hooks/exhaustive-deps
-  // }, [downloadCustomImage]);
-
-  // useEffect(() => {
-  //   function saveImage() {
-  //     const documentCustom: any = document.querySelector("#capture");
-  //     saveCustomImage &&
-  //       html2canvas(documentCustom, {}).then((canvas: any) => {
-  //         let image = canvas
-  //           .toDataURL("image/jpeg")
-  //           .replace("image/jpeg", "image/octet-stream");
-  //         // console.log("save image useEffect");
-
-  //         const data = {
-  //           image,
-  //           user,
-  //           productName: name,
-  //           productCategory: productCategory,
-  //         };
-
-  //         async function CustomImage() {
-  //           await fetch(`/api/productApp/customImage`, {
-  //             headers: { "Content-Type": "application/json" },
-  //             method: "POST",
-  //             body: JSON.stringify(data),
-  //           });
-  //         }
-  //         CustomImage();
-
-  //         setTimeout(saveImageTimeOut, 1000);
-
-  //         function saveImageTimeOut() {
-  //           setSaveCustomImage(false);
-  //           setControl(true);
-  //         }
-  //       });
+  // const handleSaveCustomImage = () => {
+  //   if (session) {
+  //     setSaveCustomImage(true);
+  //   } else {
+  //     setIsSession(false);
   //   }
-
-  //   setTimeout(saveImage, 1000);
-  // }, [name, productCategory, saveCustomImage, user]);
+  // };
 
   return (
     <div className={s.pageWrap}>
