@@ -142,6 +142,7 @@ const Custom: NextPage<Props> = ({ queryGraphCms, customPage }) => {
               image,
               userId: 1,
               productName: name,
+              productCategory,
             }),
             headers: { "Content-Type": "application/json" },
           });
