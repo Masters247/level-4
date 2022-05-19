@@ -7,20 +7,20 @@ export default async function handler(
 ) {
   const customImg = req.body;
 
-  const id = customImg.user.id;
+  console.log(customImg);
 
-  const addCustomImage = await prisma.customImage.create({
-    data: {
-      image: customImg.image,
-      category: customImg.productCategory,
-      productName: customImg.productName,
-      user: {
-        connect: {
-          id: id,
-        },
-      },
-    },
-  });
+  // const addCustomImage = await prisma.customImage.create({
+  //   data: {
+  //     image: customImg.image,
+  //     category: customImg.productCategory,
+  //     productName: customImg.productName,
+  //     user: {
+  //       connect: {
+  //         id: id,
+  //       },
+  //     },
+  //   },
+  // });
 
-  res.status(200).json(addCustomImage);
+  res.status(200).json({});
 }
