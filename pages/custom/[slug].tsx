@@ -116,11 +116,8 @@ const Custom: NextPage<Props> = ({ queryGraphCms, customPage }) => {
         useCORS: true,
       })
         .then((canvas) => {
-          const image = canvas
-            .toDataURL("image/jpeg")
-            .replace("image/jpeg", "image/octet-stream");
-
-          download(image, `Level 4 | ${name}.jpg`, "image/jpeg");
+          const image = canvas.toDataURL("image/jpeg");
+          download(image, `Level 4 | ${name}.jpeg`, "image/jpeg");
         })
         .then(() => setControl(true))
         .catch((err) => {
