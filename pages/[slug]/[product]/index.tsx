@@ -29,7 +29,6 @@ export async function getStaticPaths() {
 }
 
 export async function getStaticProps({ params }: any) {
-  console.log("params", params);
   const graphcms = new GraphQLClient(`${process.env.GRAPHCMS_URL}`, {
     headers: {
       authorization: `Bearer ${process.env.GRAPHCMS_TOKEN}`,
@@ -111,8 +110,6 @@ const Product: NextPage<Props> = ({ data }) => {
   const images = featureImage.map((i: any) => i.url);
 
   const imagesLength = productVariantColours[productColour].images.length;
-
-  console.log("visulise image", visualiseImage);
 
   return (
     <div className={s.pageWrap}>
