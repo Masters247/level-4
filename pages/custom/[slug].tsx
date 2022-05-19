@@ -44,9 +44,7 @@ export async function getStaticProps({ params }: any) {
       productCategory
       productVariantColours {
         customImage {
-          url
-          width
-          height
+          url(transformation: {image: {resize: {height: 500, width: 500}}})
         }
         colour {
           hex
@@ -217,8 +215,7 @@ const Custom: NextPage<Props> = ({ queryGraphCms, customPage }) => {
           className={s.cover}
           onClick={() => {
             setIsSession(true);
-          }}
-        >
+          }}>
           <div className={s.login}>
             <p>Please login or create account to save images</p>
             <Link href="/signin" passHref>

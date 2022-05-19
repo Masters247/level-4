@@ -1,7 +1,6 @@
 /* eslint-disable @next/next/no-img-element */
 import { useRef, useState } from "react";
 import { useSpring, animated } from "@react-spring/web";
-import Image from "next/image";
 import { useDrag } from "@use-gesture/react";
 import ImageUploader from "../ImageUploader/ImageUploader";
 import ImageConverter from "../ImageConverter/ImageConverter";
@@ -22,9 +21,6 @@ const ProductView = ({
 }: any) => {
   const [imageWidth, setImageWidth]: any = useState(80);
   const [imageHeight, setImageHeight]: any = useState(80);
-  const [movementsArray, setMovementsArray]: any = useState([
-    { offset: 0, movement: 0 },
-  ]);
   const [redo, setRedo]: any = useState([]);
   const [undo, setUndo]: any = useState([]);
 
@@ -42,10 +38,8 @@ const ProductView = ({
     (state) => {
       (window as any).movement = state.movement;
       (window as any).offset = state.offset;
-
-      // console.log("state movement", state.offset);
       const isResizing = state?.event.target === dragEl.current;
-      console.log("bind", isResizing);
+      console.log("is it element resising", isResizing);
       if (isResizing) {
         api.set({
           width: state.offset[0],
@@ -57,24 +51,27 @@ const ProductView = ({
           y: state.offset[1],
         });
       }
+
+      undo.push(state.lastOffset);
+      console.log("undo array", undo);
+      // console.log("state options", state.lastOffset);
     },
+
     {
+      // this tells use gesture where to set the initial mobement from
       from: (event) => {
         const isResizing = event.target === dragEl.current;
-        // console.log("from", isResizing);
-
         if (isResizing) {
           return [width.get(), height.get()];
         } else {
           return [x.get(), y.get()];
         }
       },
+      //Limits the bounds of the movement of drag element
       bounds: (state) => {
         const isResizing = state?.event.target === dragEl.current;
         const containerWidth: any = containerRef.current?.clientWidth ?? 0;
         const containerHeight: any = containerRef.current?.clientHeight ?? 0;
-
-        // console.log("bounds", isResizing);
         if (isResizing) {
           return {
             top: 50,
@@ -102,6 +99,26 @@ const ProductView = ({
     api.set({
       x: containerWidth / 2 - getWidth,
       y: containerHeight / 2 - getHeight,
+    });
+  };
+
+  // console.log("undo array", undo);
+
+  const handleRedo = () => {
+    console.log("redo");
+    // api.set({
+    //   x: undo[0][0],
+    //   y: undo[1][0],
+    // });
+  };
+  const handleUndo = () => {
+    console.log("undo");
+    console.log("undo length", undo.length);
+
+    // console.log(undo[0][0]);
+    api.set({
+      x: undo[0][0],
+      y: undo[0][1],
     });
   };
 
@@ -157,10 +174,11 @@ const ProductView = ({
             style={{
               width: "500px",
               height: "500px",
-            }}
-          >
+            }}>
             <img
               src={image.url}
+              width="500px"
+              height="500px"
               style={{ width: "500px", height: "500px" }}
               alt="product"
             />
@@ -168,13 +186,11 @@ const ProductView = ({
           <div className={s.productViewport}>
             <div
               className={`${control ? s.customArear : s.customArearHide}`}
-              ref={containerRef}
-            >
+              ref={containerRef}>
               <animated.div
                 className={s.customLogo}
                 style={{ x, y, width, height, zIndex: "1" }}
-                {...bind()}
-              >
+                {...bind()}>
                 <div className={s.imageOuterWrap}>
                   {logo !== null && (
                     <div className={s.logoImageWrap}>
@@ -209,6 +225,8 @@ const ProductView = ({
         handleScreenShot={handleScreenShot}
         handleImageUpload={handleImageUpload}
         stateUploader={imageUpload}
+        handleUndo={handleUndo}
+        handleRedo={handleRedo}
       />
     </div>
   );

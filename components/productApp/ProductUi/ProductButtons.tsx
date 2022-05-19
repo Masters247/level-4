@@ -11,22 +11,22 @@ const ProductButtons = ({
   handleImageUpload,
   handleSaveCustomImage,
   stateUploader,
+  handleUndo,
+  handleRedo,
 }: any) => {
   return (
     <div
       className={cn(
         s.uiButtons
         // !state && s.uiButtonHidden
-      )}
-    >
+      )}>
       <button
         className={cn(
           s.uiButton,
           s.imageButton
           // !state && s.hide
         )}
-        onClick={handleImageUpload}
-      >
+        onClick={handleImageUpload}>
         {!stateUploader ? <p>Close Image Uploader</p> : <p>New Logo</p>}
       </button>
       <button
@@ -35,8 +35,7 @@ const ProductButtons = ({
           s.undoButton
           // !state && s.hide
         )}
-        disabled
-      >
+        onClick={handleUndo}>
         <Undo styles={s.undoIcon} />
         <p>undo</p>
       </button>
@@ -46,8 +45,7 @@ const ProductButtons = ({
           s.redoButton
           // !state && s.hide
         )}
-        disabled
-      >
+        onClick={handleRedo}>
         <p>redo</p>
         <Redo styles={s.redoIcon} />
       </button>

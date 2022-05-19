@@ -22,6 +22,8 @@ const ProductUiPanel = ({
   handleImageUpload,
   handleScreenShot,
   stateUploader,
+  handleUndo,
+  handleRedo,
 }: any) => {
   const controler = [
     {
@@ -54,8 +56,7 @@ const ProductUiPanel = ({
               <button
                 key={cont.name}
                 onClick={cont?.function}
-                className={s.control}
-              >
+                className={s.control}>
                 {cont.icon}
               </button>
             );
@@ -82,6 +83,8 @@ const ProductUiPanel = ({
         handleImageUpload={handleImageUpload}
         handleScreenShot={handleScreenShot}
         handleSaveCustomImage={handleSaveCustomImage}
+        handleUndo={handleUndo}
+        handleRedo={handleRedo}
       />
     </div>
   );

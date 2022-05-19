@@ -44,14 +44,16 @@ const Product = ({ products, i }: any) => {
             products.productVariantColours[productColour].images[productView]
               .url
           }
-          height={
-            products.productVariantColours[productColour].images[productView]
-              .height
-          }
-          width={
-            products.productVariantColours[productColour].images[productView]
-              .width
-          }
+          // height={
+          //   products.productVariantColours[productColour].images[productView]
+          //     .height
+          // }
+          // width={
+          //   products.productVariantColours[productColour].images[productView]
+          //     .width
+          // }
+          height={500}
+          width={500}
         />
       </div>
       <Link href={`${slugCategory}/${slug}`} passHref>
