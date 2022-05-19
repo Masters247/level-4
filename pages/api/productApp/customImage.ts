@@ -35,7 +35,7 @@ export default async function handler(
 
   const addCustomImage = await prisma.customImage.create({
     data: {
-      image: upload.Location,
+      url: upload.Location,
       productName: data.productName,
       category: data.productCategory,
       s3Key: upload.Key,
