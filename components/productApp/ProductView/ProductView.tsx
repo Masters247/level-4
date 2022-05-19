@@ -7,6 +7,17 @@ import ImageConverter from "../ImageConverter/ImageConverter";
 import ProductUiPanel from "../ProductUi/ProductUiPanel";
 import s from "./productView.module.scss";
 
+/* 
+
+ARRAY OFFSETS IS UPDATED AND IMMUTABLE
+--------------------------------------
+
+NEED TO MAKE THE UNDO AND REDO BUTTONS ITERATE THROUGH HISTORY BY SELECTING ARRAY NUMBER 
+
+ADDING OR SUBSTRACTING RSPECTIVELY
+
+*/
+
 const ProductView = ({
   products,
   image,
@@ -21,8 +32,36 @@ const ProductView = ({
 }: any) => {
   const [imageWidth, setImageWidth]: any = useState(80);
   const [imageHeight, setImageHeight]: any = useState(80);
-  const [redo, setRedo]: any = useState([]);
-  const [undo, setUndo]: any = useState([]);
+  const xAxisState: any = [];
+  const yAxisState: any = [];
+  const positionOffset: any = [{ x: 0, y: 0 }];
+
+  // UNDO REDO FUNCTIONALITY FOR DRAG & RESIZE
+
+  /*
+  FOR DRAG 
+  
+  1: GET INITIAL POSITION OF X & Y 
+  1A: STORE IN ARRAY
+  1B: Repeat:
+  EI
+  [
+    {X: NUM, Y: NUM},
+  ]
+
+  2: GET END POSITION OF MOVEMENTT X & Y 
+  2A: STORE IN ARRAY
+
+  Note: WE DON'T NEED ALL THE MOVEMENTS JUST THE FIRST AND LAST. 
+  THE LAST AND FIRST MOVEMENT NEED TO BE IMMUTABLE
+  SO WE CAN REDO UNDO ALL STEPS FROM BEGINNING OF USE... 
+
+  3: NEED TO COUNT THE AMOUNT OF MOVEMENTS/OFFSETS.
+  
+  4: FEED THAT COUNT INTO THE UNDO AND REDO functions.
+  4A: BOTH BUTTONS INCREMENT THROUGH THE ARRAY ONE AT A TIME. 
+  
+  */
 
   const [{ x, y, width, height }, api] = useSpring(() => ({
     x: 0,
@@ -38,8 +77,9 @@ const ProductView = ({
     (state) => {
       (window as any).movement = state.movement;
       (window as any).offset = state.offset;
+
       const isResizing = state?.event.target === dragEl.current;
-      console.log("is it element resising", isResizing);
+
       if (isResizing) {
         api.set({
           width: state.offset[0],
@@ -51,14 +91,44 @@ const ProductView = ({
           y: state.offset[1],
         });
       }
+      // const xAxis = state.offset[0];
+      // xAxisState.push(xAxis);
 
-      undo.push(state.lastOffset);
-      console.log("undo array", undo);
-      // console.log("state options", state.lastOffset);
+      // const yAxis = state.offset[1];
+      // yAxisState.push(yAxis);
+
+      // const xAxisStateEnd = xAxisState.length;
+      // const yAxisStateEnd = yAxisState.length;
+
+      // positionOffset.push({
+      //   x: xAxisState[xAxisStateEnd - 1],
+      //   y: yAxisState[yAxisStateEnd - 1],
+      // });
+
+      // console.log("is active", state.active);
+
+      const isDragging = state.active;
+
+      if (!isDragging) {
+        positionOffset.push({ x: state.offset[0], y: state.offset[1] });
+        console.log("last position", positionOffset);
+      }
+
+      // console.log("container ref", containerRef);
+      // console.log("xAxis", xAxis, "yAxis", yAxis);
+      // console.log("xState", xAxisState, "yState", yAxisState);
+      // console.log("xLength", xAxisState.length, "yLength", yAxisState.length);
+      // console.log(
+      //   "x end =",
+      //   xAxisState[xAxisStateEnd - 1],
+      //   "y end =",
+      //   yAxisState[yAxisStateEnd - 1]
+      // );
+      // console.log("offsets", positionOffset);
     },
 
     {
-      // this tells use gesture where to set the initial mobement from
+      // this tells use gesture where to set the initial movement from
       from: (event) => {
         const isResizing = event.target === dragEl.current;
         if (isResizing) {
@@ -102,23 +172,22 @@ const ProductView = ({
     });
   };
 
-  // console.log("undo array", undo);
-
   const handleRedo = () => {
-    console.log("redo");
-    // api.set({
-    //   x: undo[0][0],
-    //   y: undo[1][0],
-    // });
+    const positionArrayLength = positionOffset.length;
+    console.log("array length", positionArrayLength);
+
+    api.set({
+      x: 7.5016021728515625,
+    });
   };
   const handleUndo = () => {
-    console.log("undo");
-    console.log("undo length", undo.length);
+    const positionArrayLength = positionOffset.length - 1;
 
-    // console.log(undo[0][0]);
+    // Iterate the array length by minus one to go back through offsets
+
     api.set({
-      x: undo[0][0],
-      y: undo[0][1],
+      x: positionOffset[-positionArrayLength].x,
+      y: positionOffset[-positionArrayLength].y,
     });
   };
 
