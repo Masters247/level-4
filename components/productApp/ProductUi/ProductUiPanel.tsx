@@ -24,6 +24,8 @@ const ProductUiPanel = ({
   stateUploader,
   handleUndo,
   handleRedo,
+  undoActive,
+  redoActive,
 }: any) => {
   const controler = [
     {
@@ -56,7 +58,8 @@ const ProductUiPanel = ({
               <button
                 key={cont.name}
                 onClick={cont?.function}
-                className={s.control}>
+                className={s.control}
+              >
                 {cont.icon}
               </button>
             );
@@ -85,6 +88,8 @@ const ProductUiPanel = ({
         handleSaveCustomImage={handleSaveCustomImage}
         handleUndo={handleUndo}
         handleRedo={handleRedo}
+        undoActive={undoActive}
+        redoActive={redoActive}
       />
     </div>
   );

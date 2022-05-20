@@ -13,62 +13,53 @@ const ProductButtons = ({
   stateUploader,
   handleUndo,
   handleRedo,
+  undoActive,
+  redoActive,
 }: any) => {
+  console.log("state undo", undoActive);
+  console.log("state redo", redoActive);
   return (
-    <div
-      className={cn(
-        s.uiButtons
-        // !state && s.uiButtonHidden
-      )}>
+    <div className={cn(s.uiButtons)}>
       <button
-        className={cn(
-          s.uiButton,
-          s.imageButton
-          // !state && s.hide
-        )}
-        onClick={handleImageUpload}>
+        className={cn(s.uiButton, s.imageButton)}
+        onClick={handleImageUpload}
+      >
         {!stateUploader ? <p>Close Image Uploader</p> : <p>New Logo</p>}
       </button>
       <button
         className={cn(
           s.uiButton,
-          s.undoButton
-          // !state && s.hide
+          s.undoButton,
+          !undoActive && s.undoButtonDisabled
         )}
-        onClick={handleUndo}>
+        disabled={!undoActive}
+        onClick={handleUndo}
+      >
         <Undo styles={s.undoIcon} />
         <p>undo</p>
       </button>
       <button
         className={cn(
           s.uiButton,
-          s.redoButton
-          // !state && s.hide
+          s.redoButton,
+          !redoActive && s.redoButtonDisabled
         )}
-        onClick={handleRedo}>
+        disabled={!redoActive}
+        onClick={handleRedo}
+      >
         <p>redo</p>
         <Redo styles={s.redoIcon} />
       </button>
       <button
-        className={cn(
-          s.uiButton,
-          s.saveButton
-          // state && s.disabled
-        )}
+        className={cn(s.uiButton, s.saveButton)}
         onClick={handleSaveCustomImage}
-        // disabled={state}
       >
         <Save styles={s.saveIcon} />
         <p>save</p>
       </button>
       <button
-        className={cn(
-          s.uiButton,
-          s.downloadButton
-          //  state && s.disabled
-        )}
+        className={cn(s.uiButton, s.downloadButton)}
         onClick={handleScreenShot}
-        // disabled={state}
       >
         <Download styles={s.downloadIcon} />
         <p>download</p>
