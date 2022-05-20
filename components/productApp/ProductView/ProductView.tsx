@@ -45,7 +45,7 @@ const ProductView = ({
 
       // console.log("state movement", state.offset);
       const isResizing = state?.event.target === dragEl.current;
-      console.log("bind", isResizing);
+
       if (isResizing) {
         api.set({
           width: state.offset[0],
