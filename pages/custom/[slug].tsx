@@ -4,6 +4,7 @@ import trendingQuery from "../../lib/graphcms-querys/trendingStylesQuery";
 import TrendingStyle from "../../components/global/TrendingStyle/TrendingStyle";
 import productQuery from "../../lib/graphcms-querys/productsPagesQuery";
 import s from "../../styles/pages/customPage.module.scss";
+import { Button } from "../../components/ui/Button";
 import { GraphQLClient, gql } from "graphql-request";
 import { useSession } from "next-auth/react";
 import { useState, useEffect } from "react";
@@ -89,7 +90,7 @@ interface Props {
 const Custom: NextPage<Props> = ({ queryGraphCms, customPage }) => {
   const [downloadCustomImage, setDownloadCustomImage] = useState(false);
   const [saveCustomImage, setSaveCustomImage] = useState(false);
-  const [isSession, setIsSession] = useState(true);
+  // const [isSession, setIsSession] = useState(true);
   const [control, setControl] = useState(true);
   const { data: session }: any = useSession();
   const [colour, setColour] = useState(0);
@@ -152,12 +153,13 @@ const Custom: NextPage<Props> = ({ queryGraphCms, customPage }) => {
 
   return (
     <div className={s.pageWrap}>
-      {!isSession ? (
+      {/* {!isSession ? (
         <div
           className={s.cover}
           onClick={() => {
             setIsSession(true);
-          }}>
+          }}
+        >
           <div className={s.login}>
             <p>Please login or create account to save images</p>
             <Link href="/signin" passHref>
@@ -165,7 +167,7 @@ const Custom: NextPage<Props> = ({ queryGraphCms, customPage }) => {
             </Link>
           </div>
         </div>
-      ) : null}
+      ) : null} */}
       {saveCustomImage ? (
         <div className={s.pictureSavedModal}>
           <p>Customisation Saved</p>
@@ -182,6 +184,27 @@ const Custom: NextPage<Props> = ({ queryGraphCms, customPage }) => {
         setControl={setColour}
         control={control}
       />
+      {!session && (
+        <div
+          style={{
+            width: "200px",
+            margin: "0 auto",
+          }}
+        >
+          <p
+            style={{
+              textAlign: "center",
+              opacity: "0.5",
+              marginBottom: "1em",
+            }}
+          >
+            Please sign in to save custom image
+          </p>
+          <Link href="/signin" passHref>
+            <Button variant="primary">Sign In</Button>
+          </Link>
+        </div>
+      )}
       <TrendingStyle category={true} trendingStyle={trendingStyle} />
     </div>
   );

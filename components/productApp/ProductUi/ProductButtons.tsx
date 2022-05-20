@@ -4,6 +4,7 @@ import Redo from "../../ui/icons/Redo";
 import cn from "classnames";
 import Save from "../../ui/icons/Save";
 import Download from "../../ui/icons/Download";
+import { useSession } from "next-auth/react";
 
 const ProductButtons = ({
   state,
@@ -16,8 +17,12 @@ const ProductButtons = ({
   undoActive,
   redoActive,
 }: any) => {
-  console.log("state undo", undoActive);
-  console.log("state redo", redoActive);
+  const { data: session }: any = useSession();
+  if (session) {
+    console.log("active session");
+  }
+
+  // console.log(session);
   return (
     <div className={cn(s.uiButtons)}>
       <button
@@ -51,8 +56,13 @@ const ProductButtons = ({
         <Redo styles={s.redoIcon} />
       </button>
       <button
-        className={cn(s.uiButton, s.saveButton)}
+        className={cn(
+          s.uiButton,
+          s.saveButton,
+          !session && s.saveButtonDisabled
+        )}
         onClick={handleSaveCustomImage}
+        disabled={session}
       >
         <Save styles={s.saveIcon} />
         <p>save</p>

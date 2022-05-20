@@ -106,9 +106,6 @@ const ProductView = ({
     }
   );
 
-  console.log("arr length and count", actionsArr.length, count);
-  console.log("arr", actionsArr);
-
   useEffect(() => {
     if (count === 0) {
       setUndoActive(false);
@@ -164,7 +161,6 @@ const ProductView = ({
   };
 
   const handleVertical = () => {
-    console.log("vertical");
     const getHeight = height.get() / 2;
     const containerHeight: any = containerRef.current?.clientHeight;
     api.set({
@@ -188,7 +184,6 @@ const ProductView = ({
   };
 
   const handleHorizontal = () => {
-    console.log("horizontal");
     const getWidth = width.get() / 2;
     const containerWidth: any = containerRef.current?.clientWidth;
     api.set({

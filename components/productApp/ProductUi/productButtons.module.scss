@@ -86,6 +86,13 @@
       opacity: 0.8;
     }
   }
+  .saveButtonDisabled {
+    opacity: 0.2;
+    cursor: not-allowed;
+    &:hover {
+      opacity: 0.2;
+    }
+  }
   .downloadButton {
     background-color: $button-primary;
   }
