@@ -107,7 +107,8 @@ const ProductView = ({
   );
 
   useEffect(() => {
-    console.log("array of drags and resizes", actionsArr);
+    console.log("image width", imageWidth);
+    console.log("image height", imageHeight);
     if (count === 0) {
       setUndoActive(false);
     }
@@ -242,11 +243,7 @@ const ProductView = ({
           logo={logo}
         />
       )}
-      <ImageConverter
-        imageData={logo}
-        setImageWidth={setImageWidth}
-        setImageHeight={setImageHeight}
-      />
+
       <div className={s.productViewportContainer}>
         <div id="capture" className={s.imageCaptureWrap}>
           <div
