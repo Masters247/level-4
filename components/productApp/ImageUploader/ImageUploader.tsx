@@ -7,7 +7,13 @@ import Remove from "../../ui/icons/Remove";
 import ImageUploading from "react-images-uploading";
 import ImageLogo from "./ImageLogo";
 
-const ImageUploader = ({ logo, setLogo, handleImageUpload }: any) => {
+const ImageUploader = ({
+  logo,
+  setLogo,
+  handleImageUpload,
+  setImageWidth,
+  setImageHeight,
+}: any) => {
   const [localImages, setLocalImages]: any = useState([]);
   const [images, setImages] = useState([]);
   const [selectImage, setSelectImage] = useState(0);
@@ -17,6 +23,18 @@ const ImageUploader = ({ logo, setLogo, handleImageUpload }: any) => {
     setImages(imageList);
     if (imageList.length !== 0) {
       setLogo(imageList[0].data_url);
+      const newImage = new Image();
+      newImage.src = imageList[0].data_url;
+      const imgWidth = newImage.naturalWidth;
+      const imgHeight = newImage.naturalHeight;
+      if (imgWidth > 350) {
+        setImageWidth(imgWidth / 10);
+        setImageHeight(imgHeight / 10);
+      } else {
+        setImageWidth(imgWidth);
+        setImageHeight(imgHeight);
+      }
+      console.log("image dimensions", imgHeight, imgWidth);
     } else {
       setLogo(null);
     }
@@ -25,6 +43,13 @@ const ImageUploader = ({ logo, setLogo, handleImageUpload }: any) => {
 
   const handleLogoPick = (imageList: any, index: any) => {
     setLogo(imageList[index].data_url);
+    const newImage = new Image();
+    newImage.src = imageList[index].data_url;
+    const imgWidth = newImage.naturalWidth;
+    const imgHeight = newImage.naturalHeight;
+    console.log("image dimensions", imgHeight, imgWidth);
+    setImageWidth(imgWidth);
+    setImageHeight(imgHeight);
   };
 
   useEffect(() => {

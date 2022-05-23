@@ -3,7 +3,6 @@ import { useRef, useState, useEffect } from "react";
 import { useSpring, animated } from "@react-spring/web";
 import { useDrag } from "@use-gesture/react";
 import ImageUploader from "../ImageUploader/ImageUploader";
-import ImageConverter from "../ImageConverter/ImageConverter";
 import ProductUiPanel from "../ProductUi/ProductUiPanel";
 import s from "./productView.module.scss";
 import { copyFile } from "fs";
@@ -47,10 +46,16 @@ const ProductView = ({
       const isResizing = state?.event.target === dragEl.current;
       const isDragging = state.active;
 
+      /* need to get aspect ration of image data */
+      /* and the math to work out the difference
+      
+      E.g height = width: state.offset * 0.4
+      */
+
       if (isResizing) {
         api.set({
           width: state.offset[0],
-          height: state.offset[0],
+          height: state.offset[1],
         });
       } else {
         api.set({
@@ -107,15 +112,16 @@ const ProductView = ({
   );
 
   useEffect(() => {
-    console.log("image width", imageWidth);
-    console.log("image height", imageHeight);
+    console.log(width.get());
+    console.log(height.get());
+    console.log("image wh state", imageHeight, imageWidth);
     if (count === 0) {
       setUndoActive(false);
     }
     if (actionsArr.length - 1 === count) {
       setRedoActive(false);
     }
-  }, [count, actionsArr]);
+  }, [count, actionsArr, imageHeight, imageWidth]);
 
   const handleRedo = () => {
     setUndoActive(true);
@@ -241,25 +247,15 @@ const ProductView = ({
           setLogo={setLogo}
           handleImageUpload={handleImageUpload}
           logo={logo}
+          setImageWidth={setImageWidth}
+          setImageHeight={setImageHeight}
         />
       )}
 
       <div className={s.productViewportContainer}>
         <div id="capture" className={s.imageCaptureWrap}>
-          <div
-            className={s.imageWrap}
-            style={{
-              width: "500px",
-              height: "500px",
-            }}
-          >
-            <img
-              src={image.url}
-              width="500px"
-              height="500px"
-              style={{ width: "500px", height: "500px" }}
-              alt="product"
-            />
+          <div className={s.imageWrap}>
+            <img src={image.url} width="500px" height="500px" alt="product" />
           </div>
           <div className={s.productViewport}>
             <div
@@ -268,7 +264,13 @@ const ProductView = ({
             >
               <animated.div
                 className={s.customLogo}
-                style={{ x, y, width, height, zIndex: "1" }}
+                style={{
+                  x,
+                  y,
+                  width,
+                  height,
+                  zIndex: "1",
+                }}
                 {...bind()}
                 ref={logoBox}
               >
@@ -279,10 +281,12 @@ const ProductView = ({
                         alt="logo"
                         className={s.logoImage}
                         src={logo}
-                        style={{
-                          maxWidth: `${imageWidth}`,
-                          maxHeight: `${imageHeight}`,
-                        }}
+                        // width={imageWidth}
+                        // height={imageHeight}
+                        // style={{
+                        //   maxWidth: `${imageWidth}`,
+                        //   maxHeight: `${imageHeight}`,
+                        // }}
                       />
                     </div>
                   )}
