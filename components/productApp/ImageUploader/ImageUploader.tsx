@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import cn from "classnames";
 import React from "react";
 import s from "./imageUploader.module.scss";
@@ -17,6 +17,18 @@ const ImageUploader = ({ logo, setLogo, handleImageUpload }: any) => {
     setImages(imageList);
     if (imageList.length !== 0) {
       setLogo(imageList[0].data_url);
+      // console.log("logo", logo);
+      // console.log("logo data", imageList[0].data_url);
+      // const base64image = imageList[0].data_url;
+      // const newImage = new Image();
+      // newImage.src = base64image;
+      // newImage.onload = function () {
+      //   const imgWidth = newImage.naturalWidth;
+      //   const imgHeight = newImage.naturalHeight;
+
+      //   console.log("imgWidth", imgWidth);
+      //   console.log("imgHeight", imgHeight);
+      // };
     } else {
       setLogo(null);
     }

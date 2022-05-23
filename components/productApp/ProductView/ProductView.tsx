@@ -1,12 +1,12 @@
 /* eslint-disable @next/next/no-img-element */
 import { useRef, useState, useEffect } from "react";
 import { useSpring, animated } from "@react-spring/web";
-import { ConfigResolverMap, useDrag } from "@use-gesture/react";
+import { useDrag } from "@use-gesture/react";
 import ImageUploader from "../ImageUploader/ImageUploader";
 import ImageConverter from "../ImageConverter/ImageConverter";
 import ProductUiPanel from "../ProductUi/ProductUiPanel";
 import s from "./productView.module.scss";
-import Condition from "yup/lib/Condition";
+import { copyFile } from "fs";
 
 const ProductView = ({
   products,
@@ -24,20 +24,15 @@ const ProductView = ({
   const [imageHeight, setImageHeight]: any = useState(80);
   const [undoActive, setUndoActive]: any = useState(false);
   const [redoActive, setRedoActive]: any = useState(false);
-
   const [actionsArr, setActionsArr]: any = useState([
-    { x: 0, y: 0, width: 80, height: 80 },
+    { x: 0, y: 0, width: imageWidth, height: imageHeight },
   ]);
-
-  // const [actionsArr, setActionsArr]: any = useState([{ x: 0, y: 0 }]);
-
-  // const [resizeArr, setResizeArr]: any = useState([{ width: 80, height: 80 }]);
 
   const [{ x, y, width, height }, api] = useSpring(() => ({
     x: 0,
     y: 0,
-    width: 80,
-    height: 80,
+    width: imageWidth,
+    height: imageHeight,
   }));
 
   const containerRef = useRef<HTMLDivElement | null>(null);
@@ -65,22 +60,13 @@ const ProductView = ({
       }
 
       if (!isDragging) {
-        console.log("Log box", state);
-
-        const logoBoxWidthHeight =
-          state?.target.offsetLeft + state?.target.clientHeight + 2;
-
         setActionsArr((actionsArr: any) => [
           ...actionsArr,
           {
-            x: isResizing
-              ? state.offset[0] - logoBoxWidthHeight
-              : state.offset[0],
-            y: isResizing
-              ? state.offset[1] - logoBoxWidthHeight
-              : state.offset[1],
-            width: logoBoxWidthHeight,
-            height: logoBoxWidthHeight,
+            x: x.get(),
+            y: y.get(),
+            width: width.get(),
+            height: height.get(),
           },
         ]);
         setCount(actionsArr.length);
@@ -121,7 +107,7 @@ const ProductView = ({
   );
 
   useEffect(() => {
-    console.log("actions arr", actionsArr);
+    console.log("array of drags and resizes", actionsArr);
     if (count === 0) {
       setUndoActive(false);
     }

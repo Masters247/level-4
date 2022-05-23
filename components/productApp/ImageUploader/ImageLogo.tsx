@@ -2,7 +2,7 @@
 import s from "./imageLogo.module.scss";
 import cn from "classnames";
 import Remove from "../../ui/icons/Remove";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 const ImageLogo = ({
   isLocal,
   index,
@@ -14,15 +14,9 @@ const ImageLogo = ({
   selectImage,
   onImageLocalRemove,
 }: any) => {
-  // useEffect(() => {
-  //   console.log("is array local", isLocal);
-  // }, []);
-
   const handleSelected = (index: any) => {
     setSelectImage(index);
   };
-  // console.log("image list", imageList);
-  // console.log("select image", selectImage);
 
   return (
     <div
