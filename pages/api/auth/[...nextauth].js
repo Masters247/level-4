@@ -18,10 +18,10 @@ export default NextAuth({
       },
       from: process.env.SMTP_FROM,
     }),
-    TwitterProvider({
-      clientId: process.env.TWITTER_CLIENT_ID,
-      clientSecret: process.env.TWITTER_CLIENT_SECRET,
-    }),
+    // TwitterProvider({
+    //   clientId: process.env.TWITTER_CLIENT_ID,
+    //   clientSecret: process.env.TWITTER_CLIENT_SECRET,
+    // }),
     // FacebookProvider({
     //   clientId: process.env.FACEBOOK_CLIENT_ID,
     //   clientSecret: process.env.FACEBOOK_CLIENT_SECRET,
@@ -33,10 +33,13 @@ export default NextAuth({
   ],
   pages: {
     signIn: "/signin",
+    newUser: "/account/new-account",
+    signOut: "/",
   },
   callbacks: {
     async session({ session, token, user }) {
       session.user.userId = user.id;
+      session.user.organisation = user.organisation;
       return session;
     },
   },

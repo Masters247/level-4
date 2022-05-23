@@ -57,8 +57,9 @@ const Account: NextPage = () => {
   };
 
   const customer = [
-    { type: "name", data: `${user?.name}` },
+    { type: "name", data: `${user?.name || "----"}` },
     { type: "email", data: `${user?.email}` },
+    { type: "organisation", data: `${user?.organisation || "----"}` },
   ];
 
   if (status === "loading") {
@@ -75,9 +76,6 @@ const Account: NextPage = () => {
         <h1>Your Account</h1>
         {session && (
           <div className={s.loggedInTitle}>
-            {/* <span>
-              <Image src={session?.user.image} width={30} height={30} alt="" />
-            </span> */}
             <button onClick={handleSignOut}>
               <p>Sign Out</p>
             </button>

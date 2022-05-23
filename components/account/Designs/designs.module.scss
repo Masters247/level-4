@@ -49,13 +49,30 @@
           height: 30px;
         }
       }
+
+      .downloadCustomButton {
+        position: absolute;
+        z-index: 10;
+        right: 35px;
+        top: 10px;
+        .removeIcon {
+          width: 17px;
+          opacity: 0.5;
+          height: 17px;
+        }
+      }
       // border: 1px solid blue;
     }
     .productName {
+      background-color: $grey-1;
       padding: 0.5em;
       p {
         text-align: center;
         text-transform: uppercase;
+      }
+
+      .created {
+        font-size: 0.5em;
       }
     }
   }

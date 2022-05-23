@@ -133,3 +133,57 @@
   @include flexCenter;
   flex-direction: column;
 }
+
+.newAccountWrap {
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  margin: 4em 1em;
+  @media (min-width: $media-tablet-small) {
+    margin: 4em 2em;
+  }
+  @media (min-width: $media-desktop-small) {
+    margin: 4em auto;
+    max-width: calc(950px - 4em);
+  }
+  @media (min-width: $media-desktop) {
+    margin: 4em auto;
+    max-width: calc(1020px - 4em);
+  }
+
+  h3 {
+    margin-top: 2em;
+  }
+
+  form {
+    width: 100%;
+    @include flexCenter;
+    flex-direction: column;
+    input {
+      width: 100%;
+      background-color: $white;
+      border: 1px solid $black;
+      margin-top: 1em;
+      min-height: 45px;
+      outline: none;
+      padding: 1rem;
+      &::placeholder {
+        font-size: 1em;
+      }
+    }
+    label {
+      margin-top: 1em;
+      // margin-bottom: 0.5em;
+    }
+    .button {
+      width: 100%;
+      margin-top: 1em;
+    }
+
+    @media (min-width: $media-tablet-small) {
+      width: 50%;
+    }
+  }
+}

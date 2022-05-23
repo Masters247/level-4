@@ -8,6 +8,7 @@
   letter-spacing: 0.15em;
   transition: all 200ms ease-in-out;
   @include flexCenter;
+  cursor: pointer;
 }
 
 .primary {
@@ -48,6 +49,7 @@
 .loading {
   background-color: $grey-3;
   color: $white;
+  border: 1px solid $grey-3;
   cursor: not-allowed;
 }
 

@@ -32,9 +32,9 @@ export default function SignIn({ csrfToken, providers }: any) {
         </p>
         <form method="post" action="/api/auth/signin/email">
           <input name="csrfToken" type="hidden" defaultValue={csrfToken} />
-          <label>Email address</label>
+
           <input type="email" id="email" name="email" placeholder="Email" />
-          <button type="submit">Sign in with Email</button>
+          <button type="submit">Create account with Email</button>
         </form>
       </div>
     </div>

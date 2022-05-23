@@ -1,6 +1,6 @@
 import type { NextApiRequest, NextApiResponse } from "next";
 import { prisma } from "../../../lib/prisma";
-import S3 from "aws-sdk/clients/s3";
+import { s3 } from "../../../lib/amazon-s3";
 import { randomUUID } from "crypto";
 
 export default async function handler(
@@ -21,13 +21,8 @@ export default async function handler(
     ContentType: "image/jpeg",
     ACL: "public-read",
     Bucket: `${process.env.AWS_BUCKET_NAME}`,
+    UserId: `${data.userId}`,
   };
-
-  const s3 = new S3({
-    accessKeyId: process.env.AWS_ACCESS_KEY_ID,
-    secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY,
-    region: process.env.AWS_REGION,
-  });
 
   const upload = await s3.upload(params).promise();
 
