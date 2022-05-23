@@ -12,16 +12,17 @@ import useSWR from "swr";
 const fetcher = (email: any) => fetch(email).then((res) => res.json());
 
 function useAccount(email: any) {
-  const { data: user, error } = useSWR(
-    `/api/account/user?email=${email}`,
-    fetcher,
-    { revalidateOnFocus: false }
-  );
+  const {
+    data: user,
+    error,
+    mutate,
+  } = useSWR(`/api/account/user?email=${email}`, fetcher);
 
   return {
     user: user,
     isLoading: !error && !user,
     isError: error,
+    mutate,
   };
 }
 
@@ -35,7 +36,7 @@ const Account: NextPage = () => {
   });
 
   const email = session?.user.email;
-  const { user, isLoading, isError } = useAccount(email);
+  const { user, isLoading, isError, mutate } = useAccount(email);
   const [isDetailsShown, setIsDetailsShown] = useState(true);
 
   const { mounted: isDetailsMounted, rendered: isDetailsRendered } =
@@ -55,12 +56,6 @@ const Account: NextPage = () => {
   const handleSignOut = () => {
     signOut();
   };
-
-  const customer = [
-    { type: "name", data: `${user?.name || "----"}` },
-    { type: "email", data: `${user?.email}` },
-    { type: "organisation", data: `${user?.organisation || "----"}` },
-  ];
 
   if (status === "loading") {
     return (
@@ -105,15 +100,7 @@ const Account: NextPage = () => {
           {isLoading ? (
             <p>is Loading...</p>
           ) : (
-            <>
-              {customer.map((person: any, i: number) => (
-                <Customer
-                  key={i + person.type}
-                  type={person.type}
-                  data={person.data}
-                />
-              ))}
-            </>
+            <Customer customer={user} mutate={mutate} />
           )}
         </div>
       )}
@@ -126,9 +113,6 @@ const Account: NextPage = () => {
           {isLoading ? <p>is Loading....</p> : <Designs userId={user.id} />}
         </div>
       )}
-      {/* <Button variant="primary" className={s.save} Component="button">
-        Save changes
-      </Button> */}
     </div>
   );
 };
