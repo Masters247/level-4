@@ -1,11 +1,12 @@
 /* eslint-disable @next/next/no-img-element */
 import { useRef, useState, useEffect } from "react";
 import { useSpring, animated } from "@react-spring/web";
-import { useDrag } from "@use-gesture/react";
+import { ConfigResolverMap, useDrag } from "@use-gesture/react";
 import ImageUploader from "../ImageUploader/ImageUploader";
 import ImageConverter from "../ImageConverter/ImageConverter";
 import ProductUiPanel from "../ProductUi/ProductUiPanel";
 import s from "./productView.module.scss";
+import Condition from "yup/lib/Condition";
 
 const ProductView = ({
   products,
@@ -21,11 +22,16 @@ const ProductView = ({
   const [count, setCount]: any = useState(0);
   const [imageWidth, setImageWidth]: any = useState(80);
   const [imageHeight, setImageHeight]: any = useState(80);
+  const [undoActive, setUndoActive]: any = useState(false);
+  const [redoActive, setRedoActive]: any = useState(false);
+
   const [actionsArr, setActionsArr]: any = useState([
     { x: 0, y: 0, width: 80, height: 80 },
   ]);
-  const [undoActive, setUndoActive]: any = useState(false);
-  const [redoActive, setRedoActive]: any = useState(false);
+
+  // const [actionsArr, setActionsArr]: any = useState([{ x: 0, y: 0 }]);
+
+  // const [resizeArr, setResizeArr]: any = useState([{ width: 80, height: 80 }]);
 
   const [{ x, y, width, height }, api] = useSpring(() => ({
     x: 0,
@@ -39,7 +45,7 @@ const ProductView = ({
   const logoBox = useRef<HTMLDivElement | null>(null);
 
   const bind = useDrag(
-    (state) => {
+    (state: any) => {
       (window as any).movement = state.movement;
       (window as any).offset = state.offset;
 
@@ -59,16 +65,24 @@ const ProductView = ({
       }
 
       if (!isDragging) {
+        console.log("Log box", state);
+
+        const logoBoxWidthHeight =
+          state?.target.offsetLeft + state?.target.clientHeight + 2;
+
         setActionsArr((actionsArr: any) => [
           ...actionsArr,
           {
-            x: state.offset[0],
-            y: state.offset[1],
-            width: logoBox.current?.clientWidth,
-            height: logoBox.current?.clientHeight,
+            x: isResizing
+              ? state.offset[0] - logoBoxWidthHeight
+              : state.offset[0],
+            y: isResizing
+              ? state.offset[1] - logoBoxWidthHeight
+              : state.offset[1],
+            width: logoBoxWidthHeight,
+            height: logoBoxWidthHeight,
           },
         ]);
-
         setCount(actionsArr.length);
         setUndoActive(true);
       }
@@ -107,6 +121,7 @@ const ProductView = ({
   );
 
   useEffect(() => {
+    console.log("actions arr", actionsArr);
     if (count === 0) {
       setUndoActive(false);
     }
@@ -129,12 +144,23 @@ const ProductView = ({
 
   const handleUndo = () => {
     setRedoActive(true);
+
     api.set({
       x: actionsArr[count - 1].x,
       y: actionsArr[count - 1].y,
       width: actionsArr[count - 1].width,
       height: actionsArr[count - 1].height,
     });
+
+    setActionsArr((actionsArr: any) => [
+      ...actionsArr,
+      {
+        x: actionsArr[count - 1].x,
+        y: actionsArr[count - 1].y,
+        width: actionsArr[count - 1].width,
+        height: actionsArr[count - 1].height,
+      },
+    ]);
     setCount(count - 1);
   };
 
