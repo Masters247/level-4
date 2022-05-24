@@ -15,6 +15,7 @@ const ProductView = ({
   handleSaveCustomImage,
   control,
   setControl,
+  saved,
 }: any) => {
   // gets ratio of image - used to constrain resizer to the ratio of image
   const [ratio, setRatio]: any = useState();
@@ -40,8 +41,8 @@ const ProductView = ({
     width: imageWidth,
     height: imageHeight,
   }));
-  console.log("actionsArr", actionsArr);
-  console.log("width", imageWidth);
+  // console.log("actionsArr", actionsArr);
+  // console.log("width", imageWidth);
   useEffect(() => {
     setRatio(imageHeight / imageWidth);
     if (imageWidth > 250) {
@@ -73,7 +74,7 @@ const ProductView = ({
   }, [imageHeight, imageWidth, logo]);
 
   useEffect(() => {
-    console.log("count", count);
+    // console.log("count", count);f
     if (count === 0) {
       setUndoActive(false);
     }
@@ -337,6 +338,7 @@ const ProductView = ({
         handleRedo={handleRedo}
         undoActive={undoActive}
         redoActive={redoActive}
+        saved={saved}
       />
     </div>
   );

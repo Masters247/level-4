@@ -16,6 +16,7 @@ const ProductButtons = ({
   handleRedo,
   undoActive,
   redoActive,
+  saved,
 }: any) => {
   const { data: session }: any = useSession();
   if (session) {
@@ -59,13 +60,25 @@ const ProductButtons = ({
         className={cn(
           s.uiButton,
           s.saveButton,
-          !session && s.saveButtonDisabled
+          !session && s.saveButtonDisabled,
+          saved && s.saved
         )}
         onClick={handleSaveCustomImage}
         // disabled={session}
       >
-        <Save styles={s.saveIcon} />
-        <p>save</p>
+        {saved ? (
+          <>
+            <Save styles={s.savedIcon} />
+            <p>saving</p>
+          </>
+        ) : (
+          <>
+            <Save styles={s.saveIcon} />
+            <p>save</p>
+          </>
+        )}
+        {/* <Save styles={s.saveIcon} />
+        <p>save</p> */}
       </button>
       <button
         className={cn(s.uiButton, s.downloadButton)}

@@ -26,6 +26,7 @@ const ProductUiPanel = ({
   handleRedo,
   undoActive,
   redoActive,
+  saved,
 }: any) => {
   const controler = [
     {
@@ -90,6 +91,7 @@ const ProductUiPanel = ({
         handleRedo={handleRedo}
         undoActive={undoActive}
         redoActive={redoActive}
+        saved={saved}
       />
     </div>
   );

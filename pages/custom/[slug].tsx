@@ -66,22 +66,6 @@ export async function getStaticProps({ params }: any) {
   };
 }
 
-// function useAccount(email: any) {
-//   const { data: user, error } = useSWR(
-//     `/api/account/user?email=${email}`,
-//     fetcher,
-//     {
-//       revalidateOnFocus: false,
-//     }
-//   );
-
-//   return {
-//     user: user,
-//     isLoading: !error && !user,
-//     isError: error,
-//   };
-// }
-
 interface Props {
   queryGraphCms?: any;
   customPage?: any;
@@ -123,7 +107,7 @@ const Custom: NextPage<Props> = ({ queryGraphCms, customPage }) => {
   };
 
   const handleSaveCustomImage = () => {
-    setSaveCustomImage(false);
+    setSaveCustomImage(true);
     setControl(false);
     const takeScreenShot = () => {
       html2canvas(document.getElementById("capture") as HTMLElement, {
@@ -144,7 +128,7 @@ const Custom: NextPage<Props> = ({ queryGraphCms, customPage }) => {
         })
         .then(() => {
           setControl(true),
-            setSaveCustomImage(true),
+            // setSaveCustomImage(true),
             setTimeout(() => setSaveCustomImage(false), 2000);
         })
         .catch((err) => {
@@ -157,11 +141,6 @@ const Custom: NextPage<Props> = ({ queryGraphCms, customPage }) => {
 
   return (
     <div className={s.pageWrap}>
-      {saveCustomImage && (
-        <div className={s.pictureSavedModal}>
-          <p>Customisation Saved</p>
-        </div>
-      )}
       <ProductView
         image={productVariantColours[colour].customImage}
         productColoutVariants={productVariantColours}
@@ -172,6 +151,7 @@ const Custom: NextPage<Props> = ({ queryGraphCms, customPage }) => {
         saveCustomImage={saveCustomImage}
         setControl={setColour}
         control={control}
+        saved={saveCustomImage}
       />
       {!session && (
         <div className={s.signIn}>
