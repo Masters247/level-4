@@ -20,7 +20,7 @@ export default async function handler(
     ContentEncoding: "base64",
     ContentType: "image/jpeg",
     ACL: "public-read",
-    Bucket: `${process.env.AWS_BUCKET_NAME}`,
+    Bucket: `${process.env.AWS_S3_BUCKET_NAME}`,
     UserId: `${data.userId}`,
   };
 

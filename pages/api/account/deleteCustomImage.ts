@@ -10,7 +10,7 @@ export default async function handler(
 
   const params = {
     Key: body.key,
-    Bucket: `${process.env.AWS_BUCKET_NAME}`,
+    Bucket: `${process.env.AWS_S3_BUCKET_NAME}`,
   };
 
   try {

@@ -1,4 +1,4 @@
-import { FC, useEffect } from "react";
+import { FC } from "react";
 import Pencil from "../../ui/icons/Pencil";
 import s from "./customer.module.scss";
 import { useState } from "react";

@@ -1,39 +1,36 @@
 import NextAuth from "next-auth";
 import EmailProvider from "next-auth/providers/email";
-import TwitterProvider from "next-auth/providers/twitter";
 import { PrismaAdapter } from "@next-auth/prisma-adapter";
 import { prisma } from "../../../lib/prisma";
+const mail = require("@sendgrid/mail");
+
+mail.setApiKey(process.env.SENDGRID_API_KEY);
 
 export default NextAuth({
   adapter: PrismaAdapter(prisma),
   providers: [
     EmailProvider({
-      server: {
-        host: process.env.SMTP_HOST,
-        port: process.env.SMTP_PORT,
-        auth: {
-          user: process.env.SMTP_USER,
-          pass: process.env.SMTP_PASSWORD,
-        },
-      },
       from: process.env.SMTP_FROM,
+      sendVerificationRequest({ identifier: email, url, provider: { from } }) {
+        // Sort data for customer email
+        const emailData = {
+          to: `${email}`,
+          from: `${from}`,
+          template_id: "d-7b99c1ad5f1a4940aaa07604ab007324",
+          dynamic_template_data: {
+            url: url,
+            user: email,
+          },
+        };
+        // Send signIn email to customer
+        mail.send(emailData);
+      },
     }),
-    // TwitterProvider({
-    //   clientId: process.env.TWITTER_CLIENT_ID,
-    //   clientSecret: process.env.TWITTER_CLIENT_SECRET,
-    // }),
-    // FacebookProvider({
-    //   clientId: process.env.FACEBOOK_CLIENT_ID,
-    //   clientSecret: process.env.FACEBOOK_CLIENT_SECRET,
-    // }),
-    // GoogleProvider({
-    //   clientId: process.env.GOOGLE_CLIENT_ID,
-    //   clientSecret: process.env.GOOGLE_CLIENT_SECRET,
-    // }),
   ],
   pages: {
     signIn: "/signin",
     newUser: "/account/new-account",
+    verifyRequest: "/account/verify-request",
     signOut: "/",
   },
   callbacks: {

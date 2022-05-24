@@ -44,42 +44,45 @@ const NewAccount: NextPage = () => {
   };
 
   return (
-    <div className={s.newAccountWrap}>
-      <h1>You&apos;re almost finished creating your account...</h1>
-      <h3>
-        Please fill in the below fields to finish creating your Level 4 account
-      </h3>
+    <div className={s.pageWrap}>
+      <div className={s.newAccountWrap}>
+        <h1>You&apos;re almost finished creating your account...</h1>
+        <h3>
+          Please fill in the below fields to finish creating your Level 4
+          account
+        </h3>
 
-      <form onSubmit={handleSubmit}>
-        <label htmlFor="name">Name</label>
-        <input
-          type="name"
-          id="name"
-          name="name"
-          placeholder="Name"
-          required
-          onChange={(e) => setName(e.target.value)}
-        />
+        <form onSubmit={handleSubmit}>
+          <label htmlFor="name">Name</label>
+          <input
+            type="name"
+            id="name"
+            name="name"
+            placeholder="Name"
+            required
+            onChange={(e) => setName(e.target.value)}
+          />
 
-        <label htmlFor="organisation">Organisation / Club</label>
-        <input
-          required
-          type="text"
-          id="organisation"
-          name="organisation"
-          placeholder="Organisation"
-          onChange={(e) => setOrg(e.target.value)}
-        />
-        <Button
-          Component="button"
-          type="submit"
-          variant={"primary"}
-          className={s.button}
-          loading={loading}
-        >
-          Complete Sign Up
-        </Button>
-      </form>
+          <label htmlFor="organisation">Organisation / Club</label>
+          <input
+            required
+            type="text"
+            id="organisation"
+            name="organisation"
+            placeholder="Organisation"
+            onChange={(e) => setOrg(e.target.value)}
+          />
+          <Button
+            Component="button"
+            type="submit"
+            variant={"primary"}
+            className={s.button}
+            loading={loading}
+          >
+            Complete Sign Up
+          </Button>
+        </form>
+      </div>
     </div>
   );
 };

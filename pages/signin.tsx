@@ -1,16 +1,7 @@
 import s from "../styles/pages/signIn.module.scss";
-import {
-  getProviders,
-  getCsrfToken,
-  signIn,
-  useSession,
-  getSession,
-} from "next-auth/react";
-import Image from "next/image";
+import { getProviders, getCsrfToken } from "next-auth/react";
+
 import { useState } from "react";
-import { useRouter } from "next/router";
-import CreateAccountForm from "../components/global/CreateAccountForm/CreateAccountForm";
-import { Button } from "../components/ui/Button";
 
 export async function getServerSideProps(context: any) {
   const providers = await getProviders();
@@ -21,22 +12,53 @@ export async function getServerSideProps(context: any) {
 }
 
 export default function SignIn({ csrfToken, providers }: any) {
+  const [signInView, setSignInView] = useState(true);
   return (
     <div className={s.pageWrap}>
-      <div className={s.signInForm}>
-        <h1>Create Account</h1>
-        <p>
-          Create a Level 4 account today to make sure you don’t miss out on
-          exclusive product releases, as well as being able to save your design
-          progress using our visualiser tool.
-        </p>
-        <form method="post" action="/api/auth/signin/email">
-          <input name="csrfToken" type="hidden" defaultValue={csrfToken} />
+      {!signInView ? (
+        <div className={s.signInForm}>
+          <h1>Create Account</h1>
+          <p>
+            Create a Level 4 account today to make sure you don’t miss out on
+            exclusive product releases, as well as being able to save your
+            design progress using our visualiser tool.
+          </p>
+          <form method="post" action="/api/auth/signin/email">
+            <input name="csrfToken" type="hidden" defaultValue={csrfToken} />
 
-          <input type="email" id="email" name="email" placeholder="Email" />
-          <button type="submit">Create account with Email</button>
-        </form>
-      </div>
+            <input type="email" id="email" name="email" placeholder="Email" />
+            <button type="submit">Create account</button>
+          </form>
+
+          <p
+            className={s.changeView}
+            onClick={() => setSignInView(!signInView)}
+          >
+            Already have an account?
+          </p>
+        </div>
+      ) : (
+        <div className={s.signInForm}>
+          <h1>Sign In</h1>
+          <p>
+            Sign in with your email to view your Level 4 deisgns and create
+            more.
+          </p>
+          <form method="post" action="/api/auth/signin/email">
+            <input name="csrfToken" type="hidden" defaultValue={csrfToken} />
+
+            <input type="email" id="email" name="email" placeholder="Email" />
+            <button type="submit">Sign In</button>
+          </form>
+
+          <p
+            className={s.changeView}
+            onClick={() => setSignInView(!signInView)}
+          >
+            Dont have an account yet?
+          </p>
+        </div>
+      )}
     </div>
   );
 }
