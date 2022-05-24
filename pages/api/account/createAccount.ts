@@ -12,7 +12,6 @@ export default async function handler(
       name: body.name,
       organisation: body.organisation,
       email: body.email,
-      password: body.password,
     },
   });
   res.status(200).json(addUser);
