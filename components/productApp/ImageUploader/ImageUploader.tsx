@@ -39,7 +39,10 @@ const ImageUploader = ({
   };
 
   const handleLogoPick = (imageList: any, index: any) => {
+    setActionsArr([]);
     setLogo(imageList[index].data_url);
+
+    console.log("changed logo");
 
     const newImage = new Image();
     newImage.src = imageList[index].data_url;
