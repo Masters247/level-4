@@ -1,5 +1,4 @@
 import { NextApiRequest, NextApiResponse } from "next";
-import { s3 } from "../../../lib/amazon-s3";
 import { prisma } from "../../../lib/prisma";
 
 export default async function handler(
@@ -8,23 +7,25 @@ export default async function handler(
 ) {
   const body = req.body;
 
-  const params = {
-    Key: body.key,
-    Bucket: `${process.env.AWS_S3_BUCKET_NAME}`,
-  };
-
   try {
-    await prisma.customImage.delete({
+    await prisma.user.upsert({
+      create: {
+        name: body.name,
+        organisation: body.org,
+      },
+      update: {
+        name: body.name,
+        organisation: body.org,
+        email: body.email,
+      },
       where: {
         id: body.id,
       },
     });
 
-    await s3.deleteObject(params).promise();
-
-    res.status(200).json({ status: "ok" });
+    res.status(200).json({ status: "success" });
   } catch (error) {
     console.log(error);
-    res.status(500).json({ status: "failed" });
+    res.status(500).json({ status: "error" });
   }
 }

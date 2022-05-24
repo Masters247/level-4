@@ -5,6 +5,8 @@ import s from "./designs.module.scss";
 import Image from "next/image";
 import { FC } from "react";
 import useSWR from "swr";
+import Download from "../../ui/icons/Download";
+const download = require("downloadjs");
 
 const fetcher = (id: any) => fetch(id).then((res) => res.json());
 
@@ -31,18 +33,25 @@ interface Props {
 const Designs: FC<Props> = ({ userId }) => {
   const { data, isLoading, isError, mutate } = useCustomImages(userId);
 
-  async function deleteImage(i: number) {
-    console.log("delete image", i);
+  async function deleteImage(i: string, key: string) {
     await fetch(`/api/account/deleteCustomImage`, {
       headers: { "Content-Type": "application/json" },
       method: "DELETE",
-      body: JSON.stringify(i),
+      body: JSON.stringify({
+        id: i,
+        key,
+      }),
     });
     mutate();
   }
 
   const handleFilter = (category: any) => {
     // console.log("category", category);
+  };
+
+  const date = (date: string) => {
+    const dateObj = new Date(date);
+    return dateObj.toLocaleDateString();
   };
 
   return (
@@ -73,10 +82,16 @@ const Designs: FC<Props> = ({ userId }) => {
                 <div className={s.imageWrap}>
                   <button
                     className={s.deleteCustomButton}
-                    onClick={() => deleteImage(d.id)}
+                    onClick={() => deleteImage(d.id, d.s3Key)}
                   >
                     <Remove styles={s.removeIcon} />
                   </button>
+
+                  <a href={d.url} download target="_blank" rel="noreferrer">
+                    <button className={s.downloadCustomButton}>
+                      <Download styles={s.removeIcon} />
+                    </button>
+                  </a>
                   <Image
                     layout="responsive"
                     src={d.url}
@@ -89,6 +104,7 @@ const Designs: FC<Props> = ({ userId }) => {
                 </div>
                 <div className={s.productName}>
                   <p>{d.productName}</p>
+                  <p className={s.created}>Created on: {date(d.createdAt)}</p>
                 </div>
               </div>
             ))}

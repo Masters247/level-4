@@ -4,6 +4,7 @@ const pages = [
       { name: "Home", link: "/" },
       { name: "About Us", link: "/about-us" },
       { name: "Contact Us", link: "/contact-us" },
+      { name: "Terms & Conditions", link: "/terms-and-conditions" },
     ],
   },
   {

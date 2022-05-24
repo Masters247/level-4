@@ -64,3 +64,14 @@ p {
 a {
   text-decoration: none;
 }
+
+input {
+  border-radius: 0;
+  -webkit-border-radius: 0px;
+  font-size: 1em;
+}
+
+textarea {
+  border-radius: 0;
+  -webkit-border-radius: 0px;
+}

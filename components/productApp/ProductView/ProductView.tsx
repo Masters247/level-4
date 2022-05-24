@@ -45,7 +45,9 @@ const ProductView = ({
       (window as any).offset = state.offset;
 
       const isResizing = state?.event.target === dragEl.current;
+
       const isDragging = state.active;
+
 
       if (isResizing) {
         api.set({

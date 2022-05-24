@@ -42,6 +42,7 @@
         width: 70%;
         margin-bottom: 0.5em;
         background-color: $grey-2;
+        font-size: 1rem;
         &::placeholder {
           color: $black;
           text-transform: uppercase;
@@ -54,7 +55,7 @@
         text-transform: uppercase;
         font-size: 10px;
         color: $red-1;
-        margin: 0 1em 0.4em;
+        margin: 0 1em 0em;
       }
 
       .formButton {
@@ -88,7 +89,7 @@
 
         .mailIcon {
           right: 0px;
-          top: 1px;
+          top: 5px;
           position: absolute;
           width: 20px;
           height: 20px;

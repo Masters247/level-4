@@ -13,7 +13,6 @@ import Image from "next/image";
 
 export async function getStaticPaths() {
   const productsPages = await productsPagesQuery();
-  console.log("product pages", productsPages);
 
   const paths = productsPages.map((p: any) => ({
     params: {
