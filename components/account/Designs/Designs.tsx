@@ -1,12 +1,9 @@
 import Remove from "../../ui/icons/Remove";
-import pages from "../../../lib/pages";
-import { useState, useEffect } from "react";
 import s from "./designs.module.scss";
 import Image from "next/image";
 import { FC } from "react";
 import useSWR from "swr";
 import Download from "../../ui/icons/Download";
-const download = require("downloadjs");
 
 const fetcher = (id: any) => fetch(id).then((res) => res.json());
 
@@ -49,6 +46,11 @@ const Designs: FC<Props> = ({ userId }) => {
     // console.log("category", category);
   };
 
+  const downloadImage = (url: RequestInfo) => {
+    const FileSaver = require("file-saver");
+    FileSaver.saveAs(url, "image.jpg");
+  };
+
   const date = (date: string) => {
     const dateObj = new Date(date);
     return dateObj.toLocaleDateString();
@@ -87,11 +89,14 @@ const Designs: FC<Props> = ({ userId }) => {
                     <Remove styles={s.removeIcon} />
                   </button>
 
-                  <a href={d.url} download target="_blank" rel="noreferrer">
-                    <button className={s.downloadCustomButton}>
-                      <Download styles={s.removeIcon} />
-                    </button>
-                  </a>
+                  {/* <a href={d.url} download target="_blank" rel="noreferrer"> */}
+                  <button
+                    className={s.downloadCustomButton}
+                    onClick={() => downloadImage(d.url)}
+                  >
+                    <Download styles={s.removeIcon} />
+                  </button>
+                  {/* </a> */}
                   <Image
                     layout="responsive"
                     src={d.url}
