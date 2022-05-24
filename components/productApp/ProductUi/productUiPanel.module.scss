@@ -76,7 +76,9 @@
   }
 
   .embelishment {
-    display: none;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
     h2 {
       @include uiFont;
       padding: 1em 0em 0.5em 0;
@@ -160,7 +162,8 @@
       text-align: left;
     }
     .embelishment {
-      display: block;
+      flex-direction: column;
+      align-items: flex-start;
     }
 
     .uiControlsWrap {

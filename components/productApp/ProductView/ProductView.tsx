@@ -5,7 +5,6 @@ import { useDrag } from "@use-gesture/react";
 import ImageUploader from "../ImageUploader/ImageUploader";
 import ProductUiPanel from "../ProductUi/ProductUiPanel";
 import s from "./productView.module.scss";
-import { copyFile } from "fs";
 
 const ProductView = ({
   products,
@@ -16,16 +15,24 @@ const ProductView = ({
   handleSaveCustomImage,
   control,
   setControl,
-  id,
 }: any) => {
-  const [count, setCount]: any = useState(0);
-  const [imageWidth, setImageWidth]: any = useState(80);
-  const [imageHeight, setImageHeight]: any = useState(80);
+  // gets ratio of image - used to constrain resizer to the ratio of image
+  const [ratio, setRatio]: any = useState();
   const [undoActive, setUndoActive]: any = useState(false);
   const [redoActive, setRedoActive]: any = useState(false);
-  const [actionsArr, setActionsArr]: any = useState([
-    { x: 0, y: 0, width: imageWidth, height: imageHeight },
-  ]);
+  const [actionsArr, setActionsArr]: any = useState([]);
+  // count keeps track of actionsArr
+  const [count, setCount]: any = useState(0);
+  const [logo, setLogo]: any = useState(null);
+  // if true image uploader shows in ui
+  const [imageUpload, setImageUpload]: any = useState(true);
+
+  const containerRef = useRef<HTMLDivElement | null>(null);
+  const dragEl = useRef<HTMLDivElement | null>(null);
+  const logoBox = useRef<HTMLDivElement | null>(null);
+
+  const [imageWidth, setImageWidth]: any = useState(80);
+  const [imageHeight, setImageHeight]: any = useState(80);
 
   const [{ x, y, width, height }, api] = useSpring(() => ({
     x: 0,
@@ -33,10 +40,47 @@ const ProductView = ({
     width: imageWidth,
     height: imageHeight,
   }));
+  console.log("actionsArr", actionsArr);
+  console.log("width", imageWidth);
+  useEffect(() => {
+    setRatio(imageHeight / imageWidth);
+    if (imageWidth > 250) {
+      api.set({
+        width: imageWidth / 10,
+        height: imageHeight / 10,
+      });
+    } else {
+      api.set({
+        width: imageWidth,
+        height: imageHeight,
+      });
+    }
 
-  const containerRef = useRef<HTMLDivElement | null>(null);
-  const dragEl = useRef<HTMLDivElement | null>(null);
-  const logoBox = useRef<HTMLDivElement | null>(null);
+    // this sets initial array item in actionsArr
+    if (count === 0 && logo === null) {
+      return;
+    } else {
+      setActionsArr((actionsArr: any) => [
+        ...actionsArr,
+        {
+          x: 0,
+          y: 0,
+          width: width.get(),
+          height: height.get(),
+        },
+      ]);
+    }
+  }, [imageHeight, imageWidth, logo]);
+
+  useEffect(() => {
+    console.log("count", count);
+    if (count === 0) {
+      setUndoActive(false);
+    }
+    if (actionsArr.length - 1 === count) {
+      setRedoActive(false);
+    }
+  }, [count, actionsArr]);
 
   const bind = useDrag(
     (state: any) => {
@@ -46,16 +90,10 @@ const ProductView = ({
       const isResizing = state?.event.target === dragEl.current;
       const isDragging = state.active;
 
-      /* need to get aspect ration of image data */
-      /* and the math to work out the difference
-      
-      E.g height = width: state.offset * 0.4
-      */
-
       if (isResizing) {
         api.set({
           width: state.offset[0],
-          height: state.offset[1],
+          height: state.offset[0] * ratio,
         });
       } else {
         api.set({
@@ -111,18 +149,6 @@ const ProductView = ({
     }
   );
 
-  useEffect(() => {
-    console.log(width.get());
-    console.log(height.get());
-    console.log("image wh state", imageHeight, imageWidth);
-    if (count === 0) {
-      setUndoActive(false);
-    }
-    if (actionsArr.length - 1 === count) {
-      setRedoActive(false);
-    }
-  }, [count, actionsArr, imageHeight, imageWidth]);
-
   const handleRedo = () => {
     setUndoActive(true);
     api.set({
@@ -154,6 +180,7 @@ const ProductView = ({
         height: actionsArr[count - 1].height,
       },
     ]);
+
     setCount(count - 1);
   };
 
@@ -162,10 +189,12 @@ const ProductView = ({
     const getHeight = height.get() / 2;
     const containerWidth: any = containerRef.current?.clientWidth;
     const containerHeight: any = containerRef.current?.clientHeight;
+
     api.set({
       x: containerWidth / 2 - getWidth,
       y: containerHeight / 2 - getHeight,
     });
+
     setActionsArr((actionsArr: any) => [
       ...actionsArr,
       {
@@ -175,6 +204,7 @@ const ProductView = ({
         height: logoBox.current?.clientHeight,
       },
     ]);
+
     setUndoActive(true);
     setCount(count + 1);
   };
@@ -182,6 +212,7 @@ const ProductView = ({
   const handleVertical = () => {
     const getHeight = height.get() / 2;
     const containerHeight: any = containerRef.current?.clientHeight;
+
     api.set({
       y: containerHeight / 2 - getHeight,
     });
@@ -198,6 +229,7 @@ const ProductView = ({
         height: logoBox.current?.clientHeight,
       },
     ]);
+
     setUndoActive(true);
     setCount(count + 1);
   };
@@ -221,6 +253,7 @@ const ProductView = ({
         height: logoBox.current?.clientHeight,
       },
     ]);
+
     setUndoActive(true);
     setCount(count + 1);
   };
@@ -228,9 +261,6 @@ const ProductView = ({
   const handleControls = () => {
     setControl(!control);
   };
-
-  const [logo, setLogo]: any = useState(null);
-  const [imageUpload, setImageUpload]: any = useState(true);
 
   const handleImageUpload = () => {
     setImageUpload(!imageUpload);
@@ -246,9 +276,10 @@ const ProductView = ({
         <ImageUploader
           setLogo={setLogo}
           handleImageUpload={handleImageUpload}
-          logo={logo}
           setImageWidth={setImageWidth}
           setImageHeight={setImageHeight}
+          actionsArr={actionsArr}
+          setActionsArr={setActionsArr}
         />
       )}
 
@@ -277,17 +308,7 @@ const ProductView = ({
                 <div className={s.imageOuterWrap}>
                   {logo !== null && (
                     <div className={s.logoImageWrap}>
-                      <img
-                        alt="logo"
-                        className={s.logoImage}
-                        src={logo}
-                        // width={imageWidth}
-                        // height={imageHeight}
-                        // style={{
-                        //   maxWidth: `${imageWidth}`,
-                        //   maxHeight: `${imageHeight}`,
-                        // }}
-                      />
+                      <img alt="logo" className={s.logoImage} src={logo} />
                     </div>
                   )}
                 </div>
@@ -297,6 +318,7 @@ const ProductView = ({
           </div>
         </div>
       </div>
+
       <ProductUiPanel
         products={products}
         productColoutVariants={productColoutVariants}

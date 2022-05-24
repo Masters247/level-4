@@ -1,4 +1,4 @@
-import { useEffect, useState, useRef } from "react";
+import { useEffect, useState } from "react";
 import cn from "classnames";
 import React from "react";
 import s from "./imageUploader.module.scss";
@@ -8,11 +8,12 @@ import ImageUploading from "react-images-uploading";
 import ImageLogo from "./ImageLogo";
 
 const ImageUploader = ({
-  logo,
   setLogo,
   handleImageUpload,
   setImageWidth,
   setImageHeight,
+  setActionsArr,
+  actionArr,
 }: any) => {
   const [localImages, setLocalImages]: any = useState([]);
   const [images, setImages] = useState([]);
@@ -21,20 +22,16 @@ const ImageUploader = ({
 
   const onChange = (imageList: any) => {
     setImages(imageList);
+
     if (imageList.length !== 0) {
       setLogo(imageList[0].data_url);
       const newImage = new Image();
       newImage.src = imageList[0].data_url;
       const imgWidth = newImage.naturalWidth;
       const imgHeight = newImage.naturalHeight;
-      if (imgWidth > 350) {
-        setImageWidth(imgWidth / 10);
-        setImageHeight(imgHeight / 10);
-      } else {
-        setImageWidth(imgWidth);
-        setImageHeight(imgHeight);
-      }
-      console.log("image dimensions", imgHeight, imgWidth);
+
+      setImageWidth(imgWidth);
+      setImageHeight(imgHeight);
     } else {
       setLogo(null);
     }
@@ -43,11 +40,12 @@ const ImageUploader = ({
 
   const handleLogoPick = (imageList: any, index: any) => {
     setLogo(imageList[index].data_url);
+
     const newImage = new Image();
     newImage.src = imageList[index].data_url;
     const imgWidth = newImage.naturalWidth;
     const imgHeight = newImage.naturalHeight;
-    console.log("image dimensions", imgHeight, imgWidth);
+
     setImageWidth(imgWidth);
     setImageHeight(imgHeight);
   };

@@ -153,21 +153,6 @@ const Custom: NextPage<Props> = ({ queryGraphCms, customPage }) => {
 
   return (
     <div className={s.pageWrap}>
-      {/* {!isSession ? (
-        <div
-          className={s.cover}
-          onClick={() => {
-            setIsSession(true);
-          }}
-        >
-          <div className={s.login}>
-            <p>Please login or create account to save images</p>
-            <Link href="/signin" passHref>
-              <a className={s.loginButton}>Login</a>
-            </Link>
-          </div>
-        </div>
-      ) : null} */}
       {saveCustomImage ? (
         <div className={s.pictureSavedModal}>
           <p>Customisation Saved</p>
@@ -185,21 +170,8 @@ const Custom: NextPage<Props> = ({ queryGraphCms, customPage }) => {
         control={control}
       />
       {!session && (
-        <div
-          style={{
-            width: "200px",
-            margin: "0 auto",
-          }}
-        >
-          <p
-            style={{
-              textAlign: "center",
-              opacity: "0.5",
-              marginBottom: "1em",
-            }}
-          >
-            Please sign in to save custom image
-          </p>
+        <div className={s.signIn}>
+          <p>Please sign in to save custom images</p>
           <Link href="/signin" passHref>
             <Button variant="primary">Sign In</Button>
           </Link>
