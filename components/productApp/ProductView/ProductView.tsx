@@ -6,7 +6,6 @@ import ImageUploader from "../ImageUploader/ImageUploader";
 import ImageConverter from "../ImageConverter/ImageConverter";
 import ProductUiPanel from "../ProductUi/ProductUiPanel";
 import s from "./productView.module.scss";
-import { copyFile } from "fs";
 
 const ProductView = ({
   products,
@@ -47,7 +46,6 @@ const ProductView = ({
       const isResizing = state?.event.target === dragEl.current;
 
       const isDragging = state.active;
-
 
       if (isResizing) {
         api.set({
