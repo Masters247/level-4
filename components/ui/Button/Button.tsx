@@ -47,7 +47,7 @@ const Button: FC<Props> = forwardRef(
     );
     return (
       <Component className={rootClassName} ref={ref} href={href} {...rest}>
-        {children}
+        {loading ? "Loading..." : children}
       </Component>
     );
   }

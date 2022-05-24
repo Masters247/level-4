@@ -10,7 +10,6 @@ interface Props {
 }
 
 const Visualise: FC<Props> = ({ slug, image }) => {
-  console.log("image", image);
   return (
     <section className={s.visualiseWrap}>
       <div className={s.imageWrap}>

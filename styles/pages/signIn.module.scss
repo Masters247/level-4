@@ -5,6 +5,7 @@
   min-height: 700px;
   @include flexCenter;
   .signInForm {
+    width: 90%;
     form {
       @include flexCenter;
       flex-direction: column;
@@ -15,6 +16,7 @@
         min-height: 45px;
         outline: none;
         padding: 1rem;
+        font-size: 1em;
         &::placeholder {
           font-size: 1em;
         }
@@ -23,6 +25,7 @@
         margin-bottom: 0.5em;
       }
       button {
+        width: 100%;
         padding: 1em;
         background-color: $button-primary;
         color: $white;
@@ -61,6 +64,16 @@
           border: 1px solid $white;
         }
       }
+    }
+    @media (min-width: $media-tablet) {
+      width: unset;
+    }
+
+    .changeView {
+      text-decoration: underline;
+      color: $button-primary;
+      margin: 1em;
+      cursor: pointer;
     }
   }
 

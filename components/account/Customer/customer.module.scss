@@ -25,8 +25,19 @@
       width: 15px;
       fill: $grey-5;
     }
+
+    input {
+      width: 100%;
+      border: none;
+      background: transparent;
+      text-align: right;
+      color: $grey-5;
+    }
   }
   .details:nth-child(1) {
     justify-content: flex-start;
   }
+}
+.save {
+  margin-top: 2em;
 }

@@ -1,0 +1,21 @@
+@use "../base.scss" as *;
+
+.pageWrap {
+  margin: 4em 1em;
+
+  h1 {
+    margin-bottom: 1em;
+  }
+
+  .content {
+    h2 {
+      margin: 0.75em 0;
+      font-size: 1.25rem;
+    }
+  }
+
+  @media (min-width: $media-desktop-medium-large) {
+    max-width: 1225px;
+    margin: 4em auto;
+  }
+}
