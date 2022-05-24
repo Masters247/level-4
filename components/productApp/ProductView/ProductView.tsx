@@ -1,12 +1,12 @@
 /* eslint-disable @next/next/no-img-element */
-import { useRef, useState } from "react";
+import { useRef, useState, useEffect } from "react";
 import { useSpring, animated } from "@react-spring/web";
-import Image from "next/image";
 import { useDrag } from "@use-gesture/react";
 import ImageUploader from "../ImageUploader/ImageUploader";
 import ImageConverter from "../ImageConverter/ImageConverter";
 import ProductUiPanel from "../ProductUi/ProductUiPanel";
 import s from "./productView.module.scss";
+import { copyFile } from "fs";
 
 const ProductView = ({
   products,
@@ -15,36 +15,39 @@ const ProductView = ({
   handleColourClick,
   handleScreenShot,
   handleSaveCustomImage,
-  saveCustomImage,
   control,
   setControl,
   id,
 }: any) => {
+  const [count, setCount]: any = useState(0);
   const [imageWidth, setImageWidth]: any = useState(80);
   const [imageHeight, setImageHeight]: any = useState(80);
-  const [movementsArray, setMovementsArray]: any = useState([
-    { offset: 0, movement: 0 },
+  const [undoActive, setUndoActive]: any = useState(false);
+  const [redoActive, setRedoActive]: any = useState(false);
+  const [actionsArr, setActionsArr]: any = useState([
+    { x: 0, y: 0, width: imageWidth, height: imageHeight },
   ]);
-  const [redo, setRedo]: any = useState([]);
-  const [undo, setUndo]: any = useState([]);
 
   const [{ x, y, width, height }, api] = useSpring(() => ({
     x: 0,
     y: 0,
-    width: 80,
-    height: 80,
+    width: imageWidth,
+    height: imageHeight,
   }));
 
   const containerRef = useRef<HTMLDivElement | null>(null);
   const dragEl = useRef<HTMLDivElement | null>(null);
+  const logoBox = useRef<HTMLDivElement | null>(null);
 
   const bind = useDrag(
-    (state) => {
+    (state: any) => {
       (window as any).movement = state.movement;
       (window as any).offset = state.offset;
 
-      // console.log("state movement", state.offset);
       const isResizing = state?.event.target === dragEl.current;
+
+      const isDragging = state.active;
+
 
       if (isResizing) {
         api.set({
@@ -57,12 +60,25 @@ const ProductView = ({
           y: state.offset[1],
         });
       }
+
+      if (!isDragging) {
+        setActionsArr((actionsArr: any) => [
+          ...actionsArr,
+          {
+            x: x.get(),
+            y: y.get(),
+            width: width.get(),
+            height: height.get(),
+          },
+        ]);
+        setCount(actionsArr.length);
+        setUndoActive(true);
+      }
     },
+
     {
       from: (event) => {
         const isResizing = event.target === dragEl.current;
-        // console.log("from", isResizing);
-
         if (isResizing) {
           return [width.get(), height.get()];
         } else {
@@ -73,8 +89,6 @@ const ProductView = ({
         const isResizing = state?.event.target === dragEl.current;
         const containerWidth: any = containerRef.current?.clientWidth ?? 0;
         const containerHeight: any = containerRef.current?.clientHeight ?? 0;
-
-        // console.log("bounds", isResizing);
         if (isResizing) {
           return {
             top: 50,
@@ -94,6 +108,50 @@ const ProductView = ({
     }
   );
 
+  useEffect(() => {
+    console.log("array of drags and resizes", actionsArr);
+    if (count === 0) {
+      setUndoActive(false);
+    }
+    if (actionsArr.length - 1 === count) {
+      setRedoActive(false);
+    }
+  }, [count, actionsArr]);
+
+  const handleRedo = () => {
+    setUndoActive(true);
+    api.set({
+      x: actionsArr[count + 1].x,
+      y: actionsArr[count + 1].y,
+      width: actionsArr[count + 1].width,
+      height: actionsArr[count + 1].height,
+    });
+
+    setCount(count + 1);
+  };
+
+  const handleUndo = () => {
+    setRedoActive(true);
+
+    api.set({
+      x: actionsArr[count - 1].x,
+      y: actionsArr[count - 1].y,
+      width: actionsArr[count - 1].width,
+      height: actionsArr[count - 1].height,
+    });
+
+    setActionsArr((actionsArr: any) => [
+      ...actionsArr,
+      {
+        x: actionsArr[count - 1].x,
+        y: actionsArr[count - 1].y,
+        width: actionsArr[count - 1].width,
+        height: actionsArr[count - 1].height,
+      },
+    ]);
+    setCount(count - 1);
+  };
+
   const handleCenter = () => {
     const getWidth = width.get() / 2;
     const getHeight = height.get() / 2;
@@ -103,6 +161,17 @@ const ProductView = ({
       x: containerWidth / 2 - getWidth,
       y: containerHeight / 2 - getHeight,
     });
+    setActionsArr((actionsArr: any) => [
+      ...actionsArr,
+      {
+        x: containerWidth / 2 - getWidth,
+        y: containerHeight / 2 - getHeight,
+        width: logoBox.current?.clientWidth,
+        height: logoBox.current?.clientHeight,
+      },
+    ]);
+    setUndoActive(true);
+    setCount(count + 1);
   };
 
   const handleVertical = () => {
@@ -111,6 +180,21 @@ const ProductView = ({
     api.set({
       y: containerHeight / 2 - getHeight,
     });
+
+    const arrayLength = actionsArr.length - 1;
+    const prevArrayYValue = actionsArr[arrayLength].x;
+
+    setActionsArr((actionsArr: any) => [
+      ...actionsArr,
+      {
+        x: prevArrayYValue,
+        y: containerHeight / 2 - getHeight,
+        width: logoBox.current?.clientWidth,
+        height: logoBox.current?.clientHeight,
+      },
+    ]);
+    setUndoActive(true);
+    setCount(count + 1);
   };
 
   const handleHorizontal = () => {
@@ -119,6 +203,21 @@ const ProductView = ({
     api.set({
       x: containerWidth / 2 - getWidth,
     });
+
+    const arrayLength = actionsArr.length - 1;
+    const prevArrayYValue = actionsArr[arrayLength].y;
+
+    setActionsArr((actionsArr: any) => [
+      ...actionsArr,
+      {
+        x: containerWidth / 2 - getWidth,
+        y: prevArrayYValue,
+        width: logoBox.current?.clientWidth,
+        height: logoBox.current?.clientHeight,
+      },
+    ]);
+    setUndoActive(true);
+    setCount(count + 1);
   };
 
   const handleControls = () => {
@@ -161,6 +260,8 @@ const ProductView = ({
           >
             <img
               src={image.url}
+              width="500px"
+              height="500px"
               style={{ width: "500px", height: "500px" }}
               alt="product"
             />
@@ -174,6 +275,7 @@ const ProductView = ({
                 className={s.customLogo}
                 style={{ x, y, width, height, zIndex: "1" }}
                 {...bind()}
+                ref={logoBox}
               >
                 <div className={s.imageOuterWrap}>
                   {logo !== null && (
@@ -209,6 +311,10 @@ const ProductView = ({
         handleScreenShot={handleScreenShot}
         handleImageUpload={handleImageUpload}
         stateUploader={imageUpload}
+        handleUndo={handleUndo}
+        handleRedo={handleRedo}
+        undoActive={undoActive}
+        redoActive={redoActive}
       />
     </div>
   );

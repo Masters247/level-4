@@ -22,6 +22,10 @@ const ProductUiPanel = ({
   handleImageUpload,
   handleScreenShot,
   stateUploader,
+  handleUndo,
+  handleRedo,
+  undoActive,
+  redoActive,
 }: any) => {
   const controler = [
     {
@@ -82,6 +86,10 @@ const ProductUiPanel = ({
         handleImageUpload={handleImageUpload}
         handleScreenShot={handleScreenShot}
         handleSaveCustomImage={handleSaveCustomImage}
+        handleUndo={handleUndo}
+        handleRedo={handleRedo}
+        undoActive={undoActive}
+        redoActive={redoActive}
       />
     </div>
   );

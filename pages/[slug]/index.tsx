@@ -45,9 +45,9 @@ export async function getStaticProps({ params }: any) {
         name
         productVariantColours {
           images {
-            height
-            url
-            width
+            # height
+            url(transformation: {image: {resize: {height: 500, width: 500}}})
+            # width
           }
           colour {
             hex

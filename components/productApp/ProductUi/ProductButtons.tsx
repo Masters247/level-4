@@ -4,6 +4,7 @@ import Redo from "../../ui/icons/Redo";
 import cn from "classnames";
 import Save from "../../ui/icons/Save";
 import Download from "../../ui/icons/Download";
+import { useSession } from "next-auth/react";
 
 const ProductButtons = ({
   state,
@@ -11,20 +12,21 @@ const ProductButtons = ({
   handleImageUpload,
   handleSaveCustomImage,
   stateUploader,
+  handleUndo,
+  handleRedo,
+  undoActive,
+  redoActive,
 }: any) => {
+  const { data: session }: any = useSession();
+  if (session) {
+    console.log("active session");
+  }
+
+  // console.log(session);
   return (
-    <div
-      className={cn(
-        s.uiButtons
-        // !state && s.uiButtonHidden
-      )}
-    >
+    <div className={cn(s.uiButtons)}>
       <button
-        className={cn(
-          s.uiButton,
-          s.imageButton
-          // !state && s.hide
-        )}
+        className={cn(s.uiButton, s.imageButton)}
         onClick={handleImageUpload}
       >
         {!stateUploader ? <p>Close Image Uploader</p> : <p>New Logo</p>}
@@ -32,10 +34,11 @@ const ProductButtons = ({
       <button
         className={cn(
           s.uiButton,
-          s.undoButton
-          // !state && s.hide
+          s.undoButton,
+          !undoActive && s.undoButtonDisabled
         )}
-        disabled
+        disabled={!undoActive}
+        onClick={handleUndo}
       >
         <Undo styles={s.undoIcon} />
         <p>undo</p>
@@ -43,10 +46,11 @@ const ProductButtons = ({
       <button
         className={cn(
           s.uiButton,
-          s.redoButton
-          // !state && s.hide
+          s.redoButton,
+          !redoActive && s.redoButtonDisabled
         )}
-        disabled
+        disabled={!redoActive}
+        onClick={handleRedo}
       >
         <p>redo</p>
         <Redo styles={s.redoIcon} />
@@ -54,23 +58,18 @@ const ProductButtons = ({
       <button
         className={cn(
           s.uiButton,
-          s.saveButton
-          // state && s.disabled
+          s.saveButton,
+          !session && s.saveButtonDisabled
         )}
         onClick={handleSaveCustomImage}
-        // disabled={state}
+        disabled={session}
       >
         <Save styles={s.saveIcon} />
         <p>save</p>
       </button>
       <button
-        className={cn(
-          s.uiButton,
-          s.downloadButton
-          //  state && s.disabled
-        )}
+        className={cn(s.uiButton, s.downloadButton)}
         onClick={handleScreenShot}
-        // disabled={state}
       >
         <Download styles={s.downloadIcon} />
         <p>download</p>

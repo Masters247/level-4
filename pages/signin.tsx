@@ -15,6 +15,7 @@ export default function SignIn({ csrfToken, providers }: any) {
   const [signInView, setSignInView] = useState(true);
   return (
     <div className={s.pageWrap}>
+
       {!signInView ? (
         <div className={s.signInForm}>
           <h1>Create Account</h1>
@@ -59,6 +60,7 @@ export default function SignIn({ csrfToken, providers }: any) {
           </p>
         </div>
       )}
+
     </div>
   );
 }
