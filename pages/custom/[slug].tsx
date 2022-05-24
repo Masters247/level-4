@@ -11,7 +11,6 @@ import { useState, useEffect } from "react";
 import customPageQuery from "../../lib/graphcms-querys/customPageQuery";
 import html2canvas from "html2canvas";
 import Link from "next/link";
-import useSWR from "swr";
 const download = require("downloadjs");
 
 const fetcher = (email: any) => fetch(email).then((res) => res.json());
@@ -157,22 +156,24 @@ const Custom: NextPage<Props> = ({ queryGraphCms, customPage }) => {
 
   return (
     <div className={s.pageWrap}>
-      {saveCustomImage && (
-        <div className={s.pictureSavedModal}>
-          <p>Customisation Saved</p>
-        </div>
-      )}
-      <ProductView
-        image={productVariantColours[colour].customImage}
-        productColoutVariants={productVariantColours}
-        handleColourClick={handleColourClick}
-        handleScreenShot={handleScreenShot}
-        handleSaveCustomImage={handleSaveCustomImage}
-        products={productPage}
-        saveCustomImage={saveCustomImage}
-        setControl={setColour}
-        control={control}
-      />
+      <div className={s.appWrap}>
+        {saveCustomImage && (
+          <div className={s.pictureSavedModal}>
+            <p>Customisation Saved</p>
+          </div>
+        )}
+        <ProductView
+          image={productVariantColours[colour].customImage}
+          productColoutVariants={productVariantColours}
+          handleColourClick={handleColourClick}
+          handleScreenShot={handleScreenShot}
+          handleSaveCustomImage={handleSaveCustomImage}
+          products={productPage}
+          saveCustomImage={saveCustomImage}
+          setControl={setColour}
+          control={control}
+        />
+      </div>
       {!session && (
         <div className={s.signIn}>
           <p>Please sign in to save custom images</p>
