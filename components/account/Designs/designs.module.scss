@@ -36,6 +36,9 @@
   //   border: 1px solid red;
   .productWrap {
     @include boxShadow;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
     .imageWrap {
       position: relative;
       .deleteCustomButton {
@@ -64,6 +67,11 @@
       // border: 1px solid blue;
     }
     .productName {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      flex-grow: 1;
       background-color: $grey-1;
       padding: 0.5em;
       p {

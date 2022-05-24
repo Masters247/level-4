@@ -19,7 +19,7 @@
   margin-top: 1em;
   max-width: 20em;
   position: absolute;
-  width: calc(100vw - 2em);
+  width: calc(100vw - 0em);
   z-index: 1;
 
   h1 {
@@ -149,7 +149,7 @@
     left: calc(50% - 10em);
   }
   @media (min-width: $media-desktop-small) {
-    background-color: $grey-0;
+    // background-color: $grey-0;
     box-shadow: none;
     top: calc(50% - 240px);
     left: calc(500px + 1.8em);

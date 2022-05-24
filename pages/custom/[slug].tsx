@@ -11,7 +11,6 @@ import { useState, useEffect } from "react";
 import customPageQuery from "../../lib/graphcms-querys/customPageQuery";
 import html2canvas from "html2canvas";
 import Link from "next/link";
-import useSWR from "swr";
 const download = require("downloadjs");
 
 const fetcher = (email: any) => fetch(email).then((res) => res.json());
