@@ -62,7 +62,7 @@ const ProductButtons = ({
           !session && s.saveButtonDisabled
         )}
         onClick={handleSaveCustomImage}
-        disabled={session}
+        // disabled={session}
       >
         <Save styles={s.saveIcon} />
         <p>save</p>

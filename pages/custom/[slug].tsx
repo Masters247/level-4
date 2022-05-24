@@ -66,21 +66,21 @@ export async function getStaticProps({ params }: any) {
   };
 }
 
-function useAccount(email: any) {
-  const { data: user, error } = useSWR(
-    `/api/account/user?email=${email}`,
-    fetcher,
-    {
-      revalidateOnFocus: false,
-    }
-  );
+// function useAccount(email: any) {
+//   const { data: user, error } = useSWR(
+//     `/api/account/user?email=${email}`,
+//     fetcher,
+//     {
+//       revalidateOnFocus: false,
+//     }
+//   );
 
-  return {
-    user: user,
-    isLoading: !error && !user,
-    isError: error,
-  };
-}
+//   return {
+//     user: user,
+//     isLoading: !error && !user,
+//     isError: error,
+//   };
+// }
 
 interface Props {
   queryGraphCms?: any;
@@ -88,7 +88,6 @@ interface Props {
 }
 
 const Custom: NextPage<Props> = ({ queryGraphCms, customPage }) => {
-  const [downloadCustomImage, setDownloadCustomImage] = useState(false);
   const [saveCustomImage, setSaveCustomImage] = useState(false);
   // const [isSession, setIsSession] = useState(true);
   const [control, setControl] = useState(true);
@@ -124,6 +123,7 @@ const Custom: NextPage<Props> = ({ queryGraphCms, customPage }) => {
   };
 
   const handleSaveCustomImage = () => {
+    setSaveCustomImage(false);
     setControl(false);
     const takeScreenShot = () => {
       html2canvas(document.getElementById("capture") as HTMLElement, {
@@ -142,7 +142,11 @@ const Custom: NextPage<Props> = ({ queryGraphCms, customPage }) => {
             headers: { "Content-Type": "application/json" },
           });
         })
-        .then(() => setControl(true))
+        .then(() => {
+          setControl(true),
+            setSaveCustomImage(true),
+            setTimeout(() => setSaveCustomImage(false), 2000);
+        })
         .catch((err) => {
           console.log("IMAGE DOWNLOAD ERROR: ", err);
         });
@@ -153,11 +157,11 @@ const Custom: NextPage<Props> = ({ queryGraphCms, customPage }) => {
 
   return (
     <div className={s.pageWrap}>
-      {saveCustomImage ? (
+      {saveCustomImage && (
         <div className={s.pictureSavedModal}>
           <p>Customisation Saved</p>
         </div>
-      ) : null}
+      )}
       <ProductView
         image={productVariantColours[colour].customImage}
         productColoutVariants={productVariantColours}

@@ -91,7 +91,6 @@ const ProductView = ({
 
       const isDragging = state.active;
 
-
       if (isResizing) {
         api.set({
           width: state.offset[0],
