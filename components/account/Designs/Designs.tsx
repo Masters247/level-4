@@ -48,7 +48,11 @@ const Designs: FC<Props> = ({ userId }) => {
 
   const downloadImage = (url: RequestInfo) => {
     const FileSaver = require("file-saver");
-    FileSaver.saveAs(url, "image.jpg");
+    fetch(url)
+      .then((res) => res.blob())
+      .then((image) => {
+        FileSaver.saveAs(image, "image.jpeg");
+      });
   };
 
   const date = (date: string) => {
