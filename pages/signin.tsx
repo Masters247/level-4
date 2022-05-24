@@ -41,7 +41,7 @@ export default function SignIn({ csrfToken, providers }: any) {
         <div className={s.signInForm}>
           <h1>Sign In</h1>
           <p>
-            Sign in with your email to view your Level 4 deisgns and create
+            Sign in with your email to view your Level 4 designs and create
             more.
           </p>
           <form method="post" action="/api/auth/signin/email">
