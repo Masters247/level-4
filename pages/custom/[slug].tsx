@@ -127,7 +127,7 @@ const Custom: NextPage<Props> = ({ queryGraphCms, customPage }) => {
         })
         .then(() => {
           setControl(true),
-            // setSaveCustomImage(true),
+            setSaveCustomImage(true),
             setTimeout(() => setSaveCustomImage(false), 2000);
         })
         .catch((err) => {
@@ -140,18 +140,20 @@ const Custom: NextPage<Props> = ({ queryGraphCms, customPage }) => {
 
   return (
     <div className={s.pageWrap}>
-      <ProductView
-        image={productVariantColours[colour].customImage}
-        productColoutVariants={productVariantColours}
-        handleColourClick={handleColourClick}
-        handleScreenShot={handleScreenShot}
-        handleSaveCustomImage={handleSaveCustomImage}
-        products={productPage}
-        saveCustomImage={saveCustomImage}
-        setControl={setColour}
-        control={control}
-        saved={saveCustomImage}
-      />
+      <div className={s.appWrap}>
+        <ProductView
+          image={productVariantColours[colour].customImage}
+          productColoutVariants={productVariantColours}
+          handleColourClick={handleColourClick}
+          handleScreenShot={handleScreenShot}
+          handleSaveCustomImage={handleSaveCustomImage}
+          products={productPage}
+          saveCustomImage={saveCustomImage}
+          setControl={setColour}
+          control={control}
+        />
+      </div>
+
       {!session && (
         <div className={s.signIn}>
           <p>Please sign in to save custom images</p>
