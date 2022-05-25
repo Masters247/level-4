@@ -1,9 +1,8 @@
-import Remove from "../../ui/icons/Remove";
 import s from "./designs.module.scss";
 import Image from "next/image";
 import { FC } from "react";
 import useSWR from "swr";
-import Download from "../../ui/icons/Download";
+import DesignsProduct, { Design } from "./DesignsProduct";
 
 const fetcher = (id: any) => fetch(id).then((res) => res.json());
 
@@ -30,34 +29,8 @@ interface Props {
 const Designs: FC<Props> = ({ userId }) => {
   const { data, isLoading, isError, mutate } = useCustomImages(userId);
 
-  async function deleteImage(i: string, key: string) {
-    await fetch(`/api/account/deleteCustomImage`, {
-      headers: { "Content-Type": "application/json" },
-      method: "DELETE",
-      body: JSON.stringify({
-        id: i,
-        key,
-      }),
-    });
-    mutate();
-  }
-
   const handleFilter = (category: any) => {
     // console.log("category", category);
-  };
-
-  const downloadImage = (url: RequestInfo) => {
-    const FileSaver = require("file-saver");
-    fetch(url)
-      .then((res) => res.blob())
-      .then((image) => {
-        FileSaver.saveAs(image, "image.jpeg");
-      });
-  };
-
-  const date = (date: string) => {
-    const dateObj = new Date(date);
-    return dateObj.toLocaleDateString();
   };
 
   return (
@@ -83,39 +56,8 @@ const Designs: FC<Props> = ({ userId }) => {
             </div>
           </div> */}
           <div className={s.designs}>
-            {data.map((d: any, i: number) => (
-              <div key={i} className={s.productWrap}>
-                <div className={s.imageWrap}>
-                  <button
-                    className={s.deleteCustomButton}
-                    onClick={() => deleteImage(d.id, d.s3Key)}
-                  >
-                    <Remove styles={s.removeIcon} />
-                  </button>
-
-                  {/* <a href={d.url} download target="_blank" rel="noreferrer"> */}
-                  <button
-                    className={s.downloadCustomButton}
-                    onClick={() => downloadImage(d.url)}
-                  >
-                    <Download styles={s.removeIcon} />
-                  </button>
-                  {/* </a> */}
-                  <Image
-                    layout="responsive"
-                    src={d.url}
-                    width={500}
-                    height={500}
-                    alt=""
-                    placeholder="blur"
-                    blurDataURL={d.url}
-                  />
-                </div>
-                <div className={s.productName}>
-                  <p>{d.productName}</p>
-                  <p className={s.created}>Created on: {date(d.createdAt)}</p>
-                </div>
-              </div>
+            {data.map((d: Design, i: number) => (
+              <DesignsProduct design={d} key={i} mutate={mutate} />
             ))}
           </div>
         </>

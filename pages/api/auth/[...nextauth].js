@@ -23,7 +23,9 @@ export default NextAuth({
           },
         };
         // Send signIn email to customer
-        mail.send(emailData);
+        const sendEmail = mail.send(emailData);
+        console.log(sendEmail);
+        return sendEmail;
       },
     }),
   ],
