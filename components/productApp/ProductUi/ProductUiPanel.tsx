@@ -14,8 +14,6 @@ const ProductUiPanel = ({
   center,
   vertical,
   horizontal,
-  showhide,
-  state,
   productColoutVariants,
   handleSaveCustomImage,
   handleColourClick,
@@ -46,8 +44,6 @@ const ProductUiPanel = ({
     },
   ];
 
-  const controls = state ? controler : controler.slice(3, 4);
-
   return (
     <div className={cn(s.productUiWrap)}>
       <h1>{products.name}</h1>
@@ -75,15 +71,12 @@ const ProductUiPanel = ({
           position={s.position}
         />
       </div>
-      {/* {state && ( */}
       <div className={s.embelishment}>
         <h2>Embelishment:</h2>
         <p>Embroidered</p>
       </div>
-      {/* )} */}
       <ProductButtons
         stateUploader={stateUploader}
-        state={state}
         handleImageUpload={handleImageUpload}
         handleScreenShot={handleScreenShot}
         handleSaveCustomImage={handleSaveCustomImage}

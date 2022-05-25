@@ -9,7 +9,6 @@ import { useSession } from "next-auth/react";
 import ProductButton from "./ProductButton";
 
 const ProductButtons = ({
-  state,
   handleScreenShot,
   handleImageUpload,
   handleSaveCustomImage,
@@ -65,73 +64,6 @@ const ProductButtons = ({
       >
         download
       </ProductButton>
-      {/* <button
-        className={cn(s.uiButton, s.imageButton)}
-        onClick={handleImageUpload}
-      >
-        {!stateUploader ? <p>Close Image Uploader</p> : <p>New Logo</p>}
-      </button> */}
-      {/* <button
-        className={cn(
-          s.uiButton,
-          s.undoButton,
-          !undoActive && s.undoButtonDisabled
-        )}
-        disabled={!undoActive}
-        onClick={handleUndo}
-      >
-        <Undo styles={s.undoIcon} />
-        <p>undo</p>
-      </button> */}
-      {/* <button
-        className={cn(
-          s.uiButton,
-          s.redoButton,
-          !redoActive && s.redoButtonDisabled
-        )}
-        disabled={!redoActive}
-        onClick={handleRedo}
-      >
-        <p>redo</p>
-        <Redo styles={s.redoIcon} />
-      </button> */}
-      <button
-        className={cn(
-          s.uiButton,
-          s.saveButton,
-          !session && s.saveButtonDisabled,
-          saved === 1 && s.saving,
-          saved === 2 && s.saving
-        )}
-        onClick={handleSaveCustomImage}
-      >
-        {saved === 1 ? (
-          <>
-            <Save styles={s.savingIcon} />
-            <p>saving</p>
-          </>
-        ) : (
-          <>
-            {saved === 2 ? (
-              <>
-                <Tick styles={s.savedIcon} />
-              </>
-            ) : (
-              <>
-                <Save styles={s.saveIcon} />
-                <p>save</p>
-              </>
-            )}
-          </>
-        )}
-      </button>
-      {/* <button
-        className={cn(s.uiButton, s.downloadButton)}
-        onClick={handleScreenShot}
-      >
-        <Download styles={s.downloadIcon} />
-        <p>download</p>
-      </button> */}
     </div>
   );
 };

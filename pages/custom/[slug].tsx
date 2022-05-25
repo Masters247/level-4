@@ -37,8 +37,6 @@ export async function getStaticProps({ params }: any) {
 
   const customPage = await customPageQuery();
 
-  console.log("custom page", customPage);
-
   const query = gql`
   query Product {
     productPage(where: {productSlug: "${params.slug}"}) {

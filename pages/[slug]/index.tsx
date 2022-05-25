@@ -27,8 +27,6 @@ export async function getStaticProps({ params }: any) {
     },
   });
 
-  console.log("params", params);
-
   const query = gql`
   query Category {
     categoryPages(where: {categoriesSlug: "${params.slug}"}) {
