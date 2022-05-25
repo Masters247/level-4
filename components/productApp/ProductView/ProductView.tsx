@@ -5,6 +5,7 @@ import { useDrag } from "@use-gesture/react";
 import ImageUploader from "../ImageUploader/ImageUploader";
 import ProductUiPanel from "../ProductUi/ProductUiPanel";
 import s from "./productView.module.scss";
+import { number } from "yup/lib/locale";
 
 const ProductView = ({
   products,
@@ -19,21 +20,21 @@ const ProductView = ({
 }: any) => {
   // gets ratio of image - used to constrain resizer to the ratio of image
   const [ratio, setRatio]: any = useState();
-  const [undoActive, setUndoActive]: any = useState(false);
-  const [redoActive, setRedoActive]: any = useState(false);
+  const [undoActive, setUndoActive] = useState(false);
+  const [redoActive, setRedoActive] = useState(false);
   const [actionsArr, setActionsArr]: any = useState([]);
   // count keeps track of actionsArr
-  const [count, setCount]: any = useState(0);
-  const [logo, setLogo]: any = useState(null);
+  const [count, setCount] = useState(0);
+  const [logo, setLogo] = useState(null);
   // if true image uploader shows in ui
-  const [imageUpload, setImageUpload]: any = useState(true);
+  const [imageUpload, setImageUpload] = useState(true);
 
   const containerRef = useRef<HTMLDivElement | null>(null);
   const dragEl = useRef<HTMLDivElement | null>(null);
   const logoBox = useRef<HTMLDivElement | null>(null);
 
-  const [imageWidth, setImageWidth]: any = useState(80);
-  const [imageHeight, setImageHeight]: any = useState(80);
+  const [imageWidth, setImageWidth] = useState(80);
+  const [imageHeight, setImageHeight] = useState(80);
 
   const [{ x, y, width, height }, api] = useSpring(() => ({
     x: 0,
@@ -41,6 +42,7 @@ const ProductView = ({
     width: imageWidth,
     height: imageHeight,
   }));
+
   useEffect(() => {
     setRatio(imageHeight / imageWidth);
     if (imageWidth > 250) {
