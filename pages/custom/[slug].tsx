@@ -37,6 +37,8 @@ export async function getStaticProps({ params }: any) {
 
   const customPage = await customPageQuery();
 
+  console.log("custom page", customPage);
+
   const query = gql`
   query Product {
     productPage(where: {productSlug: "${params.slug}"}) {
@@ -71,8 +73,7 @@ interface Props {
 }
 
 const Custom: NextPage<Props> = ({ queryGraphCms, customPage }) => {
-  const [saveCustomImage, setSaveCustomImage] = useState(false);
-  // const [isSession, setIsSession] = useState(true);
+  const [saveCustomImage, setSaveCustomImage] = useState(0);
   const [control, setControl] = useState(true);
   const { data: session }: any = useSession();
   const [colour, setColour] = useState(0);
@@ -106,7 +107,7 @@ const Custom: NextPage<Props> = ({ queryGraphCms, customPage }) => {
   };
 
   const handleSaveCustomImage = () => {
-    setSaveCustomImage(true);
+    setSaveCustomImage(1);
     setControl(false);
     const takeScreenShot = () => {
       html2canvas(document.getElementById("capture") as HTMLElement, {
@@ -127,8 +128,8 @@ const Custom: NextPage<Props> = ({ queryGraphCms, customPage }) => {
         })
         .then(() => {
           setControl(true),
-            setSaveCustomImage(true),
-            setTimeout(() => setSaveCustomImage(false), 2000);
+            setSaveCustomImage(2),
+            setTimeout(() => setSaveCustomImage(0), 2000);
         })
         .catch((err) => {
           console.log("IMAGE DOWNLOAD ERROR: ", err);
@@ -148,7 +149,7 @@ const Custom: NextPage<Props> = ({ queryGraphCms, customPage }) => {
           handleScreenShot={handleScreenShot}
           handleSaveCustomImage={handleSaveCustomImage}
           products={productPage}
-          saveCustomImage={saveCustomImage}
+          saved={saveCustomImage}
           setControl={setColour}
           control={control}
         />

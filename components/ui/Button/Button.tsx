@@ -32,8 +32,10 @@ const Button: FC<Props> = forwardRef(
       ...rest
     },
     buttonRef
-  ): JSX.Element => {
+  ): // buttonRef
+  JSX.Element => {
     const ref = useRef<typeof Component>(null);
+
     const rootClassName = cn(
       s.button,
       {

@@ -12,6 +12,10 @@
   grid-gap: 1em;
   padding: 1em 0 0;
 
+  .newLogoButton {
+    grid-column: 1 / 3;
+  }
+
   .imageButton {
     grid-column: 1 / 3;
     transition: background-color 200ms ease, border 200ms ease;
@@ -68,13 +72,21 @@
     transition: 200ms ease;
     .downloadIcon,
     .saveIcon,
-    .savedIcon {
+    .savedIcon,
+    .savingIcon {
       width: 24px;
       fill: $white;
       margin-right: 0.5em;
+      path {
+        fill: $white;
+      }
     }
-    .savedIcon {
+    .savedIcon,
+    .savingIcon {
       fill: $button-primary;
+      path {
+        fill: $button-primary;
+      }
     }
 
     p {
@@ -109,7 +121,8 @@
       opacity: 0.2;
     }
   }
-  .saved {
+  .saved,
+  .saving {
     background-color: $white;
     border: 1px solid $button-primary;
     p {

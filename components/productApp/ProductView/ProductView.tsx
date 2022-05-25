@@ -41,8 +41,6 @@ const ProductView = ({
     width: imageWidth,
     height: imageHeight,
   }));
-  // console.log("actionsArr", actionsArr);
-  // console.log("width", imageWidth);
   useEffect(() => {
     setRatio(imageHeight / imageWidth);
     if (imageWidth > 250) {
@@ -74,7 +72,6 @@ const ProductView = ({
   }, [imageHeight, imageWidth, logo]);
 
   useEffect(() => {
-    // console.log("count", count);f
     if (count === 0) {
       setUndoActive(false);
     }
@@ -89,7 +86,6 @@ const ProductView = ({
       (window as any).offset = state.offset;
 
       const isResizing = state?.event.target === dragEl.current;
-
       const isDragging = state.active;
 
       if (isResizing) {
@@ -128,6 +124,7 @@ const ProductView = ({
           return [x.get(), y.get()];
         }
       },
+
       bounds: (state) => {
         const isResizing = state?.event.target === dragEl.current;
         const containerWidth: any = containerRef.current?.clientWidth ?? 0;
@@ -153,6 +150,7 @@ const ProductView = ({
 
   const handleRedo = () => {
     setUndoActive(true);
+
     api.set({
       x: actionsArr[count + 1].x,
       y: actionsArr[count + 1].y,

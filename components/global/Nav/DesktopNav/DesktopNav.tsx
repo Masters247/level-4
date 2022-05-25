@@ -43,9 +43,6 @@ const DesktopNav: FC = () => {
             <a>About Us</a>
           </Link>
         </li>
-        {/* <div className={s.search}>
-          <Search />
-        </div> */}
         <div
           className={s.account}
           style={{
