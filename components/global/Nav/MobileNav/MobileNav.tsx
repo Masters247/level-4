@@ -45,7 +45,6 @@ const Nav: FC = () => {
           </div>
         </div>
       </div>
-
       <nav className={`${s.navContent} ${open ? s.show : s.hidden}`}>
         <ul className={s.navLinks}>
           {pages[0].pages?.map((page) => (
@@ -56,9 +55,7 @@ const Nav: FC = () => {
             </li>
           ))}
         </ul>
-
         <div className={s.divide}></div>
-
         <ul className={s.navLinks}>
           {pages[1].products?.map((page) => (
             <li key={page.name}>
@@ -68,9 +65,7 @@ const Nav: FC = () => {
             </li>
           ))}
         </ul>
-
         <div className={s.divide}></div>
-
         <div className={s.navBottom}>
           <div
             className={s.account}
@@ -84,16 +79,10 @@ const Nav: FC = () => {
               </button>
             ) : (
               <Link href="/account" passHref>
-                <a onClick={handleMenuToggle}>
-                  {/* {session.user?.name} */}
-                  Account
-                </a>
+                <a onClick={handleMenuToggle}>{session.user?.name}</a>
               </Link>
             )}
           </div>
-          {/* <div className={s.search}>
-            <Search />
-          </div> */}
         </div>
       </nav>
     </div>

@@ -1,0 +1,84 @@
+@use "../../../styles/base.scss" as *;
+
+@mixin buttonFont {
+  font-size: 0.8rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+}
+
+.button {
+  min-height: 3em;
+  text-transform: uppercase;
+  @include flexCenter;
+  @include boxShadow;
+  @include buttonFont;
+  transition: 300ms background-color ease, 300ms border ease;
+  .icon {
+    width: 15px;
+    margin-right: 0.5em;
+  }
+}
+
+.primary {
+  border: 1px solid $grey-4;
+  color: $black;
+
+  &:hover {
+    background-color: $button-primary;
+    border: 1px solid $button-primary;
+    color: $white;
+    .icon {
+      fill: $white;
+    }
+  }
+}
+
+.secondary {
+  color: $white;
+  background-color: $button-primary;
+  .icon {
+    fill: $white;
+  }
+
+  &:hover {
+    background-color: $white;
+    border: 1px solid $button-primary;
+    color: $button-primary;
+    .icon {
+      fill: $button-primary;
+    }
+  }
+}
+
+.tertiary {
+  color: $white;
+  background-color: $grey-4;
+  .icon {
+    fill: $white;
+  }
+
+  &:hover {
+    background-color: $white;
+    border: 1px solid $grey-4;
+    color: $grey-4;
+    .icon {
+      fill: $grey-4;
+    }
+  }
+}
+
+.disabled {
+  opacity: 0.2;
+  border: 1px solid $grey-4;
+  cursor: not-allowed;
+
+  &:hover {
+    background-color: $white;
+    border: 1px solid $grey-4;
+    color: $grey-4;
+    .icon {
+      fill: $grey-4;
+    }
+  }
+}
