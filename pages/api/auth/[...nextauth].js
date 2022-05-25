@@ -1,5 +1,6 @@
 import NextAuth from "next-auth";
 import EmailProvider from "next-auth/providers/email";
+import GoogleProvider from "next-auth/providers/google";
 import { PrismaAdapter } from "@next-auth/prisma-adapter";
 import { prisma } from "../../../lib/prisma";
 const mail = require("@sendgrid/mail");
@@ -9,6 +10,10 @@ mail.setApiKey(process.env.SENDGRID_API_KEY);
 export default NextAuth({
   adapter: PrismaAdapter(prisma),
   providers: [
+    GoogleProvider({
+      clientId: process.env.GOOGLE_CLIENT_ID,
+      clientSecret: process.env.GOOGLE_CLIENT_SECRET,
+    }),
     EmailProvider({
       from: process.env.SMTP_FROM,
       sendVerificationRequest({ identifier: email, url, provider: { from } }) {
@@ -23,9 +28,11 @@ export default NextAuth({
           },
         };
         // Send signIn email to customer
-        const sendEmail = mail.send(emailData);
-        console.log(sendEmail);
-        return sendEmail;
+        const sendEmail = async () => {
+          const send = await mail.send(emailData);
+          console.log("Log In Request: ", send);
+        };
+        sendEmail();
       },
     }),
   ],
