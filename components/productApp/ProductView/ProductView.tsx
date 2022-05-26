@@ -5,7 +5,7 @@ import { useDrag } from "@use-gesture/react";
 import ImageUploader from "../ImageUploader/ImageUploader";
 import ProductUiPanel from "../ProductUi/ProductUiPanel";
 import s from "./productView.module.scss";
-import { number } from "yup/lib/locale";
+import cn from "classnames";
 
 const ProductView = ({
   products,
@@ -82,73 +82,80 @@ const ProductView = ({
     }
   }, [count, actionsArr]);
 
-  const bind = useDrag(
-    (state: any) => {
-      (window as any).movement = state.movement;
-      (window as any).offset = state.offset;
+  const bind =
+    // if no logo do not drag
+    logo !== null
+      ? useDrag(
+          (state: any) => {
+            (window as any).movement = state.movement;
+            (window as any).offset = state.offset;
 
-      const isResizing = state?.event.target === dragEl.current;
-      const isDragging = state.active;
+            const isResizing = state?.event.target === dragEl.current;
+            const isDragging = state.active;
 
-      if (isResizing) {
-        api.set({
-          width: state.offset[0],
-          height: state.offset[0] * ratio,
-        });
-      } else {
-        api.set({
-          x: state.offset[0],
-          y: state.offset[1],
-        });
-      }
+            if (isResizing) {
+              api.set({
+                width: state.offset[0],
+                height: state.offset[0] * ratio,
+              });
+            } else {
+              api.set({
+                x: state.offset[0],
+                y: state.offset[1],
+              });
+            }
 
-      if (!isDragging) {
-        setActionsArr((actionsArr: any) => [
-          ...actionsArr,
-          {
-            x: x.get(),
-            y: y.get(),
-            width: width.get(),
-            height: height.get(),
+            if (!isDragging) {
+              setActionsArr((actionsArr: any) => [
+                ...actionsArr,
+                {
+                  x: x.get(),
+                  y: y.get(),
+                  width: width.get(),
+                  height: height.get(),
+                },
+              ]);
+              setCount(actionsArr.length);
+              setUndoActive(true);
+            }
           },
-        ]);
-        setCount(actionsArr.length);
-        setUndoActive(true);
-      }
-    },
 
-    {
-      from: (event) => {
-        const isResizing = event.target === dragEl.current;
-        if (isResizing) {
-          return [width.get(), height.get()];
-        } else {
-          return [x.get(), y.get()];
-        }
-      },
+          {
+            from: (event) => {
+              const isResizing = event.target === dragEl.current;
+              if (isResizing) {
+                return [width.get(), height.get()];
+              } else {
+                return [x.get(), y.get()];
+              }
+            },
 
-      bounds: (state) => {
-        const isResizing = state?.event.target === dragEl.current;
-        const containerWidth: any = containerRef.current?.clientWidth ?? 0;
-        const containerHeight: any = containerRef.current?.clientHeight ?? 0;
-        if (isResizing) {
-          return {
-            top: 50,
-            left: 50,
-            right: containerWidth - x.get(),
-            bottom: containerHeight - y.get(),
-          };
-        } else {
-          return {
-            top: 0,
-            left: 0,
-            right: containerWidth - width.get(),
-            bottom: containerHeight - height.get(),
-          };
-        }
-      },
-    }
-  );
+            bounds: (state) => {
+              const isResizing = state?.event.target === dragEl.current;
+              const containerWidth: any =
+                containerRef.current?.clientWidth ?? 0;
+              const containerHeight: any =
+                containerRef.current?.clientHeight ?? 0;
+              if (isResizing) {
+                return {
+                  top: 50,
+                  left: 50,
+                  right: containerWidth - x.get(),
+                  bottom: containerHeight - y.get(),
+                };
+              } else {
+                return {
+                  top: 0,
+                  left: 0,
+                  right: containerWidth - width.get(),
+                  bottom: containerHeight - height.get(),
+                };
+              }
+            },
+          }
+        )
+      : // disables drag component if no logo
+        useDrag(() => {});
 
   const handleRedo = () => {
     setUndoActive(true);
@@ -293,10 +300,12 @@ const ProductView = ({
           <div className={s.productViewport}>
             <div
               className={`${control ? s.customArear : s.customArearHide}`}
-              ref={containerRef}
-            >
+              ref={containerRef}>
               <animated.div
-                className={s.customLogo}
+                className={cn(
+                  s.customLogo,
+                  logo === null && s.customLogoDisabled
+                )}
                 style={{
                   x,
                   y,
@@ -305,8 +314,7 @@ const ProductView = ({
                   zIndex: "1",
                 }}
                 {...bind()}
-                ref={logoBox}
-              >
+                ref={logoBox}>
                 <div className={s.imageOuterWrap}>
                   {logo !== null && (
                     <div className={s.logoImageWrap}>
@@ -314,7 +322,9 @@ const ProductView = ({
                     </div>
                   )}
                 </div>
-                <div className={s.resizer} ref={dragEl}></div>
+                <div
+                  className={cn(s.resizer, logo === null && s.resizerDisabled)}
+                  ref={dragEl}></div>
               </animated.div>
             </div>
           </div>
@@ -339,6 +349,7 @@ const ProductView = ({
         undoActive={undoActive}
         redoActive={redoActive}
         saved={saved}
+        actionsTaken={logo}
       />
     </div>
   );

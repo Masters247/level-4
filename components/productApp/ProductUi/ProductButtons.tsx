@@ -18,6 +18,7 @@ const ProductButtons = ({
   undoActive,
   redoActive,
   saved,
+  actionsTaken,
 }: any) => {
   const { data: session }: any = useSession();
 
@@ -26,33 +27,29 @@ const ProductButtons = ({
       <ProductButton
         className={s.newLogoButton}
         variant="primary"
-        onClick={handleImageUpload}
-      >
-        {!stateUploader ? <>Close Image Uploader</> : <>New Logo</>}
+        onClick={handleImageUpload}>
+        {!stateUploader ? <>Close Image Uploader</> : <>Add New Logo</>}
       </ProductButton>
       <ProductButton
         undo={true}
         variant="primary"
         disabled={!undoActive}
-        onClick={handleUndo}
-      >
+        onClick={handleUndo}>
         undo
       </ProductButton>
       <ProductButton
         undo={true}
         variant="primary"
         disabled={!redoActive}
-        onClick={handleRedo}
-      >
+        onClick={handleRedo}>
         redo
       </ProductButton>
       <ProductButton
         save={saved === 0 && true}
         tick={saved === 2 && true}
         variant="tertiary"
-        disabled={!session}
-        onClick={handleSaveCustomImage}
-      >
+        disabled={!session || !actionsTaken}
+        onClick={handleSaveCustomImage}>
         {saved === 0 && "save"}
         {saved === 1 && "saving"}
         {saved === 2 && "saved"}
@@ -60,8 +57,8 @@ const ProductButtons = ({
       <ProductButton
         download={true}
         variant="secondary"
-        onClick={handleScreenShot}
-      >
+        disabled={!actionsTaken}
+        onClick={handleScreenShot}>
         download
       </ProductButton>
     </div>

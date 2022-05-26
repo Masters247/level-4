@@ -14,7 +14,6 @@
   padding: 1em;
   @include boxShadow;
   background-color: $white;
-  // border: 1px rgb(0, 217, 255) solid;
   left: calc(50% - (50vw - 1em));
   margin-top: 1em;
   max-width: 20em;
@@ -56,6 +55,10 @@
         .center {
           padding: 0 2px 2px 0;
         }
+      }
+      .controlDisabled {
+        opacity: 0.2;
+        cursor: not-allowed;
       }
     }
   }

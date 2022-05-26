@@ -90,6 +90,10 @@
       }
     }
   }
+  .customLogoDisabled {
+    pointer-events: none;
+    opacity: 0;
+  }
 }
 .customArearHide {
   border: 1px dashed rgba(255, 255, 255, 0);

@@ -13,7 +13,7 @@
   @include flexCenter;
   @include boxShadow;
   @include buttonFont;
-  transition: 300ms background-color ease, 300ms border ease;
+  transition: 200ms background-color, 200ms border;
   .icon {
     width: 15px;
     margin-right: 0.5em;
@@ -23,6 +23,7 @@
 .primary {
   border: 1px solid $grey-4;
   color: $black;
+  border: 1px solid $grey-4;
 
   &:hover {
     background-color: $button-primary;
@@ -37,6 +38,7 @@
 .secondary {
   color: $white;
   background-color: $button-primary;
+  border: 1px solid $button-primary;
   .icon {
     fill: $white;
   }
@@ -54,6 +56,7 @@
 .tertiary {
   color: $white;
   background-color: $grey-4;
+  border: 1px solid $grey-4;
   .icon {
     fill: $white;
   }
@@ -72,13 +75,18 @@
   opacity: 0.2;
   border: 1px solid $grey-4;
   cursor: not-allowed;
+  background-color: $white;
+  color: $black;
+  .icon {
+    fill: $black;
+  }
 
   &:hover {
     background-color: $white;
     border: 1px solid $grey-4;
-    color: $grey-4;
+    color: $black;
     .icon {
-      fill: $grey-4;
+      fill: $black;
     }
   }
 }

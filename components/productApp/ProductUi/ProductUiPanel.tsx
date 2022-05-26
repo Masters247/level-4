@@ -25,6 +25,7 @@ const ProductUiPanel = ({
   undoActive,
   redoActive,
   saved,
+  actionsTaken,
 }: any) => {
   const controler = [
     {
@@ -44,6 +45,11 @@ const ProductUiPanel = ({
     },
   ];
 
+  const controlStyles = cn(
+    s.control,
+    actionsTaken === null && s.controlDisabled
+  );
+
   return (
     <div className={cn(s.productUiWrap)}>
       <h1>{products.name}</h1>
@@ -55,8 +61,8 @@ const ProductUiPanel = ({
               <button
                 key={cont.name}
                 onClick={cont?.function}
-                className={s.control}
-              >
+                className={controlStyles}
+                disabled={actionsTaken === null}>
                 {cont.icon}
               </button>
             );
@@ -85,6 +91,7 @@ const ProductUiPanel = ({
         undoActive={undoActive}
         redoActive={redoActive}
         saved={saved}
+        actionsTaken={actionsTaken}
       />
     </div>
   );
