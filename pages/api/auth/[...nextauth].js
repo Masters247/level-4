@@ -21,7 +21,11 @@ export default NextAuth({
     }),
     EmailProvider({
       from: process.env.SMTP_FROM,
-      sendVerificationRequest({ identifier: email, url, provider: { from } }) {
+      async sendVerificationRequest({
+        identifier: email,
+        url,
+        provider: { from },
+      }) {
         // Sort data for customer email
         const emailData = {
           to: `${email}`,
@@ -33,11 +37,8 @@ export default NextAuth({
           },
         };
         // Send signIn email to customer
-        const sendEmail = async () => {
-          const send = await mail.send(emailData);
-          console.log("Log In Request: ", send);
-        };
-        sendEmail();
+        const send = await mail.send(emailData);
+        console.log("Log In Request: ", send);
       },
     }),
   ],
