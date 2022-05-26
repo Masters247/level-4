@@ -23,7 +23,6 @@
 .primary {
   border: 1px solid $grey-4;
   color: $black;
-  border: 1px solid $grey-4;
 
   &:hover {
     background-color: $button-primary;
@@ -34,7 +33,19 @@
     }
   }
 }
+.primaryDashed {
+  border: 1px dashed $grey-4;
+  color: $black;
 
+  &:hover {
+    background-color: $button-primary;
+    border: 1px dashed $button-primary;
+    color: $white;
+    .icon {
+      fill: $white;
+    }
+  }
+}
 .secondary {
   color: $white;
   background-color: $button-primary;

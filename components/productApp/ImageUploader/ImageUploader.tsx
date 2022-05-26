@@ -6,14 +6,14 @@ import Add from "../../ui/icons/Add";
 import Remove from "../../ui/icons/Remove";
 import ImageUploading from "react-images-uploading";
 import ImageLogo from "./ImageLogo";
+import ProductButton from "../ProductUi/ProductButton";
 
 const ImageUploader = ({
   setLogo,
   handleImageUpload,
   setImageWidth,
   setImageHeight,
-  setActionsArr,
-  actionArr,
+  reset,
 }: any) => {
   const [localImages, setLocalImages]: any = useState([]);
   const [images, setImages] = useState([]);
@@ -21,6 +21,7 @@ const ImageUploader = ({
   const maxNumber = 10;
 
   const onChange = (imageList: any) => {
+    reset();
     setImages(imageList);
 
     if (imageList.length !== 0) {
@@ -39,11 +40,8 @@ const ImageUploader = ({
   };
 
   const handleLogoPick = (imageList: any, index: any) => {
-    setActionsArr([]);
+    reset();
     setLogo(imageList[index].data_url);
-
-    console.log("changed logo");
-
     const newImage = new Image();
     newImage.src = imageList[index].data_url;
     const imgWidth = newImage.naturalWidth;
@@ -80,8 +78,7 @@ const ImageUploader = ({
         value={images}
         onChange={onChange}
         maxNumber={maxNumber}
-        dataURLKey="data_url"
-      >
+        dataURLKey="data_url">
         {({
           imageList,
           onImageUpload,
@@ -92,35 +89,25 @@ const ImageUploader = ({
           dragProps,
         }) => (
           <div className={s.uploadImageWrap}>
-            <button
-              className={s.buttonCloseImageUpload}
-              onClick={handleImageUpload}
-            >
-              <Remove styles={s.remove} />
-            </button>
             <div className={s.imageButtonWrap}>
-              <button
-                type="button"
-                className={s.uploadButton}
-                style={isDragging ? { color: "red" } : undefined}
+              <ProductButton
+                variant="primary-dashed"
                 onClick={onImageUpload}
-                {...dragProps}
-              >
-                <div className={s.buttonTextWrap}>
-                  <p>Click or Drop here</p>
-                </div>
-                <Add styles={s.add} />
-              </button>
-              <button
-                type="button"
-                className={s.removeAllImagesButton}
-                onClick={onImageRemoveAll}
-              >
-                <p>Remove all images</p>
-              </button>
+                {...dragProps}>
+                Click or Drop
+              </ProductButton>
+              <ProductButton variant="tertiary" onClick={onImageRemoveAll}>
+                Remove all
+              </ProductButton>
+              <ProductButton variant="tertiary" onClick={handleImageUpload}>
+                Close
+              </ProductButton>
             </div>
-
-            <div className={cn(s.newImageWrap)}>
+            <div
+              className={cn(
+                s.newImageWrap,
+                imageList.length !== 0 && s.newImageWrapPaddingTop
+              )}>
               {imageList?.map((image: any, index: any) => {
                 return (
                   <div key={index}>

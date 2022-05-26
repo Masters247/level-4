@@ -15,7 +15,7 @@ import Download from "../../ui/icons/Download";
 import Tick from "../../ui/icons/Tick";
 
 interface Props extends ButtonHTMLAttributes<HTMLButtonElement> {
-  variant: "primary" | "secondary" | "tertiary";
+  variant: "primary" | "primary-dashed" | "secondary" | "tertiary";
   loading?: boolean;
   loaded?: boolean;
   // classname: string;
@@ -60,6 +60,7 @@ const ProductButton: FC<Props> = forwardRef(
       s.button,
       {
         [s.primary]: variant === "primary",
+        [s.primaryDashed]: variant === "primary-dashed",
         [s.secondary]: variant === "secondary",
         [s.tertiary]: variant === "tertiary",
         [s.loading]: loading,
@@ -77,8 +78,7 @@ const ProductButton: FC<Props> = forwardRef(
         ref={ref}
         href={href}
         {...rest}
-        disabled={disabled}
-      >
+        disabled={disabled}>
         {tick && <Tick styles={iconRootName} />}
         {undo && <Undo styles={iconRootName} />}
         {redo && <Redo styles={iconRootName} />}

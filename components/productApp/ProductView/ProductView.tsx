@@ -22,7 +22,6 @@ const ProductView = ({
   const [ratio, setRatio]: any = useState();
   const [undoActive, setUndoActive] = useState(false);
   const [redoActive, setRedoActive] = useState(false);
-  const [actionsArr, setActionsArr]: any = useState([]);
   // count keeps track of actionsArr
   const [count, setCount] = useState(0);
   const [logo, setLogo] = useState(null);
@@ -36,6 +35,7 @@ const ProductView = ({
   const [imageWidth, setImageWidth] = useState(80);
   const [imageHeight, setImageHeight] = useState(80);
 
+  const [actionsArr, setActionsArr]: any = useState([]);
   const [{ x, y, width, height }, api] = useSpring(() => ({
     x: 0,
     y: 0,
@@ -157,6 +157,15 @@ const ProductView = ({
       : // disables drag component if no logo
         useDrag(() => {});
 
+  // const handleTest = () => {
+  //   const width = containerRef.current?.clientWidth;
+
+  //   api.set({
+  //     x: 0,
+  //     y: 0,
+  //   });
+  // };
+
   const handleRedo = () => {
     setUndoActive(true);
 
@@ -179,16 +188,6 @@ const ProductView = ({
       width: actionsArr[count - 1].width,
       height: actionsArr[count - 1].height,
     });
-
-    setActionsArr((actionsArr: any) => [
-      ...actionsArr,
-      {
-        x: actionsArr[count - 1].x,
-        y: actionsArr[count - 1].y,
-        width: actionsArr[count - 1].width,
-        height: actionsArr[count - 1].height,
-      },
-    ]);
 
     setCount(count - 1);
   };
@@ -279,19 +278,14 @@ const ProductView = ({
     });
   };
 
+  const reset = () => {
+    setCount(0);
+    setActionsArr([]);
+    api.set({ x: 0, y: 0 });
+  };
+
   return (
     <div className={s.appWrap}>
-      {!imageUpload && (
-        <ImageUploader
-          setLogo={setLogo}
-          handleImageUpload={handleImageUpload}
-          setImageWidth={setImageWidth}
-          setImageHeight={setImageHeight}
-          actionsArr={actionsArr}
-          setActionsArr={setActionsArr}
-        />
-      )}
-
       <div className={s.productViewportContainer}>
         <div id="capture" className={s.imageCaptureWrap}>
           <div className={s.imageWrap}>
@@ -330,6 +324,15 @@ const ProductView = ({
           </div>
         </div>
       </div>
+      {!imageUpload && (
+        <ImageUploader
+          setLogo={setLogo}
+          handleImageUpload={handleImageUpload}
+          setImageWidth={setImageWidth}
+          setImageHeight={setImageHeight}
+          reset={reset}
+        />
+      )}
 
       <ProductUiPanel
         products={products}
@@ -351,6 +354,7 @@ const ProductView = ({
         saved={saved}
         actionsTaken={logo}
       />
+      {/* <button onClick={handleTest}>test</button> */}
     </div>
   );
 };
