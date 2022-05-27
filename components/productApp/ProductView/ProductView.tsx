@@ -278,6 +278,10 @@ const ProductView = ({
     });
   };
 
+  const closeImageUpload = () => {
+    setImageUpload(true);
+  };
+
   const reset = () => {
     setCount(0);
     setActionsArr([]);
@@ -286,7 +290,7 @@ const ProductView = ({
 
   return (
     <div className={s.appWrap}>
-      <div className={s.productViewportContainer}>
+      <div className={s.productViewportContainer} onClick={closeImageUpload}>
         <div id="capture" className={s.imageCaptureWrap}>
           <div className={s.imageWrap}>
             <img src={image.url} width="500px" height="500px" alt="product" />
