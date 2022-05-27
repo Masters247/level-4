@@ -14,9 +14,12 @@ const FeatureBanner: FC<Props> = ({ featureBanner }) => {
   return (
     <div className={s.featureBannerWrap}>
       <Image
+        layout="responsive"
         src={heroImage.url}
         height={heroImage.height}
         width={heroImage.width}
+        placeholder="blur"
+        blurDataURL={heroImage.url}
       />
       <div className={s.textButtonWrap}>
         <h2>{heroTitle}</h2>

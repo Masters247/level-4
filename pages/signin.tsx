@@ -27,8 +27,8 @@ export default function SignIn({ csrfToken }: any) {
         <div className={s.signInForm}>
           <h1>Create Account</h1>
           <p>
-            Create a Level 4 account today to make sure you don’t miss out on
-            exclusive product releases, as well as being able to save your
+            Create a Level 4 account today to make sure you don&apos;t miss out
+            on exclusive product releases, as well as being able to save your
             design progress using our visualiser tool.
           </p>
           <form method="post" action="/api/auth/signin/email">
@@ -37,16 +37,13 @@ export default function SignIn({ csrfToken }: any) {
             <input type="email" id="email" name="email" placeholder="Email" />
             <button type="submit">Create account</button>
           </form>
-
           <p
             className={s.changeView}
             onClick={() => setSignInView(!signInView)}
           >
             Already have an account?
           </p>
-
           <div className={s.line}></div>
-
           <Button variant="secondary" onClick={() => signIn("google")}>
             Sign Up With Google <Google styles={s.providerLogo} />
           </Button>
@@ -71,16 +68,13 @@ export default function SignIn({ csrfToken }: any) {
             <input type="email" id="email" name="email" placeholder="Email" />
             <button type="submit">Sign In</button>
           </form>
-
           <p
             className={s.changeView}
             onClick={() => setSignInView(!signInView)}
           >
             Dont have an account yet?
           </p>
-
           <div className={s.line}></div>
-
           <Button variant="secondary" onClick={() => signIn("google")}>
             Sign In With Google <Google styles={s.providerLogo} />
           </Button>

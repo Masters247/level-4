@@ -85,12 +85,7 @@ const Custom: NextPage<Props> = ({ queryGraphCms, customPage }) => {
     productPage;
 
   const handleColourClick = (e: any, i: any) => {
-    // console.log(colourChangeProductVariant);
-    // setColourChangeProductVariant(1);
-    // console.log(colourChangeProductVariant);
     setColour(i);
-    // setColourChangeProductVariant(0);
-    // console.log(colourChangeProductVariant);
   };
 
   const handleScreenShot = () => {
@@ -113,7 +108,6 @@ const Custom: NextPage<Props> = ({ queryGraphCms, customPage }) => {
           console.log("IMAGE DOWNLOAD ERROR: ", err);
         });
     };
-    // Need this timeout to ensure the image is loaded
     setTimeout(() => takeScreenShot(), 1000);
   };
 
@@ -146,7 +140,6 @@ const Custom: NextPage<Props> = ({ queryGraphCms, customPage }) => {
           console.log("IMAGE DOWNLOAD ERROR: ", err);
         });
     };
-    // Need this timeout to ensure the image is loaded
     setTimeout(() => takeScreenShot(), 1000);
   };
 

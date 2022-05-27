@@ -27,13 +27,6 @@ export async function getStaticProps({ params }: any) {
     },
   });
 
-  // images {
-  //   height
-  //   width
-  // }
-
-  // url(transformation: {image: {resize: {height: 250, width: 250}}}
-
   const query = gql`
   query Category {
     categoryPages(where: {categoriesSlug: "${params.slug}"}) {
@@ -107,7 +100,6 @@ interface Props {
 
 const Category: NextPage<Props> = ({ data }) => {
   const { categoryPages } = data;
-
   const { trendingStyle } = categoryPages[0];
 
   return (
