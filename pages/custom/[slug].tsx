@@ -72,6 +72,9 @@ interface Props {
 
 const Custom: NextPage<Props> = ({ queryGraphCms, customPage }) => {
   const [saveCustomImage, setSaveCustomImage] = useState(0);
+  const [downloadCustomImage, setDownloadCustomImage] = useState(0);
+  const [colourChangeProductVariant, setColourChangeProductVariant] =
+    useState(0);
   const [control, setControl] = useState(true);
   const { data: session }: any = useSession();
   const [colour, setColour] = useState(0);
@@ -82,10 +85,16 @@ const Custom: NextPage<Props> = ({ queryGraphCms, customPage }) => {
     productPage;
 
   const handleColourClick = (e: any, i: any) => {
+    // console.log(colourChangeProductVariant);
+    // setColourChangeProductVariant(1);
+    // console.log(colourChangeProductVariant);
     setColour(i);
+    // setColourChangeProductVariant(0);
+    // console.log(colourChangeProductVariant);
   };
 
   const handleScreenShot = () => {
+    setDownloadCustomImage(1);
     setControl(false);
     const takeScreenShot = () => {
       html2canvas(document.getElementById("capture") as HTMLElement, {
@@ -94,8 +103,12 @@ const Custom: NextPage<Props> = ({ queryGraphCms, customPage }) => {
         .then((canvas) => {
           const image = canvas.toDataURL("image/jpeg");
           download(image, `Level 4 | ${name}.jpeg`, "image/jpeg");
+          setDownloadCustomImage(2);
+          setTimeout(() => setDownloadCustomImage(0), 2000);
         })
-        .then(() => setControl(true))
+        .then(() => {
+          setControl(true);
+        })
         .catch((err) => {
           console.log("IMAGE DOWNLOAD ERROR: ", err);
         });
@@ -150,6 +163,7 @@ const Custom: NextPage<Props> = ({ queryGraphCms, customPage }) => {
           saved={saveCustomImage}
           setControl={setColour}
           control={control}
+          download={downloadCustomImage}
         />
       </div>
 

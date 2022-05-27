@@ -6,15 +6,15 @@ import HorizontalAlign from "../../ui/icons/HorizontalAlign";
 import VerticalAlign from "../../ui/icons/VerticalAlign";
 import ProductButtons from "./ProductButtons";
 import ProductColourButtonsWrap from "../ProductColourButtons/ProductColourButtons";
-import Show from "../../ui/icons/Show";
-import Hide from "../../ui/icons/Hide";
+// import Show from "../../ui/icons/Show";
+// import Hide from "../../ui/icons/Hide";
 
 const ProductUiPanel = ({
   products,
   center,
   vertical,
   horizontal,
-  productColoutVariants,
+  // productColoutVariants,
   handleSaveCustomImage,
   handleColourClick,
   handleImageUpload,
@@ -25,6 +25,7 @@ const ProductUiPanel = ({
   undoActive,
   redoActive,
   saved,
+  download,
   actionsTaken,
 }: any) => {
   const controler = [
@@ -62,7 +63,8 @@ const ProductUiPanel = ({
                 key={cont.name}
                 onClick={cont?.function}
                 className={controlStyles}
-                disabled={actionsTaken === null}>
+                disabled={actionsTaken === null}
+              >
                 {cont.icon}
               </button>
             );
@@ -91,6 +93,7 @@ const ProductUiPanel = ({
         undoActive={undoActive}
         redoActive={redoActive}
         saved={saved}
+        download={download}
         actionsTaken={actionsTaken}
       />
     </div>

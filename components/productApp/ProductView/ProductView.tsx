@@ -11,12 +11,14 @@ const ProductView = ({
   products,
   image,
   productColoutVariants,
+  setColourChangeProductVariant,
   handleColourClick,
   handleScreenShot,
   handleSaveCustomImage,
   control,
   setControl,
   saved,
+  download,
 }: any) => {
   // gets ratio of image - used to constrain resizer to the ratio of image
   const [ratio, setRatio]: any = useState();
@@ -157,15 +159,6 @@ const ProductView = ({
       : // disables drag component if no logo
         useDrag(() => {});
 
-  // const handleTest = () => {
-  //   const width = containerRef.current?.clientWidth;
-
-  //   api.set({
-  //     x: 0,
-  //     y: 0,
-  //   });
-  // };
-
   const handleRedo = () => {
     setUndoActive(true);
 
@@ -298,7 +291,8 @@ const ProductView = ({
           <div className={s.productViewport}>
             <div
               className={`${control ? s.customArear : s.customArearHide}`}
-              ref={containerRef}>
+              ref={containerRef}
+            >
               <animated.div
                 className={cn(
                   s.customLogo,
@@ -312,7 +306,8 @@ const ProductView = ({
                   zIndex: "1",
                 }}
                 {...bind()}
-                ref={logoBox}>
+                ref={logoBox}
+              >
                 <div className={s.imageOuterWrap}>
                   {logo !== null && (
                     <div className={s.logoImageWrap}>
@@ -322,7 +317,8 @@ const ProductView = ({
                 </div>
                 <div
                   className={cn(s.resizer, logo === null && s.resizerDisabled)}
-                  ref={dragEl}></div>
+                  ref={dragEl}
+                ></div>
               </animated.div>
             </div>
           </div>
@@ -339,6 +335,7 @@ const ProductView = ({
       )}
 
       <ProductUiPanel
+        setColourChangeProductVariant={setColourChangeProductVariant}
         products={products}
         productColoutVariants={productColoutVariants}
         center={handleCenter}
@@ -356,9 +353,9 @@ const ProductView = ({
         undoActive={undoActive}
         redoActive={redoActive}
         saved={saved}
+        download={download}
         actionsTaken={logo}
       />
-      {/* <button onClick={handleTest}>test</button> */}
     </div>
   );
 };

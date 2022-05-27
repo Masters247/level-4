@@ -8,6 +8,7 @@ interface Props {
   colourClick: any;
   rotate?: any;
   position?: any;
+  setColourChangeProductVariant?: any;
 }
 
 const ProductColourButtonsWrap: FC<Props> = ({

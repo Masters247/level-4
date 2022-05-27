@@ -27,40 +27,48 @@ const Product = ({ products, i }: any) => {
 
   const slug = products.productSlug;
   const slugCategory = products.productCategory;
-  // console.log(products);
+
+  console.log("Products", products.name);
 
   return (
     <div key={products.name} className={s.productWrap}>
-      <div className={s.productImageWrap} onClick={handleImageClick}>
-        <Image
-          layout="responsive"
-          quality={50}
-          src={
-            products.productVariantColours[productColour].images[productView]
-              .url
-          }
-          placeholder="blur"
-          blurDataURL={
-            products.productVariantColours[productColour].images[productView]
-              .url
-          }
-          // height={
-          //   products.productVariantColours[productColour].images[productView]
-          //     .height
-          // }
-          // width={
-          //   products.productVariantColours[productColour].images[productView]
-          //     .width
-          // }
-          height={500}
-          width={500}
-        />
+      <div
+        className={s.productImageWrap}
+
+        // onClick allows for image changes
+        // onClick={handleImageClick}
+      >
+        <Link href={`/${slugCategory}/${slug}`} passHref>
+          <Image
+            layout="responsive"
+            quality={50}
+            src={
+              products.productVariantColours[productColour].images[productView]
+                .url
+            }
+            placeholder="blur"
+            blurDataURL={
+              products.productVariantColours[productColour].images[productView]
+                .url
+            }
+            height={260}
+            width={260}
+            // height={
+            //   products.productVariantColours[productColour].images[productView]
+            //     .height
+            // }
+            // width={
+            //   products.productVariantColours[productColour].images[productView]
+            //     .width
+            // }
+          />
+        </Link>
       </div>
-      <Link href={`${slugCategory}/${slug}`} passHref>
+      <Link href={`/${slugCategory}/${slug}`} passHref>
         <a className={s.textLink}>{products.name}</a>
       </Link>
       <ProductColourButtons products={products} colourClick={colourClick} />
-      <Link href={`${slugCategory}/${slug}`} passHref>
+      <Link href={`/${slugCategory}/${slug}`} passHref>
         <Button className={s.button} variant="primary">
           View
         </Button>

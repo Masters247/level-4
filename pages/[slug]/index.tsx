@@ -27,6 +27,13 @@ export async function getStaticProps({ params }: any) {
     },
   });
 
+  // images {
+  //   height
+  //   width
+  // }
+
+  // url(transformation: {image: {resize: {height: 250, width: 250}}}
+
   const query = gql`
   query Category {
     categoryPages(where: {categoriesSlug: "${params.slug}"}) {
@@ -45,9 +52,7 @@ export async function getStaticProps({ params }: any) {
         name
         productVariantColours {
           images {
-            # height
-            url(transformation: {image: {resize: {height: 500, width: 500}}})
-            # width
+            url(transformation: {image: {resize: {height: 260, width: 260}}})
           }
           colour {
             hex
