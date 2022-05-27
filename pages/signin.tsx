@@ -3,6 +3,7 @@ import { getCsrfToken, getSession, signIn } from "next-auth/react";
 import { useState } from "react";
 import { Button } from "../components/ui/Button";
 import Google from "../components/ui/icons/Google";
+import TwitterBlue from "../components/ui/icons/TwitterBlue";
 
 export async function getServerSideProps(context: any) {
   const csrfToken = await getCsrfToken(context);
@@ -49,6 +50,13 @@ export default function SignIn({ csrfToken }: any) {
           <Button variant="secondary" onClick={() => signIn("google")}>
             Sign Up With Google <Google styles={s.providerLogo} />
           </Button>
+          <Button
+            variant="secondary"
+            onClick={() => signIn("twitter")}
+            className={s.providerButton}
+          >
+            Sign Up With Twitter <TwitterBlue styles={s.providerLogo} />
+          </Button>
         </div>
       ) : (
         <div className={s.signInForm}>
@@ -75,6 +83,13 @@ export default function SignIn({ csrfToken }: any) {
 
           <Button variant="secondary" onClick={() => signIn("google")}>
             Sign In With Google <Google styles={s.providerLogo} />
+          </Button>
+          <Button
+            variant="secondary"
+            onClick={() => signIn("twitter")}
+            className={s.providerButton}
+          >
+            Sign In With Twitter <TwitterBlue styles={s.providerLogo} />
           </Button>
         </div>
       )}
