@@ -84,81 +84,73 @@ const ProductView = ({
     }
   }, [count, actionsArr]);
 
-  const bind =
-    // if no logo do not drag
-    logo !== null
-      ? useDrag(
-          (state: any) => {
-            (window as any).movement = state.movement;
-            (window as any).offset = state.offset;
+  const bind = useDrag(
+    (state: any) => {
+      (window as any).movement = state.movement;
+      (window as any).offset = state.offset;
 
-            const isResizing = state?.event.target === dragEl.current;
-            const isDragging = state.active;
+      const isResizing = state?.event.target === dragEl.current;
+      const isDragging = state.active;
 
-            if (isResizing) {
-              api.set({
-                width: state.offset[0],
-                height: state.offset[0] * ratio,
-              });
-            } else {
-              api.set({
-                x: state.offset[0],
-                y: state.offset[1],
-              });
-            }
+      if (isResizing) {
+        api.set({
+          width: state.offset[0],
+          height: state.offset[0] * ratio,
+        });
+      } else {
+        api.set({
+          x: state.offset[0],
+          y: state.offset[1],
+        });
+      }
 
-            if (!isDragging) {
-              setActionsArr((actionsArr: any) => [
-                ...actionsArr,
-                {
-                  x: x.get(),
-                  y: y.get(),
-                  width: width.get(),
-                  height: height.get(),
-                },
-              ]);
-              setCount(actionsArr.length);
-              setUndoActive(true);
-            }
-          },
-
+      if (!isDragging) {
+        setActionsArr((actionsArr: any) => [
+          ...actionsArr,
           {
-            from: (event) => {
-              const isResizing = event.target === dragEl.current;
-              if (isResizing) {
-                return [width.get(), height.get()];
-              } else {
-                return [x.get(), y.get()];
-              }
-            },
+            x: x.get(),
+            y: y.get(),
+            width: width.get(),
+            height: height.get(),
+          },
+        ]);
+        setCount(actionsArr.length);
+        setUndoActive(true);
+      }
+    },
 
-            bounds: (state) => {
-              const isResizing = state?.event.target === dragEl.current;
-              const containerWidth: any =
-                containerRef.current?.clientWidth ?? 0;
-              const containerHeight: any =
-                containerRef.current?.clientHeight ?? 0;
-              if (isResizing) {
-                return {
-                  top: 50,
-                  left: 50,
-                  right: containerWidth - x.get(),
-                  bottom: containerHeight - y.get(),
-                };
-              } else {
-                return {
-                  top: 0,
-                  left: 0,
-                  right: containerWidth - width.get(),
-                  bottom: containerHeight - height.get(),
-                };
-              }
-            },
-          }
-        )
-      : // disables drag component if no logo
-        useDrag(() => {});
+    {
+      from: (event) => {
+        const isResizing = event.target === dragEl.current;
+        if (isResizing) {
+          return [width.get(), height.get()];
+        } else {
+          return [x.get(), y.get()];
+        }
+      },
 
+      bounds: (state) => {
+        const isResizing = state?.event.target === dragEl.current;
+        const containerWidth: any = containerRef.current?.clientWidth ?? 0;
+        const containerHeight: any = containerRef.current?.clientHeight ?? 0;
+        if (isResizing) {
+          return {
+            top: 50,
+            left: 50,
+            right: containerWidth - x.get(),
+            bottom: containerHeight - y.get(),
+          };
+        } else {
+          return {
+            top: 0,
+            left: 0,
+            right: containerWidth - width.get(),
+            bottom: containerHeight - height.get(),
+          };
+        }
+      },
+    }
+  );
   const handleRedo = () => {
     setUndoActive(true);
 

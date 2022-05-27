@@ -12,8 +12,9 @@ const Thumb = ({
   return (
     <button
       onClick={() => handleThumbSlide(index)}
-      className={cn(s.thumb, thumbWidth, index === activeSlide && s.active)}>
-      <Image src={thumb} layout="responsive" width={100} height={100} />
+      className={cn(s.thumb, thumbWidth, index === activeSlide && s.active)}
+    >
+      <Image src={thumb} layout="responsive" width={100} height={100} alt="" />
     </button>
   );
 };
