@@ -56,11 +56,11 @@ const DesktopNav: FC<Props> = ({ menuProducts }) => {
         >
           <a>Products</a>
         </li>
-        <li onClick={() => setDropDown(false)}>
+        {/* <li onClick={() => setDropDown(false)}>
           <Link href="/visualiser" passHref>
             <a>Visualiser</a>
           </Link>
-        </li>
+        </li> */}
         <li onClick={() => setDropDown(false)}>
           <Link href="/about-us" passHref>
             <a>About Us</a>

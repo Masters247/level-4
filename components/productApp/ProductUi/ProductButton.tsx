@@ -14,9 +14,16 @@ import Redo from "../../ui/icons/Redo";
 import Save from "../../ui/icons/Save";
 import Download from "../../ui/icons/Download";
 import Tick from "../../ui/icons/Tick";
+import Remove from "../../ui/icons/Remove";
 
 interface Props extends ButtonHTMLAttributes<HTMLButtonElement> {
-  variant: "primary" | "primary-dashed" | "secondary" | "tertiary";
+  variant:
+    | "primary"
+    | "primary-b"
+    | "primary-dashed"
+    | "secondary"
+    | "tertiary"
+    | "tertiary-b";
   loading?: boolean;
   loaded?: boolean;
   // classname: string;
@@ -26,6 +33,7 @@ interface Props extends ButtonHTMLAttributes<HTMLButtonElement> {
   undo?: boolean;
   redo?: boolean;
   download?: boolean;
+  remove?: boolean;
   tick?: boolean;
   save?: boolean;
   loadingText?: string;
@@ -35,6 +43,7 @@ interface Props extends ButtonHTMLAttributes<HTMLButtonElement> {
 const ProductButton: FC<Props> = forwardRef(
   (
     {
+      remove = false,
       children,
       variant,
       icon,
@@ -61,9 +70,11 @@ const ProductButton: FC<Props> = forwardRef(
       s.button,
       {
         [s.primary]: variant === "primary",
+        [s.primaryB]: variant === "primary-b",
         [s.primaryDashed]: variant === "primary-dashed",
         [s.secondary]: variant === "secondary",
         [s.tertiary]: variant === "tertiary",
+        [s.tertiaryB]: variant === "tertiary-b",
         [s.loading]: loading,
         [s.disabled]: disabled,
       },
@@ -86,6 +97,7 @@ const ProductButton: FC<Props> = forwardRef(
         disabled={disabled}
       >
         {tick && <Tick styles={iconRootName} />}
+        {remove && <Remove styles={iconRootName} />}
         {undo && <Undo styles={iconRootName} />}
         {redo && <Redo styles={iconRootName} />}
         {save && <Save styles={iconRootName} />}

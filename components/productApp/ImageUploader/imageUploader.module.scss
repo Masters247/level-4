@@ -6,6 +6,7 @@
   text-transform: uppercase;
   letter-spacing: 0.15em;
 }
+
 .imageUploaderWrap {
   border: 1px dashed $grey-4;
   padding: 1em;
@@ -24,8 +25,17 @@
     position: relative;
     .imageButtonWrap {
       display: grid;
-      grid-template-columns: 1fr 1fr 1fr;
+      grid-template-columns: 0.9fr 0.9fr 0.1fr;
       grid-gap: 1em;
+      .remove {
+        width: 25px;
+        height: 25px;
+        g {
+          line {
+            stroke: $black;
+          }
+        }
+      }
     }
     .newImageWrap {
       display: grid;
@@ -40,13 +50,9 @@
     left: calc(50% - 10em);
   }
   @media (min-width: $media-tablet-small) {
-    // left: calc(50% - 250px);
   }
   @media (min-width: $media-desktop-small) {
-    // min-height: 16em;
     max-height: 16em;
-    // background-color: $grey-2;
-    // box-shadow: none;
     top: calc(50% - 240px);
     left: calc(500px + 1.8em);
     margin-top: 0;
