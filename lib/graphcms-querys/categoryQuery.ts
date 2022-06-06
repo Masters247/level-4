@@ -10,7 +10,7 @@ const categoryPagesSlugQuery = async () => {
           heroImage {
             height
             id
-            url(transformation: {image: {resize: {fit: crop, height: 500, width: 500}}})
+            url(transformation: {image: {resize: {fit: crop, height: 400, width: 400}}})
             width
           }
         }

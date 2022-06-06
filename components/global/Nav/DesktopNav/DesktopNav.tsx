@@ -25,22 +25,22 @@ const DesktopNav: FC<Props> = ({ menuProducts }) => {
   });
 
   return (
-    <div className={s.navWrapper}>
+    <div className={s.navWrapper} ref={ref}>
       <div
         className={`${s.dropDown} ${dropDown && s.open}`}
         onClick={() => setDropDown(!dropDown)}
-        ref={ref}
+        onMouseLeave={() => setDropDown(false)}
       >
         <ul className={s.catLinks}>
           {menuProducts?.map((item: Category) => (
-            <Link href={item.categoriesSlug} passHref key={item.id}>
+            <Link href={`/${item.categoriesSlug}`} passHref key={item.id}>
               <li>
                 <Image
                   src={item.heroImage[0].url}
                   layout="responsive"
                   alt={`Product - ${item.title}`}
-                  width={500}
-                  height={500}
+                  width={400}
+                  height={400}
                 />
                 <a>{item.title}</a>
               </li>
@@ -50,7 +50,10 @@ const DesktopNav: FC<Props> = ({ menuProducts }) => {
       </div>
 
       <ul className={s.navLinks}>
-        <li onClick={() => setDropDown(!dropDown)}>
+        <li
+          onClick={() => setDropDown(!dropDown)}
+          onMouseEnter={() => setDropDown(!dropDown)}
+        >
           <a>Products</a>
         </li>
         <li onClick={() => setDropDown(false)}>
