@@ -13,8 +13,6 @@ import html2canvas from "html2canvas";
 import Link from "next/link";
 const download = require("downloadjs");
 
-const fetcher = (email: any) => fetch(email).then((res) => res.json());
-
 export async function getStaticPaths() {
   const products = await productQuery();
 
@@ -36,8 +34,6 @@ export async function getStaticProps({ params }: any) {
   });
 
   const customPage = await customPageQuery();
-
-  console.log("custom page", customPage);
 
   const query = gql`
   query Product {
