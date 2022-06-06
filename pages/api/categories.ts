@@ -1,5 +1,5 @@
 import { NextApiRequest, NextApiResponse } from "next";
-import categoryPagesSlugQuery from "../../lib/graphcms-querys/categoryQuery";
+import { categoryPagesSlugQuery } from "../../lib/graphcms-querys/categoryQuery";
 
 export default async function handler(
   req: NextApiRequest,

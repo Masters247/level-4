@@ -1,6 +1,6 @@
 import graphcms from "../graph-ql";
 
-const categoryPagesSlugQuery = async () => {
+export const categoryPagesSlugQuery = async () => {
   const { categoryPages } = await graphcms.request(`
       query {
         categoryPages {
@@ -11,6 +11,25 @@ const categoryPagesSlugQuery = async () => {
             height
             id
             url(transformation: {image: {resize: {fit: crop, height: 400, width: 400}}})
+            width
+          }
+        }
+      }
+    `);
+  return categoryPages;
+};
+
+export const categorySlugQuery = async () => {
+  const { categoryPages } = await graphcms.request(`
+      query {
+        categoryPages(first: 4) {
+          categoriesSlug
+          id
+          title
+          heroImage {
+            height
+            id
+            url
             width
           }
         }
@@ -33,4 +52,4 @@ export type Category = {
   ];
 };
 
-export default categoryPagesSlugQuery;
+// export default categoryPagesSlugQuery;

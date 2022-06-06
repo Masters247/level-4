@@ -4,9 +4,10 @@ import { Collection } from "../../../lib/graphcms-querys/collectionsQuery";
 import { Button } from "../../ui/Button";
 import Image from "next/image";
 import Link from "next/link";
+import { Category } from "../../../lib/graphcms-querys/categoryQuery";
 
 interface Props {
-  collection: Collection;
+  collection: Category;
 }
 
 const CollectionCard: FC<Props> = ({ collection }) => {
@@ -14,19 +15,19 @@ const CollectionCard: FC<Props> = ({ collection }) => {
     <div className={s.collectionCard}>
       <div className={s.cardImage}>
         <Image
-          src={collection.heroImage.url}
+          src={collection.heroImage[0].url}
           alt="Collection Image"
-          width={collection.heroImage.width}
-          height={collection.heroImage.height}
+          width={collection.heroImage[0].width}
+          height={collection.heroImage[0].height}
           layout="responsive"
           placeholder="blur"
-          blurDataURL={collection.heroImage.url}
+          blurDataURL={collection.heroImage[0].url}
         />
       </div>
       <div className={s.cardText}>
         <h2>{collection.title}</h2>
-        <h3>{collection.shortDesctiption}</h3>
-        <Link href={`/${collection.slug}`} passHref>
+
+        <Link href={`/${collection.categoriesSlug}`} passHref>
           <Button variant="secondary">Explore Range</Button>
         </Link>
       </div>

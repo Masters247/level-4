@@ -1,17 +1,16 @@
 import { FC } from "react";
-import { Collection } from "../../../lib/graphcms-querys/collectionsQuery";
+import { Category } from "../../../lib/graphcms-querys/categoryQuery";
 import CollectionCard from "../CollectionCard";
 import s from "./collectionsGrid.module.scss";
 
 interface Props {
-  collections: Collection[];
-  slugs: any;
+  collections: Category[];
 }
 
-const CollectionsGrid: FC<Props> = ({ collections, slugs }) => {
+const CollectionsGrid: FC<Props> = ({ collections }) => {
   return (
     <div className={s.gridWrapper}>
-      {collections.map((collection, i) => (
+      {collections?.map((collection, i) => (
         <CollectionCard collection={collection} key={i} />
       ))}
     </div>
