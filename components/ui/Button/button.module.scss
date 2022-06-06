@@ -23,7 +23,7 @@
 
 .secondary {
   background-color: transparent;
-  border: $black solid 0.5px;
+  border: $black solid 1px;
 
   @media screen and (min-width: $media-tablet) {
     &:hover {
@@ -33,15 +33,27 @@
     }
   }
 }
+.secondaryB {
+  background-color: transparent;
+  border: $black solid 1px;
+
+  @media screen and (min-width: $media-tablet) {
+    &:hover {
+      background-color: $black;
+      color: $white;
+    }
+  }
+}
 
 .tertiary {
   background-color: $grey-3;
+  border: $grey-3 solid 1px;
   color: $white;
 
   @media screen and (min-width: $media-tablet) {
     &:hover {
-      background-color: $button-primary;
-      color: $white;
+      background-color: $white;
+      color: $grey-3;
     }
   }
 }

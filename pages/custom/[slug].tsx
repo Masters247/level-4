@@ -42,6 +42,7 @@ export async function getStaticProps({ params }: any) {
     productPage(where: {productSlug: "${params.slug}"}) {
       name
       productCategory
+      productEmbelishment
       productVariantColours {
         customImage {
           url(transformation: {image: {resize: {height: 500, width: 500}}})
@@ -81,8 +82,13 @@ const Custom: NextPage<Props> = ({ queryGraphCms, customPage }) => {
   const { trendingStyle } = customPage[0];
   const { productPage } = queryGraphCms;
 
-  const { name, productCategory, productSlug, productVariantColours } =
-    productPage;
+  const {
+    name,
+    productCategory,
+    productEmbelishment,
+    productSlug,
+    productVariantColours,
+  } = productPage;
 
   const handleColourClick = (e: any, i: any) => {
     setColour(i);
@@ -145,18 +151,22 @@ const Custom: NextPage<Props> = ({ queryGraphCms, customPage }) => {
 
   return (
     <div className={s.pageWrap}>
-      <div className={s.appWrap}>
+      <div
+        className={s.appWrap}
+        style={{ paddingBottom: `${!session && "10em"}` }}
+      >
         <ProductView
-          image={productVariantColours[colour].customImage}
-          productColoutVariants={productVariantColours}
+          control={control}
+          download={downloadCustomImage}
+          embelishment={productEmbelishment}
           handleColourClick={handleColourClick}
           handleScreenShot={handleScreenShot}
           handleSaveCustomImage={handleSaveCustomImage}
+          image={productVariantColours[colour].customImage}
           products={productPage}
+          productColoutVariants={productVariantColours}
           saved={saveCustomImage}
           setControl={setColour}
-          control={control}
-          download={downloadCustomImage}
         />
       </div>
 

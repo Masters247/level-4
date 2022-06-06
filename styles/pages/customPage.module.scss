@@ -1,30 +1,23 @@
 @use "../base.scss" as *;
 .pageWrap {
-  // padding: 2em 0;
   min-height: calc(100vh - 510px);
   position: relative;
-  // background-color: $grey-4;
   .signIn {
-    width: calc(100vw - 2em);
-    margin: 1em auto;
-    max-width: 20em;
-    @include boxShadow;
+    position: absolute;
+    top: 59.5em;
+    left: calc(50% - 10em);
+    width: 20em;
     padding: 1em;
-    // border: 4px solid $red-opacity;
     p {
       text-align: center;
-      // opacity: 0.5;
       margin-bottom: 1em;
     }
   }
-
   .appWrap {
     background-color: $grey-0;
     width: 100%;
     height: 100%;
-
     padding: 2em 0;
-
     @media (min-width: $media-tablet) {
       padding: 4em 0;
     }
@@ -72,23 +65,34 @@
     text-align: center;
     text-transform: uppercase;
     background-color: $white;
-    // background-color: $button-primary;
     padding: 20px;
     left: calc(50% - 125px);
     top: calc(50% - 92px);
     @include boxShadow;
-    // background-color: red;
     p {
       padding: 10px;
       font-weight: 300;
       letter-spacing: 0.15em;
     }
   }
-
   @media (min-width: $media-tablet) {
     padding: 0em 0;
   }
+  @media (min-width: $media-desktop-small) {
+    .signIn {
+      top: 37em;
+      width: 850px;
+      left: calc(50% - 425px);
+      a {
+        max-width: 24em;
+        margin: 0 auto;
+      }
+    }
+  }
   @media (min-width: $media-desktop) {
     padding: 0em 0;
+    .signIn {
+      top: 39em;
+    }
   }
 }

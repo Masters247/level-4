@@ -6,6 +6,9 @@ const Redo = ({ styles }: any) => {
       width="30.849"
       height="26.992"
       viewBox="0 0 30.849 26.992"
+      // style={{
+      //   transform: "rotate(90deg)",
+      // }}
     >
       <path
         id="Icon_metro-undo"

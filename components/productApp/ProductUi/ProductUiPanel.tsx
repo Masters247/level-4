@@ -27,6 +27,7 @@ const ProductUiPanel = ({
   saved,
   download,
   actionsTaken,
+  embelishment,
 }: any) => {
   const controler = [
     {
@@ -81,7 +82,11 @@ const ProductUiPanel = ({
       </div>
       <div className={s.embelishment}>
         <h2>Embelishment:</h2>
-        <p>Embroidered</p>
+        <p>
+          {typeof embelishment !== "string"
+            ? "Embroidered"
+            : embelishment.replace("_", " / ")}
+        </p>
       </div>
       <ProductButtons
         stateUploader={stateUploader}

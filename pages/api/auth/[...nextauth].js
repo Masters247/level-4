@@ -46,7 +46,7 @@ export default NextAuth({
     signIn: "/signin",
     newUser: "/account/new-account",
     verifyRequest: "/account/verify-request",
-    signOut: "/",
+    // signOut: "/",
   },
   callbacks: {
     async session({ session, token, user }) {

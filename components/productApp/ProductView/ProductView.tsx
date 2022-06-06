@@ -8,17 +8,18 @@ import s from "./productView.module.scss";
 import cn from "classnames";
 
 const ProductView = ({
-  products,
+  control,
+  download,
+  embelishment,
+  handleSaveCustomImage,
+  handleScreenShot,
+  handleColourClick,
   image,
   productColoutVariants,
-  setColourChangeProductVariant,
-  handleColourClick,
-  handleScreenShot,
-  handleSaveCustomImage,
-  control,
-  setControl,
+  products,
   saved,
-  download,
+  setColourChangeProductVariant,
+  setControl,
 }: any) => {
   // gets ratio of image - used to constrain resizer to the ratio of image
   const [ratio, setRatio]: any = useState();
@@ -327,26 +328,27 @@ const ProductView = ({
       )}
 
       <ProductUiPanel
-        setColourChangeProductVariant={setColourChangeProductVariant}
-        products={products}
-        productColoutVariants={productColoutVariants}
+        actionsTaken={logo}
         center={handleCenter}
-        vertical={handleVertical}
-        horizontal={handleHorizontal}
-        showhide={handleControls}
-        state={control}
-        handleSaveCustomImage={handleSaveCustomImage}
+        download={download}
+        embelishment={embelishment}
         handleColourClick={handleColourClick}
-        handleScreenShot={handleScreenShot}
         handleImageUpload={handleImageUpload}
-        stateUploader={imageUpload}
-        handleUndo={handleUndo}
         handleRedo={handleRedo}
-        undoActive={undoActive}
+        handleSaveCustomImage={handleSaveCustomImage}
+        handleScreenShot={handleScreenShot}
+        handleUndo={handleUndo}
+        horizontal={handleHorizontal}
+        productColoutVariants={productColoutVariants}
+        products={products}
         redoActive={redoActive}
         saved={saved}
-        download={download}
-        actionsTaken={logo}
+        setColourChangeProductVariant={setColourChangeProductVariant}
+        showhide={handleControls}
+        state={control}
+        stateUploader={imageUpload}
+        undoActive={undoActive}
+        vertical={handleVertical}
       />
     </div>
   );

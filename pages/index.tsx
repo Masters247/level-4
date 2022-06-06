@@ -29,7 +29,6 @@ interface Props {
 const Home: NextPage<Props> = ({ slugs, homePages }) => {
   const { featureBanner, trendingStyle, collections, heroVideo } = homePages[0];
 
-  // console.log(homePages);
   return (
     <div>
       <VideoHero video={heroVideo} />

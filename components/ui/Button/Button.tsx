@@ -10,7 +10,7 @@ import cn from "classnames";
 import s from "./button.module.scss";
 
 interface Props extends ButtonHTMLAttributes<HTMLButtonElement> {
-  variant: "primary" | "secondary" | "tertiary";
+  variant: "primary" | "secondary" | "secondary-b" | "tertiary";
   loading?: boolean;
   disabled?: boolean;
   classname?: string;
@@ -41,6 +41,7 @@ const Button: FC<Props> = forwardRef(
       {
         [s.primary]: variant === "primary",
         [s.secondary]: variant === "secondary",
+        [s.secondaryB]: variant === "secondary-b",
         [s.tertiary]: variant === "tertiary",
         [s.loading]: loading,
         [s.disabled]: disabled,

@@ -57,7 +57,7 @@ const ProductButtons = ({
         undo
       </ProductButton>
       <ProductButton
-        undo={true}
+        redo={true}
         variant="primary"
         disabled={!redoActive}
         onClick={handleRedo}

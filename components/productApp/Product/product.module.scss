@@ -28,8 +28,10 @@
       margin-right: 0.3em;
     }
   }
-  .button {
-    max-width: 10em;
-    margin: 0 auto;
+
+  .productButtonsWrap {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-gap: 1em;
   }
 }

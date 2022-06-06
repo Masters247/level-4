@@ -73,13 +73,18 @@ const ProductButton: FC<Props> = forwardRef(
     const iconRootName = cn(s.icon, {
       [s.disabledIcon]: disabled,
     });
+    // const iconRootNameRedo = cn(s.iconRedo, {
+    //   [s.disabledIcon]: disabled,
+    // });
+
     return (
       <Component
         className={rootClassName}
         ref={ref}
         href={href}
         {...rest}
-        disabled={disabled}>
+        disabled={disabled}
+      >
         {tick && <Tick styles={iconRootName} />}
         {undo && <Undo styles={iconRootName} />}
         {redo && <Redo styles={iconRootName} />}

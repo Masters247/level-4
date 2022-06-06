@@ -12,6 +12,7 @@
     @include flexCenter;
     flex-direction: column;
     h2 {
+      text-align: center;
       font-size: 2em;
       margin-bottom: 1em;
       color: $white;

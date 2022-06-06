@@ -27,17 +27,12 @@ const Product = ({ products, i }: any) => {
 
   const slug = products.productSlug;
   const slugCategory = products.productCategory;
-
-  console.log("Products", products.name);
+  const productName = products.name;
+  const productNameSliced = productName.slice(0, 16);
 
   return (
     <div key={products.name} className={s.productWrap}>
-      <div
-        className={s.productImageWrap}
-
-        // onClick allows for image changes
-        // onClick={handleImageClick}
-      >
+      <div className={s.productImageWrap}>
         <Link href={`/${slugCategory}/${slug}`} passHref>
           <Image
             layout="responsive"
@@ -53,26 +48,29 @@ const Product = ({ products, i }: any) => {
             }
             height={260}
             width={260}
-            // height={
-            //   products.productVariantColours[productColour].images[productView]
-            //     .height
-            // }
-            // width={
-            //   products.productVariantColours[productColour].images[productView]
-            //     .width
-            // }
           />
         </Link>
       </div>
       <Link href={`/${slugCategory}/${slug}`} passHref>
-        <a className={s.textLink}>{products.name}</a>
+        <a className={s.textLink}>
+          {productName.length > 19 ? productNameSliced + " ..." : productName}
+        </a>
       </Link>
       <ProductColourButtons products={products} colourClick={colourClick} />
-      <Link href={`/${slugCategory}/${slug}`} passHref>
-        <Button className={s.button} variant="primary">
-          View
-        </Button>
-      </Link>
+
+      <div
+        className={s.productButtonsWrap}
+        style={{
+          marginTop: "1em",
+        }}
+      >
+        <Link href={`/${slugCategory}/${slug}`} passHref>
+          <Button variant="primary">View</Button>
+        </Link>
+        <Link href={`/custom/${slug}`} passHref>
+          <Button variant="secondary-b">Customise</Button>
+        </Link>
+      </div>
     </div>
   );
 };

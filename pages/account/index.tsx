@@ -69,13 +69,11 @@ const Account: NextPage = () => {
     <div className={s.accountDetailsWrap}>
       <div className={s.titleWrap}>
         <h1>Your Account</h1>
-        {session && (
-          <div className={s.loggedInTitle}>
-            <button onClick={handleSignOut}>
-              <p>Sign Out</p>
-            </button>
-          </div>
-        )}
+        <div className={s.loggedInTitle}>
+          <button onClick={handleSignOut}>
+            <p>Sign Out</p>
+          </button>
+        </div>
       </div>
       <div className={s.tabWrap}>
         <button
