@@ -36,7 +36,20 @@
     }
   }
 }
+.primaryB {
+  min-height: 2em;
+  box-shadow: none;
+  align-items: flex-start;
+  color: $black;
+  border: 1px solid $white;
+
+  &:hover {
+    color: $white;
+    border: 1px solid $black;
+  }
+}
 .primaryDashed {
+  min-height: 2em;
   border: 1px dashed $grey-4;
   color: $black;
 
@@ -83,6 +96,37 @@
       fill: $grey-4;
     }
   }
+}
+
+.tertiaryB {
+  min-height: 2em;
+  color: $white;
+  background-color: $grey-4;
+  border: 1px solid $grey-4;
+  .icon {
+    fill: $white;
+  }
+
+  &:hover {
+    background-color: $white;
+    border: 1px solid $grey-4;
+    color: $grey-4;
+    .icon {
+      fill: $grey-4;
+    }
+  }
+}
+
+.tertiaryB,
+.primaryB,
+.primaryDashed {
+  font-weight: 300;
+  height: 3.3em;
+  letter-spacing: 0.05em;
+}
+
+.primaryB {
+  height: 25px;
 }
 
 .disabled {

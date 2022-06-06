@@ -2,7 +2,7 @@ const pages = [
   {
     pages: [
       { name: "Home", link: "/" },
-      { name: "Visualiser", link: "/visualiser" },
+      // { name: "Visualiser", link: "/visualiser" },
       { name: "About Us", link: "/about-us" },
       { name: "Contact Us", link: "/contact-us" },
       { name: "Terms & Conditions", link: "/terms-and-conditions" },

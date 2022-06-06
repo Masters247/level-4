@@ -78,7 +78,8 @@ const ImageUploader = ({
         value={images}
         onChange={onChange}
         maxNumber={maxNumber}
-        dataURLKey="data_url">
+        dataURLKey="data_url"
+      >
         {({
           imageList,
           onImageUpload,
@@ -93,21 +94,23 @@ const ImageUploader = ({
               <ProductButton
                 variant="primary-dashed"
                 onClick={onImageUpload}
-                {...dragProps}>
+                {...dragProps}
+              >
                 Click or Drop
               </ProductButton>
-              <ProductButton variant="tertiary" onClick={onImageRemoveAll}>
+              <ProductButton variant="tertiary-b" onClick={onImageRemoveAll}>
                 Remove all
               </ProductButton>
-              <ProductButton variant="tertiary" onClick={handleImageUpload}>
-                Close
+              <ProductButton variant="primary-b" onClick={handleImageUpload}>
+                <Remove styles={s.remove} />
               </ProductButton>
             </div>
             <div
               className={cn(
                 s.newImageWrap,
                 imageList.length !== 0 && s.newImageWrapPaddingTop
-              )}>
+              )}
+            >
               {imageList?.map((image: any, index: any) => {
                 return (
                   <div key={index}>
