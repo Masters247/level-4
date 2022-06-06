@@ -3,10 +3,11 @@
 .header {
   @include boxShadow;
   position: relative;
-
+  background-color: $white;
   z-index: 200;
 
   .topBanner {
+    background-color: $white;
     display: none;
     padding: 1em;
     font-family: sofia-pro, sans-serif;
@@ -23,6 +24,7 @@
   }
 
   .mainHeader {
+    background-color: $white;
     min-height: 4em;
     position: relative;
     @include flexCenter;

@@ -6,8 +6,14 @@ import Facebook from "../../ui/icons/Facebook";
 import Instagram from "../../ui/icons/Instagram";
 import pages from "../../../lib/pages";
 import s from "./footer.module.scss";
+import { Category } from "../../../lib/graphcms-querys/categoryQuery";
+import MastersLogo from "../../../public/m247-logo.png";
 
-const Footer: FC = () => {
+interface Props {
+  menuProducts: Category[];
+}
+
+const Footer: FC<Props> = ({ menuProducts }) => {
   return (
     <footer className={s.footer}>
       <div className={s.mainFooter}>
@@ -34,10 +40,10 @@ const Footer: FC = () => {
         <div className={`${s.footerElements} ${s.footer2}`}>
           <h4>Products</h4>
           <ul>
-            {pages[1].products?.map((page: any) => (
-              <li key={page.name} className={page?.class}>
-                <Link href={page.link} passHref prefetch={false}>
-                  <a>{page.name}</a>
+            {menuProducts?.map((page) => (
+              <li key={page.id}>
+                <Link href={page.categoriesSlug} passHref prefetch={false}>
+                  <a>{page.title}</a>
                 </Link>
               </li>
             ))}
@@ -80,7 +86,17 @@ const Footer: FC = () => {
       </div>
       <div className={s.bottomFooter}>
         <p>&copy; 2022 Level 4 All rights reserved.</p>
-        <p>Part of the Masters Golf Company Limited</p>
+        <a href="https://www.masters247.com/" target="_blank" rel="noreferrer">
+          <div className={s.poweredByMasters}>
+            <p>Powered By</p>
+            <Image
+              src={MastersLogo}
+              alt="Masters247 Logo"
+              width={100}
+              height={25}
+            />
+          </div>
+        </a>
       </div>
     </footer>
   );

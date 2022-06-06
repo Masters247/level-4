@@ -7,8 +7,13 @@ import Account from "../../../ui/icons/Account";
 import Search from "../../../ui/icons/Search";
 import { useLockBodyScroll } from "react-use";
 import { signIn, useSession } from "next-auth/react";
+import { Category } from "../../../../lib/graphcms-querys/categoryQuery";
 
-const Nav: FC = () => {
+interface Props {
+  menuProducts: Category[];
+}
+
+const Nav: FC<Props> = ({ menuProducts }) => {
   const { data: session } = useSession();
 
   const [open, setOpen] = useState(false);
@@ -57,10 +62,10 @@ const Nav: FC = () => {
         </ul>
         <div className={s.divide}></div>
         <ul className={s.navLinks}>
-          {pages[1].products?.map((page) => (
-            <li key={page.name}>
-              <Link href={page.link} passHref>
-                <a onClick={handleMenuToggle}>{page.name}</a>
+          {menuProducts?.map((page) => (
+            <li key={page.id}>
+              <Link href={page.categoriesSlug} passHref>
+                <a onClick={handleMenuToggle}>{page.title}</a>
               </Link>
             </li>
           ))}
