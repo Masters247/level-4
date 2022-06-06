@@ -6,8 +6,13 @@ import Facebook from "../../ui/icons/Facebook";
 import Instagram from "../../ui/icons/Instagram";
 import pages from "../../../lib/pages";
 import s from "./footer.module.scss";
+import { Category } from "../../../lib/graphcms-querys/categoryQuery";
 
-const Footer: FC = () => {
+interface Props {
+  menuProducts: Category[];
+}
+
+const Footer: FC<Props> = ({ menuProducts }) => {
   return (
     <footer className={s.footer}>
       <div className={s.mainFooter}>
@@ -34,10 +39,10 @@ const Footer: FC = () => {
         <div className={`${s.footerElements} ${s.footer2}`}>
           <h4>Products</h4>
           <ul>
-            {pages[1].products?.map((page: any) => (
-              <li key={page.name} className={page?.class}>
-                <Link href={page.link} passHref prefetch={false}>
-                  <a>{page.name}</a>
+            {menuProducts?.map((page) => (
+              <li key={page.id}>
+                <Link href={page.categoriesSlug} passHref prefetch={false}>
+                  <a>{page.title}</a>
                 </Link>
               </li>
             ))}
