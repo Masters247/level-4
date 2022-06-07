@@ -26,6 +26,11 @@ export const categorySlugQuery = async () => {
           categoriesSlug
           id
           title
+          homePageOrLinkImage {
+            height
+            width
+            url
+          }
           heroImage {
             height
             id
@@ -50,6 +55,11 @@ export type Category = {
       width: number;
     }
   ];
+  homePageOrLinkImage: {
+    height: number;
+    url: string;
+    width: number;
+  };
 };
 
 // export default categoryPagesSlugQuery;

@@ -15,13 +15,13 @@ const CollectionCard: FC<Props> = ({ collection }) => {
     <div className={s.collectionCard}>
       <div className={s.cardImage}>
         <Image
-          src={collection.heroImage[0].url}
+          src={collection.homePageOrLinkImage.url}
           alt="Collection Image"
-          width={collection.heroImage[0].width}
-          height={collection.heroImage[0].height}
+          width={collection.homePageOrLinkImage.width}
+          height={collection.homePageOrLinkImage.height}
           layout="responsive"
           placeholder="blur"
-          blurDataURL={collection.heroImage[0].url}
+          blurDataURL={collection.homePageOrLinkImage.url}
         />
       </div>
       <div className={s.cardText}>

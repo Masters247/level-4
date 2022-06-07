@@ -35,7 +35,6 @@ const Home: NextPage<Props> = ({ categories, homePages }) => {
   return (
     <>
       <VideoHero video={heroVideo} />
-      {/* <CollectionsGrid collections={collections}  /> */}
       <CollectionsGrid collections={categories} />
       <TrendingStyle
         radius={50}
