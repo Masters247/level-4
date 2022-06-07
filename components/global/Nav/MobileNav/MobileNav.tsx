@@ -64,7 +64,7 @@ const Nav: FC<Props> = ({ menuProducts }) => {
         <ul className={s.navLinks}>
           {menuProducts?.map((page) => (
             <li key={page.id}>
-              <Link href={page.categoriesSlug} passHref>
+              <Link href={`/${page.categoriesSlug}`} passHref>
                 <a onClick={handleMenuToggle}>{page.title}</a>
               </Link>
             </li>
