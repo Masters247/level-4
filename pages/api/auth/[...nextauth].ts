@@ -10,10 +10,11 @@ const mail = require("@sendgrid/mail");
 mail.setApiKey(process.env.SENDGRID_API_KEY);
 
 export default async function auth(req: NextApiRequest, res: NextApiResponse) {
+  console.log(req.method);
   if (req.method === "HEAD") {
     return res.status(200);
   }
-  console.log(req.method);
+
   return await NextAuth(req, res, {
     adapter: PrismaAdapter(prisma),
     providers: [
