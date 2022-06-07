@@ -13,6 +13,7 @@ export default async function auth(req: NextApiRequest, res: NextApiResponse) {
   if (req.method === "HEAD") {
     return res.status(200);
   }
+  console.log(req.method);
   return await NextAuth(req, res, {
     adapter: PrismaAdapter(prisma),
     providers: [
