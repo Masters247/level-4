@@ -14,7 +14,6 @@ const ProductUiPanel = ({
   center,
   vertical,
   horizontal,
-  // productColoutVariants,
   handleSaveCustomImage,
   handleColourClick,
   handleImageUpload,

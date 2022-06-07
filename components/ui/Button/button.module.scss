@@ -39,7 +39,8 @@
 
   @media screen and (min-width: $media-tablet) {
     &:hover {
-      background-color: $black;
+      border: $grey-4 solid 1px;
+      background-color: $grey-4;
       color: $white;
     }
   }

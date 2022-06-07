@@ -81,6 +81,7 @@ const ProductColourButtonsWrap: FC<Props> = ({
             hex={colour.colour.hex}
             handleColourClick={colourClick}
             hexSecondary={colour.secondaryColour.hex}
+            shape={colour.shape}
           />
         );
       })}

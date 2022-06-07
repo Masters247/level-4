@@ -1,10 +1,30 @@
 import s from "./productColour.module.scss";
+import cn from "classnames";
 
-const ProductColour = ({ hex, handleColourClick, i, hexSecondary }: any) => {
+const ProductColour = ({
+  hex,
+  handleColourClick,
+  i,
+  hexSecondary,
+  shape,
+}: any) => {
   return (
-    <button onClick={(e) => handleColourClick(e, i)} className={s.border}>
+    <button
+      onClick={(e) => handleColourClick(e, i)}
+      className={cn(s.border, {
+        [s.circleBorder]: shape === "Circle",
+        [s.squareBorder]: shape === "Square",
+        [s.rectangleBorder]: shape === "Rectangle",
+        [s.hexagonalBorder]: shape === "Hexagonal",
+      })}
+    >
       <div
-        className={s.colour}
+        className={cn(s.colour, {
+          [s.circle]: shape === "Circle",
+          [s.square]: shape === "Square",
+          [s.rectangle]: shape === "Rectangle",
+          [s.hexagonal]: shape === "Hexagonal",
+        })}
         style={{
           backgroundColor: `${hex}`,
           position: "relative",

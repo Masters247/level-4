@@ -84,9 +84,6 @@ const ProductButton: FC<Props> = forwardRef(
     const iconRootName = cn(s.icon, {
       [s.disabledIcon]: disabled,
     });
-    // const iconRootNameRedo = cn(s.iconRedo, {
-    //   [s.disabledIcon]: disabled,
-    // });
 
     return (
       <Component
