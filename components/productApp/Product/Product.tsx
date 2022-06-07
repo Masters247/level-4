@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import ProductColourButtons from "../ProductColourButtons/ProductColourButtons";
 import { Button } from "../../ui/Button";
 import Image from "next/image";
