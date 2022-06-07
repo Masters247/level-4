@@ -19,7 +19,7 @@
     "next-env.d.ts",
     "**/*.ts",
     "**/*.tsx",
-    "pages/api/auth/[...nextauth].js",
+    "pages/api/auth/[...nextauth].ts",
     "components/productApp/ImageUploader/ImageUpload.tsx"
   ],
   "exclude": ["node_modules"]

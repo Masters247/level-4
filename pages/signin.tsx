@@ -45,14 +45,14 @@ export default function SignIn({ csrfToken }: any) {
           </p>
           <div className={s.line}></div>
           <Button variant="secondary" onClick={() => signIn("google")}>
-            Sign Up With Google <Google styles={s.providerLogo} />
+            Continue With Google <Google styles={s.providerLogo} />
           </Button>
           <Button
             variant="secondary"
             onClick={() => signIn("twitter")}
             className={s.providerButton}
           >
-            Sign Up With Twitter <TwitterBlue styles={s.providerLogo} />
+            Continue With Twitter <TwitterBlue styles={s.providerLogo} />
           </Button>
         </div>
       ) : (
@@ -76,14 +76,14 @@ export default function SignIn({ csrfToken }: any) {
           </p>
           <div className={s.line}></div>
           <Button variant="secondary" onClick={() => signIn("google")}>
-            Sign In With Google <Google styles={s.providerLogo} />
+            Continue With Google <Google styles={s.providerLogo} />
           </Button>
           <Button
             variant="secondary"
             onClick={() => signIn("twitter")}
             className={s.providerButton}
           >
-            Sign In With Twitter <TwitterBlue styles={s.providerLogo} />
+            Continue With Twitter <TwitterBlue styles={s.providerLogo} />
           </Button>
         </div>
       )}
