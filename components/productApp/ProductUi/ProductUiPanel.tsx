@@ -74,6 +74,7 @@ const ProductUiPanel = ({
           products={products}
           colourClick={handleColourClick}
           position={s.position}
+          // shape={shape}
         />
       </div>
       <div className={s.embelishment}>

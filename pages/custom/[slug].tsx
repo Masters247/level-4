@@ -51,6 +51,7 @@ export async function getStaticProps({ params }: any) {
         secondaryColour {
           hex
         }
+        shape
       }
     }
   }
@@ -80,13 +81,8 @@ const Custom: NextPage<Props> = ({ queryGraphCms, customPage }) => {
   const { trendingStyle } = customPage[0];
   const { productPage } = queryGraphCms;
 
-  const {
-    name,
-    productCategory,
-    productEmbelishment,
-    productSlug,
-    productVariantColours,
-  } = productPage;
+  const { name, productCategory, productEmbelishment, productVariantColours } =
+    productPage;
 
   const handleColourClick = (e: any, i: any) => {
     setColour(i);
