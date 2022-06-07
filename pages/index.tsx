@@ -6,7 +6,6 @@ import {
   categorySlugQuery,
   Category,
 } from "../lib/graphcms-querys/categoryQuery";
-import s from "../styles/pages/index.module.scss";
 import homePageQuery from "../lib/graphcms-querys/homePageQuery";
 import TrendingStyle from "../components/global/TrendingStyle/TrendingStyle";
 import FeatureBanner from "../components/global/FeatureBanner/FeatureBanner";

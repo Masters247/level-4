@@ -97,12 +97,11 @@
   }
 }
 .customArearHide {
-  border: 1px dashed rgba(255, 255, 255, 0);
   box-shadow: none;
   .customLogo {
     border: 1px dashed rgba(255, 255, 255, 0);
     .resizer {
-      display: none;
+      opacity: 0;
     }
   }
 }
