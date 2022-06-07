@@ -1,4 +1,3 @@
-import { useState, useEffect } from "react";
 import s from "./productUiPanel.module.scss";
 import cn from "classnames";
 import Center from "../../ui/icons/Center";
@@ -6,8 +5,6 @@ import HorizontalAlign from "../../ui/icons/HorizontalAlign";
 import VerticalAlign from "../../ui/icons/VerticalAlign";
 import ProductButtons from "./ProductButtons";
 import ProductColourButtonsWrap from "../ProductColourButtons/ProductColourButtons";
-// import Show from "../../ui/icons/Show";
-// import Hide from "../../ui/icons/Hide";
 
 const ProductUiPanel = ({
   products,

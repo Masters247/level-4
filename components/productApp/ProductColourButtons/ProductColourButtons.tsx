@@ -3,8 +3,15 @@ import cn from "classnames";
 import ProductColour from "./ProductColour";
 import s from "./productColourButtons.module.scss";
 
+interface Products {
+  name: string;
+  productCategory: string;
+  productSlug: string;
+  productVariantColours: Array<TemplateStringsArray>;
+}
+
 interface Props {
-  products: any;
+  products: Products;
   colourClick: any;
   rotate?: any;
   position?: any;

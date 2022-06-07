@@ -14,52 +14,36 @@
   }
 }
 
+.hexagonalBorder,
+.squareBorder,
+.rectangleBorder,
 .circleBorder {
-  background-color: $button-primary;
-  border: 1px solid $button-primary;
   width: 24px;
   height: 24px;
+  background-color: $button-primary;
+  border: 1px solid $button-primary;
+  .rectangle,
+  .hexagonal,
+  .square,
   .circle {
     border: 1px solid $white;
+  }
+  .circle {
     border-radius: 50%;
     width: 16px;
     height: 16px;
   }
-}
-
-.squareBorder {
-  background-color: $button-primary;
-  border: 1px solid $button-primary;
-  width: 24px;
-  height: 24px;
   .square {
-    border: 1px solid $white;
     width: 14px;
     height: 14px;
   }
-}
-
-.rectangleBorder {
-  width: 24px;
-  height: 24px;
-  background-color: $button-primary;
-  border: 1px solid $button-primary;
   .rectangle {
     width: 9px;
     height: 14px;
-    border: 1px solid $white;
   }
-}
-
-.hexagonalBorder {
-  width: 24px;
-  height: 24px;
-  background-color: $button-primary;
-  border: 1px solid $button-primary;
   .hexagonal {
     width: 18px;
     height: 15px;
-    border: 1px solid $white;
     clip-path: polygon(25% 0%, 75% 0%, 95% 50%, 75% 100%, 25% 100%, 5% 50%);
     transform: rotate(90deg);
   }
