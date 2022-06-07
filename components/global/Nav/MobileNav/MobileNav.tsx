@@ -4,9 +4,7 @@ import s from "./mobileNav.module.scss";
 import Image from "next/image";
 import pages from "../../../../lib/pages";
 import Account from "../../../ui/icons/Account";
-import Search from "../../../ui/icons/Search";
 import { useLockBodyScroll } from "react-use";
-import { signIn, useSession } from "next-auth/react";
 import { Category } from "../../../../lib/graphcms-querys/categoryQuery";
 
 interface Props {
@@ -14,8 +12,6 @@ interface Props {
 }
 
 const Nav: FC<Props> = ({ menuProducts }) => {
-  const { data: session } = useSession();
-
   const [open, setOpen] = useState(false);
   useLockBodyScroll(open);
 
@@ -23,9 +19,7 @@ const Nav: FC<Props> = ({ menuProducts }) => {
     setOpen(!open);
   };
 
-  const handleSignIn = () => {
-    signIn();
-  };
+  const handleSignIn = () => {};
 
   return (
     <div className={`${s.navWrapper} ${open ? s.open : ""}`}>
@@ -78,7 +72,7 @@ const Nav: FC<Props> = ({ menuProducts }) => {
               cursor: "pointer",
             }}
           >
-            {!session ? (
+            {/* {!session ? (
               <button onClick={handleSignIn}>
                 <Account />
               </button>
@@ -86,7 +80,7 @@ const Nav: FC<Props> = ({ menuProducts }) => {
               <Link href="/account" passHref>
                 <a onClick={handleMenuToggle}>{session.user?.name}</a>
               </Link>
-            )}
+            )} */}
           </div>
         </div>
       </nav>

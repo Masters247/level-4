@@ -1,11 +1,12 @@
+/* eslint-disable @next/next/no-html-link-for-pages */
 import Link from "next/link";
 import { FC, useRef, useState } from "react";
 import s from "./desktopNav.module.scss";
 import Image from "next/image";
 import Account from "../../../ui/icons/Account";
-import { signIn, useSession } from "next-auth/react";
 import { Category } from "../../../../lib/graphcms-querys/categoryQuery";
 import { useClickAway } from "react-use";
+import { useUser } from "@auth0/nextjs-auth0";
 
 interface Props {
   menuProducts: Category[];
@@ -13,11 +14,7 @@ interface Props {
 
 const DesktopNav: FC<Props> = ({ menuProducts }) => {
   const [dropDown, setDropDown] = useState(false);
-  const { data: session } = useSession();
-
-  const handleSignIn = () => {
-    signIn();
-  };
+  const { user, error, isLoading } = useUser();
 
   const ref = useRef(null);
   useClickAway(ref, () => {
@@ -86,13 +83,13 @@ const DesktopNav: FC<Props> = ({ menuProducts }) => {
           }}
           onClick={() => setDropDown(false)}
         >
-          {!session ? (
-            <button onClick={handleSignIn}>
+          {!user ? (
+            <a href="/api/auth/login">
               <Account />
-            </button>
+            </a>
           ) : (
             <Link href="/account" passHref>
-              <a>{session.user?.name}</a>
+              <a>{user?.name}</a>
             </Link>
           )}
         </div>

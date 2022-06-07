@@ -1,15 +1,15 @@
 import type { AppProps } from "next/app";
-import { SessionProvider } from "next-auth/react";
 import Layout from "../components/global/Layout/Layout";
 import "../styles/main.scss";
+import { UserProvider } from "@auth0/nextjs-auth0";
 
 function MyApp({ Component, pageProps: { session, ...pageProps } }: AppProps) {
   return (
-    <SessionProvider session={session}>
+    <UserProvider>
       <Layout pageProps={pageProps}>
         <Component {...pageProps} />
       </Layout>
-    </SessionProvider>
+    </UserProvider>
   );
 }
 
