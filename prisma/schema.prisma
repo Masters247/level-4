@@ -10,7 +10,7 @@ datasource db {
 }
 
 model User {
-  id           String        @id
+  id           String        @unique
   name         String?
   image        String?
   organisation String?

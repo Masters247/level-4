@@ -8,16 +8,9 @@ export default async function handler(
   const body = req.body;
 
   try {
-    await prisma.user.upsert({
-      create: {
-        name: body.name,
-        organisation: body.org,
-      },
-      update: {
-        name: body.name,
-        organisation: body.org,
-        email: body.email,
-      },
+    await prisma.user.update({
+      data: { name: body.name, organisation: body.org, email: body.email },
+
       where: {
         id: body.id,
       },
