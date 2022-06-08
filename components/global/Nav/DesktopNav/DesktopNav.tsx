@@ -15,6 +15,7 @@ interface Props {
 const DesktopNav: FC<Props> = ({ menuProducts }) => {
   const [dropDown, setDropDown] = useState(false);
   const { user, error, isLoading } = useUser();
+  console.log(user);
 
   const ref = useRef(null);
   useClickAway(ref, () => {

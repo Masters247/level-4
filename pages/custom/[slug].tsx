@@ -6,12 +6,12 @@ import productQuery from "../../lib/graphcms-querys/productsPagesQuery";
 import s from "../../styles/pages/customPage.module.scss";
 import { Button } from "../../components/ui/Button";
 import { GraphQLClient, gql } from "graphql-request";
-import { useSession } from "next-auth/react";
 import { useState, useEffect } from "react";
 import customPageQuery from "../../lib/graphcms-querys/customPageQuery";
 import html2canvas from "html2canvas";
 import Link from "next/link";
 const download = require("downloadjs");
+import { useUser } from "@auth0/nextjs-auth0";
 
 export async function getStaticPaths() {
   const products = await productQuery();
@@ -75,10 +75,10 @@ const Custom: NextPage<Props> = ({ queryGraphCms, customPage }) => {
   const [colourChangeProductVariant, setColourChangeProductVariant] =
     useState(0);
   const [control, setControl] = useState(true);
-  const { data: session }: any = useSession();
   const [colour, setColour] = useState(0);
   const { trendingStyle } = customPage[0];
   const { productPage } = queryGraphCms;
+  const { user, error, isLoading } = useUser();
 
   const {
     name,
@@ -128,7 +128,7 @@ const Custom: NextPage<Props> = ({ queryGraphCms, customPage }) => {
             method: "POST",
             body: JSON.stringify({
               image,
-              userId: session.user.userId,
+              userId: user?.sub,
               productName: name,
               productCategory,
             }),
@@ -151,7 +151,7 @@ const Custom: NextPage<Props> = ({ queryGraphCms, customPage }) => {
     <div className={s.pageWrap}>
       <div
         className={s.appWrap}
-        style={{ paddingBottom: `${!session && "10em"}` }}
+        // style={{ paddingBottom: `${!session && "10em"}` }}
       >
         <ProductView
           control={control}
@@ -168,14 +168,14 @@ const Custom: NextPage<Props> = ({ queryGraphCms, customPage }) => {
         />
       </div>
 
-      {!session && (
+      {/* {!session && (
         <div className={s.signIn}>
           <p>Please sign in to save custom images</p>
           <Link href="/signin" passHref>
             <Button variant="primary">Sign In</Button>
           </Link>
         </div>
-      )}
+      )} */}
       <TrendingStyle category={true} trendingStyle={trendingStyle} />
     </div>
   );
