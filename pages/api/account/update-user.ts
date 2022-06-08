@@ -9,8 +9,7 @@ export default async function handler(
 
   try {
     await prisma.user.update({
-      data: { name: body.name, organisation: body.org, email: body.email },
-
+      data: { name: body.name, organisation: body.org },
       where: {
         id: body.id,
       },
