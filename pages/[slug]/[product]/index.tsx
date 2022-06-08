@@ -102,6 +102,8 @@ const Product: NextPage<Props> = ({ data }) => {
     visualiseImage,
   } = productPage;
 
+  console.log(typeof data);
+
   const handleColourClick = (e: any, i: any) => {
     setProductColour(i);
   };

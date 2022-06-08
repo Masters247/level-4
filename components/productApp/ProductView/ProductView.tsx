@@ -283,7 +283,7 @@ const ProductView = ({
           </div>
           <div className={s.productViewport}>
             <div
-              className={`${control ? s.customArear : s.customArearHide}`}
+              className={`${!control ? s.customArear : s.customArearHide}`}
               ref={containerRef}
             >
               <animated.div

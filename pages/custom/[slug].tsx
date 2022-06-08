@@ -1,17 +1,20 @@
 import type { NextPage } from "next";
 import ProductView from "../../components/productApp/ProductView/ProductView";
-import trendingQuery from "../../lib/graphcms-querys/trendingStylesQuery";
 import TrendingStyle from "../../components/global/TrendingStyle/TrendingStyle";
 import productQuery from "../../lib/graphcms-querys/productsPagesQuery";
 import s from "../../styles/pages/customPage.module.scss";
 import { Button } from "../../components/ui/Button";
 import { GraphQLClient, gql } from "graphql-request";
 import { useSession } from "next-auth/react";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import customPageQuery from "../../lib/graphcms-querys/customPageQuery";
 import html2canvas from "html2canvas";
 import Link from "next/link";
 const download = require("downloadjs");
+import {
+  useCustomiseBox,
+  useHideCustomiseBox,
+} from "../../lib/state-management/productApp/useProductApp";
 
 export async function getStaticPaths() {
   const products = await productQuery();
@@ -72,13 +75,20 @@ interface Props {
 
 const Custom: NextPage<Props> = ({ queryGraphCms, customPage }) => {
   const [saveCustomImage, setSaveCustomImage] = useState(0);
+
   const [downloadCustomImage, setDownloadCustomImage] = useState(0);
+
   const [colourChangeProductVariant, setColourChangeProductVariant] =
     useState(0);
+
   const [control, setControl] = useState(true);
+
   const { data: session }: any = useSession();
+
   const [colour, setColour] = useState(0);
+
   const { trendingStyle } = customPage[0];
+
   const { productPage } = queryGraphCms;
 
   const { name, productCategory, productEmbelishment, productVariantColours } =
@@ -143,8 +153,20 @@ const Custom: NextPage<Props> = ({ queryGraphCms, customPage }) => {
     setTimeout(() => takeScreenShot(), 1000);
   };
 
+  // useCustomiseBox,
+  // useToggleCustomiseBox,
+
+  const showCustomiseBox = useCustomiseBox();
+  console.log(
+    "🚀 ~ file: [slug].tsx ~ line 82 ~ showCustomiseBox",
+    showCustomiseBox
+  );
+
+  const hideCustomiseBox = useHideCustomiseBox();
+
   return (
     <div className={s.pageWrap}>
+      <button onClick={hideCustomiseBox}>Hide</button>
       <div
         className={s.appWrap}
         style={{ paddingBottom: `${!session && "10em"}` }}
