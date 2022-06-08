@@ -3,15 +3,16 @@ import Pencil from "../../ui/icons/Pencil";
 import s from "./customer.module.scss";
 import { useState } from "react";
 import { Button } from "../../ui/Button";
+import { UserProfile } from "@auth0/nextjs-auth0";
 
 interface Props {
-  customer: any;
+  customer?: UserProfile;
 }
 
 const Customer: FC<Props> = ({ customer }) => {
-  const [name, setName] = useState(customer.name);
-  const [email, setEmail] = useState(customer.email);
-  const [organisation, setOrganisation] = useState(customer.organisation);
+  const [name, setName] = useState(customer?.name);
+  const [email, setEmail] = useState(customer?.email);
+  const [organisation, setOrganisation] = useState("");
   const [editName, setEditName] = useState(false);
   const [editEmail, setEditEmail] = useState(false);
   const [editOrganisation, setEditOrganisation] = useState(false);
@@ -30,7 +31,7 @@ const Customer: FC<Props> = ({ customer }) => {
         body: JSON.stringify({
           name,
           org: organisation,
-          id: customer.sub,
+          id: customer?.sub,
         }),
       });
       setLoading(false);
@@ -50,7 +51,7 @@ const Customer: FC<Props> = ({ customer }) => {
           <input
             ref={(input) => input && input.focus()}
             disabled={!editName}
-            placeholder={name}
+            placeholder={name!}
             type="text"
             onChange={(e) => setName(e.target.value)}
           />
@@ -74,7 +75,7 @@ const Customer: FC<Props> = ({ customer }) => {
             ref={(input) => input && input.focus()}
             required
             disabled={!editEmail}
-            placeholder={email}
+            placeholder={email!}
             type="email"
             onChange={(e) => setEmail(e.target.value)}
           />
@@ -97,7 +98,7 @@ const Customer: FC<Props> = ({ customer }) => {
           <input
             disabled={!editOrganisation}
             ref={(input) => input && input.focus()}
-            placeholder={organisation}
+            placeholder={organisation!}
             type="text"
             onChange={(e) => setOrganisation(e.target.value)}
           />
@@ -118,9 +119,9 @@ const Customer: FC<Props> = ({ customer }) => {
         className={s.save}
         Component="button"
         disabled={
-          name === customer.name &&
-          email === customer.email &&
-          organisation === customer.organisation
+          name === customer?.name &&
+          email === customer?.email &&
+          organisation === customer?.organisation
         }
         type="submit"
       >

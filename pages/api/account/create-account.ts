@@ -7,6 +7,8 @@ export default async function handler(
 ) {
   const body = JSON.parse(req.body);
 
+  console.log(body);
+
   const addUser = await prisma.user.create({
     data: {
       id: body.id,
