@@ -1,5 +1,5 @@
 import { NextPage } from "next";
-import { useSession } from "next-auth/react";
+
 import { useRouter } from "next/router";
 import { useState } from "react";
 import { Button } from "../../components/ui/Button";
@@ -7,12 +7,6 @@ import s from "../../styles/pages/account.module.scss";
 
 const NewAccount: NextPage = () => {
   const router = useRouter();
-  const { data: session, status } = useSession({
-    required: true,
-    onUnauthenticated() {
-      router.push("/");
-    },
-  });
 
   const [name, setName] = useState("");
   const [org, setOrg] = useState("");
@@ -32,7 +26,7 @@ const NewAccount: NextPage = () => {
           name,
           org,
           //   @ts-ignore
-          id: session?.user?.userId,
+          id: user?.userId,
         }),
       });
       setLoading(false);

@@ -10,6 +10,8 @@ export default async function handler(
   const addUser = await prisma.user.create({
     data: {
       id: body.id,
+      image: body.image,
+      name: body.name,
     },
   });
   res.status(200).json(addUser);

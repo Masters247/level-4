@@ -1,10 +1,8 @@
 import s from "./productButtons.module.scss";
 import cn from "classnames";
-import { useSession } from "next-auth/react";
 import ProductButton from "./ProductButton";
 import Spinner from "../../ui/icons/Spinner";
 import { useState } from "react";
-import { ConfigurationServicePlaceholders } from "aws-sdk/lib/config_service_placeholders";
 
 const ProductButtons = ({
   handleScreenShot,
@@ -19,7 +17,6 @@ const ProductButtons = ({
   download,
   actionsTaken,
 }: any) => {
-  const { data: session }: any = useSession();
   const [spinnerColourDownload, setSpinnerColourDownload] = useState("#ffffff");
   const [spinnerColourSave, setSpinnerColourSave] = useState("#ffffff");
 
@@ -68,7 +65,7 @@ const ProductButtons = ({
         save={saved === 0 && true}
         tick={saved === 2 && true}
         variant="tertiary"
-        disabled={!session || !actionsTaken}
+        disabled={!actionsTaken}
         onClick={handleSaveCustomImage}
         onMouseEnter={() => handleMouseEnter("save")}
         onMouseLeave={() => handleMouseLeave("save")}

@@ -2,7 +2,6 @@ import type { NextPage } from "next";
 import Customer from "../../components/account/Customer/Customer";
 import Designs from "../../components/account/Designs/Designs";
 import s from "../../styles/pages/account.module.scss";
-import { signOut, useSession } from "next-auth/react";
 import useDelayedRender from "use-delayed-render";
 import { useRouter } from "next/router";
 import { useState } from "react";
@@ -11,12 +10,12 @@ import useSWR from "swr";
 
 const fetcher = (email: any) => fetch(email).then((res) => res.json());
 
-function useAccount(email: any) {
+function useAccount(id: string) {
   const {
     data: user,
     error,
     mutate,
-  } = useSWR(`/api/account/user?email=${email}`, fetcher);
+  } = useSWR(`/api/account/user?id=${id}`, fetcher);
 
   return {
     user: user,
@@ -28,15 +27,7 @@ function useAccount(email: any) {
 
 const Account: NextPage = () => {
   const router = useRouter();
-  const { data: session, status }: any = useSession({
-    required: true,
-    onUnauthenticated() {
-      router.push("/");
-    },
-  });
 
-  const email = session?.user.email;
-  const { user, isLoading, isError, mutate } = useAccount(email);
   const [isDetailsShown, setIsDetailsShown] = useState(true);
 
   const { mounted: isDetailsMounted, rendered: isDetailsRendered } =
@@ -53,9 +44,7 @@ const Account: NextPage = () => {
     }
   };
 
-  const handleSignOut = () => {
-    signOut();
-  };
+  const handleSignOut = () => {};
 
   if (status === "loading") {
     return (
@@ -89,7 +78,7 @@ const Account: NextPage = () => {
           My Designs
         </button>
       </div>
-      {isDetailsMounted && (
+      {/* {isDetailsMounted && (
         <div
           className={
             isDetailsRendered ? s.accountDetailsShow : s.accountDetailsHide
@@ -110,7 +99,7 @@ const Account: NextPage = () => {
         >
           {isLoading ? <p>is Loading....</p> : <Designs userId={user.id} />}
         </div>
-      )}
+      )} */}
     </div>
   );
 };
