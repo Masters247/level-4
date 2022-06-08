@@ -46,13 +46,13 @@ const Account: NextPage = () => {
 
   const handleSignOut = () => {};
 
-  if (status === "loading") {
-    return (
-      <div className={s.loggingOut}>
-        <Image src={"/loadingIcon.gif"} width={50} height={50} alt="" />
-      </div>
-    );
-  }
+  // if (status === "loading") {
+  //   return (
+  //     <div className={s.loggingOut}>
+  //       <Image src={"/loadingIcon.gif"} width={50} height={50} alt="" />
+  //     </div>
+  //   );
+  // }
 
   return (
     <div className={s.accountDetailsWrap}>
