@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-html-link-for-pages */
 import type { NextPage } from "next";
 import Customer from "../../components/account/Customer/Customer";
 import Designs from "../../components/account/Designs/Designs";
@@ -6,26 +7,10 @@ import useDelayedRender from "use-delayed-render";
 import { useRouter } from "next/router";
 import { useState } from "react";
 import Image from "next/image";
-import useSWR from "swr";
-
-const fetcher = (email: any) => fetch(email).then((res) => res.json());
-
-function useAccount(id: string) {
-  const {
-    data: user,
-    error,
-    mutate,
-  } = useSWR(`/api/account/user?id=${id}`, fetcher);
-
-  return {
-    user: user,
-    isLoading: !error && !user,
-    isError: error,
-    mutate,
-  };
-}
+import { useUser } from "@auth0/nextjs-auth0";
 
 const Account: NextPage = () => {
+  const { user, error, isLoading } = useUser();
   const router = useRouter();
 
   const [isDetailsShown, setIsDetailsShown] = useState(true);
@@ -59,8 +44,8 @@ const Account: NextPage = () => {
       <div className={s.titleWrap}>
         <h1>Your Account</h1>
         <div className={s.loggedInTitle}>
-          <button onClick={handleSignOut}>
-            <p>Sign Out</p>
+          <button>
+            <a href="/api/auth/logout">Logout</a>
           </button>
         </div>
       </div>
@@ -78,17 +63,13 @@ const Account: NextPage = () => {
           My Designs
         </button>
       </div>
-      {/* {isDetailsMounted && (
+      {isDetailsMounted && (
         <div
           className={
             isDetailsRendered ? s.accountDetailsShow : s.accountDetailsHide
           }
         >
-          {isLoading ? (
-            <p>is Loading...</p>
-          ) : (
-            <Customer customer={user} mutate={mutate} />
-          )}
+          {isLoading ? <p>is Loading...</p> : <Customer customer={user} />}
         </div>
       )}
       {!isDetailsMounted && (
@@ -97,9 +78,9 @@ const Account: NextPage = () => {
             !isDetailsRendered ? s.accountDetailsShow : s.accountDetailsHide
           }
         >
-          {isLoading ? <p>is Loading....</p> : <Designs userId={user.id} />}
+          {isLoading ? <p>is Loading....</p> : <Designs userId={user?.sub} />}
         </div>
-      )} */}
+      )}
     </div>
   );
 };

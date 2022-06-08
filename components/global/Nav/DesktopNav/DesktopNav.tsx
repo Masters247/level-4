@@ -90,7 +90,10 @@ const DesktopNav: FC<Props> = ({ menuProducts }) => {
             </a>
           ) : (
             <Link href="/account" passHref>
-              <a>{user?.name}</a>
+              {/* <a>{user?.name}</a> */}
+              <a>
+                <Account fill />
+              </a>
             </Link>
           )}
         </div>
