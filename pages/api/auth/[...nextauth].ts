@@ -1,5 +1,4 @@
-import NextAuth, { User } from "next-auth";
-import EmailProvider from "next-auth/providers/email";
+import NextAuth from "next-auth";
 import GoogleProvider from "next-auth/providers/google";
 import TwitterProvider from "next-auth/providers/twitter";
 import { PrismaAdapter } from "@next-auth/prisma-adapter";
@@ -7,13 +6,9 @@ import { prisma } from "../../../lib/prisma";
 import { NextApiRequest, NextApiResponse } from "next";
 const mail = require("@sendgrid/mail");
 import CredentialsProvider from "next-auth/providers/credentials";
-
 const bcrypt = require("bcrypt");
 
-const confirmPasswordHash = (
-  plainPassword: string,
-  hashedPassword: string | null
-) => {
+const confirmPasswordHash = (plainPassword: string, hashedPassword: string) => {
   return new Promise((resolve) => {
     bcrypt.compare(
       plainPassword,
@@ -42,12 +37,15 @@ export default async function auth(req: NextApiRequest, res: NextApiResponse) {
             where: {
               email: credentials.email,
             },
+            include: {
+              secret: true,
+            },
           });
 
           if (user) {
             const checkPassword = await confirmPasswordHash(
               credentials.password,
-              user.password
+              user.secret?.password!
             );
             if (checkPassword) {
               return user;

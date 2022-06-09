@@ -9,6 +9,8 @@ datasource db {
   referentialIntegrity = "prisma"
 }
 
+// User info - accounts from OAuth providers and password & email login
+
 model Account {
   id                 String  @id @default(cuid())
   userId             String
@@ -30,18 +32,25 @@ model Account {
   @@unique([provider, providerAccountId])
 }
 
+model VerificationToken {
+  identifier String
+  token      String   @unique
+  expires    DateTime
+
+  @@unique([identifier, token])
+}
+
 model Session {
   id           String   @id @default(cuid())
   sessionToken String   @unique
-  userId       String
   expires      DateTime
+  userId       String
   user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
 }
 
 model User {
   id            String        @id @default(cuid())
   name          String?
-  password      String?
   email         String?       @unique
   emailVerified DateTime?
   image         String?
@@ -50,15 +59,17 @@ model User {
   customImages  CustomImage[]
   accounts      Account[]
   sessions      Session[]
+  secret        Secret?
 }
 
-model VerificationToken {
-  identifier String
-  token      String   @unique
-  expires    DateTime
-
-  @@unique([identifier, token])
+model Secret {
+  id       String @id @default(cuid())
+  password String
+  userId   String @unique
+  user     User   @relation(fields: [userId], references: [id], onDelete: Cascade)
 }
+
+// User Data
 
 model CustomImage {
   id          String   @id @default(cuid())

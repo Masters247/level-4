@@ -19,10 +19,10 @@ interface Props {
 }
 
 const Customer: FC<Props> = ({ customer, mutate }) => {
-  const [name, setName] = useState(customer.name || "----");
-  const [email, setEmail] = useState(customer.email || "----");
+  const [name, setName] = useState(customer?.name || "----");
+  const [email, setEmail] = useState(customer?.email || "----");
   const [organisation, setOrganisation] = useState(
-    customer.organisation || "----"
+    customer?.organisation || "----"
   );
   const [editName, setEditName] = useState(false);
   const [editEmail, setEditEmail] = useState(false);
@@ -132,9 +132,9 @@ const Customer: FC<Props> = ({ customer, mutate }) => {
         className={s.save}
         Component="button"
         disabled={
-          name === customer.name &&
-          email === customer.email &&
-          organisation === customer.organisation
+          name === customer?.name &&
+          email === customer?.email &&
+          organisation === customer?.organisation
         }
         type="submit"
       >

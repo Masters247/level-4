@@ -14,7 +14,6 @@ interface Props {
 const DesktopNav: FC<Props> = ({ menuProducts }) => {
   const [dropDown, setDropDown] = useState(false);
   const { data: session } = useSession();
-  console.log(session);
 
   const handleSignIn = () => {
     signIn();
@@ -97,7 +96,17 @@ const DesktopNav: FC<Props> = ({ menuProducts }) => {
             <Link href="/account" passHref>
               <div className={s.signedIn}>
                 <a>{session.user?.name}</a>
-                <Account fill />
+                {session.user?.image ? (
+                  <Image
+                    src={session.user?.image}
+                    alt="Profile Image"
+                    height={30}
+                    width={30}
+                    className={s.profileImage}
+                  />
+                ) : (
+                  <Account fill />
+                )}
               </div>
             </Link>
           )}

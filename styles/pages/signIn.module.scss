@@ -58,7 +58,7 @@
         transition: background-color 200ms ease, color 200ms ease;
         letter-spacing: 0.15em;
         &:hover {
-          background-color: $button-primary;
+          // background-color: $button-primary;
           color: $white;
           border: 1px solid $white;
         }
@@ -89,6 +89,15 @@
 
     .providerButton {
       margin-top: 1em;
+    }
+
+    .error {
+      color: red;
+      margin: 0;
+      margin-bottom: 1em;
+      border: red 1px solid;
+      padding: 0.75em;
+      width: 100%;
     }
   }
 
