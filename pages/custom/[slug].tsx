@@ -10,11 +10,14 @@ import { useState } from "react";
 import customPageQuery from "../../lib/graphcms-querys/customPageQuery";
 import html2canvas from "html2canvas";
 import Link from "next/link";
+import { useStore } from "../../lib/state-management/productApp/useProductApp";
+
+const HideCustomiseBox = () => {
+  const hideCustomiseBox = useStore((state) => state.hideCustomiseBox);
+  return <button onClick={hideCustomiseBox}>Hide</button>;
+};
+
 const download = require("downloadjs");
-import {
-  useCustomiseBox,
-  useHideCustomiseBox,
-} from "../../lib/state-management/productApp/useProductApp";
 
 export async function getStaticPaths() {
   const products = await productQuery();
@@ -153,20 +156,9 @@ const Custom: NextPage<Props> = ({ queryGraphCms, customPage }) => {
     setTimeout(() => takeScreenShot(), 1000);
   };
 
-  // useCustomiseBox,
-  // useToggleCustomiseBox,
-
-  const showCustomiseBox = useCustomiseBox();
-  console.log(
-    "🚀 ~ file: [slug].tsx ~ line 82 ~ showCustomiseBox",
-    showCustomiseBox
-  );
-
-  const hideCustomiseBox = useHideCustomiseBox();
-
   return (
     <div className={s.pageWrap}>
-      <button onClick={hideCustomiseBox}>Hide</button>
+      <HideCustomiseBox />
       <div
         className={s.appWrap}
         style={{ paddingBottom: `${!session && "10em"}` }}
