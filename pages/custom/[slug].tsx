@@ -13,8 +13,18 @@ import Link from "next/link";
 import { useStore } from "../../lib/state-management/productApp/useProductApp";
 
 const HideCustomiseBox = () => {
-  const hideCustomiseBox = useStore((state) => state.hideCustomiseBox);
+  const hideCustomiseBox = useStore((state) => {
+    console.log(state.customiseBox);
+    return state.hideCustomiseBox;
+  });
   return <button onClick={hideCustomiseBox}>Hide</button>;
+};
+const ShowCustomiseBox = () => {
+  const showCustomiseBox = useStore((state) => {
+    console.log(state.customiseBox);
+    return state.showCustomiseBox;
+  });
+  return <button onClick={showCustomiseBox}>Show</button>;
 };
 
 const download = require("downloadjs");
@@ -104,6 +114,7 @@ const Custom: NextPage<Props> = ({ queryGraphCms, customPage }) => {
   const handleScreenShot = () => {
     setDownloadCustomImage(1);
     setControl(false);
+    useStore((state) => state.hideCustomiseBox);
     const takeScreenShot = () => {
       html2canvas(document.getElementById("capture") as HTMLElement, {
         useCORS: true,
@@ -116,6 +127,7 @@ const Custom: NextPage<Props> = ({ queryGraphCms, customPage }) => {
         })
         .then(() => {
           setControl(true);
+          useStore((state) => state.showCustomiseBox);
         })
         .catch((err) => {
           console.log("IMAGE DOWNLOAD ERROR: ", err);
@@ -159,6 +171,7 @@ const Custom: NextPage<Props> = ({ queryGraphCms, customPage }) => {
   return (
     <div className={s.pageWrap}>
       <HideCustomiseBox />
+      <ShowCustomiseBox />
       <div
         className={s.appWrap}
         style={{ paddingBottom: `${!session && "10em"}` }}
