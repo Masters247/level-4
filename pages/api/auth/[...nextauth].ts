@@ -72,7 +72,7 @@ export default async function auth(req: NextApiRequest, res: NextApiResponse) {
       signOut: "/",
     },
     callbacks: {
-      async session({ session, token, user }) {
+      async session({ session, token }) {
         session!.user!.userId = token.sub;
         return session;
       },

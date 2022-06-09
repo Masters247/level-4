@@ -95,7 +95,7 @@ const DesktopNav: FC<Props> = ({ menuProducts }) => {
           ) : (
             <Link href="/account" passHref>
               <div className={s.signedIn}>
-                <a>{session.user?.name}</a>
+                <a>My Account</a>
                 {session.user?.image ? (
                   <Image
                     src={session.user?.image}
