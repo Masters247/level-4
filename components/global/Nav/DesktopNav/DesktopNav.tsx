@@ -14,6 +14,7 @@ interface Props {
 const DesktopNav: FC<Props> = ({ menuProducts }) => {
   const [dropDown, setDropDown] = useState(false);
   const { data: session } = useSession();
+  console.log(session);
 
   const handleSignIn = () => {
     signIn();
@@ -69,13 +70,15 @@ const DesktopNav: FC<Props> = ({ menuProducts }) => {
       </ul>
       <div className={s.logo} onClick={() => setDropDown(false)}>
         <Link href="/" passHref prefetch={false}>
-          <Image
-            priority
-            src="/level-4-logo.svg"
-            width={120}
-            height={40}
-            alt="Level Four Logo"
-          />
+          <a>
+            <Image
+              priority
+              src="/level-4-logo.svg"
+              width={120}
+              height={40}
+              alt="Level Four Logo"
+            />
+          </a>
         </Link>
       </div>
       <div className={s.navBottom}>
@@ -92,7 +95,10 @@ const DesktopNav: FC<Props> = ({ menuProducts }) => {
             </button>
           ) : (
             <Link href="/account" passHref>
-              <a>{session.user?.name}</a>
+              <div className={s.signedIn}>
+                <a>{session.user?.name}</a>
+                <Account fill />
+              </div>
             </Link>
           )}
         </div>

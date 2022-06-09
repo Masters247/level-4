@@ -21,6 +21,40 @@ export async function getServerSideProps(context: any) {
 
 export default function SignIn({ csrfToken }: any) {
   const [signInView, setSignInView] = useState(true);
+  const [loading, setLoading] = useState(false);
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [name, setName] = useState("");
+  const [organisation, setOrganisation] = useState("");
+
+  const handleSubmit = async (e: any, register: boolean) => {
+    setLoading(true);
+    e.preventDefault();
+    try {
+      if (register) {
+        await fetch("api/register", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            email,
+            password,
+            name,
+            organisation,
+          }),
+        });
+      }
+      await signIn("credentials", {
+        email,
+        password,
+      });
+
+      setLoading(false);
+    } catch (error) {
+      console.error(error);
+    }
+  };
   return (
     <div className={s.pageWrap}>
       {!signInView ? (
@@ -31,11 +65,49 @@ export default function SignIn({ csrfToken }: any) {
             on exclusive product releases, as well as being able to save your
             design progress using our visualiser tool.
           </p>
-          <form method="post" action="/api/auth/signin/email">
-            <input name="csrfToken" type="hidden" defaultValue={csrfToken} />
-
-            <input type="email" id="email" name="email" placeholder="Email" />
-            <button type="submit">Create account</button>
+          <form onSubmit={(e) => handleSubmit(e, true)}>
+            <input
+              type="email"
+              id="email"
+              name="email"
+              placeholder="Email"
+              required
+              onChange={(e) => setEmail(e.target.value)}
+            />
+            <input
+              required
+              type="password"
+              id="password"
+              name="password"
+              placeholder="Password"
+              onChange={(e) => setPassword(e.target.value)}
+            />
+            <input
+              required
+              type="text"
+              id="name"
+              name="name"
+              placeholder="Name"
+              onChange={(e) => setName(e.target.value)}
+            />
+            <input
+              required
+              type="text"
+              id="organisation"
+              name="organisation"
+              placeholder="Organisation/Club"
+              onChange={(e) => setOrganisation(e.target.value)}
+            />
+            <Button
+              type="submit"
+              Component="button"
+              variant={"primary"}
+              style={{ width: "100%" }}
+              loading={loading}
+              className={s.button}
+            >
+              Sign Up
+            </Button>
           </form>
           <p
             className={s.changeView}
@@ -59,14 +131,33 @@ export default function SignIn({ csrfToken }: any) {
         <div className={s.signInForm}>
           <h1>Sign In</h1>
           <p>
-            Sign in with your email to view your Level 4 designs and create
-            more.
+            Sign in with your email and password to view your Level 4 designs
+            and create more.
           </p>
-          <form method="post" action="/api/auth/signin/email">
-            <input name="csrfToken" type="hidden" defaultValue={csrfToken} />
-
-            <input type="email" id="email" name="email" placeholder="Email" />
-            <button type="submit">Sign In</button>
+          <form onSubmit={(e) => handleSubmit(e, false)}>
+            <input
+              type="email"
+              id="email"
+              name="email"
+              placeholder="Email"
+              onChange={(e) => setEmail(e.target.value)}
+            />
+            <input
+              type="password"
+              id="password"
+              name="password"
+              placeholder="Password"
+              onChange={(e) => setPassword(e.target.value)}
+            />
+            <Button
+              type="submit"
+              Component="button"
+              variant={"primary"}
+              style={{ width: "100%" }}
+              loading={loading}
+            >
+              Sign In
+            </Button>
           </form>
           <p
             className={s.changeView}
