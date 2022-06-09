@@ -14,14 +14,14 @@ import { useStore } from "../../lib/state-management/productApp/useProductApp";
 
 const HideCustomiseBox = () => {
   const hideCustomiseBox = useStore((state) => {
-    console.log(state.customiseBox);
+    // console.log(state.customiseBox);
     return state.hideCustomiseBox;
   });
   return <button onClick={hideCustomiseBox}>Hide</button>;
 };
 const ShowCustomiseBox = () => {
   const showCustomiseBox = useStore((state) => {
-    console.log(state.customiseBox);
+    // console.log(state.customiseBox);
     return state.showCustomiseBox;
   });
   return <button onClick={showCustomiseBox}>Show</button>;
