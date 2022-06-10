@@ -68,7 +68,7 @@ const Account: NextPage = () => {
   return (
     <div className={s.accountDetailsWrap}>
       <div className={s.titleWrap}>
-        <h1>Your Account</h1>
+        <h1>My Account</h1>
         <div className={s.loggedInTitle}>
           <button onClick={handleSignOut}>
             <p>Sign Out</p>

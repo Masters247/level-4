@@ -28,7 +28,6 @@ interface Props {
 
 const Designs: FC<Props> = ({ userId }) => {
   const { data, isLoading, isError, mutate } = useCustomImages(userId);
-  console.log(data);
 
   const handleFilter = (category: any) => {
     // console.log("category", category);

@@ -25,6 +25,7 @@ const Customer: FC<Props> = ({ customer, mutate }) => {
   const [name, setName] = useState(customer?.name);
   const [email, setEmail] = useState(customer?.email);
   const [organisation, setOrganisation] = useState(customer?.organisation);
+  const [resetNotify, setResetNotify] = useState(false);
 
   const [loading, setLoading] = useState(false);
 
@@ -50,6 +51,18 @@ const Customer: FC<Props> = ({ customer, mutate }) => {
     } catch (error) {
       console.log(error);
       setLoading(false);
+    }
+  };
+
+  const passwordReset = async () => {
+    setResetNotify(false);
+    try {
+      const res = await fetch(
+        `/api/account/reset-password?email=${customer.email}`
+      );
+      console.log(await res.json());
+    } catch (error) {
+      console.log(error);
     }
   };
 
@@ -109,7 +122,15 @@ const Customer: FC<Props> = ({ customer, mutate }) => {
           <div className={s.details}>
             <h3>Password</h3>
           </div>
-          <div className={s.resetPassword}>Reset Password</div>
+          <div className={s.resetPassword} onClick={passwordReset}>
+            Reset Password
+          </div>
+          {resetNotify && (
+            <p className={s.passwordSuccess}>
+              We&apos;ve sent you a link to reset your password. This is only
+              valid for 10 minutes.
+            </p>
+          )}
         </div>
       )}
 

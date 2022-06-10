@@ -20,7 +20,6 @@
     }
     p {
       font-size: 0.8em;
-      // text-align: right;
     }
 
     input {
@@ -60,6 +59,18 @@
     background-color: $grey-0;
     color: $grey-5;
     cursor: pointer;
+  }
+
+  .passwordSuccess {
+    margin-top: 1em;
+    background-color: rgb(166, 217, 166);
+    padding: 0.5em 1em 0.5em 1em;
+    width: 100%;
+    color: $white;
+
+    @media (min-width: $media-tablet) {
+      width: max-content;
+    }
   }
 }
 .save {

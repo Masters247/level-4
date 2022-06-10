@@ -74,6 +74,7 @@ const ProductView = ({
         },
       ]);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [imageHeight, imageWidth, logo]);
 
   useEffect(() => {
