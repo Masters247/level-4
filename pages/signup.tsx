@@ -6,6 +6,7 @@ import Google from "../components/ui/icons/Google";
 import TwitterBlue from "../components/ui/icons/TwitterBlue";
 import { useRouter } from "next/router";
 import Link from "next/link";
+import Eye from "../components/ui/icons/eye";
 
 export async function getServerSideProps(context: any) {
   const session = await getSession({ req: context.req });
@@ -29,6 +30,7 @@ export default function SignUp() {
   const router = useRouter();
   const authError = router.query.error;
   const [passwordError, setPasswordError] = useState(false);
+  const [showPassword, setShowPassword] = useState(false);
 
   const handleSubmit = async (e: any) => {
     setLoading(true);
@@ -91,16 +93,26 @@ export default function SignUp() {
               Must be at least 8 characters long and contain numbers
             </p>
           )}
-          <input
-            required
-            autoComplete="password"
-            type="password"
-            id="password"
-            name="password"
-            placeholder="Password*"
-            minLength={8}
-            onChange={(e) => setPassword(e.target.value)}
-          />
+
+          <div className={s.passWrapper}>
+            <input
+              required
+              autoComplete="password"
+              type={showPassword ? "text" : "password"}
+              id="password"
+              name="password"
+              placeholder="Password*"
+              minLength={8}
+              onChange={(e) => setPassword(e.target.value)}
+            />
+            <div
+              className={s.eye}
+              onClick={() => setShowPassword(!showPassword)}
+            >
+              <Eye />
+            </div>
+          </div>
+
           <input
             required
             autoComplete="name"

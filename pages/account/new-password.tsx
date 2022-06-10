@@ -2,6 +2,7 @@ import { NextPage } from "next";
 import { signIn } from "next-auth/react";
 import { useState } from "react";
 import { Button } from "../../components/ui/Button";
+import Eye from "../../components/ui/icons/eye";
 import s from "../../styles/pages/signIn.module.scss";
 
 const NewPassword: NextPage = () => {
@@ -9,6 +10,7 @@ const NewPassword: NextPage = () => {
   const [password, setPassword] = useState("");
   const [passwordError, setPasswordError] = useState(false);
   const [error, setError] = useState(false);
+  const [showPassword, setShowPassword] = useState(false);
 
   const handleSubmit = async (e: any) => {
     setLoading(true);
@@ -56,15 +58,24 @@ const NewPassword: NextPage = () => {
               Must be at least 8 characters long and contain numbers
             </p>
           )}
-          <input
-            type="password"
-            id="password"
-            name="password"
-            placeholder="Password*"
-            minLength={8}
-            required
-            onChange={(e) => setPassword(e.target.value)}
-          />
+          <div className={s.passWrapper}>
+            <input
+              required
+              autoComplete="password"
+              type={showPassword ? "text" : "password"}
+              id="password"
+              name="password"
+              placeholder="Password*"
+              minLength={8}
+              onChange={(e) => setPassword(e.target.value)}
+            />
+            <div
+              className={s.eye}
+              onClick={() => setShowPassword(!showPassword)}
+            >
+              <Eye />
+            </div>
+          </div>
           <Button
             type="submit"
             Component="button"
