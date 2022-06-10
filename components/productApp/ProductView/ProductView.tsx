@@ -8,18 +8,17 @@ import s from "./productView.module.scss";
 import cn from "classnames";
 
 const ProductView = ({
-  control,
   download,
   embelishment,
+  handleColourClick,
   handleSaveCustomImage,
   handleScreenShot,
-  handleColourClick,
   image,
   productColoutVariants,
   products,
   saved,
-  setColourChangeProductVariant,
-  setControl,
+  // setColourChangeProductVariant,
+  showHideDragResizeDiv,
 }: any) => {
   // gets ratio of image - used to constrain resizer to the ratio of image
   const [ratio, setRatio]: any = useState();
@@ -252,9 +251,9 @@ const ProductView = ({
     setCount(count + 1);
   };
 
-  const handleControls = () => {
-    setControl(!control);
-  };
+  // const handleControls = () => {
+  //   setControl(!control);
+  // };
 
   const handleImageUpload = () => {
     setImageUpload(!imageUpload);
@@ -283,7 +282,9 @@ const ProductView = ({
           </div>
           <div className={s.productViewport}>
             <div
-              className={`${!control ? s.customArear : s.customArearHide}`}
+              className={`${
+                showHideDragResizeDiv ? s.customArear : s.customArearHide
+              }`}
               ref={containerRef}
             >
               <animated.div
@@ -343,9 +344,9 @@ const ProductView = ({
         products={products}
         redoActive={redoActive}
         saved={saved}
-        setColourChangeProductVariant={setColourChangeProductVariant}
-        showhide={handleControls}
-        state={control}
+        // setColourChangeProductVariant={setColourChangeProductVariant}
+        // showhide={handleControls}
+        // state={control}
         stateUploader={imageUpload}
         undoActive={undoActive}
         vertical={handleVertical}

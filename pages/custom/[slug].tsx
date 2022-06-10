@@ -12,21 +12,6 @@ import html2canvas from "html2canvas";
 import Link from "next/link";
 import { useStore } from "../../lib/state-management/productApp/useProductApp";
 
-const HideCustomiseBox = () => {
-  const hideCustomiseBox = useStore((state) => {
-    // console.log(state.customiseBox);
-    return state.hideCustomiseBox;
-  });
-  return <button onClick={hideCustomiseBox}>Hide</button>;
-};
-const ShowCustomiseBox = () => {
-  const showCustomiseBox = useStore((state) => {
-    // console.log(state.customiseBox);
-    return state.showCustomiseBox;
-  });
-  return <button onClick={showCustomiseBox}>Show</button>;
-};
-
 const download = require("downloadjs");
 
 export async function getStaticPaths() {
@@ -91,10 +76,10 @@ const Custom: NextPage<Props> = ({ queryGraphCms, customPage }) => {
 
   const [downloadCustomImage, setDownloadCustomImage] = useState(0);
 
-  const [colourChangeProductVariant, setColourChangeProductVariant] =
-    useState(0);
+  // const [colourChangeProductVariant, setColourChangeProductVariant] =
+  //   useState(0);
 
-  const [control, setControl] = useState(true);
+  const [showHideDragResizeDiv, setShowHidDragResizeDiv] = useState(true);
 
   const { data: session }: any = useSession();
 
@@ -113,8 +98,8 @@ const Custom: NextPage<Props> = ({ queryGraphCms, customPage }) => {
 
   const handleScreenShot = () => {
     setDownloadCustomImage(1);
-    setControl(false);
-    useStore((state) => state.hideCustomiseBox);
+    setShowHidDragResizeDiv(false);
+    // useStore((state) => state.hideCustomiseBox);
     const takeScreenShot = () => {
       html2canvas(document.getElementById("capture") as HTMLElement, {
         useCORS: true,
@@ -126,8 +111,8 @@ const Custom: NextPage<Props> = ({ queryGraphCms, customPage }) => {
           setTimeout(() => setDownloadCustomImage(0), 2000);
         })
         .then(() => {
-          setControl(true);
-          useStore((state) => state.showCustomiseBox);
+          setShowHidDragResizeDiv(true);
+          // useStore((state) => state.showCustomiseBox);
         })
         .catch((err) => {
           console.log("IMAGE DOWNLOAD ERROR: ", err);
@@ -138,7 +123,8 @@ const Custom: NextPage<Props> = ({ queryGraphCms, customPage }) => {
 
   const handleSaveCustomImage = () => {
     setSaveCustomImage(1);
-    setControl(false);
+    setShowHidDragResizeDiv(false);
+    // useStore((state) => state.hideCustomiseBox);
     const takeScreenShot = () => {
       html2canvas(document.getElementById("capture") as HTMLElement, {
         useCORS: true,
@@ -157,7 +143,8 @@ const Custom: NextPage<Props> = ({ queryGraphCms, customPage }) => {
           });
         })
         .then(() => {
-          setControl(true),
+          setShowHidDragResizeDiv(true),
+            // useStore((state) => state.showCustomiseBox);
             setSaveCustomImage(2),
             setTimeout(() => setSaveCustomImage(0), 2000);
         })
@@ -170,14 +157,12 @@ const Custom: NextPage<Props> = ({ queryGraphCms, customPage }) => {
 
   return (
     <div className={s.pageWrap}>
-      <HideCustomiseBox />
-      <ShowCustomiseBox />
       <div
         className={s.appWrap}
         style={{ paddingBottom: `${!session && "10em"}` }}
       >
         <ProductView
-          control={control}
+          // showHideDragResizeDiv - passed down one level for css show hide of dragResizeDiv
           download={downloadCustomImage}
           embelishment={productEmbelishment}
           handleColourClick={handleColourClick}
@@ -187,7 +172,7 @@ const Custom: NextPage<Props> = ({ queryGraphCms, customPage }) => {
           products={productPage}
           productColoutVariants={productVariantColours}
           saved={saveCustomImage}
-          setControl={setColour}
+          showHideDragResizeDiv={showHideDragResizeDiv}
         />
       </div>
 
