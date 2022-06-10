@@ -56,9 +56,16 @@ const Designs: FC<Props> = ({ userId }) => {
             </div>
           </div> */}
           <div className={s.designs}>
-            {data.map((d: Design, i: number) => (
-              <DesignsProduct design={d} key={i} mutate={mutate} />
-            ))}
+            {data?.length !== 0 ? (
+              data.map((d: Design, i: number) => (
+                <DesignsProduct design={d} key={i} mutate={mutate} />
+              ))
+            ) : (
+              <div className={s.noDesigns}>
+                <h2>No designs</h2>
+                <p>Head to a product page to start creating your designs</p>
+              </div>
+            )}
           </div>
         </>
       )}

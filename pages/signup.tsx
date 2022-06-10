@@ -1,6 +1,6 @@
 import s from "../styles/pages/signIn.module.scss";
 import { getCsrfToken, getSession, signIn } from "next-auth/react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Button } from "../components/ui/Button";
 import Google from "../components/ui/icons/Google";
 import TwitterBlue from "../components/ui/icons/TwitterBlue";
@@ -20,51 +20,104 @@ export async function getServerSideProps(context: any) {
   };
 }
 
-export default function SignIn() {
+export default function SignUp() {
   const [loading, setLoading] = useState(false);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [name, setName] = useState("");
+  const [organisation, setOrganisation] = useState("");
   const router = useRouter();
-  const error = router.query.error;
+  const authError = router.query.error;
+  const [passwordError, setPasswordError] = useState(false);
+
+  useEffect(() => {
+    const passes = password.match("^(?=.*?[a-z])(?=.*?[0-9]).{8,}$");
+    if (password.length > 3 && !passes) {
+      setPasswordError(true);
+    } else {
+      setPasswordError(false);
+    }
+  }, [password]);
 
   const handleSubmit = async (e: any) => {
     setLoading(true);
     e.preventDefault();
     try {
+      await fetch("api/account/register", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          email,
+          password,
+          name,
+          organisation,
+        }),
+      });
+
       await signIn("credentials", {
         email,
         password,
       });
+
       setLoading(false);
     } catch (error) {
       console.error(error);
+      setLoading(false);
     }
   };
   return (
     <div className={s.pageWrap}>
       <div className={s.signInForm}>
-        <h1>Sign In</h1>
+        <h1>Create Account</h1>
         <p>
-          Sign in with your email and password to view your Level 4 designs and
-          create more.
+          Create a Level 4 account today to make sure you don&apos;t miss out on
+          exclusive product releases, as well as being able to save your design
+          progress using our visualiser tool.
         </p>
         <form onSubmit={handleSubmit}>
-          {error && <p className={s.error}>Invalid passowrd or email</p>}
+          {authError && <p className={s.error}>Invalid passowrd or email</p>}
           <input
             type="email"
             id="email"
             name="email"
-            placeholder="Email"
+            placeholder="Email*"
+            autoComplete="email"
             required
             onChange={(e) => setEmail(e.target.value)}
           />
+          {passwordError && (
+            <p className={s.error}>
+              Must be at least 8 characters long and contain numbers
+            </p>
+          )}
           <input
+            required
+            autoComplete="password"
             type="password"
             id="password"
             name="password"
-            placeholder="Password"
-            required
+            placeholder="Password*"
+            minLength={8}
             onChange={(e) => setPassword(e.target.value)}
+          />
+          <input
+            required
+            autoComplete="name"
+            type="text"
+            id="name"
+            name="name"
+            placeholder="Name*"
+            onChange={(e) => setName(e.target.value)}
+          />
+          <input
+            required
+            type="text"
+            id="organisation"
+            name="organisation"
+            placeholder="Organisation/Club*"
+            onChange={(e) => setOrganisation(e.target.value)}
           />
           <Button
             type="submit"
@@ -73,11 +126,11 @@ export default function SignIn() {
             style={{ width: "100%" }}
             loading={loading}
           >
-            Sign In
+            Sign Up
           </Button>
         </form>
-        <Link href="/signup" passHref>
-          <p className={s.changeView}>Dont have an account yet?</p>
+        <Link href="/signin" passHref>
+          <p className={s.changeView}>Already have an account?</p>
         </Link>
         <div className={s.line}></div>
         <Button variant="secondary" onClick={() => signIn("google")}>

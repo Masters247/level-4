@@ -1,22 +1,62 @@
 import NextAuth from "next-auth";
-import EmailProvider from "next-auth/providers/email";
 import GoogleProvider from "next-auth/providers/google";
 import TwitterProvider from "next-auth/providers/twitter";
 import { PrismaAdapter } from "@next-auth/prisma-adapter";
 import { prisma } from "../../../lib/prisma";
 import { NextApiRequest, NextApiResponse } from "next";
 const mail = require("@sendgrid/mail");
+import CredentialsProvider from "next-auth/providers/credentials";
+const bcrypt = require("bcrypt");
+
+const confirmPasswordHash = (plainPassword: string, hashedPassword: string) => {
+  return new Promise((resolve) => {
+    bcrypt.compare(
+      plainPassword,
+      hashedPassword,
+      function (err: any, res: unknown) {
+        resolve(res);
+      }
+    );
+  });
+};
 
 mail.setApiKey(process.env.SENDGRID_API_KEY);
 
 export default async function auth(req: NextApiRequest, res: NextApiResponse) {
-  if (req.method === "HEAD") {
-    return res.status(200);
-  }
-
   return await NextAuth(req, res, {
     adapter: PrismaAdapter(prisma),
+    debug: process.env.NODE_ENV === "development",
+    session: {
+      strategy: "jwt",
+    },
     providers: [
+      CredentialsProvider({
+        credentials: {},
+        async authorize(credentials: any, req) {
+          const user = await prisma.user.findFirst({
+            where: {
+              email: credentials.email,
+            },
+            include: {
+              secret: true,
+            },
+          });
+
+          if (user) {
+            const checkPassword = await confirmPasswordHash(
+              credentials.password,
+              user.secret?.password!
+            );
+            if (checkPassword) {
+              return user;
+            } else {
+              return null;
+            }
+          } else {
+            return null;
+          }
+        },
+      }),
       GoogleProvider({
         clientId: process.env.GOOGLE_CLIENT_ID!,
         clientSecret: process.env.GOOGLE_CLIENT_SECRET!,
@@ -25,41 +65,15 @@ export default async function auth(req: NextApiRequest, res: NextApiResponse) {
         clientId: process.env.TWITTER_CLIENT_ID!,
         clientSecret: process.env.TWITTER_CLIENT_SECRET!,
       }),
-      EmailProvider({
-        from: process.env.SMTP_FROM,
-        async sendVerificationRequest({
-          identifier: email,
-          url,
-          provider: { from },
-        }) {
-          // Sort data for customer email
-          const emailData = {
-            to: `${email}`,
-            from: `${from}`,
-            template_id: "d-7b99c1ad5f1a4940aaa07604ab007324",
-            dynamic_template_data: {
-              url: url,
-              user: email,
-            },
-          };
-          // Send signIn email to customer
-          const send = await mail.send(emailData);
-          console.log("Log In Request: ", send);
-        },
-      }),
     ],
     pages: {
       signIn: "/signin",
       newUser: "/account/new-account",
-      verifyRequest: "/account/verify-request",
       signOut: "/",
     },
     callbacks: {
-      async session({ session, token, user }) {
-        // @ts-ignore
-        session.user?.userId = user.id;
-        // @ts-ignore
-        session.user.organisation = user.organisation;
+      async session({ session, token }) {
+        session!.user!.userId = token.sub;
         return session;
       },
     },

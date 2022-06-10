@@ -38,6 +38,10 @@
         &:hover {
           opacity: 50%;
         }
+
+        .catImage {
+          background-color: $grey-1;
+        }
       }
     }
   }
@@ -105,9 +109,9 @@
     }
 
     .account {
-      // display: flex;
-      // align-items: center;
-      // justify-content: center;
+      display: flex;
+      align-items: center;
+      justify-content: center;
 
       a {
         text-transform: uppercase;
@@ -119,6 +123,22 @@
 
         &:hover {
           opacity: 50%;
+        }
+      }
+
+      .signedIn {
+        display: flex;
+        align-items: center;
+        a {
+          font-weight: 300;
+          margin-right: 1em;
+        }
+
+        .profileImage {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          border-radius: 50%;
         }
       }
     }
