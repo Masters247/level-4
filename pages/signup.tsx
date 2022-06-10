@@ -6,7 +6,7 @@ import Google from "../components/ui/icons/Google";
 import TwitterBlue from "../components/ui/icons/TwitterBlue";
 import { useRouter } from "next/router";
 import Link from "next/link";
-import Eye from "../components/ui/icons/eye";
+import Eye from "../components/ui/icons/Eye";
 
 export async function getServerSideProps(context: any) {
   const session = await getSession({ req: context.req });

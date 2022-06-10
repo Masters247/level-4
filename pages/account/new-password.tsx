@@ -2,7 +2,8 @@ import { NextPage } from "next";
 import { signIn } from "next-auth/react";
 import { useState } from "react";
 import { Button } from "../../components/ui/Button";
-import Eye from "../../components/ui/icons/eye";
+import Eye from "../../components/ui/icons/Eye";
+
 import s from "../../styles/pages/signIn.module.scss";
 
 const NewPassword: NextPage = () => {
