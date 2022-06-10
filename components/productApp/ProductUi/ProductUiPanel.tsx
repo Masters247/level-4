@@ -5,22 +5,20 @@ import HorizontalAlign from "../../ui/icons/HorizontalAlign";
 import VerticalAlign from "../../ui/icons/VerticalAlign";
 import ProductButtons from "./ProductButtons";
 import ProductColourButtons from "../ProductColourButtons/ProductColourButtons";
-import { useStore } from "../stateProductApp/store";
+import { useStore } from "../store";
 
 const ProductUiPanel = ({
-  products,
-  center,
-  vertical,
-  horizontal,
-  handleSaveCustomImage,
-  handleImageUpload,
-  handleScreenShot,
-  stateUploader,
-  handleUndo,
-  handleRedo,
-  undoActive,
-  redoActive,
   actionsTaken,
+  center,
+  horizontal,
+  handleRedo,
+  handleSaveCustomImage,
+  handleScreenShot,
+  handleUndo,
+  products,
+  redoActive,
+  undoActive,
+  vertical,
 }: any) => {
   const controler = [
     {
@@ -48,7 +46,7 @@ const ProductUiPanel = ({
 
   return (
     <div className={cn(s.productUiWrap)}>
-      <h1>{products.name}</h1>
+      <h1>{store.productName}</h1>
       <div className={s.uiControlsWrap}>
         <h2>Controls:</h2>
         <div className={s.controlsWrap}>
@@ -75,8 +73,6 @@ const ProductUiPanel = ({
         <p>{store.productEmbelishment}</p>
       </div>
       <ProductButtons
-        stateUploader={stateUploader}
-        handleImageUpload={handleImageUpload}
         handleScreenShot={handleScreenShot}
         handleSaveCustomImage={handleSaveCustomImage}
         handleUndo={handleUndo}

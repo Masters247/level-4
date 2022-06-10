@@ -4,10 +4,11 @@ import { useSession } from "next-auth/react";
 import ProductButton from "./ProductButton";
 import Spinner from "../../ui/icons/Spinner";
 import { useState } from "react";
-import { useStore } from "../stateProductApp/store";
+import { useStore } from "../store";
 
 const ProductButtons = ({
   handleScreenShot,
+  // Possibly remove
   handleImageUpload,
   handleSaveCustomImage,
   stateUploader,
@@ -43,9 +44,9 @@ const ProductButtons = ({
       <ProductButton
         className={s.newLogoButton}
         variant="primary"
-        onClick={handleImageUpload}
+        onClick={() => store.setImageUploader(!store.imageUploader)}
       >
-        {!stateUploader ? <>Close Image Uploader</> : <>Add New Logo</>}
+        {store.imageUploader ? <>Close Image Uploader</> : <>Add New Logo</>}
       </ProductButton>
       <ProductButton
         undo={true}

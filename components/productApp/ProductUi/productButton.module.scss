@@ -52,14 +52,29 @@
   min-height: 2em;
   border: 1px dashed $grey-4;
   color: $black;
+  animation: flash 3s infinite;
+  animation-timing-function: ease-in-out;
 
   &:hover {
     background-color: $button-primary;
     border: 1px dashed $button-primary;
     color: $white;
+    animation: none;
     .icon {
       fill: $white;
     }
+  }
+}
+
+@keyframes flash {
+  0% {
+    opacity: 1;
+    border: 1px dashed $grey-4;
+  }
+
+  50% {
+    color: $red-1;
+    border: 1px dashed $red-1;
   }
 }
 .secondary {

@@ -8,10 +8,10 @@ import { GraphQLClient, gql } from "graphql-request";
 import { useSession } from "next-auth/react";
 import { useState, useEffect } from "react";
 import customPageQuery from "../../lib/graphcms-querys/customPageQuery";
+import customisePageQuery from "../../lib/graphcms-querys/customisePageQuery";
 import html2canvas from "html2canvas";
 import Link from "next/link";
-import { useStore } from "../../components/productApp/stateProductApp/store";
-import { ConnectContactLens } from "aws-sdk";
+import { useStore } from "../../components/productApp/store";
 
 const download = require("downloadjs");
 
@@ -36,30 +36,32 @@ export async function getStaticProps({ params }: any) {
   });
 
   const customPage = await customPageQuery();
+  const queryGraphCms = await customisePageQuery(params.slug);
 
-  const query = gql`
-  query Product {
-    productPage(where: {productSlug: "${params.slug}"}) {
-      name
-      productCategory
-      productEmbelishment
-      productVariantColours {
-        customImage {
-          url(transformation: {image: {resize: {height: 500, width: 500}}})
-        }
-        colour {
-          hex
-        }
-        secondaryColour {
-          hex
-        }
-        shape
-      }
-    }
-  }
-  `;
+  // const query = gql`
+  // query Product {
+  //   productPage(where: {productSlug: "${params.slug}"}) {
+  //     name
+  //     productCategory
+  //     productEmbelishment
+  //     productVariantColours {
+  //       customImage {
+  //         url(transformation: {image: {resize: {height: 500, width: 500}}})
+  //       }
+  //       colour {
+  //         hex
+  //       }
+  //       secondaryColour {
+  //         hex
+  //       }
+  //       shape
+  //     }
+  //   }
+  // }
+  // `;
 
-  const queryGraphCms = await graphcms.request(query);
+  // const queryGraphCms = await graphcms.request(customisePage);
+  // const queryGraphCms = await graphcms.request(query);
 
   return {
     props: { queryGraphCms, customPage },
@@ -75,11 +77,10 @@ interface Props {
 const Custom: NextPage<Props> = ({ queryGraphCms, customPage }) => {
   const { data: session }: any = useSession();
 
-  const [colour, setColour] = useState(0);
-
   const [showHideDragResizeDiv, setShowHidDragResizeDiv] = useState(true);
 
   const { productPage } = queryGraphCms;
+
   const { name, productCategory, productEmbelishment, productVariantColours } =
     productPage;
 
@@ -91,11 +92,8 @@ const Custom: NextPage<Props> = ({ queryGraphCms, customPage }) => {
     const embelishment =
       productEmbelishment === null ? "Embroidered" : productEmbelishment;
     store.setProductEmbelishment(embelishment);
+    store.setProductName(name);
   }, []);
-
-  // const handleColourClick = (i: any) => {
-  //   setColour(i);
-  // };
 
   const handleScreenShot = () => {
     store.setDownloadCustomImage(1);
@@ -156,6 +154,8 @@ const Custom: NextPage<Props> = ({ queryGraphCms, customPage }) => {
     setTimeout(() => takeScreenShot(), 1000);
   };
 
+  console.log("products", productPage.name);
+
   return (
     <div className={s.pageWrap}>
       <div
@@ -167,7 +167,6 @@ const Custom: NextPage<Props> = ({ queryGraphCms, customPage }) => {
           handleSaveCustomImage={handleSaveCustomImage}
           image={productVariantColours[store.productColour].customImage}
           products={productPage}
-          productColoutVariants={productVariantColours}
           showHideDragResizeDiv={showHideDragResizeDiv}
         />
       </div>

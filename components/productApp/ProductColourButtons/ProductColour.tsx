@@ -1,6 +1,6 @@
 import s from "./productColour.module.scss";
 import cn from "classnames";
-import { useStore } from "../stateProductApp/store";
+import { useStore } from "../store";
 const ProductColour = ({ hex, i, hexSecondary, shape }: any) => {
   const store = useStore();
 

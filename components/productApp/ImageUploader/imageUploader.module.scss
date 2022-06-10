@@ -8,7 +8,7 @@
 }
 
 .imageUploaderWrap {
-  border: 1px dashed $button-primary;
+  border: 1px solid $button-primary;
   padding: 1em;
   @include boxShadow;
   background-color: $white;
@@ -18,8 +18,9 @@
   position: absolute;
   width: calc(100vw - 0em);
   z-index: 200;
-  max-height: 10.5em;
+  // max-height: 10.5em;
   overflow-y: scroll;
+  height: 21.6em;
 
   .uploadImageWrap {
     position: relative;

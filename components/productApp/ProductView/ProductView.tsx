@@ -6,12 +6,12 @@ import ImageUploader from "../ImageUploader/ImageUploader";
 import ProductUiPanel from "../ProductUi/ProductUiPanel";
 import s from "./productView.module.scss";
 import cn from "classnames";
+import { useStore } from "../store";
 
 const ProductView = ({
   handleSaveCustomImage,
   handleScreenShot,
   image,
-  productColoutVariants,
   products,
   showHideDragResizeDiv,
 }: any) => {
@@ -23,14 +23,9 @@ const ProductView = ({
   const [ratio, setRatio]: any = useState();
   const [undoActive, setUndoActive] = useState(false);
   const [redoActive, setRedoActive] = useState(false);
-
-  // count keeps track of actionsArr
+  const store = useStore();
   const [count, setCount] = useState(0);
   const [logo, setLogo] = useState(null);
-
-  // if true image uploader shows in ui
-  const [imageUpload, setImageUpload] = useState(true);
-
   const [imageWidth, setImageWidth] = useState(80);
   const [imageHeight, setImageHeight] = useState(80);
 
@@ -250,18 +245,6 @@ const ProductView = ({
     setCount(count + 1);
   };
 
-  const handleImageUpload = () => {
-    setImageUpload(!imageUpload);
-    window.scrollTo({
-      top: 0,
-      behavior: "smooth",
-    });
-  };
-
-  const closeImageUpload = () => {
-    setImageUpload(true);
-  };
-
   const reset = () => {
     setCount(0);
     setActionsArr([]);
@@ -270,7 +253,10 @@ const ProductView = ({
 
   return (
     <div className={s.appWrap}>
-      <div className={s.productViewportContainer} onClick={closeImageUpload}>
+      <div
+        className={s.productViewportContainer}
+        onClick={() => store.setImageUploader(false)}
+      >
         <div id="capture" className={s.imageCaptureWrap}>
           <div className={s.imageWrap}>
             <img src={image.url} width="500px" height="500px" alt="product" />
@@ -313,10 +299,10 @@ const ProductView = ({
           </div>
         </div>
       </div>
-      {!imageUpload && (
+
+      {store.imageUploader && (
         <ImageUploader
           setLogo={setLogo}
-          handleImageUpload={handleImageUpload}
           setImageWidth={setImageWidth}
           setImageHeight={setImageHeight}
           reset={reset}
@@ -326,18 +312,13 @@ const ProductView = ({
       <ProductUiPanel
         actionsTaken={logo}
         center={handleCenter}
-        // handle state handleColourClick
-        // handleColourClick={handleColourClick}
-        handleImageUpload={handleImageUpload}
         handleRedo={handleRedo}
         handleSaveCustomImage={handleSaveCustomImage}
         handleScreenShot={handleScreenShot}
         handleUndo={handleUndo}
         horizontal={handleHorizontal}
-        productColoutVariants={productColoutVariants}
         products={products}
         redoActive={redoActive}
-        stateUploader={imageUpload}
         undoActive={undoActive}
         vertical={handleVertical}
       />

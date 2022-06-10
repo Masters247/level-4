@@ -7,10 +7,10 @@ import Remove from "../../ui/icons/Remove";
 import ImageUploading from "react-images-uploading";
 import ImageLogo from "./ImageLogo";
 import ProductButton from "../ProductUi/ProductButton";
+import { useStore } from "../store";
 
 const ImageUploader = ({
   setLogo,
-  handleImageUpload,
   setImageWidth,
   setImageHeight,
   reset,
@@ -19,6 +19,7 @@ const ImageUploader = ({
   const [images, setImages] = useState([]);
   const [selectImage, setSelectImage] = useState(0);
   const maxNumber = 10;
+  const store = useStore();
 
   const onChange = (imageList: any) => {
     reset();
@@ -84,7 +85,6 @@ const ImageUploader = ({
           imageList,
           onImageUpload,
           onImageRemoveAll,
-          onImageUpdate,
           onImageRemove,
           isDragging,
           dragProps,
@@ -101,7 +101,10 @@ const ImageUploader = ({
               <ProductButton variant="tertiary-b" onClick={onImageRemoveAll}>
                 Remove all
               </ProductButton>
-              <ProductButton variant="primary-b" onClick={handleImageUpload}>
+              <ProductButton
+                variant="primary-b"
+                onClick={() => store.setImageUploader(false)}
+              >
                 <Remove styles={s.remove} />
               </ProductButton>
             </div>
