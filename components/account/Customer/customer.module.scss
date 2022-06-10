@@ -54,11 +54,10 @@
   }
 
   .resetPassword {
-    padding: 0.5em 1em 0.5em 1em;
-    width: max-content;
-    background-color: $grey-0;
-    color: $grey-5;
-    cursor: pointer;
+    margin-top: 1em;
+    @media (min-width: $media-tablet) {
+      width: max-content;
+    }
   }
 
   .passwordSuccess {

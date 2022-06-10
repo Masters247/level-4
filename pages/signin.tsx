@@ -49,7 +49,7 @@ export default function SignIn() {
           create more.
         </p>
         <form onSubmit={handleSubmit}>
-          {error && <p className={s.error}>Invalid passowrd or email</p>}
+          {error && <p className={s.error}>Invalid password or email</p>}
           <input
             type="email"
             id="email"
@@ -78,6 +78,9 @@ export default function SignIn() {
         </form>
         <Link href="/signup" passHref>
           <p className={s.changeView}>Dont have an account yet?</p>
+        </Link>
+        <Link href="/forgot-password" passHref>
+          <p className={s.changeView}>Forgot password?</p>
         </Link>
         <div className={s.line}></div>
         <Button variant="secondary" onClick={() => signIn("google")}>

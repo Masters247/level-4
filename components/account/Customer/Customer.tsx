@@ -1,5 +1,4 @@
 import { FC } from "react";
-import Pencil from "../../ui/icons/Pencil";
 import s from "./customer.module.scss";
 import { useState } from "react";
 import { Button } from "../../ui/Button";
@@ -26,8 +25,8 @@ const Customer: FC<Props> = ({ customer, mutate }) => {
   const [email, setEmail] = useState(customer?.email);
   const [organisation, setOrganisation] = useState(customer?.organisation);
   const [resetNotify, setResetNotify] = useState(false);
-
   const [loading, setLoading] = useState(false);
+  const [passwordLoading, setPasswordLoading] = useState(false);
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -55,14 +54,24 @@ const Customer: FC<Props> = ({ customer, mutate }) => {
   };
 
   const passwordReset = async () => {
+    setPasswordLoading(true);
     setResetNotify(false);
     try {
-      const res = await fetch(
-        `/api/account/reset-password?email=${customer.email}`
+      const resetStart = await fetch(
+        `/api/account/reset-password-email?email=${customer.email}`
       );
-      console.log(await res.json());
-    } catch (error) {
-      console.log(error);
+      const res = await resetStart.json();
+
+      if (res.status === "success") {
+        setPasswordLoading(false);
+        setResetNotify(true);
+      } else {
+        setPasswordLoading(false);
+        setResetNotify(false);
+        throw new Error(res.message);
+      }
+    } catch (error: any) {
+      console.log("Reset Error:", error.message);
     }
   };
 
@@ -122,9 +131,14 @@ const Customer: FC<Props> = ({ customer, mutate }) => {
           <div className={s.details}>
             <h3>Password</h3>
           </div>
-          <div className={s.resetPassword} onClick={passwordReset}>
+          <Button
+            className={s.resetPassword}
+            onClick={passwordReset}
+            variant="secondary"
+            loading={passwordLoading}
+          >
             Reset Password
-          </div>
+          </Button>
           {resetNotify && (
             <p className={s.passwordSuccess}>
               We&apos;ve sent you a link to reset your password. This is only
