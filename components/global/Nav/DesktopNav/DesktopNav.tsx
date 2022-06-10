@@ -35,13 +35,15 @@ const DesktopNav: FC<Props> = ({ menuProducts }) => {
           {menuProducts?.map((item: Category) => (
             <Link href={`/${item.categoriesSlug}`} passHref key={item.id}>
               <li>
-                <Image
-                  src={item.heroImage[0].url}
-                  layout="responsive"
-                  alt={`Product - ${item.title}`}
-                  width={400}
-                  height={400}
-                />
+                <div className={s.catImage}>
+                  <Image
+                    src={item?.homePageOrLinkImage.url}
+                    layout="responsive"
+                    alt={`Product - ${item.title}`}
+                    width={400}
+                    height={400}
+                  />
+                </div>
                 <a>{item.title}</a>
               </li>
             </Link>

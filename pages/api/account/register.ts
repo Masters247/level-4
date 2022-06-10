@@ -18,6 +18,7 @@ export default async function handler(
           name: name,
           organisation: organisation,
           image: `https://ui-avatars.com/api/?name=${name}`,
+          emailSignup: true,
         },
       });
 

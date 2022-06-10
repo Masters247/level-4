@@ -84,7 +84,7 @@ const Nav: FC<Props> = ({ menuProducts }) => {
               </button>
             ) : (
               <Link href="/account" passHref>
-                <div className={s.signedIn}>
+                <div className={s.signedIn} onClick={handleMenuToggle}>
                   <a>My Account</a>
                   {session.user?.image ? (
                     <Image

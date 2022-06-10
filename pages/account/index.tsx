@@ -9,9 +9,9 @@ import { useState } from "react";
 import Image from "next/image";
 import useSWR from "swr";
 
-const fetcher = (email: any) => fetch(email).then((res) => res.json());
+const fetcher = (email: string) => fetch(email).then((res) => res.json());
 
-function useAccount(email: any) {
+function useAccount(email: string) {
   const {
     data: user,
     error,
@@ -96,7 +96,9 @@ const Account: NextPage = () => {
           }
         >
           {isLoading ? (
-            <p>is Loading...</p>
+            <div className={s.loggingOut}>
+              <Image src={"/loadingIcon.gif"} width={50} height={50} alt="" />
+            </div>
           ) : (
             <Customer customer={user} mutate={mutate} />
           )}
@@ -108,7 +110,13 @@ const Account: NextPage = () => {
             !isDetailsRendered ? s.accountDetailsShow : s.accountDetailsHide
           }
         >
-          {isLoading ? <p>is Loading....</p> : <Designs userId={user.id} />}
+          {isLoading ? (
+            <div className={s.loggingOut}>
+              <Image src={"/loadingIcon.gif"} width={50} height={50} alt="" />
+            </div>
+          ) : (
+            <Designs userId={user.id} />
+          )}
         </div>
       )}
     </div>

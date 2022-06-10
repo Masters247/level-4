@@ -11,6 +11,9 @@ export default async function handler(
     where: {
       email: email,
     },
+    include: {
+      accounts: true,
+    },
   });
 
   const user = await JSON.parse(JSON.stringify(getUser));
