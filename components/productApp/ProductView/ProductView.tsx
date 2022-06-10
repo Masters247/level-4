@@ -8,7 +8,7 @@ import s from "./productView.module.scss";
 import cn from "classnames";
 
 const ProductView = ({
-  download,
+  // download,
   embelishment,
   handleColourClick,
   handleSaveCustomImage,
@@ -16,6 +16,7 @@ const ProductView = ({
   image,
   productColoutVariants,
   products,
+  // replace saveCustomImage
   saved,
   // setColourChangeProductVariant,
   showHideDragResizeDiv,
@@ -331,7 +332,6 @@ const ProductView = ({
       <ProductUiPanel
         actionsTaken={logo}
         center={handleCenter}
-        download={download}
         embelishment={embelishment}
         handleColourClick={handleColourClick}
         handleImageUpload={handleImageUpload}
@@ -343,10 +343,8 @@ const ProductView = ({
         productColoutVariants={productColoutVariants}
         products={products}
         redoActive={redoActive}
-        saved={saved}
-        // setColourChangeProductVariant={setColourChangeProductVariant}
-        // showhide={handleControls}
-        // state={control}
+        // replace saveCustomImage
+        // saved={saved}
         stateUploader={imageUpload}
         undoActive={undoActive}
         vertical={handleVertical}

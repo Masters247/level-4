@@ -10,7 +10,7 @@ import { useState } from "react";
 import customPageQuery from "../../lib/graphcms-querys/customPageQuery";
 import html2canvas from "html2canvas";
 import Link from "next/link";
-import { useStore } from "../../lib/state-management/productApp/useProductApp";
+import { useStore } from "../../components/productApp/stateProductApp/store";
 
 const download = require("downloadjs");
 
@@ -72,12 +72,8 @@ interface Props {
 }
 
 const Custom: NextPage<Props> = ({ queryGraphCms, customPage }) => {
-  const [saveCustomImage, setSaveCustomImage] = useState(0);
-
-  const [downloadCustomImage, setDownloadCustomImage] = useState(0);
-
-  // const [colourChangeProductVariant, setColourChangeProductVariant] =
-  //   useState(0);
+  const store = useStore();
+  // const [saveCustomImage, setSaveCustomImage] = useState(0);
 
   const [showHideDragResizeDiv, setShowHidDragResizeDiv] = useState(true);
 
@@ -97,9 +93,9 @@ const Custom: NextPage<Props> = ({ queryGraphCms, customPage }) => {
   };
 
   const handleScreenShot = () => {
-    setDownloadCustomImage(1);
+    store.setDownloadCustomImage(1);
+
     setShowHidDragResizeDiv(false);
-    // useStore((state) => state.hideCustomiseBox);
     const takeScreenShot = () => {
       html2canvas(document.getElementById("capture") as HTMLElement, {
         useCORS: true,
@@ -107,12 +103,11 @@ const Custom: NextPage<Props> = ({ queryGraphCms, customPage }) => {
         .then((canvas) => {
           const image = canvas.toDataURL("image/jpeg");
           download(image, `Level 4 | ${name}.jpeg`, "image/jpeg");
-          setDownloadCustomImage(2);
-          setTimeout(() => setDownloadCustomImage(0), 2000);
+          store.setDownloadCustomImage(2);
+          setTimeout(() => store.setDownloadCustomImage(0), 2000);
         })
         .then(() => {
           setShowHidDragResizeDiv(true);
-          // useStore((state) => state.showCustomiseBox);
         })
         .catch((err) => {
           console.log("IMAGE DOWNLOAD ERROR: ", err);
@@ -122,9 +117,8 @@ const Custom: NextPage<Props> = ({ queryGraphCms, customPage }) => {
   };
 
   const handleSaveCustomImage = () => {
-    setSaveCustomImage(1);
+    store.setSaveCustomImage(1);
     setShowHidDragResizeDiv(false);
-    // useStore((state) => state.hideCustomiseBox);
     const takeScreenShot = () => {
       html2canvas(document.getElementById("capture") as HTMLElement, {
         useCORS: true,
@@ -144,9 +138,8 @@ const Custom: NextPage<Props> = ({ queryGraphCms, customPage }) => {
         })
         .then(() => {
           setShowHidDragResizeDiv(true),
-            // useStore((state) => state.showCustomiseBox);
-            setSaveCustomImage(2),
-            setTimeout(() => setSaveCustomImage(0), 2000);
+            store.setSaveCustomImage(2),
+            setTimeout(() => store.setSaveCustomImage(0), 2000);
         })
         .catch((err) => {
           console.log("IMAGE DOWNLOAD ERROR: ", err);
@@ -162,8 +155,6 @@ const Custom: NextPage<Props> = ({ queryGraphCms, customPage }) => {
         style={{ paddingBottom: `${!session && "10em"}` }}
       >
         <ProductView
-          // showHideDragResizeDiv - passed down one level for css show hide of dragResizeDiv
-          download={downloadCustomImage}
           embelishment={productEmbelishment}
           handleColourClick={handleColourClick}
           handleScreenShot={handleScreenShot}
@@ -171,7 +162,6 @@ const Custom: NextPage<Props> = ({ queryGraphCms, customPage }) => {
           image={productVariantColours[colour].customImage}
           products={productPage}
           productColoutVariants={productVariantColours}
-          saved={saveCustomImage}
           showHideDragResizeDiv={showHideDragResizeDiv}
         />
       </div>

@@ -4,7 +4,7 @@ import { useSession } from "next-auth/react";
 import ProductButton from "./ProductButton";
 import Spinner from "../../ui/icons/Spinner";
 import { useState } from "react";
-import { ConfigurationServicePlaceholders } from "aws-sdk/lib/config_service_placeholders";
+import { useStore } from "../stateProductApp/store";
 
 const ProductButtons = ({
   handleScreenShot,
@@ -15,10 +15,9 @@ const ProductButtons = ({
   handleRedo,
   undoActive,
   redoActive,
-  saved,
-  download,
   actionsTaken,
 }: any) => {
+  const store = useStore();
   const { data: session }: any = useSession();
   const [spinnerColourDownload, setSpinnerColourDownload] = useState("#ffffff");
   const [spinnerColourSave, setSpinnerColourSave] = useState("#ffffff");
@@ -65,30 +64,32 @@ const ProductButtons = ({
         redo
       </ProductButton>
       <ProductButton
-        save={saved === 0 && true}
-        tick={saved === 2 && true}
+        save={store.saveCustomImage === 0 && true}
+        tick={store.saveCustomImage === 2 && true}
         variant="tertiary"
         disabled={!session || !actionsTaken}
         onClick={handleSaveCustomImage}
         onMouseEnter={() => handleMouseEnter("save")}
         onMouseLeave={() => handleMouseLeave("save")}
       >
-        {saved === 0 && "save"}
-        {saved === 1 && <Spinner colour={spinnerColourSave} />}
-        {saved === 2 && "saved"}
+        {store.saveCustomImage === 0 && "save"}
+        {store.saveCustomImage === 1 && <Spinner colour={spinnerColourSave} />}
+        {store.saveCustomImage === 2 && "saved"}
       </ProductButton>
       <ProductButton
-        download={download === 0 && true}
-        tick={download === 2 && true}
+        download={store.downloadCustomImage === 0 && true}
+        tick={store.downloadCustomImage === 2 && true}
         variant="secondary"
         disabled={!actionsTaken}
         onClick={handleScreenShot}
         onMouseEnter={() => handleMouseEnter("download")}
         onMouseLeave={() => handleMouseLeave("download")}
       >
-        {download === 0 && "download"}
-        {download === 1 && <Spinner colour={spinnerColourDownload} />}
-        {download === 2 && "downloaded"}
+        {store.downloadCustomImage === 0 && "download"}
+        {store.downloadCustomImage === 1 && (
+          <Spinner colour={spinnerColourDownload} />
+        )}
+        {store.downloadCustomImage === 2 && "downloaded"}
       </ProductButton>
     </div>
   );

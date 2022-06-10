@@ -20,8 +20,8 @@ const ProductUiPanel = ({
   handleRedo,
   undoActive,
   redoActive,
-  saved,
-  download,
+  // replace saveCustomImage
+  // saved,
   actionsTaken,
   embelishment,
 }: any) => {
@@ -94,8 +94,7 @@ const ProductUiPanel = ({
         handleRedo={handleRedo}
         undoActive={undoActive}
         redoActive={redoActive}
-        saved={saved}
-        download={download}
+        // replace saveCustomImage
         actionsTaken={actionsTaken}
       />
     </div>
