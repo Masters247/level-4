@@ -6,11 +6,12 @@ import s from "../../styles/pages/customPage.module.scss";
 import { Button } from "../../components/ui/Button";
 import { GraphQLClient, gql } from "graphql-request";
 import { useSession } from "next-auth/react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import customPageQuery from "../../lib/graphcms-querys/customPageQuery";
 import html2canvas from "html2canvas";
 import Link from "next/link";
 import { useStore } from "../../components/productApp/stateProductApp/store";
+import { ConnectContactLens } from "aws-sdk";
 
 const download = require("downloadjs");
 
@@ -44,7 +45,7 @@ export async function getStaticProps({ params }: any) {
       productEmbelishment
       productVariantColours {
         customImage {
-          url
+          url(transformation: {image: {resize: {height: 500, width: 500}}})
         }
         colour {
           hex
@@ -72,30 +73,35 @@ interface Props {
 }
 
 const Custom: NextPage<Props> = ({ queryGraphCms, customPage }) => {
-  const store = useStore();
-  // const [saveCustomImage, setSaveCustomImage] = useState(0);
-
-  const [showHideDragResizeDiv, setShowHidDragResizeDiv] = useState(true);
-
   const { data: session }: any = useSession();
 
   const [colour, setColour] = useState(0);
 
-  const { trendingStyle } = customPage[0];
+  const [showHideDragResizeDiv, setShowHidDragResizeDiv] = useState(true);
 
   const { productPage } = queryGraphCms;
-
   const { name, productCategory, productEmbelishment, productVariantColours } =
     productPage;
 
-  const handleColourClick = (e: any, i: any) => {
-    setColour(i);
-  };
+  const store = useStore();
+
+  const { trendingStyle } = customPage[0];
+
+  useEffect(() => {
+    const embelishment =
+      productEmbelishment === null ? "Embroidered" : productEmbelishment;
+    store.setProductEmbelishment(embelishment);
+  }, []);
+
+  // const handleColourClick = (i: any) => {
+  //   setColour(i);
+  // };
 
   const handleScreenShot = () => {
     store.setDownloadCustomImage(1);
 
     setShowHidDragResizeDiv(false);
+
     const takeScreenShot = () => {
       html2canvas(document.getElementById("capture") as HTMLElement, {
         useCORS: true,
@@ -118,7 +124,9 @@ const Custom: NextPage<Props> = ({ queryGraphCms, customPage }) => {
 
   const handleSaveCustomImage = () => {
     store.setSaveCustomImage(1);
+
     setShowHidDragResizeDiv(false);
+
     const takeScreenShot = () => {
       html2canvas(document.getElementById("capture") as HTMLElement, {
         useCORS: true,
@@ -155,11 +163,9 @@ const Custom: NextPage<Props> = ({ queryGraphCms, customPage }) => {
         style={{ paddingBottom: `${!session && "10em"}` }}
       >
         <ProductView
-          embelishment={productEmbelishment}
-          handleColourClick={handleColourClick}
           handleScreenShot={handleScreenShot}
           handleSaveCustomImage={handleSaveCustomImage}
-          image={productVariantColours[colour].customImage}
+          image={productVariantColours[store.productColour].customImage}
           products={productPage}
           productColoutVariants={productVariantColours}
           showHideDragResizeDiv={showHideDragResizeDiv}

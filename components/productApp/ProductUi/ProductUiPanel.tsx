@@ -4,7 +4,8 @@ import Center from "../../ui/icons/Center";
 import HorizontalAlign from "../../ui/icons/HorizontalAlign";
 import VerticalAlign from "../../ui/icons/VerticalAlign";
 import ProductButtons from "./ProductButtons";
-import ProductColourButtonsWrap from "../ProductColourButtons/ProductColourButtons";
+import ProductColourButtons from "../ProductColourButtons/ProductColourButtons";
+import { useStore } from "../stateProductApp/store";
 
 const ProductUiPanel = ({
   products,
@@ -12,7 +13,6 @@ const ProductUiPanel = ({
   vertical,
   horizontal,
   handleSaveCustomImage,
-  handleColourClick,
   handleImageUpload,
   handleScreenShot,
   stateUploader,
@@ -20,10 +20,7 @@ const ProductUiPanel = ({
   handleRedo,
   undoActive,
   redoActive,
-  // replace saveCustomImage
-  // saved,
   actionsTaken,
-  embelishment,
 }: any) => {
   const controler = [
     {
@@ -47,6 +44,7 @@ const ProductUiPanel = ({
     s.control,
     actionsTaken === null && s.controlDisabled
   );
+  const store = useStore();
 
   return (
     <div className={cn(s.productUiWrap)}>
@@ -70,20 +68,11 @@ const ProductUiPanel = ({
       </div>
       <div className={s.productColourWrap}>
         <h2>Colour:</h2>
-        <ProductColourButtonsWrap
-          products={products}
-          colourClick={handleColourClick}
-          position={s.position}
-          // shape={shape}
-        />
+        <ProductColourButtons products={products} position={s.position} />
       </div>
       <div className={s.embelishment}>
         <h2>Embelishment:</h2>
-        <p>
-          {typeof embelishment !== "string"
-            ? "Embroidered"
-            : embelishment.replace("_", " / ")}
-        </p>
+        <p>{store.productEmbelishment}</p>
       </div>
       <ProductButtons
         stateUploader={stateUploader}
@@ -94,7 +83,6 @@ const ProductUiPanel = ({
         handleRedo={handleRedo}
         undoActive={undoActive}
         redoActive={redoActive}
-        // replace saveCustomImage
         actionsTaken={actionsTaken}
       />
     </div>

@@ -12,7 +12,6 @@ interface Products {
 
 interface Props {
   products: Products;
-  colourClick: any;
   rotate?: any;
   position?: any;
   setColourChangeProductVariant?: any;
@@ -20,7 +19,6 @@ interface Props {
 
 const ProductColourButtonsWrap: FC<Props> = ({
   products,
-  colourClick,
   rotate,
   position,
 }) => {
@@ -86,7 +84,6 @@ const ProductColourButtonsWrap: FC<Props> = ({
             key={i}
             i={`${i + productColourView.start}`}
             hex={colour.colour.hex}
-            handleColourClick={colourClick}
             hexSecondary={colour.secondaryColour.hex}
             shape={colour.shape}
           />

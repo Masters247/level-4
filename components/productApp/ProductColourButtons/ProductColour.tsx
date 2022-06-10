@@ -1,16 +1,12 @@
 import s from "./productColour.module.scss";
 import cn from "classnames";
+import { useStore } from "../stateProductApp/store";
+const ProductColour = ({ hex, i, hexSecondary, shape }: any) => {
+  const store = useStore();
 
-const ProductColour = ({
-  hex,
-  handleColourClick,
-  i,
-  hexSecondary,
-  shape,
-}: any) => {
   return (
     <button
-      onClick={(e) => handleColourClick(e, i)}
+      onClick={() => store.setProductColour(i)}
       className={cn(s.border, {
         [s.circleBorder]: shape === "Circle",
         [s.squareBorder]: shape === "Square",

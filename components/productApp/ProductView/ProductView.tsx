@@ -8,37 +8,34 @@ import s from "./productView.module.scss";
 import cn from "classnames";
 
 const ProductView = ({
-  // download,
-  embelishment,
-  handleColourClick,
   handleSaveCustomImage,
   handleScreenShot,
   image,
   productColoutVariants,
   products,
-  // replace saveCustomImage
-  saved,
-  // setColourChangeProductVariant,
   showHideDragResizeDiv,
 }: any) => {
+  const containerRef = useRef<HTMLDivElement | null>(null);
+  const dragEl = useRef<HTMLDivElement | null>(null);
+  const logoBox = useRef<HTMLDivElement | null>(null);
+
   // gets ratio of image - used to constrain resizer to the ratio of image
   const [ratio, setRatio]: any = useState();
   const [undoActive, setUndoActive] = useState(false);
   const [redoActive, setRedoActive] = useState(false);
+
   // count keeps track of actionsArr
   const [count, setCount] = useState(0);
   const [logo, setLogo] = useState(null);
+
   // if true image uploader shows in ui
   const [imageUpload, setImageUpload] = useState(true);
-
-  const containerRef = useRef<HTMLDivElement | null>(null);
-  const dragEl = useRef<HTMLDivElement | null>(null);
-  const logoBox = useRef<HTMLDivElement | null>(null);
 
   const [imageWidth, setImageWidth] = useState(80);
   const [imageHeight, setImageHeight] = useState(80);
 
   const [actionsArr, setActionsArr]: any = useState([]);
+
   const [{ x, y, width, height }, api] = useSpring(() => ({
     x: 0,
     y: 0,
@@ -253,10 +250,6 @@ const ProductView = ({
     setCount(count + 1);
   };
 
-  // const handleControls = () => {
-  //   setControl(!control);
-  // };
-
   const handleImageUpload = () => {
     setImageUpload(!imageUpload);
     window.scrollTo({
@@ -333,8 +326,8 @@ const ProductView = ({
       <ProductUiPanel
         actionsTaken={logo}
         center={handleCenter}
-        embelishment={embelishment}
-        handleColourClick={handleColourClick}
+        // handle state handleColourClick
+        // handleColourClick={handleColourClick}
         handleImageUpload={handleImageUpload}
         handleRedo={handleRedo}
         handleSaveCustomImage={handleSaveCustomImage}
@@ -344,8 +337,6 @@ const ProductView = ({
         productColoutVariants={productColoutVariants}
         products={products}
         redoActive={redoActive}
-        // replace saveCustomImage
-        // saved={saved}
         stateUploader={imageUpload}
         undoActive={undoActive}
         vertical={handleVertical}
