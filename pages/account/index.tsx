@@ -8,6 +8,7 @@ import { useRouter } from "next/router";
 import { useState } from "react";
 import Image from "next/image";
 import useSWR from "swr";
+import { Button } from "../../components/ui/Button";
 
 const fetcher = (email: string) => fetch(email).then((res) => res.json());
 
@@ -70,9 +71,9 @@ const Account: NextPage = () => {
       <div className={s.titleWrap}>
         <h1>My Account</h1>
         <div className={s.loggedInTitle}>
-          <button onClick={handleSignOut}>
+          <Button onClick={handleSignOut} variant="secondary">
             <p>Sign Out</p>
-          </button>
+          </Button>
         </div>
       </div>
       <div className={s.tabWrap}>

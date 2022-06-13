@@ -1,11 +1,12 @@
 import s from "../styles/pages/signIn.module.scss";
-import { getCsrfToken, getSession, signIn } from "next-auth/react";
-import { useEffect, useState } from "react";
+import { getSession, signIn } from "next-auth/react";
+import { useState } from "react";
 import { Button } from "../components/ui/Button";
 import Google from "../components/ui/icons/Google";
 import TwitterBlue from "../components/ui/icons/TwitterBlue";
 import { useRouter } from "next/router";
 import Link from "next/link";
+import Eye from "../components/ui/icons/Eye";
 
 export async function getServerSideProps(context: any) {
   const session = await getSession({ req: context.req });
@@ -29,19 +30,19 @@ export default function SignUp() {
   const router = useRouter();
   const authError = router.query.error;
   const [passwordError, setPasswordError] = useState(false);
-
-  useEffect(() => {
-    const passes = password.match("^(?=.*?[a-z])(?=.*?[0-9]).{8,}$");
-    if (password.length > 3 && !passes) {
-      setPasswordError(true);
-    } else {
-      setPasswordError(false);
-    }
-  }, [password]);
+  const [showPassword, setShowPassword] = useState(false);
 
   const handleSubmit = async (e: any) => {
     setLoading(true);
     e.preventDefault();
+    const passes = password.match("^(?=.*?[a-z])(?=.*?[0-9]).{8,}$");
+    if (!passes) {
+      setPasswordError(true);
+      setLoading(false);
+      return;
+    } else {
+      setPasswordError(false);
+    }
     try {
       await fetch("api/account/register", {
         method: "POST",
@@ -77,7 +78,7 @@ export default function SignUp() {
           progress using our visualiser tool.
         </p>
         <form onSubmit={handleSubmit}>
-          {authError && <p className={s.error}>Invalid passowrd or email</p>}
+          {authError && <p className={s.error}>Invalid password or email</p>}
           <input
             type="email"
             id="email"
@@ -92,16 +93,26 @@ export default function SignUp() {
               Must be at least 8 characters long and contain numbers
             </p>
           )}
-          <input
-            required
-            autoComplete="password"
-            type="password"
-            id="password"
-            name="password"
-            placeholder="Password*"
-            minLength={8}
-            onChange={(e) => setPassword(e.target.value)}
-          />
+
+          <div className={s.passWrapper}>
+            <input
+              required
+              autoComplete="password"
+              type={showPassword ? "text" : "password"}
+              id="password"
+              name="password"
+              placeholder="Password*"
+              minLength={8}
+              onChange={(e) => setPassword(e.target.value)}
+            />
+            <div
+              className={s.eye}
+              onClick={() => setShowPassword(!showPassword)}
+            >
+              <Eye />
+            </div>
+          </div>
+
           <input
             required
             autoComplete="name"

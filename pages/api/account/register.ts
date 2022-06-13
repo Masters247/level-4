@@ -10,7 +10,11 @@ export default async function handler(
     const { email, password, name, organisation } = req.body;
 
     try {
+      // Hash password to be stored in database
+
       const hash = await bcrypt.hash(password, 10);
+
+      // Create user in database
 
       const addUser = await prisma.user.create({
         data: {
@@ -22,6 +26,8 @@ export default async function handler(
         },
       });
 
+      //  Create the secret object in BD connected to user
+
       await prisma.secret.create({
         data: {
           password: hash,
@@ -32,6 +38,8 @@ export default async function handler(
           },
         },
       });
+
+      // Return success response
 
       return res.status(200).end();
     } catch (err) {

@@ -6,6 +6,7 @@ import Google from "../components/ui/icons/Google";
 import TwitterBlue from "../components/ui/icons/TwitterBlue";
 import { useRouter } from "next/router";
 import Link from "next/link";
+import Eye from "../components/ui/icons/Eye";
 
 export async function getServerSideProps(context: any) {
   const session = await getSession({ req: context.req });
@@ -26,6 +27,7 @@ export default function SignIn() {
   const [password, setPassword] = useState("");
   const router = useRouter();
   const error = router.query.error;
+  const [showPassword, setShowPassword] = useState(false);
 
   const handleSubmit = async (e: any) => {
     setLoading(true);
@@ -49,7 +51,7 @@ export default function SignIn() {
           create more.
         </p>
         <form onSubmit={handleSubmit}>
-          {error && <p className={s.error}>Invalid passowrd or email</p>}
+          {error && <p className={s.error}>Invalid password or email</p>}
           <input
             type="email"
             id="email"
@@ -58,14 +60,24 @@ export default function SignIn() {
             required
             onChange={(e) => setEmail(e.target.value)}
           />
-          <input
-            type="password"
-            id="password"
-            name="password"
-            placeholder="Password"
-            required
-            onChange={(e) => setPassword(e.target.value)}
-          />
+          <div className={s.passWrapper}>
+            <input
+              required
+              autoComplete="password"
+              type={showPassword ? "text" : "password"}
+              id="password"
+              name="password"
+              placeholder="Password*"
+              minLength={8}
+              onChange={(e) => setPassword(e.target.value)}
+            />
+            <div
+              className={s.eye}
+              onClick={() => setShowPassword(!showPassword)}
+            >
+              <Eye />
+            </div>
+          </div>
           <Button
             type="submit"
             Component="button"
@@ -78,6 +90,9 @@ export default function SignIn() {
         </form>
         <Link href="/signup" passHref>
           <p className={s.changeView}>Dont have an account yet?</p>
+        </Link>
+        <Link href="/forgot-password" passHref>
+          <p className={s.changeView}>Forgot password?</p>
         </Link>
         <div className={s.line}></div>
         <Button variant="secondary" onClick={() => signIn("google")}>
