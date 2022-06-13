@@ -43,7 +43,7 @@ export async function getStaticProps({ params }: any) {
       productEmbelishment
       productVariantColours {
         customImage {
-          url(transformation: {image: {resize: {height: 500, width: 500}}})
+          url
         }
         colour {
           hex

@@ -13,6 +13,12 @@ export const categoryPagesSlugQuery = async () => {
             url(transformation: {image: {resize: {fit: crop, height: 400, width: 400}}})
             width
           }
+          homePageOrLinkImage {
+            height
+            width
+            url(transformation: {image: {resize: {fit: crop, height: 400, width: 400}}})
+            id
+          }
         }
       }
     `);

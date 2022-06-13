@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/alt-text */
 import { useState } from "react";
 import ProductColourButtons from "../ProductColourButtons/ProductColourButtons";
 import { Button } from "../../ui/Button";
@@ -36,7 +37,6 @@ const Product = ({ products, i }: any) => {
         <Link href={`/${slugCategory}/${slug}`} passHref>
           <Image
             layout="responsive"
-            quality={50}
             src={
               products.productVariantColours[productColour].images[productView]
                 .url

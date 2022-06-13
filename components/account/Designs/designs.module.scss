@@ -91,4 +91,25 @@
   @media (min-width: $media-tablet) {
     grid-template-columns: repeat(4, 1fr);
   }
+
+  .noDesigns {
+    padding: 2em 1em;
+    background-color: $grey-0;
+    @include flexCenter;
+    text-align: center;
+    flex-direction: column;
+    width: 100%;
+    grid-column: span 2;
+
+    h2 {
+      margin-bottom: 1em;
+    }
+
+    @media (min-width: $media-tablet-small) {
+      grid-column: span 3;
+    }
+    @media (min-width: $media-tablet) {
+      grid-column: span 4;
+    }
+  }
 }

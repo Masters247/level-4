@@ -1,8 +1,8 @@
 import { FC } from "react";
-import Pencil from "../../ui/icons/Pencil";
 import s from "./customer.module.scss";
 import { useState } from "react";
 import { Button } from "../../ui/Button";
+import { Account } from "@prisma/client";
 
 export type Customer = {
   id: string;
@@ -11,6 +11,8 @@ export type Customer = {
   emailVerified: string;
   image: string;
   organisation: string;
+  emailSignup?: boolean;
+  accounts: Account[];
 };
 
 interface Props {
@@ -19,15 +21,12 @@ interface Props {
 }
 
 const Customer: FC<Props> = ({ customer, mutate }) => {
-  const [name, setName] = useState(customer.name || "----");
-  const [email, setEmail] = useState(customer.email || "----");
-  const [organisation, setOrganisation] = useState(
-    customer.organisation || "----"
-  );
-  const [editName, setEditName] = useState(false);
-  const [editEmail, setEditEmail] = useState(false);
-  const [editOrganisation, setEditOrganisation] = useState(false);
+  const [name, setName] = useState(customer?.name);
+  const [email, setEmail] = useState(customer?.email);
+  const [organisation, setOrganisation] = useState(customer?.organisation);
+  const [resetNotify, setResetNotify] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [passwordLoading, setPasswordLoading] = useState(false);
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -54,6 +53,28 @@ const Customer: FC<Props> = ({ customer, mutate }) => {
     }
   };
 
+  const passwordReset = async () => {
+    setPasswordLoading(true);
+    setResetNotify(false);
+    try {
+      const resetStart = await fetch(
+        `/api/account/reset-password-email?email=${customer.email}`
+      );
+      const res = await resetStart.json();
+
+      if (res.status === "success") {
+        setPasswordLoading(false);
+        setResetNotify(true);
+      } else {
+        setPasswordLoading(false);
+        setResetNotify(false);
+        throw new Error(res.message);
+      }
+    } catch (error: any) {
+      console.log("Reset Error:", error.message);
+    }
+  };
+
   return (
     <form onSubmit={handleSubmit}>
       <div className={s.customer}>
@@ -62,20 +83,10 @@ const Customer: FC<Props> = ({ customer, mutate }) => {
         </div>
         <div className={s.details}>
           <input
-            ref={(input) => input && input.focus()}
-            disabled={!editName}
             placeholder={name}
             type="text"
             onChange={(e) => setName(e.target.value)}
           />
-        </div>
-        <div
-          className={s.details}
-          onClick={() => {
-            setEditName(!editName);
-          }}
-        >
-          <Pencil styles={s.pencil} />
         </div>
       </div>
 
@@ -85,22 +96,21 @@ const Customer: FC<Props> = ({ customer, mutate }) => {
         </div>
         <div className={s.details}>
           <input
-            ref={(input) => input && input.focus()}
             required
-            disabled={!editEmail}
+            defaultValue={email}
             placeholder={email}
+            disabled={!customer?.emailSignup}
             type="email"
             onChange={(e) => setEmail(e.target.value)}
           />
         </div>
-        <div
-          className={s.details}
-          onClick={() => {
-            setEditEmail(!editEmail);
-          }}
-        >
-          <Pencil styles={s.pencil} />
-        </div>
+        {!customer.emailSignup && (
+          <div className={s.details}>
+            <p className={s.provider}>
+              *Email provided by <span>{customer.accounts[0]?.provider}</span>
+            </p>
+          </div>
+        )}
       </div>
 
       <div className={s.customer}>
@@ -109,22 +119,34 @@ const Customer: FC<Props> = ({ customer, mutate }) => {
         </div>
         <div className={s.details}>
           <input
-            disabled={!editOrganisation}
-            ref={(input) => input && input.focus()}
             placeholder={organisation}
             type="text"
             onChange={(e) => setOrganisation(e.target.value)}
           />
         </div>
-        <div
-          className={s.details}
-          onClick={() => {
-            setEditOrganisation(!editOrganisation);
-          }}
-        >
-          <Pencil styles={s.pencil} />
-        </div>
       </div>
+
+      {customer.emailSignup && (
+        <div className={s.customer}>
+          <div className={s.details}>
+            <h3>Password</h3>
+          </div>
+          <Button
+            className={s.resetPassword}
+            onClick={passwordReset}
+            variant="secondary"
+            loading={passwordLoading}
+          >
+            Reset Password
+          </Button>
+          {resetNotify && (
+            <p className={s.passwordSuccess}>
+              We&apos;ve sent you a link to reset your password. This is only
+              valid for 10 minutes.
+            </p>
+          )}
+        </div>
+      )}
 
       <Button
         loading={loading}
@@ -132,9 +154,9 @@ const Customer: FC<Props> = ({ customer, mutate }) => {
         className={s.save}
         Component="button"
         disabled={
-          name === customer.name &&
-          email === customer.email &&
-          organisation === customer.organisation
+          name === customer?.name &&
+          email === customer?.email &&
+          organisation === customer?.organisation
         }
         type="submit"
       >
