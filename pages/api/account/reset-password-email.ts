@@ -67,7 +67,7 @@ export default async function handler(
     }://${req.headers.host}/api/account/password-reset?token=${token}`;
     const data = {
       to: `${user.email}`,
-      from: "info@golfway.com",
+      from: "info@level-four.co.uk",
       template_id: "d-7b99c1ad5f1a4940aaa07604ab007324",
       dynamic_template_data: {
         resetLink: passwordResetLink,
