@@ -12,7 +12,7 @@ interface Props {
 }
 
 const DesktopNav: FC<Props> = ({ menuProducts }) => {
-  const [dropDown, setDropDown] = useState(true);
+  const [dropDown, setDropDown] = useState(false);
   const { data: session } = useSession();
 
   const handleSignIn = () => {
@@ -27,7 +27,7 @@ const DesktopNav: FC<Props> = ({ menuProducts }) => {
   return (
     <div className={s.navWrapper} ref={ref}>
       <div
-        className={`${s.dropDown} ${!dropDown && s.open}`}
+        className={`${s.dropDown} ${dropDown && s.open}`}
         onClick={() => setDropDown(!dropDown)}
         onMouseLeave={() => setDropDown(false)}>
         <ul className={s.catLinks}>
@@ -55,8 +55,7 @@ const DesktopNav: FC<Props> = ({ menuProducts }) => {
       <ul className={s.navLinks}>
         <li
           onClick={() => setDropDown(!dropDown)}
-          // onMouseEnter={() => setDropDown(!dropDown)}
-        >
+          onMouseEnter={() => setDropDown(!dropDown)}>
           <a>Products</a>
         </li>
         {/* <li onClick={() => setDropDown(false)}>
