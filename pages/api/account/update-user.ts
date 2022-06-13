@@ -8,6 +8,8 @@ export default async function handler(
   const body = req.body;
 
   try {
+    // Update user data or add it
+
     await prisma.user.upsert({
       create: {
         name: body.name,
@@ -17,6 +19,7 @@ export default async function handler(
         name: body.name,
         organisation: body.org,
         email: body.email,
+        image: `https://ui-avatars.com/api/?name=${body.name}`,
       },
       where: {
         id: body.id,
