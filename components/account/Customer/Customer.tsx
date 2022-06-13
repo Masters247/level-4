@@ -11,7 +11,7 @@ export type Customer = {
   emailVerified: string;
   image: string;
   organisation: string;
-  emailSignup: boolean;
+  emailSignup?: boolean;
   accounts: Account[];
 };
 
@@ -99,7 +99,7 @@ const Customer: FC<Props> = ({ customer, mutate }) => {
             required
             defaultValue={email}
             placeholder={email}
-            disabled={!customer.emailSignup}
+            disabled={!customer?.emailSignup}
             type="email"
             onChange={(e) => setEmail(e.target.value)}
           />

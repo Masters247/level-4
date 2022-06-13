@@ -16,7 +16,7 @@ export const categoryPagesSlugQuery = async () => {
           homePageOrLinkImage {
             height
             width
-            url(transformation: {image: {resize: {fit: max, height: 400, width: 400}}})
+            url(transformation: {image: {resize: {fit: crop, height: 400, width: 400}}})
             id
           }
         }

@@ -280,7 +280,7 @@ const ProductView = ({
       <div className={s.productViewportContainer} onClick={closeImageUpload}>
         <div id="capture" className={s.imageCaptureWrap}>
           <div className={s.imageWrap}>
-            <img src={image.url} width="500px" height="500px" alt="product" />
+            <img src={image.url} width="450px" height="450px" alt="product" />
           </div>
           <div className={s.productViewport}>
             <div
