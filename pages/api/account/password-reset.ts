@@ -54,7 +54,7 @@ export default async function handler(
     // If both the token and user exist then update the password and clear the token cookie
 
     if (user?.secret?.resetToken === decodedToken.resetToken) {
-      const hash = await bcrypt.hash(newPassword, 10);
+      const hash = await bcrypt.hash(newPassword, 12);
 
       //   Update password
 

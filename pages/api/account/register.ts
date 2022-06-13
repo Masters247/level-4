@@ -12,7 +12,7 @@ export default async function handler(
     try {
       // Hash password to be stored in database
 
-      const hash = await bcrypt.hash(password, 10);
+      const hash = await bcrypt.hash(password, 12);
 
       // Create user in database
 
