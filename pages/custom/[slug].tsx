@@ -36,50 +36,53 @@ export async function getStaticProps({ params }: any) {
   });
 
   const customPage = await customPageQuery();
-  const queryGraphCms = await customisePageQuery(params.slug);
 
-  // const query = gql`
-  // query Product {
-  //   productPage(where: {productSlug: "${params.slug}"}) {
-  //     name
-  //     productCategory
-  //     productEmbelishment
-  //     productVariantColours {
-  //       customImage {
-  //         url(transformation: {image: {resize: {height: 500, width: 500}}})
-  //       }
-  //       colour {
-  //         hex
-  //       }
-  //       secondaryColour {
-  //         hex
-  //       }
-  //       shape
-  //     }
-  //   }
-  // }
-  // `;
+  // const customisedPages = await customisePageQuery(params.slug);
+
+  // const customisePages = JSON.stringify(customisedPages);
+
+  const query = gql`
+  query Product {
+    productPage(where: {productSlug: "${params.slug}"}) {
+      name
+      productCategory
+      productEmbelishment
+      productVariantColours {
+        customImage {
+          url(transformation: {image: {resize: {height: 500, width: 500}}})
+        }
+        colour {
+          hex
+        }
+        secondaryColour {
+          hex
+        }
+        shape
+      }
+    }
+  }
+  `;
 
   // const queryGraphCms = await graphcms.request(customisePage);
-  // const queryGraphCms = await graphcms.request(query);
+  const customisePages = await graphcms.request(query);
 
   return {
-    props: { queryGraphCms, customPage },
+    props: { customisePages, customPage },
     revalidate: 10,
   };
 }
 
 interface Props {
-  queryGraphCms?: any;
+  customisePages?: any;
   customPage?: any;
 }
 
-const Custom: NextPage<Props> = ({ queryGraphCms, customPage }) => {
+const Custom: NextPage<Props> = ({ customisePages, customPage }) => {
   const { data: session }: any = useSession();
 
   const [showHideDragResizeDiv, setShowHidDragResizeDiv] = useState(true);
 
-  const { productPage } = queryGraphCms;
+  const { productPage } = customisePages;
 
   const { name, productCategory, productEmbelishment, productVariantColours } =
     productPage;
@@ -154,14 +157,11 @@ const Custom: NextPage<Props> = ({ queryGraphCms, customPage }) => {
     setTimeout(() => takeScreenShot(), 1000);
   };
 
-  console.log("products", productPage.name);
-
   return (
     <div className={s.pageWrap}>
       <div
         className={s.appWrap}
-        style={{ paddingBottom: `${!session && "10em"}` }}
-      >
+        style={{ paddingBottom: `${!session && "10em"}` }}>
         <ProductView
           handleScreenShot={handleScreenShot}
           handleSaveCustomImage={handleSaveCustomImage}

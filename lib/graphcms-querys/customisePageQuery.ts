@@ -1,8 +1,11 @@
 import graphcms from "../graph-ql";
 
 const customisePageQuery = async (params: string) => {
+  console.log("params", params);
+
   const { customisePages } = await graphcms.request(`
-  query productPage(where: {productSlug: "${params}"}) {
+  query Product {
+    productPage(where: {productSlug: "${params}"}) {
       name
       productCategory
       productEmbelishment

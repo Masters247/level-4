@@ -8,7 +8,7 @@ import ProductColourButtons from "../ProductColourButtons/ProductColourButtons";
 import { useStore } from "../store";
 
 const ProductUiPanel = ({
-  actionsTaken,
+  actionsTaken, // used in this compononent
   center,
   horizontal,
   handleRedo,
@@ -56,8 +56,7 @@ const ProductUiPanel = ({
                 key={cont.name}
                 onClick={cont?.function}
                 className={controlStyles}
-                disabled={actionsTaken === null}
-              >
+                disabled={actionsTaken === null}>
                 {cont.icon}
               </button>
             );
@@ -79,7 +78,7 @@ const ProductUiPanel = ({
         handleRedo={handleRedo}
         undoActive={undoActive}
         redoActive={redoActive}
-        actionsTaken={actionsTaken}
+        actionsTaken={actionsTaken} // store
       />
     </div>
   );

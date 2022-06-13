@@ -10,7 +10,7 @@ import ProductButton from "../ProductUi/ProductButton";
 import { useStore } from "../store";
 
 const ImageUploader = ({
-  setLogo,
+  setLogo, // store
   setImageWidth,
   setImageHeight,
   reset,
@@ -22,11 +22,20 @@ const ImageUploader = ({
   const store = useStore();
 
   const onChange = (imageList: any) => {
+    console.log(
+      "🚀 ~ file: ImageUploader.tsx ~ line 25 ~ onChange ~ imageList",
+      typeof imageList
+    );
     reset();
     setImages(imageList);
 
     if (imageList.length !== 0) {
       setLogo(imageList[0].data_url);
+      console.log(
+        "🚀 ~ file: ImageUploader.tsx ~ line 25 ~ onChange ~ imageList",
+        typeof imageList[0].data_url
+      );
+
       const newImage = new Image();
       newImage.src = imageList[0].data_url;
       const imgWidth = newImage.naturalWidth;
@@ -79,8 +88,7 @@ const ImageUploader = ({
         value={images}
         onChange={onChange}
         maxNumber={maxNumber}
-        dataURLKey="data_url"
-      >
+        dataURLKey="data_url">
         {({
           imageList,
           onImageUpload,
@@ -94,8 +102,7 @@ const ImageUploader = ({
               <ProductButton
                 variant="primary-dashed"
                 onClick={onImageUpload}
-                {...dragProps}
-              >
+                {...dragProps}>
                 Click or Drop
               </ProductButton>
               <ProductButton variant="tertiary-b" onClick={onImageRemoveAll}>
@@ -103,8 +110,7 @@ const ImageUploader = ({
               </ProductButton>
               <ProductButton
                 variant="primary-b"
-                onClick={() => store.setImageUploader(false)}
-              >
+                onClick={() => store.setImageUploader(false)}>
                 <Remove styles={s.remove} />
               </ProductButton>
             </div>
@@ -112,8 +118,7 @@ const ImageUploader = ({
               className={cn(
                 s.newImageWrap,
                 imageList.length !== 0 && s.newImageWrapPaddingTop
-              )}
-            >
+              )}>
               {imageList?.map((image: any, index: any) => {
                 return (
                   <div key={index}>

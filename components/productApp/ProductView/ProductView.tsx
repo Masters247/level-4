@@ -25,7 +25,10 @@ const ProductView = ({
   const [redoActive, setRedoActive] = useState(false);
   const store = useStore();
   const [count, setCount] = useState(0);
+
+  // is there a logo
   const [logo, setLogo] = useState(null);
+
   const [imageWidth, setImageWidth] = useState(80);
   const [imageHeight, setImageHeight] = useState(80);
 
@@ -255,8 +258,7 @@ const ProductView = ({
     <div className={s.appWrap}>
       <div
         className={s.productViewportContainer}
-        onClick={() => store.setImageUploader(false)}
-      >
+        onClick={() => store.setImageUploader(false)}>
         <div id="capture" className={s.imageCaptureWrap}>
           <div className={s.imageWrap}>
             <img src={image.url} width="500px" height="500px" alt="product" />
@@ -266,8 +268,7 @@ const ProductView = ({
               className={`${
                 showHideDragResizeDiv ? s.customArear : s.customArearHide
               }`}
-              ref={containerRef}
-            >
+              ref={containerRef}>
               <animated.div
                 className={cn(
                   s.customLogo,
@@ -281,8 +282,7 @@ const ProductView = ({
                   zIndex: "1",
                 }}
                 {...bind()}
-                ref={logoBox}
-              >
+                ref={logoBox}>
                 <div className={s.imageOuterWrap}>
                   {logo !== null && (
                     <div className={s.logoImageWrap}>
@@ -292,8 +292,7 @@ const ProductView = ({
                 </div>
                 <div
                   className={cn(s.resizer, logo === null && s.resizerDisabled)}
-                  ref={dragEl}
-                ></div>
+                  ref={dragEl}></div>
               </animated.div>
             </div>
           </div>
@@ -302,7 +301,7 @@ const ProductView = ({
 
       {store.imageUploader && (
         <ImageUploader
-          setLogo={setLogo}
+          setLogo={setLogo} // store - related to actions taken
           setImageWidth={setImageWidth}
           setImageHeight={setImageHeight}
           reset={reset}
@@ -310,7 +309,7 @@ const ProductView = ({
       )}
 
       <ProductUiPanel
-        actionsTaken={logo}
+        actionsTaken={logo} // store
         center={handleCenter}
         handleRedo={handleRedo}
         handleSaveCustomImage={handleSaveCustomImage}

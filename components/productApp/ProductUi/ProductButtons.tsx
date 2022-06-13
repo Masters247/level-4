@@ -9,14 +9,14 @@ import { useStore } from "../store";
 const ProductButtons = ({
   handleScreenShot,
   // Possibly remove
-  handleImageUpload,
+  // handleImageUpload,
   handleSaveCustomImage,
-  stateUploader,
+  // stateUploader,
   handleUndo,
   handleRedo,
   undoActive,
   redoActive,
-  actionsTaken,
+  actionsTaken, // used in this compononent
 }: any) => {
   const store = useStore();
   const { data: session }: any = useSession();
@@ -44,24 +44,21 @@ const ProductButtons = ({
       <ProductButton
         className={s.newLogoButton}
         variant="primary"
-        onClick={() => store.setImageUploader(!store.imageUploader)}
-      >
+        onClick={() => store.setImageUploader(!store.imageUploader)}>
         {store.imageUploader ? <>Close Image Uploader</> : <>Add New Logo</>}
       </ProductButton>
       <ProductButton
         undo={true}
         variant="primary"
         disabled={!undoActive}
-        onClick={handleUndo}
-      >
+        onClick={handleUndo}>
         undo
       </ProductButton>
       <ProductButton
         redo={true}
         variant="primary"
         disabled={!redoActive}
-        onClick={handleRedo}
-      >
+        onClick={handleRedo}>
         redo
       </ProductButton>
       <ProductButton
@@ -71,8 +68,7 @@ const ProductButtons = ({
         disabled={!session || !actionsTaken}
         onClick={handleSaveCustomImage}
         onMouseEnter={() => handleMouseEnter("save")}
-        onMouseLeave={() => handleMouseLeave("save")}
-      >
+        onMouseLeave={() => handleMouseLeave("save")}>
         {store.saveCustomImage === 0 && "save"}
         {store.saveCustomImage === 1 && <Spinner colour={spinnerColourSave} />}
         {store.saveCustomImage === 2 && "saved"}
@@ -84,8 +80,7 @@ const ProductButtons = ({
         disabled={!actionsTaken}
         onClick={handleScreenShot}
         onMouseEnter={() => handleMouseEnter("download")}
-        onMouseLeave={() => handleMouseLeave("download")}
-      >
+        onMouseLeave={() => handleMouseLeave("download")}>
         {store.downloadCustomImage === 0 && "download"}
         {store.downloadCustomImage === 1 && (
           <Spinner colour={spinnerColourDownload} />
