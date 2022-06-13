@@ -96,11 +96,11 @@
   width: 100%;
   margin-top: 1em;
   padding: 0.5em 1em 0.5em 1em;
-  background-color: rgb(240, 88, 88);
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  border: rgb(240, 88, 88) 1px solid;
 
   @media (min-width: $media-tablet) {
     align-items: flex-start;
@@ -122,15 +122,11 @@
 
     &:hover {
       background-color: rgb(166, 217, 166);
-      border: rgb(240, 88, 88) 1px solid;
+      border: $black 1px solid;
     }
 
     @media (min-width: $media-tablet) {
       width: 20em;
     }
-  }
-
-  p {
-    color: $white;
   }
 }
