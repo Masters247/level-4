@@ -12,7 +12,7 @@ interface Props {
 }
 
 const DesktopNav: FC<Props> = ({ menuProducts }) => {
-  const [dropDown, setDropDown] = useState(false);
+  const [dropDown, setDropDown] = useState(true);
   const { data: session } = useSession();
 
   const handleSignIn = () => {
@@ -27,24 +27,25 @@ const DesktopNav: FC<Props> = ({ menuProducts }) => {
   return (
     <div className={s.navWrapper} ref={ref}>
       <div
-        className={`${s.dropDown} ${dropDown && s.open}`}
+        className={`${s.dropDown} ${!dropDown && s.open}`}
         onClick={() => setDropDown(!dropDown)}
-        onMouseLeave={() => setDropDown(false)}
-      >
+        onMouseLeave={() => setDropDown(false)}>
         <ul className={s.catLinks}>
           {menuProducts?.map((item: Category) => (
             <Link href={`/${item.categoriesSlug}`} passHref key={item.id}>
               <li>
-                <div className={s.catImage}>
-                  <Image
-                    src={item?.homePageOrLinkImage.url}
-                    layout="responsive"
-                    alt={`Product - ${item.title}`}
-                    width={400}
-                    height={400}
-                  />
-                </div>
-                <a>{item.title}</a>
+                <a>
+                  <div className={s.catImage}>
+                    <Image
+                      src={item?.homePageOrLinkImage.url}
+                      layout="responsive"
+                      alt={`Product - ${item.title}`}
+                      width={item?.homePageOrLinkImage.width}
+                      height={item?.homePageOrLinkImage.height}
+                    />
+                  </div>
+                  {item.title}
+                </a>
               </li>
             </Link>
           ))}
@@ -54,7 +55,7 @@ const DesktopNav: FC<Props> = ({ menuProducts }) => {
       <ul className={s.navLinks}>
         <li
           onClick={() => setDropDown(!dropDown)}
-          onMouseEnter={() => setDropDown(!dropDown)}
+          // onMouseEnter={() => setDropDown(!dropDown)}
         >
           <a>Products</a>
         </li>
@@ -88,8 +89,7 @@ const DesktopNav: FC<Props> = ({ menuProducts }) => {
           style={{
             cursor: "pointer",
           }}
-          onClick={() => setDropDown(false)}
-        >
+          onClick={() => setDropDown(false)}>
           {!session ? (
             <button onClick={handleSignIn}>
               <Account />

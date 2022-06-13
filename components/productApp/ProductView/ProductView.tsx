@@ -28,10 +28,8 @@ const ProductView = ({
 
   // is there a logo
   const [logo, setLogo] = useState(null);
-
   const [imageWidth, setImageWidth] = useState(80);
   const [imageHeight, setImageHeight] = useState(80);
-
   const [actionsArr, setActionsArr]: any = useState([]);
 
   const [{ x, y, width, height }, api] = useSpring(() => ({
@@ -56,6 +54,7 @@ const ProductView = ({
     }
 
     // this sets initial array item in actionsArr
+
     if (count === 0 && logo === null) {
       return;
     } else {
@@ -254,6 +253,10 @@ const ProductView = ({
     api.set({ x: 0, y: 0 });
   };
 
+  const test = () => {
+    console.log("test clicked");
+  };
+
   return (
     <div className={s.appWrap}>
       <div
@@ -301,7 +304,7 @@ const ProductView = ({
 
       {store.imageUploader && (
         <ImageUploader
-          setLogo={setLogo} // store - related to actions taken
+          setLogo={setLogo} // STORE - related to actions taken
           setImageWidth={setImageWidth}
           setImageHeight={setImageHeight}
           reset={reset}
@@ -309,17 +312,17 @@ const ProductView = ({
       )}
 
       <ProductUiPanel
-        actionsTaken={logo} // store
-        center={handleCenter}
-        handleRedo={handleRedo}
-        handleSaveCustomImage={handleSaveCustomImage}
-        handleScreenShot={handleScreenShot}
-        handleUndo={handleUndo}
-        horizontal={handleHorizontal}
-        products={products}
-        redoActive={redoActive}
-        undoActive={undoActive}
-        vertical={handleVertical}
+        actionsTaken={logo} // STORE DIFF
+        handleSaveCustomImage={handleSaveCustomImage} // STORE DIFF
+        products={products} // OK FOR NOW !!
+        center={handleCenter} //  OK
+        horizontal={handleHorizontal} // OK
+        vertical={handleVertical} // OK
+        handleRedo={handleRedo} // STORE
+        handleScreenShot={handleScreenShot} //  STORE
+        handleUndo={handleUndo} // STORE
+        redoActive={redoActive} // STORE
+        undoActive={undoActive} // STORE
       />
     </div>
   );

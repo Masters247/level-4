@@ -7,16 +7,14 @@ import { useState } from "react";
 import { useStore } from "../store";
 
 const ProductButtons = ({
-  handleScreenShot,
-  // Possibly remove
-  // handleImageUpload,
-  handleSaveCustomImage,
-  // stateUploader,
-  handleUndo,
-  handleRedo,
-  undoActive,
-  redoActive,
-  actionsTaken, // used in this compononent
+  actionsTaken, //  STORE DIFFICULT
+
+  handleSaveCustomImage, // STORE
+  handleScreenShot, // STORE
+  handleRedo, // STORE
+  handleUndo, // STORE
+  redoActive, // STORE
+  undoActive, // STORE
 }: any) => {
   const store = useStore();
   const { data: session }: any = useSession();

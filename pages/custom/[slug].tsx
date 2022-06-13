@@ -37,10 +37,6 @@ export async function getStaticProps({ params }: any) {
 
   const customPage = await customPageQuery();
 
-  // const customisedPages = await customisePageQuery(params.slug);
-
-  // const customisePages = JSON.stringify(customisedPages);
-
   const query = gql`
   query Product {
     productPage(where: {productSlug: "${params.slug}"}) {
@@ -63,7 +59,6 @@ export async function getStaticProps({ params }: any) {
   }
   `;
 
-  // const queryGraphCms = await graphcms.request(customisePage);
   const customisePages = await graphcms.request(query);
 
   return {

@@ -8,17 +8,18 @@ import ProductColourButtons from "../ProductColourButtons/ProductColourButtons";
 import { useStore } from "../store";
 
 const ProductUiPanel = ({
-  actionsTaken, // used in this compononent
-  center,
-  horizontal,
-  handleRedo,
-  handleSaveCustomImage,
-  handleScreenShot,
-  handleUndo,
-  products,
-  redoActive,
-  undoActive,
-  vertical,
+  actionsTaken, // STORE DIFFICULT
+  products, // OK FOR NOW !!
+  center, // OK
+  horizontal, // OK
+  vertical, // OK
+
+  handleRedo, // STORE
+  handleSaveCustomImage, //  STORE
+  handleScreenShot, // STORE
+  handleUndo, // STORE
+  redoActive, // STORE
+  undoActive, // STORE
 }: any) => {
   const controler = [
     {
@@ -72,13 +73,13 @@ const ProductUiPanel = ({
         <p>{store.productEmbelishment}</p>
       </div>
       <ProductButtons
-        handleScreenShot={handleScreenShot}
-        handleSaveCustomImage={handleSaveCustomImage}
-        handleUndo={handleUndo}
-        handleRedo={handleRedo}
-        undoActive={undoActive}
-        redoActive={redoActive}
-        actionsTaken={actionsTaken} // store
+        actionsTaken={actionsTaken} // STORE DIFFICULT
+        handleScreenShot={handleScreenShot} // STORE
+        handleSaveCustomImage={handleSaveCustomImage} // STORE
+        handleRedo={handleRedo} // STORE
+        handleUndo={handleUndo} // STORE
+        redoActive={redoActive} // STORE
+        undoActive={undoActive} // STORE
       />
     </div>
   );
