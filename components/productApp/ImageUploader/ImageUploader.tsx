@@ -71,7 +71,7 @@ const ImageUploader = ({
     } else {
       setImages(localImages?.concat(obj));
     }
-  }, []);
+  }, [localImages]);
 
   const onImageLocalRemove = (index: any) => {
     let local: any = window.localStorage.getItem("logo list");
@@ -88,7 +88,9 @@ const ImageUploader = ({
         value={images}
         onChange={onChange}
         maxNumber={maxNumber}
-        dataURLKey="data_url">
+        dataURLKey="data_url"
+        acceptType={["png", "jpeg", "jpg"]}
+      >
         {({
           imageList,
           onImageUpload,
@@ -102,7 +104,8 @@ const ImageUploader = ({
               <ProductButton
                 variant="primary-dashed"
                 onClick={onImageUpload}
-                {...dragProps}>
+                {...dragProps}
+              >
                 Click or Drop
               </ProductButton>
               <ProductButton variant="tertiary-b" onClick={onImageRemoveAll}>
@@ -110,7 +113,8 @@ const ImageUploader = ({
               </ProductButton>
               <ProductButton
                 variant="primary-b"
-                onClick={() => store.setImageUploader(false)}>
+                onClick={() => store.setImageUploader(false)}
+              >
                 <Remove styles={s.remove} />
               </ProductButton>
             </div>
@@ -118,8 +122,9 @@ const ImageUploader = ({
               className={cn(
                 s.newImageWrap,
                 imageList.length !== 0 && s.newImageWrapPaddingTop
-              )}>
-              {imageList?.map((image: any, index: any) => {
+              )}
+            >
+              {imageList?.map((image: any, index: number) => {
                 return (
                   <div key={index}>
                     {image !== null && (

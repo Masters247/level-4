@@ -1,12 +1,12 @@
 import s from "./designs.module.scss";
 import Image from "next/image";
-import { FC } from "react";
+import { FC, useEffect, useState } from "react";
 import useSWR from "swr";
 import DesignsProduct, { Design } from "./DesignsProduct";
 
 const fetcher = (id: any) => fetch(id).then((res) => res.json());
 
-function useCustomImages(id: any) {
+function useCustomImages(id: string) {
   const { data, error, mutate } = useSWR(
     `/api/account/getCustomImages?id=${id}`,
     fetcher,
@@ -27,10 +27,41 @@ interface Props {
 }
 
 const Designs: FC<Props> = ({ userId }) => {
-  const { data, isLoading, isError, mutate } = useCustomImages(userId);
+  const {
+    data,
+    isLoading,
+    isError,
+    mutate,
+  }: {
+    data: Design[];
+    isLoading: boolean;
+    isError: boolean;
+    mutate: () => void;
+  } = useCustomImages(userId);
 
-  const handleFilter = (category: any) => {
-    // console.log("category", category);
+  const [savedImages, setSavedImages] = useState(data);
+  const [selectedImage, setSelectedImage] = useState("");
+
+  useEffect(() => {
+    if (data) {
+      setSavedImages(data);
+      setSelectedImage("all");
+    }
+  }, [data]);
+
+  const categories = data?.map((item: Design) => item.category);
+
+  const handleFilter = (category: string) => {
+    if (category === "all") {
+      setSavedImages(data);
+      setSelectedImage("all");
+    } else {
+      const filtered = data?.filter(
+        (item: Design) => item.category === category
+      );
+      setSavedImages(filtered);
+      setSelectedImage(category);
+    }
   };
 
   return (
@@ -43,21 +74,32 @@ const Designs: FC<Props> = ({ userId }) => {
         </div>
       ) : (
         <>
-          {/* <div className={s.navFilterWrap}>
+          <div className={s.navFilterWrap}>
             <div className={s.navFilter}>
-              {pages[1].products?.map((c: any, i: number) => (
-                <button
-                  key={`${c.name} ${i}`}
-                  onClick={() => handleFilter(c.name)}
-                >
-                  <p>{c.name}</p>
-                </button>
-              ))}
+              <button onClick={() => handleFilter("all")}>
+                <p className={`${selectedImage === "all" && s.selected}`}>
+                  All
+                </p>
+              </button>
+              {categories
+                ?.filter((cat, i) => categories.indexOf(cat) === i)
+                .map((category, i) => (
+                  <button
+                    key={`${category}-${i}`}
+                    onClick={() => handleFilter(category)}
+                  >
+                    <p
+                      className={`${category === selectedImage && s.selected}`}
+                    >
+                      {category.replace("_", " ")}
+                    </p>
+                  </button>
+                ))}
             </div>
-          </div> */}
+          </div>
           <div className={s.designs}>
-            {data?.length !== 0 ? (
-              data.map((d: Design, i: number) => (
+            {savedImages?.length !== 0 ? (
+              savedImages?.map((d: Design, i: number) => (
                 <DesignsProduct design={d} key={i} mutate={mutate} />
               ))
             ) : (

@@ -5,12 +5,12 @@ import ProductButton from "./ProductButton";
 import Spinner from "../../ui/icons/Spinner";
 import { useState } from "react";
 import { useStore } from "../store";
+import html2canvas from "html2canvas";
+
+const download = require("downloadjs");
 
 const ProductButtons = ({
   actionsTaken, //  STORE DIFFICULT
-
-  handleSaveCustomImage, // STORE
-  handleScreenShot, // STORE
   handleRedo, // STORE
   handleUndo, // STORE
   redoActive, // STORE
@@ -37,26 +37,86 @@ const ProductButtons = ({
     }
   };
 
+  const handleDownloadCustomImage = () => {
+    store.setDownloadCustomImage(1);
+    store.setShowHidDragResizeDiv(false);
+
+    const takeScreenShot = () => {
+      html2canvas(document.getElementById("capture") as HTMLElement, {
+        useCORS: true,
+      })
+        .then((canvas) => {
+          const image = canvas.toDataURL("image/jpeg");
+          download(image, `Level 4 | ${name}.jpeg`, "image/jpeg");
+          store.setDownloadCustomImage(2);
+          setTimeout(() => store.setDownloadCustomImage(0), 2000);
+        })
+        .then(() => {
+          store.setShowHidDragResizeDiv(true);
+        })
+        .catch((err) => {
+          console.log("IMAGE DOWNLOAD ERROR: ", err);
+        });
+    };
+    setTimeout(() => takeScreenShot(), 1000);
+  };
+
+  const handleSaveCustomImage = () => {
+    store.setSaveCustomImage(1);
+    store.setShowHidDragResizeDiv(false);
+
+    const takeScreenShot = () => {
+      html2canvas(document.getElementById("capture") as HTMLElement, {
+        useCORS: true,
+      })
+        .then((canvas) => {
+          const image = canvas.toDataURL("image/jpeg");
+          fetch("/api/productApp/customImage", {
+            method: "POST",
+            body: JSON.stringify({
+              image,
+              userId: session.user.userId,
+              productName: store.productName,
+              productCategory: store.productCategory,
+            }),
+            headers: { "Content-Type": "application/json" },
+          });
+        })
+        .then(() => {
+          store.setShowHidDragResizeDiv(true),
+            store.setSaveCustomImage(2),
+            setTimeout(() => store.setSaveCustomImage(0), 2000);
+        })
+        .catch((err) => {
+          console.log("IMAGE DOWNLOAD ERROR: ", err);
+        });
+    };
+    setTimeout(() => takeScreenShot(), 1000);
+  };
+
   return (
     <div className={cn(s.uiButtons)}>
       <ProductButton
         className={s.newLogoButton}
         variant="primary"
-        onClick={() => store.setImageUploader(!store.imageUploader)}>
+        onClick={() => store.setImageUploader(!store.imageUploader)}
+      >
         {store.imageUploader ? <>Close Image Uploader</> : <>Add New Logo</>}
       </ProductButton>
       <ProductButton
         undo={true}
         variant="primary"
         disabled={!undoActive}
-        onClick={handleUndo}>
+        onClick={handleUndo}
+      >
         undo
       </ProductButton>
       <ProductButton
         redo={true}
         variant="primary"
         disabled={!redoActive}
-        onClick={handleRedo}>
+        onClick={handleRedo}
+      >
         redo
       </ProductButton>
       <ProductButton
@@ -66,7 +126,8 @@ const ProductButtons = ({
         disabled={!session || !actionsTaken}
         onClick={handleSaveCustomImage}
         onMouseEnter={() => handleMouseEnter("save")}
-        onMouseLeave={() => handleMouseLeave("save")}>
+        onMouseLeave={() => handleMouseLeave("save")}
+      >
         {store.saveCustomImage === 0 && "save"}
         {store.saveCustomImage === 1 && <Spinner colour={spinnerColourSave} />}
         {store.saveCustomImage === 2 && "saved"}
@@ -76,9 +137,10 @@ const ProductButtons = ({
         tick={store.downloadCustomImage === 2 && true}
         variant="secondary"
         disabled={!actionsTaken}
-        onClick={handleScreenShot}
+        onClick={handleDownloadCustomImage}
         onMouseEnter={() => handleMouseEnter("download")}
-        onMouseLeave={() => handleMouseLeave("download")}>
+        onMouseLeave={() => handleMouseLeave("download")}
+      >
         {store.downloadCustomImage === 0 && "download"}
         {store.downloadCustomImage === 1 && (
           <Spinner colour={spinnerColourDownload} />

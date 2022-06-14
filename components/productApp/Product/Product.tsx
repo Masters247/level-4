@@ -46,8 +46,8 @@ const Product = ({ products, i }: any) => {
               products.productVariantColours[productColour].images[productView]
                 .url
             }
-            height={260}
-            width={260}
+            height={500}
+            width={500}
           />
         </Link>
       </div>

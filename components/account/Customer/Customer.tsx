@@ -200,7 +200,7 @@ const Customer: FC<Props> = ({ customer, mutate }) => {
       {deleteWarning && (
         <div className={s.deleteWarning}>
           <p>
-            Deleting your account is irreversable and will delete any custom
+            Deleting your account is irreversible and will delete any custom
             designs saved to your account. All data will be instantly removed
             from our database.
           </p>

@@ -9,13 +9,16 @@ import { useStore } from "../store";
 
 const ProductUiPanel = ({
   actionsTaken, // STORE DIFFICULT
+  handleSaveCustomImage, //  STORE DIFF
+
   products, // OK FOR NOW !!
+
   center, // OK
   horizontal, // OK
   vertical, // OK
 
-  handleRedo, // STORE
-  handleSaveCustomImage, //  STORE
+  handleRedo, // STORE - not used in this component
+
   handleScreenShot, // STORE
   handleUndo, // STORE
   redoActive, // STORE
@@ -57,7 +60,8 @@ const ProductUiPanel = ({
                 key={cont.name}
                 onClick={cont?.function}
                 className={controlStyles}
-                disabled={actionsTaken === null}>
+                disabled={actionsTaken === null}
+              >
                 {cont.icon}
               </button>
             );

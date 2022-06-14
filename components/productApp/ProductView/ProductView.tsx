@@ -9,12 +9,12 @@ import cn from "classnames";
 import { useStore } from "../store";
 
 const ProductView = ({
-  handleSaveCustomImage,
-  handleScreenShot,
+  // handleSaveCustomImage,
+  // handleScreenShot,
   image,
   products,
-  showHideDragResizeDiv,
-}: any) => {
+}: // showHideDragResizeDiv,
+any) => {
   const containerRef = useRef<HTMLDivElement | null>(null);
   const dragEl = useRef<HTMLDivElement | null>(null);
   const logoBox = useRef<HTMLDivElement | null>(null);
@@ -54,7 +54,6 @@ const ProductView = ({
     }
 
     // this sets initial array item in actionsArr
-
     if (count === 0 && logo === null) {
       return;
     } else {
@@ -147,6 +146,7 @@ const ProductView = ({
       },
     }
   );
+
   const handleRedo = () => {
     setUndoActive(true);
 
@@ -253,15 +253,12 @@ const ProductView = ({
     api.set({ x: 0, y: 0 });
   };
 
-  const test = () => {
-    console.log("test clicked");
-  };
-
   return (
     <div className={s.appWrap}>
       <div
         className={s.productViewportContainer}
-        onClick={() => store.setImageUploader(false)}>
+        onClick={() => store.setImageUploader(false)}
+      >
         <div id="capture" className={s.imageCaptureWrap}>
           <div className={s.imageWrap}>
             <img src={image.url} width="450px" height="450px" alt="product" />
@@ -269,9 +266,10 @@ const ProductView = ({
           <div className={s.productViewport}>
             <div
               className={`${
-                showHideDragResizeDiv ? s.customArear : s.customArearHide
+                store.showHideDragResizeDiv ? s.customArear : s.customArearHide
               }`}
-              ref={containerRef}>
+              ref={containerRef}
+            >
               <animated.div
                 className={cn(
                   s.customLogo,
@@ -285,7 +283,8 @@ const ProductView = ({
                   zIndex: "1",
                 }}
                 {...bind()}
-                ref={logoBox}>
+                ref={logoBox}
+              >
                 <div className={s.imageOuterWrap}>
                   {logo !== null && (
                     <div className={s.logoImageWrap}>
@@ -295,7 +294,8 @@ const ProductView = ({
                 </div>
                 <div
                   className={cn(s.resizer, logo === null && s.resizerDisabled)}
-                  ref={dragEl}></div>
+                  ref={dragEl}
+                ></div>
               </animated.div>
             </div>
           </div>
@@ -313,13 +313,11 @@ const ProductView = ({
 
       <ProductUiPanel
         actionsTaken={logo} // STORE DIFF
-        handleSaveCustomImage={handleSaveCustomImage} // STORE DIFF
         products={products} // OK FOR NOW !!
         center={handleCenter} //  OK
         horizontal={handleHorizontal} // OK
         vertical={handleVertical} // OK
         handleRedo={handleRedo} // STORE
-        handleScreenShot={handleScreenShot} //  STORE
         handleUndo={handleUndo} // STORE
         redoActive={redoActive} // STORE
         undoActive={undoActive} // STORE
