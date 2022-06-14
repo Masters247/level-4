@@ -61,7 +61,7 @@ const ImageUploader = ({
     } else {
       setImages(localImages?.concat(obj));
     }
-  }, []);
+  }, [localImages]);
 
   const onImageLocalRemove = (index: any) => {
     let local: any = window.localStorage.getItem("logo list");
@@ -79,6 +79,7 @@ const ImageUploader = ({
         onChange={onChange}
         maxNumber={maxNumber}
         dataURLKey="data_url"
+        acceptType={["png", "jpeg", "jpg"]}
       >
         {({
           imageList,
@@ -111,7 +112,7 @@ const ImageUploader = ({
                 imageList.length !== 0 && s.newImageWrapPaddingTop
               )}
             >
-              {imageList?.map((image: any, index: any) => {
+              {imageList?.map((image: any, index: number) => {
                 return (
                   <div key={index}>
                     {image !== null && (
