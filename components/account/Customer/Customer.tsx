@@ -4,6 +4,7 @@ import { useState } from "react";
 import { Button } from "../../ui/Button";
 import { Account } from "@prisma/client";
 import { signOut } from "next-auth/react";
+import { NextSeo } from "next-seo";
 
 export type Customer = {
   id: string;
@@ -223,6 +224,15 @@ const Customer: FC<Props> = ({ customer, mutate }) => {
           </div>
         </div>
       )}
+
+      {/* SEO */}
+
+      <NextSeo
+        title={`Level 4 | My Account`}
+        openGraph={{
+          title: `Level 4 | My Account`,
+        }}
+      />
     </form>
   );
 };

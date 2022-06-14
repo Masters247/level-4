@@ -6,6 +6,7 @@ import Product from "../../components/productApp/Product/Product";
 import { categoryPagesSlugQuery } from "../../lib/graphcms-querys/categoryQuery";
 import MailingList from "../../components/global/MailingList/MailingList";
 import TrendingStyle from "../../components/global/TrendingStyle/TrendingStyle";
+import { NextSeo } from "next-seo";
 
 export async function getStaticPaths() {
   const categoryPages = await categoryPagesSlugQuery();
@@ -134,6 +135,17 @@ const Category: NextPage<Props> = ({ data }) => {
       </section>
       <TrendingStyle trendingStyle={trendingStyle} category={true} />
       <MailingList />
+
+      {/* SEO */}
+
+      <NextSeo
+        title={`Level 4 | ${categoryPages[0].title}`}
+        description={categoryPages[0].heroText}
+        openGraph={{
+          title: `${categoryPages[0].title}`,
+          description: `${categoryPages[0].heroText}`,
+        }}
+      />
     </div>
   );
 };

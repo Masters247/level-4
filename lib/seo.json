@@ -1,0 +1,20 @@
+{
+  "title": "Level 4 | Bespoke and custom golf equipment | Designed to meet your requirements",
+  "description": "Level 4 personalisation is our bespoke and custom service that gives you the finest quality products designed to meet your requirements.",
+  "openGraph": {
+    "title": "Level 4 | Bespoke and custom golf equipment | Designed to meet your requirements",
+    "description": "Level 4 personalisation is our bespoke and custom service that gives you the finest quality products designed to meet your requirements.",
+    "type": "website",
+    "locale": "en_GB",
+    "url": "https://level-four.co.uk",
+    "site_name": "Level4",
+    "images": [
+      {
+        "url": "/card.png",
+        "width": 1200,
+        "height": 630,
+        "alt": "Level4"
+      }
+    ]
+  }
+}

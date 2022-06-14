@@ -11,6 +11,7 @@ import { useState, useEffect } from "react";
 import customPageQuery from "../../lib/graphcms-querys/customPageQuery";
 import html2canvas from "html2canvas";
 import Link from "next/link";
+import { NextSeo } from "next-seo";
 const download = require("downloadjs");
 
 export async function getStaticPaths() {
@@ -173,6 +174,15 @@ const Custom: NextPage<Props> = ({ queryGraphCms, customPage }) => {
         </div>
       )}
       <TrendingStyle category={true} trendingStyle={trendingStyle} />
+
+      {/* SEO */}
+
+      <NextSeo
+        title={`Level 4 | Visuliser | ${name}`}
+        openGraph={{
+          title: `Level 4 | Visuliser | ${name}`,
+        }}
+      />
     </div>
   );
 };

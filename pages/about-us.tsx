@@ -3,6 +3,7 @@ import aboutUsQuery from "../lib/graphcms-querys/aboutPageQuery";
 import Image from "next/image";
 import MailingList from "../components/global/MailingList/MailingList";
 import s from "../styles/pages/aboutUsPage.module.scss";
+import { NextSeo } from "next-seo";
 
 export const getStaticProps: GetStaticProps = async () => {
   const aboutUs = await aboutUsQuery();
@@ -94,6 +95,15 @@ const AboutUs: NextPage<Props> = ({ aboutUs }) => {
         </div>
       </section>
       <MailingList />
+
+      {/* SEO */}
+
+      <NextSeo
+        title={`Level 4 | About`}
+        openGraph={{
+          title: `Level 4 | About`,
+        }}
+      />
     </div>
   );
 };

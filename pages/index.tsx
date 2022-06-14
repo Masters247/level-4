@@ -9,6 +9,7 @@ import {
 import homePageQuery from "../lib/graphcms-querys/homePageQuery";
 import TrendingStyle from "../components/global/TrendingStyle/TrendingStyle";
 import FeatureBanner from "../components/global/FeatureBanner/FeatureBanner";
+import { LocalBusinessJsonLd } from "next-seo";
 
 export const getStaticProps: GetStaticProps = async () => {
   const homePages = await homePageQuery();
@@ -42,6 +43,22 @@ const Home: NextPage<Props> = ({ categories, homePages }) => {
       />
       <FeatureBanner featureBanner={featureBanner} />
       <MailingList />
+
+      {/* SEO */}
+
+      <LocalBusinessJsonLd
+        type="SportingGoodsStore"
+        id="http://level-four.co.uk"
+        name="Level 4"
+        description="Level 4 personalisation is our bespoke and custom service that gives you the finest quality products designed to meet your requirements"
+        address={{
+          streetAddress: "Serbert Road",
+          addressLocality: "Portishead",
+          addressRegion: "Bristol",
+          postalCode: "BS20 7GG",
+          addressCountry: "GB",
+        }}
+      />
     </>
   );
 };
