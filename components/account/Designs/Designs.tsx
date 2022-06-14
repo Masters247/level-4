@@ -42,8 +42,6 @@ const Designs: FC<Props> = ({ userId }) => {
   const [savedImages, setSavedImages] = useState(data);
   const [selectedImage, setSelectedImage] = useState("");
 
-  console.log(savedImages);
-
   useEffect(() => {
     if (data) {
       setSavedImages(data);
