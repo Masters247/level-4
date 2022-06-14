@@ -62,7 +62,7 @@
 
   .passwordSuccess {
     margin-top: 1em;
-    background-color: rgb(166, 217, 166);
+    background-color: $success-green;
     padding: 0.5em 1em 0.5em 1em;
     width: 100%;
     color: $white;
@@ -122,7 +122,7 @@
     color: $black;
 
     &:hover {
-      background-color: rgb(166, 217, 166);
+      background-color: $success-green;
       border: $black 1px solid;
     }
 
