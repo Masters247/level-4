@@ -67,11 +67,7 @@ const ContactForm = () => {
                     {/* <label htmlFor="name">
                       <span>&#42;</span> Name
                     </label> */}
-                    <Field
-                      className={s.name}
-                      name="name"
-                      placeholder="*Email"
-                    />
+                    <Field className={s.name} name="name" placeholder="*Name" />
                     {errors.name && touched.name ? (
                       <div className={s.error}>{errors.name}</div>
                     ) : null}
