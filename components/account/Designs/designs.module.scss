@@ -1,7 +1,10 @@
 @use "../../../styles/base.scss" as *;
 
 .navFilterWrap {
-  margin-bottom: 2em;
+  width: 100%;
+  margin-bottom: 1em;
+  padding-bottom: 1em;
+  border-bottom: 1px solid $grey-3;
   @include flexCenter;
   .navFilter {
     @include flexCenter;
@@ -12,12 +15,18 @@
       }
     }
     button {
-      margin: 1em;
+      margin: 0.5em 0.75em;
       p {
         text-transform: uppercase;
-        font-size: 1em;
-        font-weight: 600;
+        font-size: 0.75rem;
+        padding: 0.5em;
       }
+    }
+
+    .selected {
+      background-color: $grey-0;
+      padding: 0.5em;
+      font-weight: 400;
     }
   }
 }
