@@ -3,6 +3,7 @@ import Image from "next/image";
 import { FC, useEffect, useState } from "react";
 import useSWR from "swr";
 import DesignsProduct, { Design } from "./DesignsProduct";
+import { NextSeo } from "next-seo";
 
 const fetcher = (id: any) => fetch(id).then((res) => res.json());
 
@@ -111,6 +112,15 @@ const Designs: FC<Props> = ({ userId }) => {
           </div>
         </>
       )}
+
+      {/* SEO */}
+
+      <NextSeo
+        title={`Level 4 | My Designs`}
+        openGraph={{
+          title: `Level 4 | My Designs`,
+        }}
+      />
     </>
   );
 };

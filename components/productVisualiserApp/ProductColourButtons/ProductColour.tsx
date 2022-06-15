@@ -23,17 +23,13 @@ const ProductColour = ({ hex, i, hexSecondary, shape }: any) => {
         })}
         style={{
           backgroundColor: `${hex}`,
-          position: "relative",
         }}
       >
         <span
           style={{
             backgroundColor: `${hexSecondary}`,
-            left: "calc(50% - 2px)",
-            top: "calc(50% - 2px)",
-            position: "absolute",
-            width: "4px",
-            height: "4px",
+            width: "5px",
+            height: "5px",
           }}
         ></span>
       </div>

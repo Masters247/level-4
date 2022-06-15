@@ -2,6 +2,7 @@ import { GetStaticProps, NextPage } from "next";
 import termsPageQuery from "../lib/graphcms-querys/TermsPageQuery";
 import s from "../styles/pages/termsPage.module.scss";
 import ReactHtmlParser from "react-html-parser";
+import { NextSeo } from "next-seo";
 
 export const getStaticProps: GetStaticProps = async () => {
   const termsPage = await termsPageQuery();
@@ -27,6 +28,15 @@ const Terms: NextPage<Props> = ({ termsPage }) => {
     <div className={s.pageWrap}>
       <h1>{termsPage.title}</h1>
       <div className={s.content}>{ReactHtmlParser(termsPage.content.html)}</div>
+
+      {/* SEO */}
+
+      <NextSeo
+        title={`Level 4 | Terms & Conditions`}
+        openGraph={{
+          title: `Level 4 | Terms & Conditions`,
+        }}
+      />
     </div>
   );
 };

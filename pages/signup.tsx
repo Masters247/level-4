@@ -7,6 +7,7 @@ import TwitterBlue from "../components/ui/icons/TwitterBlue";
 import { useRouter } from "next/router";
 import Link from "next/link";
 import Eye from "../components/ui/icons/Eye";
+import { NextSeo } from "next-seo";
 
 export async function getServerSideProps(context: any) {
   const session = await getSession({ req: context.req });
@@ -155,6 +156,15 @@ export default function SignUp() {
           Continue With Twitter <TwitterBlue styles={s.providerLogo} />
         </Button>
       </div>
+
+      {/* SEO */}
+
+      <NextSeo
+        title={`Level 4 | Signup`}
+        openGraph={{
+          title: `Level 4 | Signup`,
+        }}
+      />
     </div>
   );
 }

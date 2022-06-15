@@ -20,8 +20,6 @@ const ProductUiPanel = ({
   redoActive, // STORE OR REFACT
   undoActive, // STORE OR REFACT
 }: any) => {
-  console.log("🚀 ~ file: ProductUiPanel.tsx ~ line 23 ~ products", products);
-
   const controler = [
     {
       name: "center",
@@ -45,6 +43,10 @@ const ProductUiPanel = ({
     actionsTaken === null && s.controlDisabled
   );
   const store = useStore();
+  console.log(
+    "🚀 ~ file: ProductUiPanel.tsx ~ line 46 ~ store",
+    store.productEmbelishment.replace("_", " / ")
+  );
 
   return (
     <div className={cn(s.productUiWrap)}>
@@ -60,7 +62,7 @@ const ProductUiPanel = ({
                 className={controlStyles}
                 disabled={actionsTaken === null}
               >
-                {cont.icon}
+                <span className={s.iconWrap}>{cont.icon}</span>
               </button>
             );
           })}
@@ -72,7 +74,7 @@ const ProductUiPanel = ({
       </div>
       <div className={s.embelishment}>
         <h2>Embelishment:</h2>
-        <p>{store.productEmbelishment}</p>
+        <p>{store.productEmbelishment.replace("_", " / ")}</p>
       </div>
       <ProductButtons
         actionsTaken={actionsTaken} // STORE OR REFACT

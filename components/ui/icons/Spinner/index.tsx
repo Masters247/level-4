@@ -6,7 +6,6 @@ interface Props {
 }
 
 const Spinner: FC<Props> = ({ colour }) => {
-  // const colour = "#000000";
   return (
     <div className={s.ldsRing}>
       <div

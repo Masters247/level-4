@@ -53,6 +53,7 @@ const DesignsProduct: FC<Props> = ({ design, mutate }) => {
         url,
       }),
     });
+
     const { base64 } = await convertImage.json();
     download(
       `data:image/jpeg;base64,${base64}`,

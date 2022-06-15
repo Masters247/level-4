@@ -14,6 +14,9 @@
   @include boxShadow;
   @include buttonFont;
   transition: 200ms background-color, 200ms border;
+  &:active {
+    opacity: 0.2;
+  }
   .icon {
     width: 15px;
     margin-right: 0.5em;
@@ -46,6 +49,18 @@
   &:hover {
     color: $white;
     border: 1px solid $black;
+  }
+}
+.primaryC {
+  border: 1px solid $grey-4;
+  color: $black;
+
+  &:hover {
+    border: 1px solid $button-primary;
+    color: $button-primary;
+    .icon {
+      fill: $button-primary;
+    }
   }
 }
 .primaryDashed {

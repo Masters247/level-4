@@ -8,9 +8,10 @@ import { GraphQLClient, gql } from "graphql-request";
 import { useSession } from "next-auth/react";
 import { useEffect } from "react";
 import customPageQuery from "../../lib/graphcms-querys/customPageQuery";
-import customisePageQuery from "../../lib/graphcms-querys/customisePageQuery";
+import html2canvas from "html2canvas";
+import Link from "next/link";
+import { NextSeo } from "next-seo";
 import { useStore } from "../../components/productVisualiserApp/store";
-
 const download = require("downloadjs");
 
 export async function getStaticPaths() {
@@ -100,6 +101,15 @@ const Custom: NextPage<Props> = ({ customisePages, customPage }) => {
       </div>
       <PleaseSignIn />
       <TrendingStyle category={true} trendingStyle={trendingStyle} />
+
+      {/* SEO */}
+
+      <NextSeo
+        title={`Level 4 | Visuliser | ${name}`}
+        openGraph={{
+          title: `Level 4 | Visuliser | ${name}`,
+        }}
+      />
     </div>
   );
 };

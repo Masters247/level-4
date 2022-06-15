@@ -7,10 +7,14 @@
   padding: 2px;
   margin: 2px;
   .colour {
+    @include flexCenter;
     display: flex;
     width: 19px;
     height: 18px;
     border: 1px solid $grey-4;
+    &:active {
+      opacity: 0.2;
+    }
   }
 }
 

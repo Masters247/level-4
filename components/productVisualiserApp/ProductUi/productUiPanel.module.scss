@@ -14,7 +14,6 @@
   padding: 1em;
   @include boxShadow;
   background-color: $white;
-  // background-color: $red-1;
   left: calc(50% - (50vw - 1em));
   margin-top: 1em;
   max-width: 20em;
@@ -28,7 +27,6 @@
   }
 
   .uiControlsWrap {
-    // background-color: red;
     padding: 1em 0;
     display: flex;
     align-items: center;
@@ -40,6 +38,11 @@
     .controlsWrap {
       display: flex;
       margin-right: 2px;
+      .iconWrap {
+        &:active {
+          opacity: 0.2;
+        }
+      }
 
       .control {
         background-color: $white;
@@ -92,7 +95,8 @@
 
     p {
       text-align: center;
-      margin-top: 0.2em;
+      margin-top: 0.5em;
+      font-size: 0.9rem;
     }
   }
 
@@ -160,15 +164,11 @@
     left: calc(50% - 10em);
   }
   @media (min-width: $media-desktop-small) {
-    // background-color: $grey-0;
     box-shadow: none;
     top: calc(50% - 50%);
     left: calc(500px + 1.8em);
     margin-top: 0;
-    // padding: 2em;
-    // .productUiMinWrap {
-    //   top: calc(50% - 110px);
-    // }
+
     h1 {
       text-align: left;
     }

@@ -8,6 +8,7 @@ import { GraphQLClient, gql } from "graphql-request";
 import type { NextPage } from "next";
 import { useStore } from "../../../components/productVisualiserApp/store";
 import Image from "next/image";
+import { NextSeo } from "next-seo";
 
 export async function getStaticPaths() {
   const productsPages = await productsPagesQuery();
@@ -162,6 +163,17 @@ const Product: NextPage<Props> = ({ data }) => {
       {featureBanner === null ? null : (
         <FeatureBanner featureBanner={featureBanner} />
       )}
+
+      {/* SEO */}
+
+      <NextSeo
+        title={`Level 4 | ${productPage.name}`}
+        description={productPage.description}
+        openGraph={{
+          title: `${productPage.name}`,
+          description: `${productPage.description}`,
+        }}
+      />
     </div>
   );
 };

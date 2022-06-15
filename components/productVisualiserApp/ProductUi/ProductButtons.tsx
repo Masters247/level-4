@@ -98,14 +98,14 @@ const ProductButtons = ({
     <div className={cn(s.uiButtons)}>
       <ProductButton
         className={s.newLogoButton}
-        variant="primary"
+        variant="primary-c"
         onClick={() => store.setImageUploader(!store.imageUploader)}
       >
         {store.imageUploader ? <>Close Image Uploader</> : <>Add New Logo</>}
       </ProductButton>
       <ProductButton
         undo={true}
-        variant="primary"
+        variant="primary-c"
         disabled={!undoActive}
         onClick={handleUndo}
       >
@@ -113,7 +113,7 @@ const ProductButtons = ({
       </ProductButton>
       <ProductButton
         redo={true}
-        variant="primary"
+        variant="primary-c"
         disabled={!redoActive}
         onClick={handleRedo}
       >

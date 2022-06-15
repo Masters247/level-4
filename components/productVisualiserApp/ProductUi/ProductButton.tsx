@@ -20,6 +20,7 @@ interface Props extends ButtonHTMLAttributes<HTMLButtonElement> {
   variant:
     | "primary"
     | "primary-b"
+    | "primary-c"
     | "primary-dashed"
     | "secondary"
     | "tertiary"
@@ -71,6 +72,7 @@ const ProductButton: FC<Props> = forwardRef(
       {
         [s.primary]: variant === "primary",
         [s.primaryB]: variant === "primary-b",
+        [s.primaryC]: variant === "primary-c",
         [s.primaryDashed]: variant === "primary-dashed",
         [s.secondary]: variant === "secondary",
         [s.tertiary]: variant === "tertiary",

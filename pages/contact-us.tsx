@@ -1,4 +1,5 @@
 import type { GetStaticProps, NextPage } from "next";
+import { NextSeo } from "next-seo";
 import ContactForm from "../components/global/ContactForm/ContactForm";
 import contactUsQuery from "../lib/graphcms-querys/contactPageQuery";
 import s from "../styles/pages/contactUsPage.module.scss";
@@ -35,6 +36,15 @@ const ContactUs: NextPage<Props> = ({ contactUs }) => {
       <section className={s.form}>
         <ContactForm />
       </section>
+
+      {/* SEO */}
+
+      <NextSeo
+        title={`Level 4 | Contact Us`}
+        openGraph={{
+          title: `Level 4 | Contact Us`,
+        }}
+      />
     </div>
   );
 };
