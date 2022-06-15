@@ -5,32 +5,23 @@ import Image from "next/image";
 import Link from "next/link";
 import s from "./product.module.scss";
 import { useStore } from "../store";
+import { useEffect } from "react";
 
 const Product = ({ products, i }: any) => {
+  console.log("🚀 ~ file: Product.tsx ~ line 11 ~ Product ~ i", i);
   const store = useStore();
-
-  // const [productColour, setProductColour] = useState(0);
-
-  // const productImageLength = products.productVariantColours.map(
-  //   (l: any) => l.images.length
-  // );
-
-  // const handleImageClick = () => {
-  //   if (productView < productImageLength[0] - 1) {
-  //     setProductView(productView + 1);
-  //   } else {
-  //     setProductView(0);
-  //   }
-  // };
-
-  // const colourClick = (e: any, i: any) => {
-  //   setProductColour(i);
-  // };
+  console.log(
+    "🚀 ~ file: Product.tsx ~ line 12 ~ Product ~ store",
+    store.productIndex
+  );
 
   const slug = products.productSlug;
   const slugCategory = products.productCategory;
   const productName = products.name;
   const productNameSliced = productName.slice(0, 16);
+
+  const productVariantLength = products.productVariantColours.length;
+
   const src = products.productVariantColours[0].images[0].url;
 
   return (

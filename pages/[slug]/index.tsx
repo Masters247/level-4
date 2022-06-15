@@ -7,6 +7,8 @@ import { categoryPagesSlugQuery } from "../../lib/graphcms-querys/categoryQuery"
 import MailingList from "../../components/global/MailingList/MailingList";
 import TrendingStyle from "../../components/global/TrendingStyle/TrendingStyle";
 import { NextSeo } from "next-seo";
+import { useStore } from "../../components/productVisualiserApp/store";
+import { useEffect } from "react";
 
 export async function getStaticPaths() {
   const categoryPages = await categoryPagesSlugQuery();
@@ -103,6 +105,14 @@ interface Props {
 const Category: NextPage<Props> = ({ data }) => {
   const { categoryPages } = data;
   const { trendingStyle } = categoryPages[0];
+  const store = useStore();
+  console.log("file: index.tsx ~ line 109 ~ store", store);
+
+  const productsArray = categoryPages[0].products.map((i: number) => i);
+
+  useEffect(() => {
+    store.setProductIndex([productsArray]);
+  }, []);
 
   return (
     <div className={s.categoriesPageWrap}>

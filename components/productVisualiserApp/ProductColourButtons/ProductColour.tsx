@@ -1,7 +1,16 @@
 import s from "./productColour.module.scss";
+import { FC } from "react";
 import cn from "classnames";
 import { useStore } from "../store";
-const ProductColour = ({ hex, i, hexSecondary, shape }: any) => {
+
+interface Props {
+  hex: string;
+  i: number;
+  hexSecondary: string;
+  shape: string;
+}
+
+const ProductColour: FC<Props> = ({ hex, i, hexSecondary, shape }) => {
   const store = useStore();
 
   return (

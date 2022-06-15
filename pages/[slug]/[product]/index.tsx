@@ -1,14 +1,14 @@
 import ProductColourButtonsWrap from "../../../components/productVisualiserApp/ProductColourButtons/ProductColourButtons";
 import SliderContainer from "../../../components/slider/SlideContainer/SliderContainer";
 import Visualise from "../../../components/productVisualiserApp/Visualise/Visualise";
-import s from "../../../styles/pages/productPage.module.scss";
 import FeatureBanner from "../../../components/global/FeatureBanner/FeatureBanner";
 import productsPagesQuery from "../../../lib/graphcms-querys/productsPagesQuery";
+import { useStore } from "../../../components/productVisualiserApp/store";
+import s from "../../../styles/pages/productPage.module.scss";
 import { GraphQLClient, gql } from "graphql-request";
 import type { NextPage } from "next";
-import { useStore } from "../../../components/productVisualiserApp/store";
-import Image from "next/image";
 import { NextSeo } from "next-seo";
+import Image from "next/image";
 
 export async function getStaticPaths() {
   const productsPages = await productsPagesQuery();
@@ -102,7 +102,6 @@ const Product: NextPage<Props> = ({ data }) => {
   } = productPage;
 
   const images = featureImage.map((i: any) => i.url);
-
   const imagesLength = productVariantColours[store.productColour].images.length;
 
   return (
@@ -117,7 +116,6 @@ const Product: NextPage<Props> = ({ data }) => {
         <h1>{name}</h1>
         <p>{description}</p>
       </section>
-
       <section
         className={s.productImagesSection}
         style={{
@@ -163,9 +161,7 @@ const Product: NextPage<Props> = ({ data }) => {
       {featureBanner === null ? null : (
         <FeatureBanner featureBanner={featureBanner} />
       )}
-
       {/* SEO */}
-
       <NextSeo
         title={`Level 4 | ${productPage.name}`}
         description={productPage.description}

@@ -82,7 +82,7 @@ const ProductColourButtonsWrap: FC<Props> = ({
         return (
           <ProductColour
             key={i}
-            i={`${i + productColourView.start}`}
+            i={i}
             hex={colour.colour.hex}
             hexSecondary={colour.secondaryColour.hex}
             shape={colour.shape}
