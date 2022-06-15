@@ -2,7 +2,7 @@ import Image from "next/image";
 import type { NextPage } from "next";
 import { GraphQLClient, gql } from "graphql-request";
 import s from "../../styles/pages/categories.module.scss";
-import Product from "../../components/productApp/Product/Product";
+import Product from "../../components/productVisualiserApp/Product/Product";
 import { categoryPagesSlugQuery } from "../../lib/graphcms-querys/categoryQuery";
 import MailingList from "../../components/global/MailingList/MailingList";
 import TrendingStyle from "../../components/global/TrendingStyle/TrendingStyle";

@@ -1,23 +1,36 @@
 /* eslint-disable @next/next/no-img-element */
-import { useRef, useState, useEffect } from "react";
+import { FC, useRef, useState, useEffect } from "react";
 import { useSpring, animated } from "@react-spring/web";
-import { useDrag } from "@use-gesture/react";
+import { Action, useDrag } from "@use-gesture/react";
 import ImageUploader from "../ImageUploader/ImageUploader";
 import ProductUiPanel from "../ProductUi/ProductUiPanel";
 import s from "./productView.module.scss";
 import cn from "classnames";
 import { useStore } from "../store";
 
-const ProductView = ({
-  // handleSaveCustomImage,
-  // handleScreenShot,
-  image,
-  products,
-}: // showHideDragResizeDiv,
-any) => {
+type Image = {
+  url: string;
+};
+
+type Product = {
+  name: string;
+  productCategory: string;
+  productEmbelishment: null | string;
+  productVariantColours: [];
+};
+
+interface Props {
+  image: Image;
+  products: Product;
+}
+
+const ProductView: FC<Props> = ({ image, products }) => {
   const containerRef = useRef<HTMLDivElement | null>(null);
   const dragEl = useRef<HTMLDivElement | null>(null);
   const logoBox = useRef<HTMLDivElement | null>(null);
+
+  const containerWidth = containerRef.current?.clientWidth ?? 0;
+  const containerHeight = containerRef.current?.clientHeight ?? 0;
 
   // gets ratio of image - used to constrain resizer to the ratio of image
   const [ratio, setRatio]: any = useState();
@@ -38,6 +51,9 @@ any) => {
     width: imageWidth,
     height: imageHeight,
   }));
+
+  const getWidth = width.get() / 2;
+  const getHeight = height.get() / 2;
 
   useEffect(() => {
     setRatio(imageHeight / imageWidth);
@@ -81,9 +97,6 @@ any) => {
 
   const bind = useDrag(
     (state: any) => {
-      (window as any).movement = state.movement;
-      (window as any).offset = state.offset;
-
       const isResizing = state?.event.target === dragEl.current;
       const isDragging = state.active;
 
@@ -126,8 +139,6 @@ any) => {
 
       bounds: (state) => {
         const isResizing = state?.event.target === dragEl.current;
-        const containerWidth: any = containerRef.current?.clientWidth ?? 0;
-        const containerHeight: any = containerRef.current?.clientHeight ?? 0;
         if (isResizing) {
           return {
             top: 50,
@@ -174,11 +185,6 @@ any) => {
   };
 
   const handleCenter = () => {
-    const getWidth = width.get() / 2;
-    const getHeight = height.get() / 2;
-    const containerWidth: any = containerRef.current?.clientWidth;
-    const containerHeight: any = containerRef.current?.clientHeight;
-
     api.set({
       x: containerWidth / 2 - getWidth,
       y: containerHeight / 2 - getHeight,
@@ -199,9 +205,6 @@ any) => {
   };
 
   const handleVertical = () => {
-    const getHeight = height.get() / 2;
-    const containerHeight: any = containerRef.current?.clientHeight;
-
     api.set({
       y: containerHeight / 2 - getHeight,
     });
@@ -224,8 +227,6 @@ any) => {
   };
 
   const handleHorizontal = () => {
-    const getWidth = width.get() / 2;
-    const containerWidth: any = containerRef.current?.clientWidth;
     api.set({
       x: containerWidth / 2 - getWidth,
     });

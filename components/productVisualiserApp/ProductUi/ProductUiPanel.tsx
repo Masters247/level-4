@@ -8,22 +8,20 @@ import ProductColourButtons from "../ProductColourButtons/ProductColourButtons";
 import { useStore } from "../store";
 
 const ProductUiPanel = ({
-  actionsTaken, // STORE DIFFICULT
-  handleSaveCustomImage, //  STORE DIFF
-
-  products, // OK FOR NOW !!
+  actionsTaken, // STORE OR REFACT
+  products, // STORE
 
   center, // OK
   horizontal, // OK
   vertical, // OK
 
-  handleRedo, // STORE - not used in this component
-
-  handleScreenShot, // STORE
-  handleUndo, // STORE
-  redoActive, // STORE
-  undoActive, // STORE
+  handleRedo, // STORE OR REFACT
+  handleUndo, // STORE OR REFACT
+  redoActive, // STORE OR REFACT
+  undoActive, // STORE OR REFACT
 }: any) => {
+  console.log("🚀 ~ file: ProductUiPanel.tsx ~ line 23 ~ products", products);
+
   const controler = [
     {
       name: "center",
@@ -77,13 +75,11 @@ const ProductUiPanel = ({
         <p>{store.productEmbelishment}</p>
       </div>
       <ProductButtons
-        actionsTaken={actionsTaken} // STORE DIFFICULT
-        handleScreenShot={handleScreenShot} // STORE
-        handleSaveCustomImage={handleSaveCustomImage} // STORE
-        handleRedo={handleRedo} // STORE
-        handleUndo={handleUndo} // STORE
-        redoActive={redoActive} // STORE
-        undoActive={undoActive} // STORE
+        actionsTaken={actionsTaken} // STORE OR REFACT
+        handleRedo={handleRedo} // STORE OR REFACT
+        handleUndo={handleUndo} // STORE OR REFACT
+        redoActive={redoActive} // STORE OR REFACT
+        undoActive={undoActive} // STORE OR REFACT
       />
     </div>
   );

@@ -1,5 +1,20 @@
 import create from "zustand";
 
+type productVariants = [
+  {
+    color: {
+      hex?: string;
+    };
+    // customImage: {
+    //   url: string;
+    // };
+    // secondaryColour: {
+    //   hex: string;
+    // };
+    // shape: null | string;
+  }
+];
+
 interface ProductAppState {
   productName: string;
   downloadCustomImage: number;
@@ -10,6 +25,8 @@ interface ProductAppState {
   imageUploader: boolean;
   showHideDragResizeDiv: boolean;
   productCategory: string;
+  // productVariants: productVariants;
+  // setProductVaraints: (array: any) => void;
   setProductCategory: (string: string) => void;
   setProductName: (string: string) => void;
   setDownloadCustomImage: (number: number) => void;
@@ -31,6 +48,7 @@ export const useStore = create<ProductAppState>((set) => ({
   imageUploader: false,
   showHideDragResizeDiv: true,
   productCategory: "",
+
   setProductCategory: (string: string) =>
     set(() => ({
       productCategory: string,

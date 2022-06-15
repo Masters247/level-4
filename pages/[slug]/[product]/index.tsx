@@ -1,14 +1,12 @@
-import ProductColourButtonsWrap from "../../../components/productApp/ProductColourButtons/ProductColourButtons";
+import ProductColourButtonsWrap from "../../../components/productVisualiserApp/ProductColourButtons/ProductColourButtons";
 import SliderContainer from "../../../components/slider/SlideContainer/SliderContainer";
-import Visualise from "../../../components/productApp/Visualise/Visualise";
+import Visualise from "../../../components/productVisualiserApp/Visualise/Visualise";
 import s from "../../../styles/pages/productPage.module.scss";
 import FeatureBanner from "../../../components/global/FeatureBanner/FeatureBanner";
-
-import MailingList from "../../../components/global/MailingList/MailingList";
 import productsPagesQuery from "../../../lib/graphcms-querys/productsPagesQuery";
 import { GraphQLClient, gql } from "graphql-request";
-import { useState, useEffect } from "react";
 import type { NextPage } from "next";
+import { useStore } from "../../../components/productVisualiserApp/store";
 import Image from "next/image";
 
 export async function getStaticPaths() {
@@ -90,7 +88,7 @@ interface Props {
 }
 
 const Product: NextPage<Props> = ({ data }) => {
-  const [productColour, setProductColour] = useState(0);
+  const store = useStore();
   const { productPage } = data;
   const {
     featureImage,
@@ -102,15 +100,9 @@ const Product: NextPage<Props> = ({ data }) => {
     visualiseImage,
   } = productPage;
 
-  console.log(typeof data);
-
-  const handleColourClick = (e: any, i: any) => {
-    setProductColour(i);
-  };
-
   const images = featureImage.map((i: any) => i.url);
 
-  const imagesLength = productVariantColours[productColour].images.length;
+  const imagesLength = productVariantColours[store.productColour].images.length;
 
   return (
     <div className={s.pageWrap}>
@@ -135,7 +127,6 @@ const Product: NextPage<Props> = ({ data }) => {
           <div className={s.productColourWrap}>
             <ProductColourButtonsWrap
               products={productPage}
-              colourClick={handleColourClick}
               rotate={s.rotate}
             />
           </div>
@@ -150,18 +141,20 @@ const Product: NextPage<Props> = ({ data }) => {
               margin: " 0 auto",
             }}
           >
-            {productVariantColours[productColour].images.map((image: any) => (
-              <Image
-                alt=""
-                key={image.url}
-                layout="responsive"
-                src={image.url}
-                height={200}
-                width={200}
-                placeholder="blur"
-                blurDataURL={image.url}
-              />
-            ))}
+            {productVariantColours[store.productColour].images.map(
+              (image: any) => (
+                <Image
+                  alt=""
+                  key={image.url}
+                  layout="responsive"
+                  src={image.url}
+                  height={200}
+                  width={200}
+                  placeholder="blur"
+                  blurDataURL={image.url}
+                />
+              )
+            )}
           </div>
         </div>
       </section>

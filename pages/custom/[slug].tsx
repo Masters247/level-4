@@ -1,14 +1,15 @@
 import type { NextPage } from "next";
-import ProductView from "../../components/productApp/ProductView/ProductView";
+import ProductView from "../../components/productVisualiserApp/ProductView/ProductView";
 import TrendingStyle from "../../components/global/TrendingStyle/TrendingStyle";
 import productQuery from "../../lib/graphcms-querys/productsPagesQuery";
-import PleaseSignIn from "../../components/productApp/PleaseSignIn/PleaseSignIn";
+import PleaseSignIn from "../../components/productVisualiserApp/PleaseSignIn/PleaseSignIn";
 import s from "../../styles/pages/customPage.module.scss";
 import { GraphQLClient, gql } from "graphql-request";
 import { useSession } from "next-auth/react";
 import { useEffect } from "react";
 import customPageQuery from "../../lib/graphcms-querys/customPageQuery";
-import { useStore } from "../../components/productApp/store";
+import customisePageQuery from "../../lib/graphcms-querys/customisePageQuery";
+import { useStore } from "../../components/productVisualiserApp/store";
 
 const download = require("downloadjs");
 
@@ -33,6 +34,7 @@ export async function getStaticProps({ params }: any) {
   });
 
   const customPage = await customPageQuery();
+  // const customisePages = await customisePageQuery({where: productSlug: {`${params}`}});
 
   const query = gql`
   query Product {
