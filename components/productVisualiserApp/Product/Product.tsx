@@ -4,25 +4,26 @@ import { Button } from "../../ui/Button";
 import Image from "next/image";
 import Link from "next/link";
 import s from "./product.module.scss";
-import { useStore } from "../store";
-import { useEffect } from "react";
+import { useState, FC } from "react";
 
-const Product = ({ products, i }: any) => {
-  console.log("🚀 ~ file: Product.tsx ~ line 11 ~ Product ~ i", i);
-  const store = useStore();
-  console.log(
-    "🚀 ~ file: Product.tsx ~ line 12 ~ Product ~ store",
-    store.productIndex
-  );
+interface Props {
+  products: any;
+  i: number;
+}
+
+const Product: FC<Props> = ({ products, i }) => {
+  const [productColour, setProductColour] = useState(0);
+
+  const colourClick = (i: number) => {
+    setProductColour(i);
+  };
 
   const slug = products.productSlug;
   const slugCategory = products.productCategory;
   const productName = products.name;
   const productNameSliced = productName.slice(0, 16);
 
-  const productVariantLength = products.productVariantColours.length;
-
-  const src = products.productVariantColours[0].images[0].url;
+  const src = products.productVariantColours[productColour].images[0].url;
 
   return (
     <div key={products.name} className={s.productWrap}>
@@ -43,7 +44,7 @@ const Product = ({ products, i }: any) => {
           {productName.length > 19 ? productNameSliced + " ..." : productName}
         </a>
       </Link>
-      <ProductColourButtons products={products} />
+      <ProductColourButtons products={products} colourClick={colourClick} />
 
       <div
         className={s.productButtonsWrap}

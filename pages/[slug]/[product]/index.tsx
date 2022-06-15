@@ -66,6 +66,7 @@ export async function getStaticProps({ params }: any) {
           secondaryColour {
             hex
           }
+          shape
         }
         visualiseImage {
           height

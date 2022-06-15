@@ -7,15 +7,30 @@ interface Props {
   hex: string;
   i: number;
   hexSecondary: string;
-  shape: string;
+  shape: string | undefined;
+  colourClick?: (i: number) => void;
 }
 
-const ProductColour: FC<Props> = ({ hex, i, hexSecondary, shape }) => {
+const ProductColour: FC<Props> = ({
+  hex,
+  i,
+  hexSecondary,
+  shape,
+  colourClick,
+}) => {
   const store = useStore();
+
+  const handleColourClick = () => {
+    if (colourClick) {
+      colourClick(i);
+    } else {
+      store.setProductColour(i);
+    }
+  };
 
   return (
     <button
-      onClick={() => store.setProductColour(i)}
+      onClick={handleColourClick}
       className={cn(s.border, {
         [s.circleBorder]: shape === "Circle",
         [s.squareBorder]: shape === "Square",

@@ -3,6 +3,23 @@ import cn from "classnames";
 import ProductColour from "./ProductColour";
 import s from "./productColourButtons.module.scss";
 
+// interface Colour {
+//   colour: {
+//     hex: string;
+//   };
+//   images: [
+//     {
+//       url: string;
+//       height: number;
+//       width: number;
+//     }
+//   ];
+//   secondaryColour: {
+//     hex: string;
+//   };
+//   shape?: string | undefined;
+// }
+
 interface Products {
   name: string;
   productCategory: string;
@@ -12,15 +29,17 @@ interface Products {
 
 interface Props {
   products: Products;
-  rotate?: any;
+  rotate?: string;
   position?: any;
   setColourChangeProductVariant?: any;
+  colourClick?: (i: number) => void;
 }
 
 const ProductColourButtonsWrap: FC<Props> = ({
   products,
   rotate,
   position,
+  colourClick,
 }) => {
   const [productColourView, setProductColourView] = useState({
     start: 0,
@@ -78,7 +97,13 @@ const ProductColourButtonsWrap: FC<Props> = ({
           <p className={rotate}>+{colourLeft}</p>
         </button>
       )}
-      {productVariantColoursLimit.map((colour: any, i: any) => {
+
+      {productVariantColoursLimit.map((colour: any, i: number) => {
+        console.log(
+          "file: ProductColourButtons.tsx ~ line 86 ~ colour",
+          colour
+        );
+
         return (
           <ProductColour
             key={i}
@@ -86,6 +111,7 @@ const ProductColourButtonsWrap: FC<Props> = ({
             hex={colour.colour.hex}
             hexSecondary={colour.secondaryColour.hex}
             shape={colour.shape}
+            colourClick={colourClick}
           />
         );
       })}
