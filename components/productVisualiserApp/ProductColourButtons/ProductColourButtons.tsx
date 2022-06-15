@@ -99,11 +99,6 @@ const ProductColourButtonsWrap: FC<Props> = ({
       )}
 
       {productVariantColoursLimit.map((colour: any, i: number) => {
-        console.log(
-          "file: ProductColourButtons.tsx ~ line 86 ~ colour",
-          colour
-        );
-
         return (
           <ProductColour
             key={i}

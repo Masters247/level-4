@@ -43,10 +43,6 @@ const ProductUiPanel = ({
     actionsTaken === null && s.controlDisabled
   );
   const store = useStore();
-  console.log(
-    "🚀 ~ file: ProductUiPanel.tsx ~ line 46 ~ store",
-    store.productEmbelishment.replace("_", " / ")
-  );
 
   return (
     <div className={cn(s.productUiWrap)}>
