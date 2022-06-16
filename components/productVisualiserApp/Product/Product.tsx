@@ -1,6 +1,7 @@
 /* eslint-disable jsx-a11y/alt-text */
 import ProductColourButtons from "../ProductColourButtons/ProductColourButtons";
-import { Button } from "../../ui/Button";
+// import { Button } from "../../ui/Button";
+import Button from "../ProductUi/ProductButton";
 import Image from "next/image";
 import Link from "next/link";
 import s from "./product.module.scss";
@@ -8,13 +9,12 @@ import { useState, FC } from "react";
 
 interface Props {
   products: any;
-  i: number;
 }
 
-const Product: FC<Props> = ({ products, i }) => {
-  const [productColour, setProductColour] = useState(0);
+const Product: FC<Props> = ({ products }) => {
+  const [colour, setProductColour] = useState(0);
 
-  const colourClick = (i: number) => {
+  const handleColourClick = (e: any, i: number) => {
     setProductColour(i);
   };
 
@@ -23,7 +23,7 @@ const Product: FC<Props> = ({ products, i }) => {
   const productName = products.name;
   const productNameSliced = productName.slice(0, 16);
 
-  const src = products.productVariantColours[productColour].images[0].url;
+  const src = products.productVariantColours[colour].images[0].url;
 
   return (
     <div key={products.name} className={s.productWrap}>
@@ -44,19 +44,21 @@ const Product: FC<Props> = ({ products, i }) => {
           {productName.length > 19 ? productNameSliced + " ..." : productName}
         </a>
       </Link>
-      <ProductColourButtons products={products} colourClick={colourClick} />
+      <ProductColourButtons
+        products={products}
+        handleColourClick={handleColourClick}
+      />
 
       <div
         className={s.productButtonsWrap}
         style={{
           marginTop: "1em",
-        }}
-      >
+        }}>
         <Link href={`/${slugCategory}/${slug}`} passHref prefetch={false}>
-          <Button variant="primary">View</Button>
+          <Button variant="secondary">View</Button>
         </Link>
         <Link href={`/custom/${slug}`} passHref prefetch={false}>
-          <Button variant="secondary-b">Customise</Button>
+          <Button variant="primary-c">Customise</Button>
         </Link>
       </div>
     </div>

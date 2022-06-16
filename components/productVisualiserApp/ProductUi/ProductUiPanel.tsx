@@ -19,6 +19,7 @@ const ProductUiPanel = ({
   handleUndo, // STORE OR REFACT
   redoActive, // STORE OR REFACT
   undoActive, // STORE OR REFACT
+  handleColourClick,
 }: any) => {
   const controler = [
     {
@@ -56,8 +57,7 @@ const ProductUiPanel = ({
                 key={cont.name}
                 onClick={cont?.function}
                 className={controlStyles}
-                disabled={actionsTaken === null}
-              >
+                disabled={actionsTaken === null}>
                 <span className={s.iconWrap}>{cont.icon}</span>
               </button>
             );
@@ -66,7 +66,11 @@ const ProductUiPanel = ({
       </div>
       <div className={s.productColourWrap}>
         <h2>Colour:</h2>
-        <ProductColourButtons products={products} position={s.position} />
+        <ProductColourButtons
+          products={products}
+          position={s.position}
+          handleColourClick={handleColourClick}
+        />
       </div>
       <div className={s.embelishment}>
         <h2>Embelishment:</h2>

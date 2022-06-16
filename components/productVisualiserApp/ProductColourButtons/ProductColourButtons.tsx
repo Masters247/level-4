@@ -33,6 +33,7 @@ interface Props {
   position?: any;
   setColourChangeProductVariant?: any;
   colourClick?: (i: number) => void;
+  handleColourClick: any;
 }
 
 const ProductColourButtonsWrap: FC<Props> = ({
@@ -40,6 +41,7 @@ const ProductColourButtonsWrap: FC<Props> = ({
   rotate,
   position,
   colourClick,
+  handleColourClick,
 }) => {
   const [productColourView, setProductColourView] = useState({
     start: 0,
@@ -92,8 +94,7 @@ const ProductColourButtonsWrap: FC<Props> = ({
             s.coloursRight,
             productColourView.start === 0 && s.hide
           )}
-          disabled={productColourView.start === 0}
-        >
+          disabled={productColourView.start === 0}>
           <p className={rotate}>+{colourLeft}</p>
         </button>
       )}
@@ -102,11 +103,12 @@ const ProductColourButtonsWrap: FC<Props> = ({
         return (
           <ProductColour
             key={i}
-            i={i}
+            i={`${i + productColourView.start}`}
             hex={colour.colour.hex}
             hexSecondary={colour.secondaryColour.hex}
             shape={colour.shape}
-            colourClick={colourClick}
+            // colourClick={colourClick}
+            handleColourClick={handleColourClick}
           />
         );
       })}
@@ -114,8 +116,7 @@ const ProductColourButtonsWrap: FC<Props> = ({
         <button
           onClick={showMoreColoursRight}
           className={cn(s.coloursLeft, colourRight === 0 && s.hide)}
-          disabled={colourRight === 0}
-        >
+          disabled={colourRight === 0}>
           <p className={rotate}>+{colourRight}</p>
         </button>
       )}

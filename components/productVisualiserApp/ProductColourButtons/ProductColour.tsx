@@ -5,10 +5,11 @@ import { useStore } from "../store";
 
 interface Props {
   hex: string;
-  i: number;
+  i: string;
   hexSecondary: string;
   shape: string | undefined;
-  colourClick?: (i: number) => void;
+  // colourClick?: any;
+  handleColourClick: any;
 }
 
 const ProductColour: FC<Props> = ({
@@ -16,28 +17,17 @@ const ProductColour: FC<Props> = ({
   i,
   hexSecondary,
   shape,
-  colourClick,
+  handleColourClick,
 }) => {
-  const store = useStore();
-
-  const handleColourClick = () => {
-    if (colourClick) {
-      colourClick(i);
-    } else {
-      store.setProductColour(i);
-    }
-  };
-
   return (
     <button
-      onClick={handleColourClick}
+      onClick={(e) => handleColourClick(e, i)}
       className={cn(s.border, {
         [s.circleBorder]: shape === "Circle",
         [s.squareBorder]: shape === "Square",
         [s.rectangleBorder]: shape === "Rectangle",
         [s.hexagonalBorder]: shape === "Hexagonal",
-      })}
-    >
+      })}>
       <div
         className={cn(s.colour, {
           [s.circle]: shape === "Circle",
@@ -47,15 +37,13 @@ const ProductColour: FC<Props> = ({
         })}
         style={{
           backgroundColor: `${hex}`,
-        }}
-      >
+        }}>
         <span
           style={{
             backgroundColor: `${hexSecondary}`,
             width: "5px",
             height: "5px",
-          }}
-        ></span>
+          }}></span>
       </div>
     </button>
   );

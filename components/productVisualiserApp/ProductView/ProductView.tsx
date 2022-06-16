@@ -22,9 +22,10 @@ type Product = {
 interface Props {
   image: Image;
   products: Product;
+  handleColourClick: any;
 }
 
-const ProductView: FC<Props> = ({ image, products }) => {
+const ProductView: FC<Props> = ({ image, products, handleColourClick }) => {
   const containerRef = useRef<HTMLDivElement | null>(null);
   const dragEl = useRef<HTMLDivElement | null>(null);
   const logoBox = useRef<HTMLDivElement | null>(null);
@@ -258,8 +259,7 @@ const ProductView: FC<Props> = ({ image, products }) => {
     <div className={s.appWrap}>
       <div
         className={s.productViewportContainer}
-        onClick={() => store.setImageUploader(false)}
-      >
+        onClick={() => store.setImageUploader(false)}>
         <div id="capture" className={s.imageCaptureWrap}>
           <div className={s.imageWrap}>
             <img src={image.url} width="450px" height="450px" alt="product" />
@@ -269,8 +269,7 @@ const ProductView: FC<Props> = ({ image, products }) => {
               className={`${
                 store.showHideDragResizeDiv ? s.customArear : s.customArearHide
               }`}
-              ref={containerRef}
-            >
+              ref={containerRef}>
               <animated.div
                 className={cn(
                   s.customLogo,
@@ -284,8 +283,7 @@ const ProductView: FC<Props> = ({ image, products }) => {
                   zIndex: "1",
                 }}
                 {...bind()}
-                ref={logoBox}
-              >
+                ref={logoBox}>
                 <div className={s.imageOuterWrap}>
                   {logo !== null && (
                     <div className={s.logoImageWrap}>
@@ -295,8 +293,7 @@ const ProductView: FC<Props> = ({ image, products }) => {
                 </div>
                 <div
                   className={cn(s.resizer, logo === null && s.resizerDisabled)}
-                  ref={dragEl}
-                ></div>
+                  ref={dragEl}></div>
               </animated.div>
             </div>
           </div>
@@ -322,6 +319,7 @@ const ProductView: FC<Props> = ({ image, products }) => {
         handleUndo={handleUndo} // STORE
         redoActive={redoActive} // STORE
         undoActive={undoActive} // STORE
+        handleColourClick={handleColourClick}
       />
     </div>
   );

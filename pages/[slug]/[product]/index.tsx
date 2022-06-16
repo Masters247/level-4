@@ -9,6 +9,7 @@ import { GraphQLClient, gql } from "graphql-request";
 import type { NextPage } from "next";
 import { NextSeo } from "next-seo";
 import Image from "next/image";
+import { useState } from "react";
 
 export async function getStaticPaths() {
   const productsPages = await productsPagesQuery();
@@ -105,6 +106,12 @@ const Product: NextPage<Props> = ({ data }) => {
   const images = featureImage.map((i: any) => i.url);
   const imagesLength = productVariantColours[store.productColour].images.length;
 
+  const [colour, setProductColour] = useState(0);
+
+  const handleColourClick = (e: any, i: number) => {
+    setProductColour(i);
+  };
+
   return (
     <div className={s.pageWrap}>
       <SliderContainer
@@ -121,13 +128,13 @@ const Product: NextPage<Props> = ({ data }) => {
         className={s.productImagesSection}
         style={{
           position: "relative",
-        }}
-      >
+        }}>
         <div className={s.productImagesBackgroundWrap}>
           <div className={s.productColourWrap}>
             <ProductColourButtonsWrap
               products={productPage}
               rotate={s.rotate}
+              handleColourClick={handleColourClick}
             />
           </div>
           <div
@@ -139,22 +146,19 @@ const Product: NextPage<Props> = ({ data }) => {
               } * 1em))`,
               gridGap: "1em",
               margin: " 0 auto",
-            }}
-          >
-            {productVariantColours[store.productColour].images.map(
-              (image: any) => (
-                <Image
-                  alt=""
-                  key={image.url}
-                  layout="responsive"
-                  src={image.url}
-                  height={200}
-                  width={200}
-                  placeholder="blur"
-                  blurDataURL={image.url}
-                />
-              )
-            )}
+            }}>
+            {productVariantColours[colour].images.map((image: any) => (
+              <Image
+                alt=""
+                key={image.url}
+                layout="responsive"
+                src={image.url}
+                height={200}
+                width={200}
+                placeholder="blur"
+                blurDataURL={image.url}
+              />
+            ))}
           </div>
         </div>
       </section>

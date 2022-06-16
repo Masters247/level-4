@@ -129,7 +129,7 @@ const Category: NextPage<Props> = ({ data }) => {
         </div>
         <div className={s.productsWrap}>
           {categoryPages[0].products.map((products: any, i: number) => {
-            return <Product key={i} products={products} i={i} />;
+            return <Product key={i} products={products} />;
           })}
         </div>
       </section>

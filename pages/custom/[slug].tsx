@@ -11,6 +11,7 @@ import customPageQuery from "../../lib/graphcms-querys/customPageQuery";
 import html2canvas from "html2canvas";
 import Link from "next/link";
 import { NextSeo } from "next-seo";
+import { useState } from "react";
 import { useStore } from "../../components/productVisualiserApp/store";
 const download = require("downloadjs");
 
@@ -75,9 +76,14 @@ interface Props {
 const Custom: NextPage<Props> = ({ customisePages, customPage }) => {
   const { data: session } = useSession();
   const store = useStore();
+  const [colour, setColour] = useState(0);
   const { productPage } = customisePages;
   const { name, productCategory, productEmbelishment, productVariantColours } =
     productPage;
+  console.log(
+    "file: [slug].tsx ~ line 82 ~ productVariantColours",
+    productVariantColours
+  );
   const embelishment =
     productEmbelishment === null ? "Embroidered" : productEmbelishment;
   const { trendingStyle } = customPage[0];
@@ -88,14 +94,18 @@ const Custom: NextPage<Props> = ({ customisePages, customPage }) => {
     store.setProductCategory(productCategory);
   }, []);
 
+  const handleColourClick = (e: any, i: any) => {
+    setColour(i);
+  };
+
   return (
     <div className={s.pageWrap}>
       <div
         className={s.appWrap}
-        style={{ paddingBottom: `${!session && "10em"}` }}
-      >
+        style={{ paddingBottom: `${!session && "10em"}` }}>
         <ProductView
-          image={productVariantColours[store.productColour].customImage}
+          image={productVariantColours[colour].customImage}
+          handleColourClick={handleColourClick}
           products={productPage}
         />
       </div>
@@ -105,9 +115,9 @@ const Custom: NextPage<Props> = ({ customisePages, customPage }) => {
       {/* SEO */}
 
       <NextSeo
-        title={`Level 4 | Visuliser | ${name}`}
+        title={`Level 4 | Visualiser | ${name}`}
         openGraph={{
-          title: `Level 4 | Visuliser | ${name}`,
+          title: `Level 4 | Visualiser | ${name}`,
         }}
       />
     </div>

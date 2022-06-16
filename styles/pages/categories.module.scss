@@ -46,19 +46,19 @@
   }
   .productsWrap {
     margin: 0 auto;
-    max-width: calc(520px + 2em);
+    max-width: calc(300px + 2em);
     display: grid;
     grid-template-columns: repeat(1, 1fr);
-    grid-gap: 1em;
+    grid-gap: 3em;
     @media (min-width: $media-tablet-small) {
       grid-template-columns: repeat(2, 1fr);
       max-width: calc(650px + 2em);
       grid-gap: 2em;
     }
-    @media (min-width: $media-tablet) {
+    @media (min-width: $media-desktop) {
       grid-template-columns: repeat(3, 1fr);
-      max-width: calc(650px + 2em);
-      grid-gap: 2em;
+      max-width: calc(850px + 2em);
+      // grid-gap: 1em;
     }
     @media (min-width: $media-desktop-large) {
       max-width: calc(1020px + 2em);
