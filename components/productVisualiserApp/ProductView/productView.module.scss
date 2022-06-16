@@ -58,7 +58,7 @@
 .customArearHide,
 .customArear {
   position: relative;
-  // border: 1px dashed $grey-4;
+  border: 1px dashed $grey-4;
   position: relative;
   height: 450px;
   width: calc(100vw - 2em);
@@ -95,7 +95,11 @@
     pointer-events: none;
     opacity: 0;
   }
+  @media (min-width: $media-desktop-small) {
+    max-width: 450px;
+  }
 }
+
 .customArearHide {
   box-shadow: none;
   .customLogo {

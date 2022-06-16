@@ -8,8 +8,6 @@ import { GraphQLClient, gql } from "graphql-request";
 import { useSession } from "next-auth/react";
 import { useEffect } from "react";
 import customPageQuery from "../../lib/graphcms-querys/customPageQuery";
-import html2canvas from "html2canvas";
-import Link from "next/link";
 import { NextSeo } from "next-seo";
 import { useState } from "react";
 import { useStore } from "../../components/productVisualiserApp/store";
@@ -80,10 +78,6 @@ const Custom: NextPage<Props> = ({ customisePages, customPage }) => {
   const { productPage } = customisePages;
   const { name, productCategory, productEmbelishment, productVariantColours } =
     productPage;
-  console.log(
-    "file: [slug].tsx ~ line 82 ~ productVariantColours",
-    productVariantColours
-  );
   const embelishment =
     productEmbelishment === null ? "Embroidered" : productEmbelishment;
   const { trendingStyle } = customPage[0];
