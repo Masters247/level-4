@@ -7,22 +7,12 @@ import ControlPanel from "../ControlPanel/ControlPanel";
 import s from "./globalView.module.scss";
 import cn from "classnames";
 import { useStore } from "../store";
-
-type Image = {
-  url: string;
-};
-
-type Product = {
-  name: string;
-  productCategory: string;
-  productEmbelishment: null | string;
-  productVariantColours: [];
-};
+import { Product, BasicImage, handleColourClick } from "../types";
 
 interface Props {
-  image: Image;
+  image: BasicImage;
   products: Product;
-  handleColourClick: any;
+  handleColourClick: handleColourClick;
 }
 
 const ProductView: FC<Props> = ({ image, products, handleColourClick }) => {

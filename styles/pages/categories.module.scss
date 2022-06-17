@@ -55,7 +55,7 @@
       max-width: calc(650px + 2em);
       grid-gap: 2em;
     }
-    @media (min-width: $media-desktop) {
+    @media (min-width: $media-tablet) {
       grid-template-columns: repeat(3, 1fr);
       max-width: calc(850px + 2em);
     }

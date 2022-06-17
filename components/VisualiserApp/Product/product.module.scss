@@ -1,10 +1,8 @@
 @use "../../../styles/base.scss" as *;
 
 .productWrap {
-  // max-width: 260px;
   .productImageWrap {
     display: block;
-    // border-radius: 50%;
     overflow: hidden;
     cursor: pointer;
   }
@@ -28,13 +26,23 @@
       margin-right: 0.3em;
     }
   }
-
   .productButtonsWrap {
     display: grid;
     grid-template-columns: 1fr;
     grid-gap: 1em;
   }
   @media (min-width: $media-tablet-small) {
+    .productButtonsWrap {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+
+  @media (min-width: $media-tablet) {
+    .productButtonsWrap {
+      grid-template-columns: 1fr;
+    }
+  }
+  @media (min-width: $media-tablet-large) {
     .productButtonsWrap {
       grid-template-columns: 1fr 1fr;
     }
