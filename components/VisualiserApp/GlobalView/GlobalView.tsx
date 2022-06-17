@@ -310,7 +310,7 @@ const ProductView: FC<Props> = ({ image, products, handleColourClick }) => {
       )}
 
       <ControlPanel
-        actionsTaken={logo} // STORE DIFF
+        logo={logo} // STORE DIFF
         products={products} // OK FOR NOW !!
         center={handleCenter} //  OK
         horizontal={handleHorizontal} // OK

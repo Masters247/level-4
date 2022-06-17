@@ -10,13 +10,21 @@ import html2canvas from "html2canvas";
 
 const download = require("downloadjs");
 
-const VisualiserButtons: FC = ({
-  actionsTaken, //  STORE DIFFICULT
+interface Props {
+  logo: null | string;
+  handleRedo: () => void;
+  handleUndo: () => void;
+  redoActive: () => void;
+  undoActive: () => void;
+}
+
+const VisualiserButtons: FC<Props> = ({
+  logo, //  STORE DIFFICULT
   handleRedo, // STORE
   handleUndo, // STORE
   redoActive, // STORE
   undoActive, // STORE
-}: any) => {
+}) => {
   const store = useStore();
   const { data: session }: any = useSession();
   const [spinnerColourDownload, setSpinnerColourDownload] = useState("#ffffff");
@@ -124,7 +132,7 @@ const VisualiserButtons: FC = ({
         save={store.saveCustomImage === 0 && true}
         tick={store.saveCustomImage === 2 && true}
         variant="tertiary"
-        disabled={!session || !actionsTaken}
+        disabled={!session || !logo}
         onClick={handleSaveCustomImage}
         onMouseEnter={() => handleMouseEnter("save")}
         onMouseLeave={() => handleMouseLeave("save")}
@@ -137,7 +145,7 @@ const VisualiserButtons: FC = ({
         download={store.downloadCustomImage === 0 && true}
         tick={store.downloadCustomImage === 2 && true}
         variant="secondary"
-        disabled={!actionsTaken}
+        disabled={!logo}
         onClick={handleDownloadCustomImage}
         onMouseEnter={() => handleMouseEnter("download")}
         onMouseLeave={() => handleMouseLeave("download")}

@@ -8,7 +8,7 @@ import ProductColourButtons from "../ProductColourButtons/ProductColourButtons";
 import { useStore } from "../store";
 
 const ControlPanel = ({
-  actionsTaken, // STORE OR REFACT
+  logo, // STORE OR REFACT
   products, // STORE
 
   center, // OK
@@ -39,10 +39,7 @@ const ControlPanel = ({
     },
   ];
 
-  const controlStyles = cn(
-    s.control,
-    actionsTaken === null && s.controlDisabled
-  );
+  const controlStyles = cn(s.control, logo === null && s.controlDisabled);
   const store = useStore();
 
   return (
@@ -57,7 +54,7 @@ const ControlPanel = ({
                 key={cont.name}
                 onClick={cont?.function}
                 className={controlStyles}
-                disabled={actionsTaken === null}
+                disabled={logo === null}
               >
                 <span className={s.iconWrap}>{cont.icon}</span>
               </button>
@@ -78,7 +75,7 @@ const ControlPanel = ({
         <p>{store.productEmbelishment.replace("_", " / ")}</p>
       </div>
       <VisualiserButtons
-        actionsTaken={actionsTaken} // STORE OR REFACT
+        logo={logo} // STORE OR REFACT
         handleRedo={handleRedo} // STORE OR REFACT
         handleUndo={handleUndo} // STORE OR REFACT
         redoActive={redoActive} // STORE OR REFACT
