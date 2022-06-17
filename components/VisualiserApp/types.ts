@@ -16,5 +16,14 @@ export type BasicImage = {
   url: string;
 };
 
+// state
+
+export interface ActionsObject {
+  x?: number;
+  y?: number;
+  width?: number;
+  height?: number;
+}
+
 // functions
 export type handleColourClick = (e: any, i: any) => void;

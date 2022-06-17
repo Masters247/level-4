@@ -7,7 +7,12 @@ import ControlPanel from "../ControlPanel/ControlPanel";
 import s from "./globalView.module.scss";
 import cn from "classnames";
 import { useStore } from "../store";
-import { Product, BasicImage, handleColourClick } from "../types";
+import {
+  Product,
+  BasicImage,
+  handleColourClick,
+  ActionsObject,
+} from "../types";
 
 interface Props {
   image: BasicImage;
@@ -24,7 +29,7 @@ const ProductView: FC<Props> = ({ image, products, handleColourClick }) => {
   const containerHeight = containerRef.current?.clientHeight ?? 0;
 
   // gets ratio of image - used to constrain resizer to the ratio of image
-  const [ratio, setRatio]: any = useState();
+  const [ratio, setRatio] = useState<number>();
   const [undoActive, setUndoActive] = useState(false);
   const [redoActive, setRedoActive] = useState(false);
   const store = useStore();
@@ -34,7 +39,7 @@ const ProductView: FC<Props> = ({ image, products, handleColourClick }) => {
   const [logo, setLogo] = useState(null);
   const [imageWidth, setImageWidth] = useState(80);
   const [imageHeight, setImageHeight] = useState(80);
-  const [actionsArr, setActionsArr]: any = useState([]);
+  const [actionsArr, setActionsArr] = useState<Array<ActionsObject>>([]);
 
   const [{ x, y, width, height }, api] = useSpring(() => ({
     x: 0,
@@ -47,7 +52,8 @@ const ProductView: FC<Props> = ({ image, products, handleColourClick }) => {
   const getHeight = height.get() / 2;
 
   useEffect(() => {
-    setRatio(imageHeight / imageWidth);
+    const ratioCalculated = imageHeight / imageWidth;
+    setRatio(ratioCalculated);
     if (imageWidth > 250) {
       api.set({
         width: imageWidth / 10,
@@ -64,7 +70,7 @@ const ProductView: FC<Props> = ({ image, products, handleColourClick }) => {
     if (count === 0 && logo === null) {
       return;
     } else {
-      setActionsArr((actionsArr: any) => [
+      setActionsArr((actionsArr) => [
         ...actionsArr,
         {
           x: 0,
@@ -87,11 +93,11 @@ const ProductView: FC<Props> = ({ image, products, handleColourClick }) => {
   }, [count, actionsArr]);
 
   const bind = useDrag(
-    (state: any) => {
+    (state) => {
       const isResizing = state?.event.target === dragEl.current;
       const isDragging = state.active;
 
-      if (isResizing) {
+      if (isResizing && ratio !== undefined) {
         api.set({
           width: state.offset[0],
           height: state.offset[0] * ratio,
@@ -104,7 +110,7 @@ const ProductView: FC<Props> = ({ image, products, handleColourClick }) => {
       }
 
       if (!isDragging) {
-        setActionsArr((actionsArr: any) => [
+        setActionsArr((actionsArr) => [
           ...actionsArr,
           {
             x: x.get(),
@@ -181,7 +187,7 @@ const ProductView: FC<Props> = ({ image, products, handleColourClick }) => {
       y: containerHeight / 2 - getHeight,
     });
 
-    setActionsArr((actionsArr: any) => [
+    setActionsArr((actionsArr) => [
       ...actionsArr,
       {
         x: containerWidth / 2 - getWidth,
@@ -203,7 +209,7 @@ const ProductView: FC<Props> = ({ image, products, handleColourClick }) => {
     const arrayLength = actionsArr.length - 1;
     const prevArrayYValue = actionsArr[arrayLength].x;
 
-    setActionsArr((actionsArr: any) => [
+    setActionsArr((actionsArr) => [
       ...actionsArr,
       {
         x: prevArrayYValue,
@@ -225,7 +231,7 @@ const ProductView: FC<Props> = ({ image, products, handleColourClick }) => {
     const arrayLength = actionsArr.length - 1;
     const prevArrayYValue = actionsArr[arrayLength].y;
 
-    setActionsArr((actionsArr: any) => [
+    setActionsArr((actionsArr) => [
       ...actionsArr,
       {
         x: containerWidth / 2 - getWidth,

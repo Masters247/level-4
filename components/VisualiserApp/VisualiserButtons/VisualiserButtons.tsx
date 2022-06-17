@@ -1,5 +1,6 @@
 import s from "./visualiserButtons.module.scss";
 import cn from "classnames";
+import { FC } from "react";
 import { useSession } from "next-auth/react";
 import ControlButton from "../Button/ControlButton";
 import Spinner from "../../ui/icons/Spinner";
