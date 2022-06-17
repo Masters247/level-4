@@ -13,6 +13,8 @@ export default async function handler(
     Bucket: `${process.env.AWS_S3_BUCKET_NAME}`,
   };
 
+  // Delete the image relation from the DB
+
   try {
     await prisma.customImage.delete({
       where: {
@@ -20,7 +22,11 @@ export default async function handler(
       },
     });
 
+    // Delete the image from the S3 bucket
+
     await s3.deleteObject(params).promise();
+
+    // Send a success response
 
     res.status(200).json({ status: "ok" });
   } catch (error) {

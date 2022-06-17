@@ -11,10 +11,12 @@ export default async function handler(
     // Update user data or add it
 
     await prisma.user.upsert({
+      // If the data doesn't exist, create it
       create: {
         name: body.name,
         organisation: body.org,
       },
+      // If the data already exsists on the user, update it
       update: {
         name: body.name,
         organisation: body.org,
@@ -25,6 +27,8 @@ export default async function handler(
         id: body.id,
       },
     });
+
+    // Send a success response
 
     res.status(200).json({ status: "success" });
   } catch (error) {
