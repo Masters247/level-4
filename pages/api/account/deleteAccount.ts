@@ -24,7 +24,7 @@ export default async function handler(
   if (images.length > 0) {
     const params = {
       Delete: {
-        Objects: images.map((image) => {
+        Objects: images.map((image: { s3Key: string }) => {
           return {
             Key: image.s3Key,
           };

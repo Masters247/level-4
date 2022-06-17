@@ -29,7 +29,8 @@ const DesktopNav: FC<Props> = ({ menuProducts }) => {
       <div
         className={`${s.dropDown} ${dropDown && s.open}`}
         onClick={() => setDropDown(!dropDown)}
-        onMouseLeave={() => setDropDown(false)}>
+        onMouseLeave={() => setDropDown(false)}
+      >
         <ul className={s.catLinks}>
           {menuProducts?.map((item: Category) => (
             <Link href={`/${item.categoriesSlug}`} passHref key={item.id}>
@@ -40,8 +41,8 @@ const DesktopNav: FC<Props> = ({ menuProducts }) => {
                       src={item?.homePageOrLinkImage.url}
                       layout="responsive"
                       alt={`Product - ${item.title}`}
-                      width={item?.homePageOrLinkImage.width}
-                      height={item?.homePageOrLinkImage.height}
+                      width={400}
+                      height={400}
                     />
                   </div>
                   {item.title}
@@ -55,7 +56,8 @@ const DesktopNav: FC<Props> = ({ menuProducts }) => {
       <ul className={s.navLinks}>
         <li
           onClick={() => setDropDown(!dropDown)}
-          onMouseEnter={() => setDropDown(!dropDown)}>
+          onMouseEnter={() => setDropDown(!dropDown)}
+        >
           <a>Products</a>
         </li>
         {/* <li onClick={() => setDropDown(false)}>
@@ -88,7 +90,8 @@ const DesktopNav: FC<Props> = ({ menuProducts }) => {
           style={{
             cursor: "pointer",
           }}
-          onClick={() => setDropDown(false)}>
+          onClick={() => setDropDown(false)}
+        >
           {!session ? (
             <button onClick={handleSignIn}>
               <Account />
