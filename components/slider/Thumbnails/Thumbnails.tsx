@@ -38,7 +38,7 @@ const Thumbnails = ({
     if (activeSlide === 6) {
       setMarginState(thumbNailswidth * 2);
     }
-  }, [activeSlide, thumbWidths]);
+  }, [activeSlide, thumbWidths, thumbNailswidth]);
 
   return (
     <div className={s.thumbnailsOuterWrap}>

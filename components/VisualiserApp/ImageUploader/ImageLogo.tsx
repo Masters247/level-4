@@ -20,7 +20,7 @@ const ImageLogo = ({
   useEffect(() => {
     setSelectImage(selectedLogoNumber);
     setIsSelected(true);
-  }, []);
+  }, [selectedLogoNumber]);
 
   const handleSelected = (index: number) => {
     const indexToString = index.toString();
