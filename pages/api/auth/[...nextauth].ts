@@ -4,7 +4,6 @@ import TwitterProvider from "next-auth/providers/twitter";
 import { PrismaAdapter } from "@next-auth/prisma-adapter";
 import { prisma } from "../../../lib/prisma";
 import { NextApiRequest, NextApiResponse } from "next";
-const mail = require("@sendgrid/mail");
 import CredentialsProvider from "next-auth/providers/credentials";
 const bcrypt = require("bcrypt");
 
@@ -20,8 +19,6 @@ const confirmPasswordHash = (plainPassword: string, hashedPassword: string) => {
   });
 };
 
-mail.setApiKey(process.env.SENDGRID_API_KEY);
-
 export default async function auth(req: NextApiRequest, res: NextApiResponse) {
   return await NextAuth(req, res, {
     adapter: PrismaAdapter(prisma),
@@ -33,6 +30,8 @@ export default async function auth(req: NextApiRequest, res: NextApiResponse) {
       CredentialsProvider({
         credentials: {},
         async authorize(credentials: any, req) {
+          // Check for a user with the given email
+
           const user = await prisma.user.findFirst({
             where: {
               email: credentials.email,
@@ -42,17 +41,26 @@ export default async function auth(req: NextApiRequest, res: NextApiResponse) {
             },
           });
 
+          // If there is a user in the DB, check if the password is correct
+
           if (user) {
             const checkPassword = await confirmPasswordHash(
               credentials.password,
               user.secret?.password!
             );
+
+            // If the password is correct, return the user
+
             if (checkPassword) {
               return user;
             } else {
+              // Return null which will create a NextAuth error
+
               return null;
             }
           } else {
+            // If there is no user in the DB, return null which will create a NextAuth error
+
             return null;
           }
         },
@@ -68,11 +76,14 @@ export default async function auth(req: NextApiRequest, res: NextApiResponse) {
     ],
     pages: {
       signIn: "/signin",
+      // This only fires if the new user is created using social log ins
       newUser: "/account/new-account",
       signOut: "/",
     },
     callbacks: {
       async session({ session, token }) {
+        // Return the user ID from DB in the session
+
         session!.user!.userId = token.sub;
         return session;
       },
