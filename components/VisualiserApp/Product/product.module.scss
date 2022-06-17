@@ -31,7 +31,12 @@
 
   .productButtonsWrap {
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 1fr;
     grid-gap: 1em;
+  }
+  @media (min-width: $media-tablet-small) {
+    .productButtonsWrap {
+      grid-template-columns: 1fr 1fr;
+    }
   }
 }

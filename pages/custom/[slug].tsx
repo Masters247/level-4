@@ -1,8 +1,9 @@
 import type { NextPage } from "next";
-import ProductView from "../../components/productVisualiserApp/ProductView/ProductView";
+import cn from "classnames";
+import ProductView from "../../components/VisualiserApp/GlobalView/GlobalView";
 import TrendingStyle from "../../components/global/TrendingStyle/TrendingStyle";
 import productQuery from "../../lib/graphcms-querys/productsPagesQuery";
-import PleaseSignIn from "../../components/productVisualiserApp/PleaseSignIn/PleaseSignIn";
+import PleaseSignIn from "../../components/VisualiserApp/PleaseSignIn/PleaseSignIn";
 import s from "../../styles/pages/customPage.module.scss";
 import { GraphQLClient, gql } from "graphql-request";
 import { useSession } from "next-auth/react";
@@ -10,7 +11,7 @@ import { useEffect } from "react";
 import customPageQuery from "../../lib/graphcms-querys/customPageQuery";
 import { NextSeo } from "next-seo";
 import { useState } from "react";
-import { useStore } from "../../components/productVisualiserApp/store";
+import { useStore } from "../../components/VisualiserApp/store";
 const download = require("downloadjs");
 
 export async function getStaticPaths() {
@@ -73,6 +74,7 @@ interface Props {
 
 const Custom: NextPage<Props> = ({ customisePages, customPage }) => {
   const { data: session } = useSession();
+  // console.log("file: [slug].tsx ~ line 76 ~ session", session);
   const store = useStore();
   const [colour, setColour] = useState(0);
   const { productPage } = customisePages;
@@ -94,9 +96,7 @@ const Custom: NextPage<Props> = ({ customisePages, customPage }) => {
 
   return (
     <div className={s.pageWrap}>
-      <div
-        className={s.appWrap}
-        style={{ paddingBottom: `${!session && "10em"}` }}>
+      <div className={cn(s.appWrap, !session && s.isSession)}>
         <ProductView
           image={productVariantColours[colour].customImage}
           handleColourClick={handleColourClick}

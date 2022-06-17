@@ -1,7 +1,7 @@
-import s from "./productButtons.module.scss";
+import s from "./visualiserButtons.module.scss";
 import cn from "classnames";
 import { useSession } from "next-auth/react";
-import ProductButton from "./ProductButton";
+import ControlButton from "../Button/ControlButton";
 import Spinner from "../../ui/icons/Spinner";
 import { useState } from "react";
 import { useStore } from "../store";
@@ -9,7 +9,7 @@ import html2canvas from "html2canvas";
 
 const download = require("downloadjs");
 
-const ProductButtons = ({
+const VisualiserButtons = ({
   actionsTaken, //  STORE DIFFICULT
   handleRedo, // STORE
   handleUndo, // STORE
@@ -96,30 +96,30 @@ const ProductButtons = ({
 
   return (
     <div className={cn(s.uiButtons)}>
-      <ProductButton
+      <ControlButton
         className={s.newLogoButton}
         variant="primary-c"
         onClick={() => store.setImageUploader(!store.imageUploader)}
       >
         {store.imageUploader ? <>Close Image Uploader</> : <>Add New Logo</>}
-      </ProductButton>
-      <ProductButton
+      </ControlButton>
+      <ControlButton
         undo={true}
         variant="primary-c"
         disabled={!undoActive}
         onClick={handleUndo}
       >
         undo
-      </ProductButton>
-      <ProductButton
+      </ControlButton>
+      <ControlButton
         redo={true}
         variant="primary-c"
         disabled={!redoActive}
         onClick={handleRedo}
       >
         redo
-      </ProductButton>
-      <ProductButton
+      </ControlButton>
+      <ControlButton
         save={store.saveCustomImage === 0 && true}
         tick={store.saveCustomImage === 2 && true}
         variant="tertiary"
@@ -131,8 +131,8 @@ const ProductButtons = ({
         {store.saveCustomImage === 0 && "save"}
         {store.saveCustomImage === 1 && <Spinner colour={spinnerColourSave} />}
         {store.saveCustomImage === 2 && "saved"}
-      </ProductButton>
-      <ProductButton
+      </ControlButton>
+      <ControlButton
         download={store.downloadCustomImage === 0 && true}
         tick={store.downloadCustomImage === 2 && true}
         variant="secondary"
@@ -146,9 +146,9 @@ const ProductButtons = ({
           <Spinner colour={spinnerColourDownload} />
         )}
         {store.downloadCustomImage === 2 && "downloaded"}
-      </ProductButton>
+      </ControlButton>
     </div>
   );
 };
 
-export default ProductButtons;
+export default VisualiserButtons;

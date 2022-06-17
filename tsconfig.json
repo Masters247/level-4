@@ -20,7 +20,7 @@
     "**/*.ts",
     "**/*.tsx",
     "pages/api/auth/[...nextauth].ts",
-    "components/productVisualiserApp/ImageUploader/ImageUpload.tsx"
+    "components/VisualiserApp/ImageUploader/ImageUpload.tsx"
   ],
   "exclude": ["node_modules"]
 }

@@ -1,9 +1,9 @@
-import ProductColourButtonsWrap from "../../../components/productVisualiserApp/ProductColourButtons/ProductColourButtons";
+import ProductColourButtonsWrap from "../../../components/VisualiserApp/ProductColourButtons/ProductColourButtons";
 import SliderContainer from "../../../components/slider/SlideContainer/SliderContainer";
-import Visualise from "../../../components/productVisualiserApp/Visualise/Visualise";
+import Visualise from "../../../components/global/VisualiseSection/Visualise";
 import FeatureBanner from "../../../components/global/FeatureBanner/FeatureBanner";
 import productsPagesQuery from "../../../lib/graphcms-querys/productsPagesQuery";
-import { useStore } from "../../../components/productVisualiserApp/store";
+import { useStore } from "../../../components/VisualiserApp/store";
 import s from "../../../styles/pages/productPage.module.scss";
 import { GraphQLClient, gql } from "graphql-request";
 import type { NextPage } from "next";
@@ -128,7 +128,8 @@ const Product: NextPage<Props> = ({ data }) => {
         className={s.productImagesSection}
         style={{
           position: "relative",
-        }}>
+        }}
+      >
         <div className={s.productImagesBackgroundWrap}>
           <div className={s.productColourWrap}>
             <ProductColourButtonsWrap
@@ -146,7 +147,8 @@ const Product: NextPage<Props> = ({ data }) => {
               } * 1em))`,
               gridGap: "1em",
               margin: " 0 auto",
-            }}>
+            }}
+          >
             {productVariantColours[colour].images.map((image: any) => (
               <Image
                 alt=""

@@ -1,9 +1,6 @@
 @use "../../../styles/base.scss" as *;
 .formWrap {
   @include flexCenter;
-  @media (min-width: $media-desktop-small) {
-    margin: 0;
-  }
   h2 {
     margin-bottom: 1.5rem;
   }
@@ -71,6 +68,9 @@
     &:hover {
       background-color: $grey-1;
     }
+  }
+  @media (min-width: $media-desktop-small) {
+    margin: 0;
   }
 }
 .thankYou {

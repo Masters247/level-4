@@ -16,10 +16,10 @@
   @include flexCenter;
   width: 100%;
   overflow: hidden;
-  .imageCaptureWrap {
-    .imageWrap {
-    }
-  }
+  // .imageCaptureWrap {
+  //   .imageWrap {
+  //   }
+  // }
 
   @media (min-width: $media-desktop-small) {
     justify-content: flex-start;
@@ -58,7 +58,7 @@
 .customArearHide,
 .customArear {
   position: relative;
-  border: 1px dashed $grey-4;
+  // border: 1px dashed $grey-4;
   position: relative;
   height: 450px;
   width: calc(100vw - 2em);

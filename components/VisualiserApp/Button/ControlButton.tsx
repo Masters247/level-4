@@ -8,7 +8,7 @@ import {
   Component,
 } from "react";
 import cn from "classnames";
-import s from "./productButton.module.scss";
+import s from "./controlButton.module.scss";
 import Undo from "../../ui/icons/Undo";
 import Redo from "../../ui/icons/Redo";
 import Save from "../../ui/icons/Save";

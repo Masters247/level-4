@@ -1,7 +1,7 @@
 /* eslint-disable jsx-a11y/alt-text */
 import ProductColourButtons from "../ProductColourButtons/ProductColourButtons";
 // import { Button } from "../../ui/Button";
-import Button from "../ProductUi/ProductButton";
+import Button from "../Button/ControlButton";
 import Image from "next/image";
 import Link from "next/link";
 import s from "./product.module.scss";
@@ -53,7 +53,8 @@ const Product: FC<Props> = ({ products }) => {
         className={s.productButtonsWrap}
         style={{
           marginTop: "1em",
-        }}>
+        }}
+      >
         <Link href={`/${slugCategory}/${slug}`} passHref prefetch={false}>
           <Button variant="secondary">View</Button>
         </Link>

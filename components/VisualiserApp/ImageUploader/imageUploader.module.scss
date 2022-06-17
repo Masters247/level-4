@@ -8,7 +8,7 @@
 }
 
 .imageUploaderWrap {
-  border: 1px solid $button-primary;
+  // border: 1px solid $button-primary;
   padding: 1em;
   @include boxShadow;
   background-color: $white;
@@ -18,10 +18,8 @@
   position: absolute;
   width: calc(100vw - 0em);
   z-index: 200;
-  // max-height: 10.5em;
   overflow-y: scroll;
   height: 21.6em;
-
   .uploadImageWrap {
     position: relative;
     .imageButtonWrap {
@@ -50,11 +48,9 @@
   @media (min-width: 352px) {
     left: calc(50% - 10em);
   }
-  @media (min-width: $media-tablet-small) {
-  }
   @media (min-width: $media-desktop-small) {
-    max-height: 16em;
-    top: calc(50% - 240px);
+    max-height: 16.4em;
+    top: calc(50% - 14.2em);
     left: calc(500px + 1.8em);
     margin-top: 0;
   }

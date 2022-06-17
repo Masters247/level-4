@@ -67,9 +67,6 @@
   min-height: 2em;
   border: 1px dashed $grey-4;
   color: $black;
-  animation: flash 3s infinite;
-  animation-timing-function: ease-in-out;
-
   &:hover {
     background-color: $button-primary;
     border: 1px dashed $button-primary;
@@ -78,18 +75,6 @@
     .icon {
       fill: $white;
     }
-  }
-}
-
-@keyframes flash {
-  0% {
-    opacity: 1;
-    border: 1px dashed $grey-4;
-  }
-
-  50% {
-    color: $red-1;
-    border: 1px dashed $red-1;
   }
 }
 .secondary {
@@ -109,7 +94,6 @@
     }
   }
 }
-
 .tertiary {
   color: $white;
   background-color: $grey-4;
@@ -117,7 +101,6 @@
   .icon {
     fill: $white;
   }
-
   &:hover {
     background-color: $white;
     border: 1px solid $grey-4;
@@ -127,7 +110,6 @@
     }
   }
 }
-
 .tertiaryB {
   min-height: 2em;
   color: $white;
@@ -146,7 +128,6 @@
     }
   }
 }
-
 .tertiaryB,
 .primaryB,
 .primaryDashed {
@@ -168,7 +149,6 @@
   .icon {
     fill: $black;
   }
-
   &:hover {
     background-color: $white;
     border: 1px solid $grey-4;

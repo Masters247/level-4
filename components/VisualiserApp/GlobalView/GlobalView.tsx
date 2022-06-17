@@ -3,8 +3,8 @@ import { FC, useRef, useState, useEffect } from "react";
 import { useSpring, animated } from "@react-spring/web";
 import { Action, useDrag } from "@use-gesture/react";
 import ImageUploader from "../ImageUploader/ImageUploader";
-import ProductUiPanel from "../ProductUi/ProductUiPanel";
-import s from "./productView.module.scss";
+import ControlPanel from "../ControlPanel/ControlPanel";
+import s from "./globalView.module.scss";
 import cn from "classnames";
 import { useStore } from "../store";
 
@@ -259,7 +259,8 @@ const ProductView: FC<Props> = ({ image, products, handleColourClick }) => {
     <div className={s.appWrap}>
       <div
         className={s.productViewportContainer}
-        onClick={() => store.setImageUploader(false)}>
+        onClick={() => store.setImageUploader(false)}
+      >
         <div id="capture" className={s.imageCaptureWrap}>
           <div className={s.imageWrap}>
             <img src={image.url} width="450px" height="450px" alt="product" />
@@ -269,7 +270,8 @@ const ProductView: FC<Props> = ({ image, products, handleColourClick }) => {
               className={`${
                 store.showHideDragResizeDiv ? s.customArear : s.customArearHide
               }`}
-              ref={containerRef}>
+              ref={containerRef}
+            >
               <animated.div
                 className={cn(
                   s.customLogo,
@@ -283,7 +285,8 @@ const ProductView: FC<Props> = ({ image, products, handleColourClick }) => {
                   zIndex: "1",
                 }}
                 {...bind()}
-                ref={logoBox}>
+                ref={logoBox}
+              >
                 <div className={s.imageOuterWrap}>
                   {logo !== null && (
                     <div className={s.logoImageWrap}>
@@ -293,7 +296,8 @@ const ProductView: FC<Props> = ({ image, products, handleColourClick }) => {
                 </div>
                 <div
                   className={cn(s.resizer, logo === null && s.resizerDisabled)}
-                  ref={dragEl}></div>
+                  ref={dragEl}
+                ></div>
               </animated.div>
             </div>
           </div>
@@ -309,7 +313,7 @@ const ProductView: FC<Props> = ({ image, products, handleColourClick }) => {
         />
       )}
 
-      <ProductUiPanel
+      <ControlPanel
         actionsTaken={logo} // STORE DIFF
         products={products} // OK FOR NOW !!
         center={handleCenter} //  OK

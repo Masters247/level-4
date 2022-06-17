@@ -1,13 +1,13 @@
-import s from "./productUiPanel.module.scss";
+import s from "./controlPanel.module.scss";
 import cn from "classnames";
 import Center from "../../ui/icons/Center";
 import HorizontalAlign from "../../ui/icons/HorizontalAlign";
 import VerticalAlign from "../../ui/icons/VerticalAlign";
-import ProductButtons from "./ProductButtons";
+import VisualiserButtons from "../VisualiserButtons/VisualiserButtons";
 import ProductColourButtons from "../ProductColourButtons/ProductColourButtons";
 import { useStore } from "../store";
 
-const ProductUiPanel = ({
+const ControlPanel = ({
   actionsTaken, // STORE OR REFACT
   products, // STORE
 
@@ -57,7 +57,8 @@ const ProductUiPanel = ({
                 key={cont.name}
                 onClick={cont?.function}
                 className={controlStyles}
-                disabled={actionsTaken === null}>
+                disabled={actionsTaken === null}
+              >
                 <span className={s.iconWrap}>{cont.icon}</span>
               </button>
             );
@@ -76,7 +77,7 @@ const ProductUiPanel = ({
         <h2>Embelishment:</h2>
         <p>{store.productEmbelishment.replace("_", " / ")}</p>
       </div>
-      <ProductButtons
+      <VisualiserButtons
         actionsTaken={actionsTaken} // STORE OR REFACT
         handleRedo={handleRedo} // STORE OR REFACT
         handleUndo={handleUndo} // STORE OR REFACT
@@ -87,4 +88,4 @@ const ProductUiPanel = ({
   );
 };
 
-export default ProductUiPanel;
+export default ControlPanel;

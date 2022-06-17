@@ -2,12 +2,12 @@ import { useEffect, useState } from "react";
 import cn from "classnames";
 import React from "react";
 import s from "./imageUploader.module.scss";
-import Add from "../../ui/icons/Add";
 import Remove from "../../ui/icons/Remove";
 import ImageUploading from "react-images-uploading";
 import ImageLogo from "./ImageLogo";
-import ProductButton from "../ProductUi/ProductButton";
+import ProductButton from "../Button/ControlButton";
 import { useStore } from "../store";
+// import { Image } from "../types";
 
 const ImageUploader = ({
   setLogo,
@@ -39,6 +39,7 @@ const ImageUploader = ({
     } else {
       setLogo(null);
     }
+
     window.localStorage.setItem("logo list", JSON.stringify(imageList));
   };
 
@@ -59,6 +60,7 @@ const ImageUploader = ({
   useEffect(() => {
     let local: any = window.localStorage.getItem("logo list");
     let obj = JSON.parse(local);
+
     if (obj === null) {
       return;
     } else if (localImages?.length === 0) {
@@ -68,14 +70,6 @@ const ImageUploader = ({
     }
   }, [localImages]);
 
-  const onImageLocalRemove = (index: number) => {
-    let local: any = window.localStorage.getItem("logo list");
-    let obj = JSON.parse(local);
-    obj.splice(index, 1);
-    window.localStorage.setItem("logo list", JSON.stringify(obj));
-    setLocalImages(obj);
-  };
-
   return (
     <div className={s.imageUploaderWrap}>
       <ImageUploading
@@ -84,13 +78,13 @@ const ImageUploader = ({
         onChange={onChange}
         maxNumber={maxNumber}
         dataURLKey="data_url"
-        acceptType={["png", "jpeg", "jpg"]}>
+        acceptType={["png", "jpeg", "jpg"]}
+      >
         {({
           imageList,
           onImageUpload,
           onImageRemoveAll,
           onImageRemove,
-          // isDragging,
           dragProps,
         }) => (
           <div className={s.uploadImageWrap}>
@@ -98,7 +92,8 @@ const ImageUploader = ({
               <ProductButton
                 variant="primary-dashed"
                 onClick={onImageUpload}
-                {...dragProps}>
+                {...dragProps}
+              >
                 Click or Drop
               </ProductButton>
               <ProductButton variant="tertiary-b" onClick={onImageRemoveAll}>
@@ -106,7 +101,8 @@ const ImageUploader = ({
               </ProductButton>
               <ProductButton
                 variant="primary-b"
-                onClick={() => store.setImageUploader(false)}>
+                onClick={() => store.setImageUploader(false)}
+              >
                 <Remove styles={s.remove} />
               </ProductButton>
             </div>
@@ -114,7 +110,8 @@ const ImageUploader = ({
               className={cn(
                 s.newImageWrap,
                 imageList.length !== 0 && s.newImageWrapPaddingTop
-              )}>
+              )}
+            >
               {imageList?.map((image: any, index: number) => {
                 return (
                   <div key={index}>
@@ -128,8 +125,6 @@ const ImageUploader = ({
                         image={image}
                         setSelectImage={setSelectImage}
                         selectImage={selectImage}
-                        isLocal={false}
-                        onImageLocalRemove={onImageLocalRemove}
                       />
                     )}
                   </div>
