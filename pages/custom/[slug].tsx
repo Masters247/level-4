@@ -87,6 +87,7 @@ const Custom: NextPage<Props> = ({ customisePages, customPage }) => {
     store.setProductEmbelishment(embelishment);
     store.setProductName(name);
     store.setProductCategory(productCategory);
+    window.localStorage.removeItem("selected-logo");
   }, []);
 
   const handleColourClick = (e: any, i: any) => {

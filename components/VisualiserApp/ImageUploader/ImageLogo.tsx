@@ -22,10 +22,11 @@ const ImageLogo = ({
     setIsSelected(true);
   }, []);
 
-  const handleSelected = (index: any) => {
+  const handleSelected = (index: number) => {
+    const indexToString = index.toString();
     setIsSelected(true);
     setSelectImage(index);
-    window.localStorage.setItem("selected-logo", index);
+    window.localStorage.setItem("selected-logo", indexToString);
   };
 
   return (

@@ -10,7 +10,7 @@ import html2canvas from "html2canvas";
 
 const download = require("downloadjs");
 
-const VisualiserButtons = ({
+const VisualiserButtons: FC = ({
   actionsTaken, //  STORE DIFFICULT
   handleRedo, // STORE
   handleUndo, // STORE

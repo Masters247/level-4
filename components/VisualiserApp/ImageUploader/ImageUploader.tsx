@@ -7,7 +7,6 @@ import ImageUploading from "react-images-uploading";
 import ImageLogo from "./ImageLogo";
 import ProductButton from "../Button/ControlButton";
 import { useStore } from "../store";
-// import { Image } from "../types";
 
 const ImageUploader = ({
   setLogo,
@@ -43,7 +42,7 @@ const ImageUploader = ({
     window.localStorage.setItem("logo list", JSON.stringify(imageList));
   };
 
-  const handleLogoPick = (imageList: any, index: any) => {
+  const handleLogoPick = (imageList: any, index: number) => {
     reset();
     setLogo(imageList[index].data_url);
 
@@ -96,7 +95,13 @@ const ImageUploader = ({
               >
                 Click or Drop
               </ProductButton>
-              <ProductButton variant="tertiary-b" onClick={onImageRemoveAll}>
+              <ProductButton
+                variant="tertiary-b"
+                onClick={() => {
+                  onImageRemoveAll();
+                  window.localStorage.removeItem("selected-logo");
+                }}
+              >
                 Remove all
               </ProductButton>
               <ProductButton
