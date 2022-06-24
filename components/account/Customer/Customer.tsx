@@ -28,6 +28,7 @@ const Customer: FC<Props> = ({ customer, mutate }) => {
   const [organisation, setOrganisation] = useState(customer?.organisation);
   const [resetNotify, setResetNotify] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [deleteLoading, setDeleteLoading] = useState(false);
   const [passwordLoading, setPasswordLoading] = useState(false);
   const [deleteWarning, setDeleteWarning] = useState(false);
 
@@ -79,7 +80,7 @@ const Customer: FC<Props> = ({ customer, mutate }) => {
   };
 
   const deleteAccount = async () => {
-    setDeleteWarning(false);
+    setDeleteLoading(true);
     try {
       const deleteUser = await fetch("/api/account/deleteAccount", {
         method: "POST",
@@ -210,6 +211,7 @@ const Customer: FC<Props> = ({ customer, mutate }) => {
               variant="secondary"
               Component="button"
               onClick={deleteAccount}
+              loading={deleteLoading}
             >
               Delete
             </Button>

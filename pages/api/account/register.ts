@@ -1,5 +1,6 @@
 import { NextApiRequest, NextApiResponse } from "next";
 import { prisma } from "../../../lib/prisma";
+import sendWelcomeEmail from "../../../lib/welcome-email";
 const bcrypt = require("bcrypt");
 
 export default async function handler(
@@ -38,6 +39,10 @@ export default async function handler(
           },
         },
       });
+
+      // Send welcome email to user
+
+      await sendWelcomeEmail(email);
 
       // Return success response
 

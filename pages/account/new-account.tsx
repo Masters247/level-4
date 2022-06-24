@@ -31,8 +31,9 @@ const NewAccount: NextPage = () => {
         body: JSON.stringify({
           name,
           org,
-          //   @ts-ignore
           id: session?.user?.userId,
+          email: session?.user?.email,
+          newUser: true,
         }),
       });
       setLoading(false);

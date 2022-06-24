@@ -1,5 +1,6 @@
 import { NextApiRequest, NextApiResponse } from "next";
 import { prisma } from "../../../lib/prisma";
+import sendWelcomeEmail from "../../../lib/welcome-email";
 
 export default async function handler(
   req: NextApiRequest,
@@ -27,6 +28,10 @@ export default async function handler(
         id: body.id,
       },
     });
+
+    // Send welcome email to user if new user
+
+    if (body.newUser === true) await sendWelcomeEmail(body.email);
 
     // Send a success response
 
