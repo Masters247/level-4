@@ -7,7 +7,7 @@ import s from "../../styles/pages/account.module.scss";
 
 const NewAccount: NextPage = () => {
   const router = useRouter();
-  const { data: session, status } = useSession({
+  const { data: session } = useSession({
     required: true,
     onUnauthenticated() {
       router.push("/");
