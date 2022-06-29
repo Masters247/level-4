@@ -4,23 +4,6 @@ import ProductColour from "./ProductColour";
 import s from "./productColourButtons.module.scss";
 import { handleColourClick } from "../types";
 
-// interface Colour {
-//   colour: {
-//     hex: string;
-//   };
-//   images: [
-//     {
-//       url: string;
-//       height: number;
-//       width: number;
-//     }
-//   ];
-//   secondaryColour: {
-//     hex: string;
-//   };
-//   shape?: string | undefined;
-// }
-
 interface Products {
   name: string;
   productCategory: string;
@@ -94,8 +77,7 @@ const ProductColourButtonsWrap: FC<Props> = ({
             s.coloursRight,
             productColourView.start === 0 && s.hide
           )}
-          disabled={productColourView.start === 0}
-        >
+          disabled={productColourView.start === 0}>
           <p className={rotate}>+{colourLeft}</p>
         </button>
       )}
@@ -108,7 +90,6 @@ const ProductColourButtonsWrap: FC<Props> = ({
             hex={colour.colour.hex}
             hexSecondary={colour.secondaryColour.hex}
             shape={colour.shape}
-            // colourClick={colourClick}
             handleColourClick={handleColourClick}
           />
         );
@@ -117,8 +98,7 @@ const ProductColourButtonsWrap: FC<Props> = ({
         <button
           onClick={showMoreColoursRight}
           className={cn(s.coloursLeft, colourRight === 0 && s.hide)}
-          disabled={colourRight === 0}
-        >
+          disabled={colourRight === 0}>
           <p className={rotate}>+{colourRight}</p>
         </button>
       )}
