@@ -102,9 +102,7 @@ const Product: NextPage<Props> = ({ data }) => {
     visualiseImage,
   } = productPage;
 
-  console.log(typeof data);
-
-  const handleColourClick = (e: any, i: any) => {
+  const colourClick = (i: any) => {
     setProductColour(i);
   };
 
@@ -129,13 +127,12 @@ const Product: NextPage<Props> = ({ data }) => {
         className={s.productImagesSection}
         style={{
           position: "relative",
-        }}
-      >
+        }}>
         <div className={s.productImagesBackgroundWrap}>
           <div className={s.productColourWrap}>
             <ProductColourButtonsWrap
               products={productPage}
-              colourClick={handleColourClick}
+              colourClick={colourClick}
               rotate={s.rotate}
             />
           </div>
@@ -148,8 +145,7 @@ const Product: NextPage<Props> = ({ data }) => {
               } * 1em))`,
               gridGap: "1em",
               margin: " 0 auto",
-            }}
-          >
+            }}>
             {productVariantColours[productColour].images.map((image: any) => (
               <Image
                 alt=""

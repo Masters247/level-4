@@ -22,7 +22,7 @@ const Product = ({ products, i }: any) => {
     }
   };
 
-  const colourClick = (e: any, i: any) => {
+  const colourClick = (i: number) => {
     setProductColour(i);
   };
 
@@ -62,8 +62,7 @@ const Product = ({ products, i }: any) => {
         className={s.productButtonsWrap}
         style={{
           marginTop: "1em",
-        }}
-      >
+        }}>
         <Link href={`/${slugCategory}/${slug}`} passHref>
           <Button variant="primary">View</Button>
         </Link>

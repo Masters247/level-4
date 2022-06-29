@@ -15,6 +15,7 @@ interface Props {
   rotate?: any;
   position?: any;
   setColourChangeProductVariant?: any;
+  colourClick?: (i: number) => void;
 }
 
 const ProductColourButtonsWrap: FC<Props> = ({
@@ -73,12 +74,11 @@ const ProductColourButtonsWrap: FC<Props> = ({
             s.coloursRight,
             productColourView.start === 0 && s.hide
           )}
-          disabled={productColourView.start === 0}
-        >
+          disabled={productColourView.start === 0}>
           <p className={rotate}>+{colourLeft}</p>
         </button>
       )}
-      {productVariantColoursLimit.map((colour: any, i: any) => {
+      {productVariantColoursLimit.map((colour: any, i: number) => {
         return (
           <ProductColour
             key={i}
@@ -93,8 +93,7 @@ const ProductColourButtonsWrap: FC<Props> = ({
         <button
           onClick={showMoreColoursRight}
           className={cn(s.coloursLeft, colourRight === 0 && s.hide)}
-          disabled={colourRight === 0}
-        >
+          disabled={colourRight === 0}>
           <p className={rotate}>+{colourRight}</p>
         </button>
       )}
